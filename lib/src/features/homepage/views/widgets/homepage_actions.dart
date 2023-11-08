@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jobpilot/src/constants/strings/home_strings.dart';
 import 'package:jobpilot/src/services/theme/app_theme.dart';
-import 'package:jobpilot/src/utilities/size_utilities.dart';
+import 'package:jobpilot/src/utilities/extensions/size_utilities.dart';
 
 class HomepageActions extends StatelessWidget {
   const HomepageActions({

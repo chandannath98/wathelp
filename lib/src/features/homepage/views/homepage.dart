@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jobpilot/src/constants/assets/assets.dart';
+import 'package:jobpilot/src/constants/design/paddings.dart';
 import 'package:jobpilot/src/features/homepage/controllers/homepage_controller.dart';
-import 'package:jobpilot/src/services/theme/extensions/colors_theme.dart';
-import 'package:jobpilot/src/utilities/overlay_loader.dart';
+import 'package:jobpilot/src/services/theme/app_theme.dart';
+import 'package:jobpilot/src/utilities/extensions/overlay_loader.dart';
+import 'package:jobpilot/src/utilities/extensions/size_utilities.dart';
 
+import 'widgets/header_section.dart';
 import 'widgets/homepage_actions.dart';
+import 'widgets/more_vacancy.dart';
+import 'widgets/popular_category.dart';
+import 'widgets/tutorial_section.dart';
 
 class Homepage extends StatelessWidget {
   const Homepage({super.key});
@@ -33,8 +39,33 @@ class Homepage extends StatelessWidget {
             ),
           ],
         ),
-        body: const CustomScrollView(
-          slivers: [],
+        body: CustomScrollView(
+          slivers: [
+            const SliverToBoxAdapter(
+              child: Padding(
+                padding: horizontal16,
+                child: NoUserHomeHeader(),
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: 32.height,
+            ),
+            const SliverToBoxAdapter(
+              child: HomeMoreVacanciesSection(),
+            ),
+            const SliverToBoxAdapter(
+              child: HomeTutorialSection(),
+            ),
+            // SliverToBoxAdapter(
+            //   child: 32.height,
+            // ),
+            const SliverToBoxAdapter(
+              child: HomePopularCategorySection(),
+            ),
+            SliverToBoxAdapter(
+              child: 32.height,
+            ),
+          ],
         ),
       );
     });

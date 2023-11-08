@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:jobpilot/src/constants/design/paddings.dart';
 
 import '../extensions/colors_theme.dart';
 
@@ -16,8 +17,31 @@ const _backgroundColor = Color(0xffEDEFF5);
 final lightTheme = ThemeData(
   brightness: Brightness.light,
   textTheme: GoogleFonts.interTextTheme(),
+  iconTheme: const IconThemeData(
+    color: _primaryColor,
+  ),
+  elevatedButtonTheme: ElevatedButtonThemeData(
+    style: ElevatedButton.styleFrom(
+      elevation: 0,
+      minimumSize: const Size.fromHeight(40),
+      foregroundColor: _theme,
+      backgroundColor: _primaryColor,
+      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 18),
+      textStyle: const TextStyle(
+        fontSize: 16,
+        fontWeight: FontWeight.bold,
+      ),
+    ),
+  ),
   inputDecorationTheme: const InputDecorationTheme(
-    border: OutlineInputBorder(),
+    isDense: true,
+    border: InputBorder.none,
+    contentPadding: vertical8,
+    focusedBorder: UnderlineInputBorder(
+      borderSide: BorderSide(
+        color: _primaryColor,
+      ),
+    ),
   ),
   extensions: {
     ColorTheme(
