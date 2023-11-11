@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:get/get.dart' hide ContextExtensionss;
 import 'package:jobpilot/src/constants/assets/assets.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
-import 'package:jobpilot/src/features/homepage/controllers/homepage_controller.dart';
+import 'package:jobpilot/src/constants/strings/home_strings.dart';
+import 'package:jobpilot/src/features/browse_section/views/browse_screen.dart';
 import 'package:jobpilot/src/services/theme/app_theme.dart';
 import 'package:jobpilot/src/utilities/extensions/overlay_loader.dart';
 import 'package:jobpilot/src/utilities/extensions/size_utilities.dart';
+import 'package:jobpilot/src/utilities/svg_icon.dart';
 
-import 'widgets/header_section.dart';
-import 'widgets/homepage_actions.dart';
-import 'widgets/more_vacancy.dart';
-import 'widgets/popular_category.dart';
-import 'widgets/tutorial_section.dart';
+import '../controllers/homepage_controller.dart';
+import '../widgets/actions.dart';
+import '../widgets/bottom_navigation.dart';
 
 class Homepage extends StatelessWidget {
   const Homepage({super.key});
@@ -39,32 +39,34 @@ class Homepage extends StatelessWidget {
             ),
           ],
         ),
-        body: CustomScrollView(
-          slivers: [
-            const SliverToBoxAdapter(
-              child: Padding(
-                padding: horizontal16,
-                child: NoUserHomeHeader(),
-              ),
-            ),
-            SliverToBoxAdapter(
-              child: 32.height,
-            ),
-            const SliverToBoxAdapter(
-              child: HomeMoreVacanciesSection(),
-            ),
-            const SliverToBoxAdapter(
-              child: HomeTutorialSection(),
-            ),
-            // SliverToBoxAdapter(
-            //   child: 32.height,
-            // ),
-            const SliverToBoxAdapter(
-              child: HomePopularCategorySection(),
-            ),
-            SliverToBoxAdapter(
-              child: 32.height,
-            ),
+        bottomNavigationBar: NavigationBarWidget(
+          currentIndex: controller.currentIndex,
+          navbarItems: [
+            controller.isAuthenticated
+                ? const (SvgIcon(browseIcon), "Browse")
+                : const (SvgIcon(homeIcon), "Home"),
+            controller.isAuthenticated
+                ? const (SvgIcon(companyIcon), "Company")
+                : const (SvgIcon(browseIcon), "Browse"),
+            controller.isAuthenticated
+                ? const (SvgIcon(dashboardIcon), "Dashboard")
+                : const (SvgIcon(loginIcon), "Login"),
+            controller.isAuthenticated
+                ? const (SvgIcon(jobsIcon), "Job Alert")
+                : const (SvgIcon(pricingIcon), "Pricing"),
+            const (SvgIcon(menuIcon), "Menu"),
+          ],
+          onItemClick: controller.changePage,
+        ),
+        body: PageView(
+          controller: controller.pageController,
+          onPageChanged: controller.onPageChange,
+          children: const [
+            BrowseScreen(),
+            Placeholder(),
+            Placeholder(),
+            Placeholder(),
+            Placeholder(),
           ],
         ),
       );

@@ -69,7 +69,7 @@ class HomePopularCategorySection extends StatelessWidget {
                 color: context.color?.primary,
               ),
             ),
-          )
+          ),
         ],
       ),
     );

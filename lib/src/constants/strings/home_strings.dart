@@ -5,3 +5,12 @@ const subtitle =
 const search = "Search";
 const location = "Location";
 const advanceFilter = "Advance Filter";
+
+const browseIcon = "assets/icon/browse.svg";
+const companyIcon = "assets/icon/company.svg";
+const dashboardIcon = "assets/icon/dashboard.svg";
+const jobsIcon = "assets/icon/jobs.svg";
+const loginIcon = "assets/icon/login.svg";
+const menuIcon = "assets/icon/menu.svg";
+const homeIcon = "assets/icon/home.svg";
+const pricingIcon = "assets/icon/pricing.svg";
