@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:jobpilot/src/constants/assets/assets.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
@@ -83,7 +84,7 @@ class NoUserHomeHeader extends StatelessWidget {
           textAlign: TextAlign.center,
         ),
         32.height,
-        Image.asset(Assets.homeHero),
+        SvgPicture.asset(Assets.homeHeroSvg),
         32.height,
         GridView.count(
           shrinkWrap: true,

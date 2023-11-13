@@ -26,7 +26,17 @@ class HomeFeaturedJobsSection extends StatelessWidget {
             18.height,
             for (var i in List.generate(6, (index) => index)) ...[
               8.height,
-              SingleFeaturedJobCard(),
+              SingleFeaturedJobCard(
+                bookmarked: true,
+                postName: "Project Manager",
+                postType: "FULL-TIME",
+                salaryRange: "Salary: \$2$i,000 - \$3$i,000",
+                companyName: "Google Inc.",
+                companyLocation: "Dhaka, Bangladesh",
+                companyIcon:
+                    "https://img.icons8.com/?size=48&id=17949&format=png",
+                onBookmarkCallback: () {},
+              ),
               8.height,
             ],
             18.height,
@@ -53,12 +63,29 @@ class HomeFeaturedJobsSection extends StatelessWidget {
 class SingleFeaturedJobCard extends StatelessWidget {
   const SingleFeaturedJobCard({
     super.key,
+    required this.bookmarked,
+    required this.postName,
+    required this.postType,
+    required this.salaryRange,
+    required this.companyName,
+    required this.companyIcon,
+    required this.companyLocation,
+    required this.onBookmarkCallback,
   });
+  final bool bookmarked;
+  final String postName;
+  final String postType;
+  final String salaryRange;
+  final String companyName;
+  final String companyIcon;
+  final String companyLocation;
+  final VoidCallback onBookmarkCallback;
 
   @override
   Widget build(BuildContext context) {
     return DecoratedBox(
       decoration: BoxDecoration(
+        color: context.color?.theme,
         borderRadius: BorderRadius.circular(8),
         border: Border.all(
           color: context.color?.secondaryAccent ?? Colors.grey,
@@ -74,7 +101,7 @@ class SingleFeaturedJobCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Text(
-                  "Project Manager",
+                  postName,
                   style: context.text.titleMedium?.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
@@ -92,7 +119,7 @@ class SingleFeaturedJobCard extends StatelessWidget {
                         child: Padding(
                           padding: vertical6 + horizontal8,
                           child: Text(
-                            "FULL-TIME",
+                            postType,
                             style: context.text.bodySmall?.copyWith(
                               color: context.color?.mainAccent,
                               fontWeight: FontWeight.bold,
@@ -102,7 +129,7 @@ class SingleFeaturedJobCard extends StatelessWidget {
                       ),
                       8.width,
                       Text(
-                        "Salary: \$20,000 - \$25,000",
+                        salaryRange,
                         style: context.text.titleMedium?.copyWith(
                           color: context.color?.extra,
                         ),
@@ -126,7 +153,7 @@ class SingleFeaturedJobCard extends StatelessWidget {
                               child: Padding(
                                 padding: all8,
                                 child: Image.network(
-                                  "https://img.icons8.com/?size=48&id=17949&format=png",
+                                  companyIcon,
                                 ),
                               ),
                             ),
@@ -146,7 +173,7 @@ class SingleFeaturedJobCard extends StatelessWidget {
                                         CrossAxisAlignment.stretch,
                                     children: [
                                       Text(
-                                        "Google Inc.",
+                                        companyName,
                                         style:
                                             context.text.titleSmall?.copyWith(
                                           color: context.color?.extraText,
@@ -160,7 +187,7 @@ class SingleFeaturedJobCard extends StatelessWidget {
                                             color: context.color?.extra,
                                           ),
                                           Text(
-                                            "Dhaka, Bangladesh",
+                                            companyLocation,
                                             style: context.text.titleMedium,
                                           ),
                                         ],
@@ -173,7 +200,7 @@ class SingleFeaturedJobCard extends StatelessWidget {
                           ),
                         ),
                         IconButton(
-                          onPressed: () {},
+                          onPressed: onBookmarkCallback,
                           icon: Icon(
                             Icons.bookmark_border,
                             color: context.color?.extra,

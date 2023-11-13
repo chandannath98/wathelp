@@ -51,36 +51,6 @@ class NavigationBarWidget extends StatelessWidget {
         ),
       ),
     );
-
-    // return BottomAppBar(
-    //   elevation: 9,
-    //   notchMargin: 6,
-    //   clipBehavior: Clip.hardEdge,
-    //   child: BottomNavigationBar(
-    //     onTap: onItemClick,
-    //     currentIndex: currentIndex,
-    //     showUnselectedLabels: true,
-    //     backgroundColor: colorTheme?.primary,
-    //     selectedItemColor: colorTheme?.primary,
-    //     unselectedItemColor: colorTheme?.extra,
-    //     selectedLabelStyle: TextStyle(
-    //       fontSize: 12,
-    //       fontWeight: FontWeight.w600,
-    //       color: colorTheme?.primary,
-    //     ),
-    //     unselectedLabelStyle: TextStyle(
-    //       fontSize: 12,
-    //       fontWeight: FontWeight.w500,
-    //       color: colorTheme?.extraText,
-    //     ),
-    //     items: navbarItems
-    //         .map((item) => BottomNavigationBarItem(
-    //               icon: item.$1,
-    //               label: item.$2,
-    //             ))
-    //         .toList(),
-    //   ),
-    // );
   }
 }
 

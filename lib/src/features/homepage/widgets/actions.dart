@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:jobpilot/src/constants/strings/home_strings.dart';
 import 'package:jobpilot/src/services/theme/app_theme.dart';
 import 'package:jobpilot/src/utilities/extensions/size_utilities.dart';
+import 'package:jobpilot/src/utilities/svg_icon.dart';
 
 class HomepageActions extends StatelessWidget {
   const HomepageActions({
@@ -29,8 +30,9 @@ class HomepageActions extends StatelessWidget {
             textDirection: TextDirection.rtl,
             child: TextButton.icon(
               onPressed: onLoginClick,
-              icon: Icon(
-                Icons.exit_to_app,
+              icon: SvgIcon(
+                loginIcon,
+                size: 22,
                 color: context.color?.primary,
               ),
               label: Text(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/instance_manager.dart';
 import 'package:get/route_manager.dart';
 import 'package:jobpilot/src/constants/assets/assets.dart';
@@ -54,7 +55,7 @@ class _SplashScreenState extends State<SplashScreen>
               dimension: constraints.maxWidth - 120,
               child: FittedBox(
                 child: Center(
-                  child: Image.asset(Assets.appLogo),
+                  child: SvgPicture.asset(Assets.appLogoSvg),
                 ),
               ),
             ),
