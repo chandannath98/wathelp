@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart' hide ContextExtensionss;
 import 'package:jobpilot/src/constants/assets/assets.dart';
-import 'package:jobpilot/src/constants/strings/home_strings.dart';
+import 'package:jobpilot/src/features/authentication/views/auth_switcher.dart';
 import 'package:jobpilot/src/features/browse_section/views/browse_screen.dart';
 import 'package:jobpilot/src/features/find_jobs/views/find_jobs.dart';
 import 'package:jobpilot/src/services/theme/app_theme.dart';
@@ -34,7 +34,10 @@ class Homepage extends StatelessWidget {
               HomepageActions(
                 profilePic: profile,
                 isAuthenticated: controller.isAuthenticated,
+                showRegisterButton:
+                    !controller.isAuthenticated && controller.isLoginScreen,
                 onLoginClick: controller.onLoginClick.withOverlay,
+                onRegisterClick: controller.onRegisterClick,
                 onProfileClick: controller.onProfileClick.withOverlay,
                 onNotificationClick: () => controller.onNotificationClick(),
               ),
@@ -44,30 +47,32 @@ class Homepage extends StatelessWidget {
             currentIndex: controller.currentIndex,
             navbarItems: [
               controller.isAuthenticated
-                  ? const (SvgIcon(browseIcon), "Browse")
-                  : const (SvgIcon(homeIcon), "Home"),
+                  ? const (SvgIcon(Assets.browseIcon), "Browse")
+                  : const (SvgIcon(Assets.homeIcon), "Home"),
               controller.isAuthenticated
-                  ? const (SvgIcon(companyIcon), "Company")
-                  : const (SvgIcon(browseIcon), "Browse"),
+                  ? const (SvgIcon(Assets.companyIcon), "Company")
+                  : const (SvgIcon(Assets.browseIcon), "Browse"),
               controller.isAuthenticated
-                  ? const (SvgIcon(dashboardIcon), "Dashboard")
-                  : const (SvgIcon(loginIcon), "Login"),
+                  ? const (SvgIcon(Assets.dashboardIcon), "Dashboard")
+                  : const (SvgIcon(Assets.loginIcon), "Login"),
               controller.isAuthenticated
-                  ? const (SvgIcon(jobsIcon), "Job Alert")
-                  : const (SvgIcon(pricingIcon), "Pricing"),
-              const (SvgIcon(menuIcon), "Menu"),
+                  ? const (SvgIcon(Assets.jobsIcon), "Job Alert")
+                  : const (SvgIcon(Assets.pricingIcon), "Pricing"),
+              const (SvgIcon(Assets.menuIcon), "Menu"),
             ],
             onItemClick: controller.changePage,
           ),
           body: PageView(
             controller: controller.pageController,
             onPageChanged: controller.onPageChange,
-            children: const [
-              BrowseScreen(),
-              FindJobsPage(),
-              Placeholder(),
-              Placeholder(),
-              Placeholder(),
+            children: [
+              const BrowseScreen(),
+              const FindJobsPage(),
+              AuthenticationSwitcher(
+                showLogin: !controller.isRegisterScreen,
+              ),
+              const Placeholder(),
+              const Placeholder(),
             ],
           ),
         );

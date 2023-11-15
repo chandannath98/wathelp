@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jobpilot/src/constants/assets/assets.dart';
 import 'package:jobpilot/src/constants/strings/home_strings.dart';
 import 'package:jobpilot/src/services/theme/app_theme.dart';
 import 'package:jobpilot/src/utilities/extensions/size_utilities.dart';
@@ -8,15 +9,19 @@ class HomepageActions extends StatelessWidget {
   const HomepageActions({
     super.key,
     required this.isAuthenticated,
+    required this.showRegisterButton,
     required this.profilePic,
     required this.onLoginClick,
+    required this.onRegisterClick,
     required this.onProfileClick,
     required this.onNotificationClick,
   });
 
+  final bool showRegisterButton;
   final bool isAuthenticated;
   final String profilePic;
   final VoidCallback onLoginClick;
+  final VoidCallback onRegisterClick;
   final VoidCallback onProfileClick;
   final VoidCallback onNotificationClick;
 
@@ -29,14 +34,14 @@ class HomepageActions extends StatelessWidget {
           Directionality(
             textDirection: TextDirection.rtl,
             child: TextButton.icon(
-              onPressed: onLoginClick,
+              onPressed: (!showRegisterButton) ? onLoginClick : onRegisterClick,
               icon: SvgIcon(
-                loginIcon,
+                Assets.loginIcon,
                 size: 22,
                 color: context.color?.primary,
               ),
               label: Text(
-                login,
+                (!showRegisterButton) ? login : createAccount,
                 style: context.text.bodyLarge?.copyWith(
                   fontWeight: FontWeight.bold,
                   color: context.color?.primary,

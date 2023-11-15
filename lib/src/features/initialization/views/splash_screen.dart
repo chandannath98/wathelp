@@ -5,6 +5,7 @@ import 'package:get/route_manager.dart';
 import 'package:jobpilot/src/constants/assets/assets.dart';
 import 'package:jobpilot/src/features/homepage/views/homepage.dart';
 import 'package:jobpilot/src/features/initialization/controllers/init_controller.dart';
+import 'package:jobpilot/src/services/theme/app_theme.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -47,6 +48,7 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: context.color?.primary,
       body: LayoutBuilder(builder: (context, constraints) {
         return Opacity(
           opacity: _animationController.value,
@@ -55,7 +57,7 @@ class _SplashScreenState extends State<SplashScreen>
               dimension: constraints.maxWidth - 120,
               child: FittedBox(
                 child: Center(
-                  child: SvgPicture.asset(Assets.appLogoSvg),
+                  child: SvgPicture.asset(Assets.onboardSvg),
                 ),
               ),
             ),

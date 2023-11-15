@@ -100,7 +100,7 @@ class SearchTextFieldRow extends StatelessWidget {
             maxLines: 1,
             controller: controller,
             style: const TextStyle(height: 1),
-            decoration: InputDecoration(
+            decoration: searchBoxInputDecoration.copyWith(
               hintText: hintText,
             ),
           ),
