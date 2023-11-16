@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:jobpilot/src/constants/assets/assets.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
 import 'package:jobpilot/src/constants/strings/home_strings.dart';
@@ -25,14 +26,16 @@ class RegistrationScreen extends StatelessWidget {
           Directionality(
             textDirection: TextDirection.rtl,
             child: TextButton.icon(
-              onPressed: () {},
+              onPressed: () {
+                Get.back();
+              },
               icon: SvgIcon(
                 Assets.loginIcon,
                 size: 22,
                 color: context.color?.primary,
               ),
               label: Text(
-                createAccount,
+                login,
                 style: context.text.bodyLarge?.copyWith(
                   fontWeight: FontWeight.bold,
                   color: context.color?.primary,
@@ -76,7 +79,7 @@ class _RegistrationSectionWidgetState extends State<RegistrationSectionWidget> {
                     color: context.color?.opposite,
                   ),
                 ),
-                24.height,
+                16.height,
                 DecoratedBox(
                   decoration: BoxDecoration(
                     color: context.color?.theme,
@@ -124,7 +127,7 @@ class _RegistrationSectionWidgetState extends State<RegistrationSectionWidget> {
                     ),
                   ),
                 ),
-                24.height,
+                16.height,
                 Row(
                   children: [
                     Expanded(

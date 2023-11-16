@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jobpilot/src/features/authentication/views/login.dart';
+import 'package:jobpilot/src/features/authentication/views/registration.dart';
 
 class HomepageController extends GetxController {
   int currentIndex = 0;
@@ -31,7 +32,7 @@ class HomepageController extends GetxController {
     update();
   }
 
-  Future<void> onLoginClick() async {
+  void onLoginClick() {
     print("Login Clicked!");
     isRegisterScreen = false;
     // Get.to(
@@ -41,9 +42,17 @@ class HomepageController extends GetxController {
     update();
   }
 
-  Future<void> onRegisterClick() async {
+  void onForgotpassClick() {
     isRegisterScreen = true;
+    print("Forgotpass Clicked!");
+  }
+
+  Future<void> onRegisterClick() async {
     print("Register Clicked!");
+    Get.to(
+      () => const RegistrationScreen(),
+      transition: Transition.rightToLeft,
+    );
     update();
   }
 

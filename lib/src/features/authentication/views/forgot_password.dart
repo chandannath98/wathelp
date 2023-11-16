@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:jobpilot/src/constants/assets/assets.dart';
@@ -7,8 +8,8 @@ import 'package:jobpilot/src/services/theme/app_theme.dart';
 import 'package:jobpilot/src/utilities/extensions/size_utilities.dart';
 import 'package:jobpilot/src/utilities/svg_icon.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+class ForgotPasswordScreen extends StatelessWidget {
+  const ForgotPasswordScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -41,54 +42,46 @@ class LoginScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: LoginSectionWidget(
-        attemptLogin: (
-            {required email, required isRememberMe, required password}) async {
+      body: ForgotPasswordSectionWidget(
+        onResetCallback: ({String? email}) async {
           return null;
         },
-        goForgotPassword: ({String? email}) async {
-          print(email);
-        },
-        onFacebookClick: () {},
-        onGoogleClick: () {},
+        onFacebookSignIn: () {},
+        goSignIn: () {},
+        goRegister: () {},
+        onGoogleSignIn: () {},
       ),
     );
   }
 }
 
-typedef LoginCallback = Future<String?> Function({
-  required String email,
-  required String password,
-  required bool isRememberMe,
-});
-
-class LoginSectionWidget extends StatefulWidget {
-  const LoginSectionWidget({
+class ForgotPasswordSectionWidget extends StatefulWidget {
+  const ForgotPasswordSectionWidget({
     super.key,
     this.emailValidator,
-    this.passwordValidator,
-    required this.attemptLogin,
-    required this.goForgotPassword,
-    required this.onFacebookClick,
-    required this.onGoogleClick,
+    required this.onResetCallback,
+    required this.onFacebookSignIn,
+    required this.goSignIn,
+    required this.goRegister,
+    required this.onGoogleSignIn,
   });
 
-  final LoginCallback attemptLogin;
-
-  final Future<void> Function({String? email}) goForgotPassword;
-  final VoidCallback onFacebookClick;
-  final VoidCallback onGoogleClick;
+  final Future<String?> Function({required String email}) onResetCallback;
   final FormFieldValidator<String>? emailValidator;
-  final FormFieldValidator<String>? passwordValidator;
+  final VoidCallback onFacebookSignIn;
+  final VoidCallback goSignIn;
+  final VoidCallback goRegister;
+  final VoidCallback onGoogleSignIn;
 
   @override
-  State<LoginSectionWidget> createState() => _LoginSectionWidgetState();
+  State<ForgotPasswordSectionWidget> createState() =>
+      _ForgotPasswordSectionWidgetState();
 }
 
-class _LoginSectionWidgetState extends State<LoginSectionWidget> {
+class _ForgotPasswordSectionWidgetState
+    extends State<ForgotPasswordSectionWidget> {
   final _formKey = GlobalKey<FormState>();
-  bool _isRememberMe = false;
-  bool _hidPassword = true;
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -103,10 +96,46 @@ class _LoginSectionWidgetState extends State<LoginSectionWidget> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Text(
-                    "Sign in",
+                    "Forgot password",
                     style: context.text.headlineSmall?.copyWith(
                       fontWeight: FontWeight.bold,
                       color: context.color?.opposite,
+                    ),
+                  ),
+                  24.height,
+                  RichText(
+                    text: TextSpan(
+                      text: "Go back to ",
+                      style: context.text.titleMedium,
+                      children: [
+                        TextSpan(
+                          text: "Sign In.",
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = widget.goSignIn,
+                          style: TextStyle(
+                            color: context.color?.primary,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  8.height,
+                  RichText(
+                    text: TextSpan(
+                      text: "Don't have account? ",
+                      style: context.text.titleMedium,
+                      children: [
+                        TextSpan(
+                          text: "Create Account.",
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = widget.goRegister,
+                          style: TextStyle(
+                            color: context.color?.primary,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   24.height,
@@ -117,71 +146,19 @@ class _LoginSectionWidgetState extends State<LoginSectionWidget> {
                     ),
                   ),
                   10.height,
-                  TextFormField(
-                    obscureText: _hidPassword,
-                    validator: widget.passwordValidator,
-                    decoration: InputDecoration(
-                      hintText: "Password",
-                      suffixIcon: IconButton(
-                        onPressed: () {
-                          setState(() {
-                            _hidPassword = !_hidPassword;
-                          });
-                        },
-                        icon: Icon(
-                          _hidPassword
-                              ? Icons.visibility_off_outlined
-                              : Icons.visibility_outlined,
-                        ),
-                      ),
-                    ),
-                  ),
-                  5.height,
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Row(
-                          children: [
-                            Checkbox(
-                              value: false,
-                              visualDensity: VisualDensity.compact,
-                              onChanged: (value) {
-                                setState(() {
-                                  _isRememberMe = value ?? false;
-                                });
-                              },
-                            ),
-                            const Expanded(
-                              child: Text(
-                                "Remember me",
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      TextButton(
-                        onPressed: () => widget.goForgotPassword(),
-                        child: const Text(
-                          "Forgot Password",
-                        ),
-                      ),
-                    ],
-                  ),
                   Directionality(
                     textDirection: TextDirection.rtl,
                     child: ElevatedButton.icon(
                       onPressed: () {
                         if (_formKey.currentState?.validate() ?? false) {
-                          widget.attemptLogin(
+                          widget.onResetCallback(
                             email: "",
-                            password: "",
-                            isRememberMe: _isRememberMe,
                           );
-                        }
+                        } else {}
                       },
                       icon: Icon(Icons.arrow_back),
                       label: Text(
-                        "Sign In",
+                        "Reset Password",
                       ),
                     ),
                   ),
@@ -196,14 +173,14 @@ class _LoginSectionWidgetState extends State<LoginSectionWidget> {
                     text: "Sign in with Facebook",
                     iconLink:
                         "https://img.icons8.com/?size=48&id=118497&format=png",
-                    onTap: widget.onFacebookClick,
+                    onTap: widget.onFacebookSignIn,
                   ),
                   10.height,
                   SocialButton(
                     text: "Sign in with Google",
                     iconLink:
                         "https://img.icons8.com/?size=48&id=17949&format=png",
-                    onTap: widget.onGoogleClick,
+                    onTap: widget.onGoogleSignIn,
                   ),
                 ],
               ),

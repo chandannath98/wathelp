@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart' hide ContextExtensionss;
 import 'package:jobpilot/src/constants/assets/assets.dart';
-import 'package:jobpilot/src/features/authentication/views/auth_switcher.dart';
+import 'package:jobpilot/src/features/authentication/views/login_system_switcher.dart';
 import 'package:jobpilot/src/features/browse_section/views/browse_screen.dart';
 import 'package:jobpilot/src/features/find_jobs/views/find_jobs.dart';
 import 'package:jobpilot/src/services/theme/app_theme.dart';
@@ -36,7 +36,7 @@ class Homepage extends StatelessWidget {
                 isAuthenticated: controller.isAuthenticated,
                 showRegisterButton:
                     !controller.isAuthenticated && controller.isLoginScreen,
-                onLoginClick: controller.onLoginClick.withOverlay,
+                onLoginClick: controller.onLoginClick,
                 onRegisterClick: controller.onRegisterClick,
                 onProfileClick: controller.onProfileClick.withOverlay,
                 onNotificationClick: () => controller.onNotificationClick(),
@@ -65,14 +65,12 @@ class Homepage extends StatelessWidget {
           body: PageView(
             controller: controller.pageController,
             onPageChanged: controller.onPageChange,
-            children: [
-              const BrowseScreen(),
-              const FindJobsPage(),
-              AuthenticationSwitcher(
-                showLogin: !controller.isRegisterScreen,
-              ),
-              const Placeholder(),
-              const Placeholder(),
+            children: const [
+              BrowseScreen(),
+              FindJobsPage(),
+              LoginSystemSwitcher(),
+              Placeholder(),
+              Placeholder(),
             ],
           ),
         );
