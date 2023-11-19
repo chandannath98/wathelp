@@ -68,7 +68,7 @@ class _RegistrationSectionWidgetState extends State<RegistrationSectionWidget> {
       child: Center(
         child: SingleChildScrollView(
           child: Padding(
-            padding: horizontal16,
+            padding: horizontal16 + vertical8,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [

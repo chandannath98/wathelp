@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:jobpilot/src/constants/assets/assets.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
 import 'package:jobpilot/src/constants/strings/home_strings.dart';
+import 'package:jobpilot/src/global/widgets/loading_indicator.dart';
 import 'package:jobpilot/src/services/theme/app_theme.dart';
 import 'package:jobpilot/src/utilities/extensions/size_utilities.dart';
+import 'package:jobpilot/src/utilities/scaffold_util.dart';
 import 'package:jobpilot/src/utilities/svg_icon.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -42,6 +45,8 @@ class LoginScreen extends StatelessWidget {
         ],
       ),
       body: LoginSectionWidget(
+        emailController: TextEditingController(),
+        passwordController: TextEditingController(),
         attemptLogin: (
             {required email, required isRememberMe, required password}) async {
           return null;
@@ -65,6 +70,9 @@ typedef LoginCallback = Future<String?> Function({
 class LoginSectionWidget extends StatefulWidget {
   const LoginSectionWidget({
     super.key,
+    this.hasOldCredentials = false,
+    required this.emailController,
+    required this.passwordController,
     this.emailValidator,
     this.passwordValidator,
     required this.attemptLogin,
@@ -72,6 +80,10 @@ class LoginSectionWidget extends StatefulWidget {
     required this.onFacebookClick,
     required this.onGoogleClick,
   });
+
+  final bool hasOldCredentials;
+  final TextEditingController emailController;
+  final TextEditingController passwordController;
 
   final LoginCallback attemptLogin;
 
@@ -87,8 +99,34 @@ class LoginSectionWidget extends StatefulWidget {
 
 class _LoginSectionWidgetState extends State<LoginSectionWidget> {
   final _formKey = GlobalKey<FormState>();
-  bool _isRememberMe = false;
+  late bool _isRememberMe;
   bool _hidPassword = true;
+
+  late final FocusNode _emailFocusNode;
+  late final FocusNode _passwordFocusNode;
+
+  @override
+  void initState() {
+    super.initState();
+    _isRememberMe = widget.hasOldCredentials;
+    _emailFocusNode = FocusNode();
+    _passwordFocusNode = FocusNode();
+  }
+
+  void onLoginClick() async {
+    if (_formKey.currentState?.validate() ?? false) {
+      final val = await Get.showOverlay(
+        loadingWidget: const OverlayLoadingIndicator(),
+        asyncFunction: () => widget.attemptLogin(
+          email: widget.emailController.text,
+          password: widget.passwordController.text,
+          isRememberMe: _isRememberMe,
+        ),
+      );
+      if (val != null) showToastError(val);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -96,7 +134,7 @@ class _LoginSectionWidgetState extends State<LoginSectionWidget> {
       child: Center(
         child: SingleChildScrollView(
           child: Padding(
-            padding: horizontal16,
+            padding: horizontal16 + vertical16,
             child: Form(
               key: _formKey,
               child: Column(
@@ -111,7 +149,11 @@ class _LoginSectionWidgetState extends State<LoginSectionWidget> {
                   ),
                   24.height,
                   TextFormField(
+                    focusNode: _emailFocusNode,
+                    controller: widget.emailController,
                     validator: widget.emailValidator,
+                    onFieldSubmitted: (value) =>
+                        _passwordFocusNode.requestFocus(),
                     decoration: const InputDecoration(
                       hintText: "Email address...",
                     ),
@@ -119,7 +161,10 @@ class _LoginSectionWidgetState extends State<LoginSectionWidget> {
                   10.height,
                   TextFormField(
                     obscureText: _hidPassword,
+                    focusNode: _passwordFocusNode,
+                    controller: widget.passwordController,
                     validator: widget.passwordValidator,
+                    onFieldSubmitted: (value) => onLoginClick(),
                     decoration: InputDecoration(
                       hintText: "Password",
                       suffixIcon: IconButton(
@@ -143,7 +188,7 @@ class _LoginSectionWidgetState extends State<LoginSectionWidget> {
                         child: Row(
                           children: [
                             Checkbox(
-                              value: false,
+                              value: _isRememberMe,
                               visualDensity: VisualDensity.compact,
                               onChanged: (value) {
                                 setState(() {
@@ -170,15 +215,7 @@ class _LoginSectionWidgetState extends State<LoginSectionWidget> {
                   Directionality(
                     textDirection: TextDirection.rtl,
                     child: ElevatedButton.icon(
-                      onPressed: () {
-                        if (_formKey.currentState?.validate() ?? false) {
-                          widget.attemptLogin(
-                            email: "",
-                            password: "",
-                            isRememberMe: _isRememberMe,
-                          );
-                        }
-                      },
+                      onPressed: onLoginClick,
                       icon: Icon(Icons.arrow_back),
                       label: Text(
                         "Sign In",

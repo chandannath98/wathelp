@@ -43,6 +43,7 @@ class ForgotPasswordScreen extends StatelessWidget {
         ],
       ),
       body: ForgotPasswordSectionWidget(
+        emailController: TextEditingController(),
         onResetCallback: ({String? email}) async {
           return null;
         },
@@ -59,6 +60,7 @@ class ForgotPasswordSectionWidget extends StatefulWidget {
   const ForgotPasswordSectionWidget({
     super.key,
     this.emailValidator,
+    required this.emailController,
     required this.onResetCallback,
     required this.onFacebookSignIn,
     required this.goSignIn,
@@ -67,6 +69,7 @@ class ForgotPasswordSectionWidget extends StatefulWidget {
   });
 
   final Future<String?> Function({required String email}) onResetCallback;
+  final TextEditingController emailController;
   final FormFieldValidator<String>? emailValidator;
   final VoidCallback onFacebookSignIn;
   final VoidCallback goSignIn;
@@ -140,6 +143,7 @@ class _ForgotPasswordSectionWidgetState
                   ),
                   24.height,
                   TextFormField(
+                    controller: widget.emailController,
                     validator: widget.emailValidator,
                     decoration: const InputDecoration(
                       hintText: "Email address...",
@@ -152,7 +156,7 @@ class _ForgotPasswordSectionWidgetState
                       onPressed: () {
                         if (_formKey.currentState?.validate() ?? false) {
                           widget.onResetCallback(
-                            email: "",
+                            email: widget.emailController.text,
                           );
                         } else {}
                       },

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jobpilot/src/features/initialization/views/splash_screen.dart';
 import 'package:jobpilot/src/services/theme/app_theme.dart';
+import 'package:jobpilot/src/utilities/scaffold_util.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -12,6 +13,7 @@ class MyApp extends StatelessWidget {
       title: 'Jobpilot App',
       home: const SplashScreen(),
       debugShowCheckedModeBanner: false,
+      scaffoldMessengerKey: ScaffoldUtilities.instance.key,
     );
   }
 }

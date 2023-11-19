@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:jobpilot/src/features/authentication/views/login.dart';
 import 'package:jobpilot/src/features/authentication/views/registration.dart';
+import 'package:jobpilot/src/services/authentication/auth_controller.dart';
 
 class HomepageController extends GetxController {
+  final int loginPageIndex = 2;
   int currentIndex = 0;
-  bool isAuthenticated = false;
-  bool isRegisterScreen = false;
+  bool get isAuthenticated => AuthController.find.isAuthenticated;
   bool get isLoginScreen =>
-      (!isAuthenticated && currentIndex == 2 && !isRegisterScreen);
+      (!isAuthenticated && currentIndex == loginPageIndex);
   late final PageController pageController;
 
   @override
   void onInit() {
     super.onInit();
     pageController = PageController();
+    AuthController.find.addListener(() {
+      update();
+    });
   }
 
   void changePage(int index) {
@@ -27,28 +30,19 @@ class HomepageController extends GetxController {
 
   void onPageChange(int index) {
     currentIndex = index;
-    print("Current Index : $currentIndex");
-    print(isLoginScreen);
     update();
   }
 
   void onLoginClick() {
-    print("Login Clicked!");
-    isRegisterScreen = false;
-    // Get.to(
-    //   () => const LoginScreen(),
-    //   transition: Transition.rightToLeft,
-    // );
+    pageController.animateToPage(
+      loginPageIndex,
+      curve: Curves.ease,
+      duration: const Duration(milliseconds: 380),
+    );
     update();
   }
 
-  void onForgotpassClick() {
-    isRegisterScreen = true;
-    print("Forgotpass Clicked!");
-  }
-
   Future<void> onRegisterClick() async {
-    print("Register Clicked!");
     Get.to(
       () => const RegistrationScreen(),
       transition: Transition.rightToLeft,
@@ -59,8 +53,7 @@ class HomepageController extends GetxController {
   void onNotificationClick() {}
 
   Future<void> onProfileClick() async {
-    await Future.delayed(const Duration(seconds: 3));
-    isAuthenticated = !isAuthenticated;
+    await AuthController.find.logOut();
     update();
   }
 }

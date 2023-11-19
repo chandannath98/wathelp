@@ -65,16 +65,48 @@ class Homepage extends StatelessWidget {
           body: PageView(
             controller: controller.pageController,
             onPageChanged: controller.onPageChange,
-            children: const [
-              BrowseScreen(),
-              FindJobsPage(),
-              LoginSystemSwitcher(),
+            children: [
+              controller.isAuthenticated
+                  ? const FindJobsPage()
+                  : const BrowseScreen(),
+              controller.isAuthenticated
+                  ? const FindCompanyPage()
+                  : const FindJobsPage(),
+              controller.isAuthenticated
+                  ? const DashboardScreen()
+                  : const LoginSystemSwitcher(),
               Placeholder(),
               Placeholder(),
             ],
           ),
         );
       },
+    );
+  }
+}
+
+class DashboardScreen extends StatelessWidget {
+  const DashboardScreen({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder(
+      child: Text("My Dashboard Page."),
+    );
+  }
+}
+
+class FindCompanyPage extends StatelessWidget {
+  const FindCompanyPage({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder(
+      child: Text("Find Company Page."),
     );
   }
 }

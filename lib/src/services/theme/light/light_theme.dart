@@ -56,7 +56,12 @@ final lightTheme = ThemeData(
         color: _extraColor,
       ),
     ),
-    errorBorder: OutlineInputBorder(),
+    errorBorder: OutlineInputBorder(
+      borderSide: BorderSide(
+        color: Colors.red,
+      ),
+    ),
+    errorStyle: TextStyle(fontStyle: FontStyle.italic),
     enabledBorder: OutlineInputBorder(
       borderSide: BorderSide(
         width: 0.5,
