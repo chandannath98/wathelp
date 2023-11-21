@@ -1,75 +1,81 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'user.dart';
+part of 'candidate.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
+_$CandidateImpl _$$CandidateImplFromJson(Map<String, dynamic> json) =>
+    _$CandidateImpl(
       id: json['id'] as int?,
-      username: json['username'] as String?,
-      email: json['email'] as String?,
-      role: json['role'] as String?,
-      name: json['name'] as String?,
-      firstName: json['first_name'] as String?,
-      lastName: json['last_name'] as String?,
+      userId: json['user_id'] as int?,
       roleId: json['role_id'] as int?,
       professionId: json['profession_id'] as int?,
       experienceId: json['experience_id'] as int?,
       educationId: json['education_id'] as int?,
       title: json['title'] as String?,
+      firstName: json['first_name'] as String?,
+      lastName: json['last_name'] as String?,
       gender: json['gender'] as String?,
       website: json['website'] as String?,
+      photo: json['photo'] as String?,
       cv: json['cv'] as String?,
       bio: json['bio'] as String?,
       maritalStatus: json['marital_status'] as String?,
-      birthDate: json['birth_date'] as String?,
+      birthDate: json['birth_date'] == null
+          ? null
+          : DateTime.parse(json['birth_date'] as String),
+      visibility: json['visibility'] as int?,
       cvVisibility: json['cv_visibility'] as int?,
+      receivedJobAlert: json['received_job_alert'] as int?,
       profileComplete: json['profile_complete'] as int?,
+      createdAt: json['created_at'] as String?,
+      updatedAt: json['updated_at'] as String?,
       address: json['address'] as String?,
+      exactLocation: json['exact_location'] as String?,
       neighborhood: json['neighborhood'] as String?,
       locality: json['locality'] as String?,
       place: json['place'] as String?,
       district: json['district'] as String?,
-      postcode: json['postcode'] as String?,
+      postcode: json['postcode'] as int?,
       region: json['region'] as String?,
       country: json['country'] as String?,
-      photoUrl: json['photo_url'] as String?,
-      userPlan: json['user_plan'] == null
-          ? null
-          : UserPlan.fromJson(json['user_plan'] as Map<String, dynamic>),
-      social: (json['social'] as List<dynamic>?)
-          ?.map((e) => Social.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      contactInfo: json['contactinfo'] == null
-          ? null
-          : ContactInfo.fromJson(json['contactinfo'] as Map<String, dynamic>),
+      long: (json['long'] as num?)?.toDouble(),
+      lat: (json['lat'] as num?)?.toDouble(),
+      status: json['status'] as String?,
+      availableIn: json['available_in'] as String?,
+      whatsappNumber: json['whatsapp_number'] as String?,
+      bookmarkCandidatesCount: json['bookmark_candidates_count'] as int?,
+      fullAddress: json['full_address'] as String?,
     );
 
-Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
+Map<String, dynamic> _$$CandidateImplToJson(_$CandidateImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'username': instance.username,
-      'email': instance.email,
-      'role': instance.role,
-      'name': instance.name,
-      'first_name': instance.firstName,
-      'last_name': instance.lastName,
+      'user_id': instance.userId,
       'role_id': instance.roleId,
       'profession_id': instance.professionId,
       'experience_id': instance.experienceId,
       'education_id': instance.educationId,
       'title': instance.title,
+      'first_name': instance.firstName,
+      'last_name': instance.lastName,
       'gender': instance.gender,
       'website': instance.website,
+      'photo': instance.photo,
       'cv': instance.cv,
       'bio': instance.bio,
       'marital_status': instance.maritalStatus,
-      'birth_date': instance.birthDate,
+      'birth_date': instance.birthDate?.toIso8601String(),
+      'visibility': instance.visibility,
       'cv_visibility': instance.cvVisibility,
+      'received_job_alert': instance.receivedJobAlert,
       'profile_complete': instance.profileComplete,
+      'created_at': instance.createdAt,
+      'updated_at': instance.updatedAt,
       'address': instance.address,
+      'exact_location': instance.exactLocation,
       'neighborhood': instance.neighborhood,
       'locality': instance.locality,
       'place': instance.place,
@@ -77,8 +83,11 @@ Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
       'postcode': instance.postcode,
       'region': instance.region,
       'country': instance.country,
-      'photo_url': instance.photoUrl,
-      'user_plan': instance.userPlan,
-      'social': instance.social,
-      'contactinfo': instance.contactInfo,
+      'long': instance.long,
+      'lat': instance.lat,
+      'status': instance.status,
+      'available_in': instance.availableIn,
+      'whatsapp_number': instance.whatsappNumber,
+      'bookmark_candidates_count': instance.bookmarkCandidatesCount,
+      'full_address': instance.fullAddress,
     };

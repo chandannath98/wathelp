@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
+import 'package:jobpilot/src/services/authentication/models/user_type/user_type.dart';
 
 import '../contact_info/contact_info.dart';
 import '../social/social.dart';
@@ -14,7 +15,7 @@ class User with _$User {
     @JsonKey(name: 'id') int? id,
     @JsonKey(name: 'username') String? username,
     @JsonKey(name: 'email') String? email,
-    @JsonKey(name: 'role') String? role,
+    @JsonKey(name: 'role') UserType? role,
     @JsonKey(name: 'name') String? name,
     @JsonKey(name: 'first_name') String? firstName,
     @JsonKey(name: 'last_name') String? lastName,

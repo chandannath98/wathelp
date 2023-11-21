@@ -5,10 +5,14 @@ import 'package:jobpilot/src/constants/assets/assets.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
 import 'package:jobpilot/src/constants/strings/home_strings.dart';
 import 'package:jobpilot/src/global/widgets/loading_indicator.dart';
+import 'package:jobpilot/src/global/widgets/social_login_button.dart';
 import 'package:jobpilot/src/services/theme/app_theme.dart';
 import 'package:jobpilot/src/utilities/extensions/size_utilities.dart';
+import 'package:jobpilot/src/utilities/functions.dart';
 import 'package:jobpilot/src/utilities/scaffold_util.dart';
 import 'package:jobpilot/src/utilities/svg_icon.dart';
+
+import 'package:jobpilot/src/utilities/extensions/overlay_loader.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -113,15 +117,21 @@ class _LoginSectionWidgetState extends State<LoginSectionWidget> {
     _passwordFocusNode = FocusNode();
   }
 
-  void onLoginClick() async {
+  Future<void> onLoginClick() async {
+    rmvFocus();
     if (_formKey.currentState?.validate() ?? false) {
-      final val = await Get.showOverlay(
-        loadingWidget: const OverlayLoadingIndicator(),
-        asyncFunction: () => widget.attemptLogin(
-          email: widget.emailController.text,
-          password: widget.passwordController.text,
-          isRememberMe: _isRememberMe,
-        ),
+      // final val = await Get.showOverlay(
+      //   loadingWidget: const OverlayLoadingIndicator(),
+      //   asyncFunction: () => widget.attemptLogin(
+      //     email: widget.emailController.text,
+      //     password: widget.passwordController.text,
+      //     isRememberMe: _isRememberMe,
+      //   ),
+      // );
+      final val = await widget.attemptLogin(
+        email: widget.emailController.text,
+        password: widget.passwordController.text,
+        isRememberMe: _isRememberMe,
       );
       if (val != null) showToastError(val);
     }
@@ -215,7 +225,7 @@ class _LoginSectionWidgetState extends State<LoginSectionWidget> {
                   Directionality(
                     textDirection: TextDirection.rtl,
                     child: ElevatedButton.icon(
-                      onPressed: onLoginClick,
+                      onPressed: onLoginClick.withOverlay,
                       icon: Icon(Icons.arrow_back),
                       label: Text(
                         "Sign In",
@@ -244,59 +254,6 @@ class _LoginSectionWidgetState extends State<LoginSectionWidget> {
                   ),
                 ],
               ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class SocialButton extends StatelessWidget {
-  const SocialButton({
-    super.key,
-    required this.text,
-    required this.iconLink,
-    required this.onTap,
-  });
-  final String text;
-  final String iconLink;
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 42,
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(4),
-        child: DecoratedBox(
-          decoration: BoxDecoration(
-            color: context.color?.theme,
-            borderRadius: BorderRadius.circular(4),
-            border: Border.all(
-              width: 0.5,
-              color: context.color?.extra ?? Colors.grey,
-            ),
-          ),
-          child: Padding(
-            padding: vertical6 + horizontal12,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox.square(
-                  child: Image.network(
-                    iconLink,
-                  ),
-                ),
-                12.width,
-                Flexible(
-                  child: Text(
-                    text,
-                    style: context.text.bodyLarge,
-                  ),
-                ),
-              ],
             ),
           ),
         ),

@@ -1,7 +1,8 @@
 import 'package:get/get.dart';
 import 'package:jobpilot/src/domain/local_storage/repositories/auth_storage/auth_storage.dart';
-import 'package:jobpilot/src/domain/server/repositories/auth/models/user/user.dart';
+import 'package:jobpilot/src/domain/server/repositories/authentication/models/user/user.dart';
 import 'package:jobpilot/src/services/authentication/models/auth_credentials/auth_credentials.dart';
+import 'package:jobpilot/src/services/authentication/models/user_type/user_type.dart';
 
 class AuthController extends GetxController {
   static AuthController get find => Get.find();
@@ -9,10 +10,12 @@ class AuthController extends GetxController {
 
   User? _currentUser;
   String? _currentToken;
+  UserType? _currentUserType;
   AuthCredentials? _userCredentials;
 
   User? get currentUser => _currentUser;
   String? get currentToken => _currentToken;
+  UserType? get currentUserType => _currentUserType;
   AuthCredentials? get userCredentials => _userCredentials;
 
   bool get isAuthenticated => _currentUser != null && _currentToken != null;
@@ -32,6 +35,7 @@ class AuthController extends GetxController {
 
   handleNewUser(User user) async {
     _currentUser = user;
+    _currentUserType = user.role;
     await _authStorage.saveProfile(user);
     update();
   }

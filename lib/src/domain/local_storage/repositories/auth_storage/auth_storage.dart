@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:jobpilot/src/domain/local_storage/config/hive_config.dart';
-import 'package:jobpilot/src/domain/server/repositories/auth/models/user/user.dart';
+import 'package:jobpilot/src/domain/server/repositories/authentication/models/user/user.dart';
 import 'package:jobpilot/src/services/authentication/models/auth_credentials/auth_credentials.dart';
 
 class AuthStorage {

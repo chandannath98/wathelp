@@ -2,27 +2,24 @@ import 'dart:developer' show log;
 
 import 'package:dio/dio.dart';
 import 'package:get/get.dart' hide Response;
-import 'package:jobpilot/src/domain/server/config/api/api_config.dart';
 import 'package:jobpilot/src/domain/server/config/repository.dart';
+import 'package:jobpilot/src/services/authentication/auth_controller.dart';
 import 'package:jobpilot/src/utilities/scaffold_util.dart';
 
 class RequestHandler extends GetxController {
   static RequestHandler get find => Get.find();
 
-  final Dio _dio = Dio(
-    BaseOptions(
-      baseUrl: API.baseUrl,
-    ),
-  );
+  String? get authToken => AuthController.find.currentToken;
 
-  Dio get dio => _dio;
-
-  updateToken({required String token}) async {
-    log("#UpdatedToken: \$TOKEN => $token");
-    dio.options.headers['Authorization'] = 'Bearer $token';
-    dio.options.headers['Connection'] = 'keep-alive';
-    update();
-  }
+  Dio get dio => Dio(
+        BaseOptions(
+          baseUrl: API.baseUrl,
+          headers: {
+            'Connection': 'keep-alive',
+            if (authToken != null) 'Authorization': 'Bearer $authToken',
+          },
+        ),
+      );
 
   String get mainUrl => API.baseUrl;
 
@@ -76,7 +73,6 @@ class RequestHandler extends GetxController {
   }) async {
     try {
       final fullUrl = baseUrl ?? mainUrl + url;
-      log("Get : $fullUrl");
       final response = await dio.get(
         fullUrl,
         options: options,
@@ -235,7 +231,9 @@ res: ${res ?? ''}
       );
       showToastError(response.errorMsg);
     } catch (_) {}
-    if (res?.data != null && res!.data!.containsKey("error")) {
+    if (res?.data != null &&
+        res?.data is Map &&
+        res!.data!.containsKey("error")) {
       showToastError("${res!.data["error"]}");
     } else {
       showToastError(defaultMessage);

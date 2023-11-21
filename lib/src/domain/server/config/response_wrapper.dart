@@ -10,8 +10,8 @@ class ResponseWrapper<C> {
   Map<String, List<String>>? error;
 
   String get errorMsg => (isError)
-      ? (message ??
-          error?.entries.firstOrNull?.value.first ??
+      ? (error?.entries.firstOrNull?.value.first ??
+          message ??
           "Unknown response error!")
       : "Request didn't finished with error!";
 
@@ -26,8 +26,8 @@ class ResponseWrapper<C> {
   /* Actual data pursing : Start*/
 
   late final C? data;
-  bool get isError => error != null || message != null;
-  bool get isSuccess => data != null && error == null && message == null;
+  bool get isError => error != null && data == null;
+  bool get isSuccess => data != null && error == null;
 
   factory ResponseWrapper.fromMap({
     required dynamic rawData,
@@ -38,24 +38,36 @@ class ResponseWrapper<C> {
     if (print) {
       log(rawData.toString());
     }
-    final map = Map<String, dynamic>.from(rawData as Map);
-    final isErrorString =
-        (map.containsKey('error') && (map['error'] is String));
-    final String? errorMsg = isErrorString ? map['error'] : map['message'];
-    final data = _purseResponse(map['data'], purse);
-    return ResponseWrapper<C>(
-      data: data,
-      status: status,
-      message: errorMsg,
-      rawResponse: map['data'],
-      error: isErrorString
-          ? {
-              "error": [errorMsg!]
-            }
-          : map['error'] == null
-              ? null
-              : Map<String, List<String>>.from(json.decode(map['error'])),
-    );
+
+    if (rawData is Map) {
+      final map = Map<String, dynamic>.from(rawData);
+      final isErrorString =
+          (map.containsKey('error') && (map['error'] is String));
+      final String? message = isErrorString ? map['error'] : map['message'];
+      final data = _purseResponse(map['data'], purse);
+      return ResponseWrapper<C>(
+        data: data,
+        status: status,
+        message: message,
+        rawResponse: map['data'],
+        error: isErrorString
+            ? {
+                "error": [map['error']!]
+              }
+            : map['error'] == null
+                ? null
+                : Map<String, List<String>>.from(json.decode(map['error'])),
+      );
+    } else {
+      return ResponseWrapper<C>(
+        status: status,
+        message: "Response was sent in unknown format!",
+        rawResponse: rawData,
+        error: {
+          'response_error': ["Response was sent in unknown format!"],
+        },
+      );
+    }
   }
 
   /* Actual data pursing : End*/

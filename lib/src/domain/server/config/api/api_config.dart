@@ -3,4 +3,5 @@ class API {
 
   //
   static const login = "/login";
+  static const register = "/register";
 }

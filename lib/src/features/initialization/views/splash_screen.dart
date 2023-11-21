@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/instance_manager.dart';
-import 'package:get/route_manager.dart';
+import 'package:get/get.dart';
 import 'package:jobpilot/src/constants/assets/assets.dart';
 import 'package:jobpilot/src/features/homepage/views/homepage.dart';
 import 'package:jobpilot/src/features/initialization/controllers/init_controller.dart';
@@ -30,13 +29,6 @@ class _SplashScreenState extends State<SplashScreen>
         setState(() {});
       })
       ..repeat(reverse: true);
-
-    final controller = Get.put(InitializationController(
-      afterInit: () {
-        Get.off(() => const Homepage());
-      },
-    ));
-    controller.initializeApp();
   }
 
   @override
@@ -47,24 +39,30 @@ class _SplashScreenState extends State<SplashScreen>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: context.color?.primary,
-      body: LayoutBuilder(builder: (context, constraints) {
-        return Opacity(
-          opacity: _animationController.value,
-          child: Center(
-            child: SizedBox.square(
-              dimension: constraints.maxWidth - 120,
-              child: FittedBox(
+    return GetBuilder(
+        init: InitializationController(
+          afterInit: () => Get.off(() => const Homepage()),
+        ),
+        builder: (controller) {
+          return Scaffold(
+            backgroundColor: context.color?.primary,
+            body: LayoutBuilder(builder: (context, constraints) {
+              return Opacity(
+                opacity: _animationController.value,
                 child: Center(
-                  child: SvgPicture.asset(Assets.onboardSvg),
+                  child: SizedBox.square(
+                    dimension: constraints.maxWidth - 120,
+                    child: FittedBox(
+                      child: Center(
+                        child: SvgPicture.asset(Assets.onboardSvg),
+                      ),
+                    ),
+                  ),
                 ),
-              ),
-            ),
-          ),
-        );
-      }),
-    );
+              );
+            }),
+          );
+        });
   }
 }
 

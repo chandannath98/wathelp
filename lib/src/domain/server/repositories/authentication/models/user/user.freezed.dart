@@ -27,7 +27,7 @@ mixin _$User {
   @JsonKey(name: 'email')
   String? get email => throw _privateConstructorUsedError;
   @JsonKey(name: 'role')
-  String? get role => throw _privateConstructorUsedError;
+  UserType? get role => throw _privateConstructorUsedError;
   @JsonKey(name: 'name')
   String? get name => throw _privateConstructorUsedError;
   @JsonKey(name: 'first_name')
@@ -99,7 +99,7 @@ abstract class $UserCopyWith<$Res> {
       {@JsonKey(name: 'id') int? id,
       @JsonKey(name: 'username') String? username,
       @JsonKey(name: 'email') String? email,
-      @JsonKey(name: 'role') String? role,
+      @JsonKey(name: 'role') UserType? role,
       @JsonKey(name: 'name') String? name,
       @JsonKey(name: 'first_name') String? firstName,
       @JsonKey(name: 'last_name') String? lastName,
@@ -195,7 +195,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
       role: freezed == role
           ? _value.role
           : role // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as UserType?,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -347,7 +347,7 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       {@JsonKey(name: 'id') int? id,
       @JsonKey(name: 'username') String? username,
       @JsonKey(name: 'email') String? email,
-      @JsonKey(name: 'role') String? role,
+      @JsonKey(name: 'role') UserType? role,
       @JsonKey(name: 'name') String? name,
       @JsonKey(name: 'first_name') String? firstName,
       @JsonKey(name: 'last_name') String? lastName,
@@ -442,7 +442,7 @@ class __$$UserImplCopyWithImpl<$Res>
       role: freezed == role
           ? _value.role
           : role // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as UserType?,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -611,7 +611,7 @@ class _$UserImpl with DiagnosticableTreeMixin implements _User {
   final String? email;
   @override
   @JsonKey(name: 'role')
-  final String? role;
+  final UserType? role;
   @override
   @JsonKey(name: 'name')
   final String? name;
@@ -862,7 +862,7 @@ abstract class _User implements User {
           {@JsonKey(name: 'id') final int? id,
           @JsonKey(name: 'username') final String? username,
           @JsonKey(name: 'email') final String? email,
-          @JsonKey(name: 'role') final String? role,
+          @JsonKey(name: 'role') final UserType? role,
           @JsonKey(name: 'name') final String? name,
           @JsonKey(name: 'first_name') final String? firstName,
           @JsonKey(name: 'last_name') final String? lastName,
@@ -906,7 +906,7 @@ abstract class _User implements User {
   String? get email;
   @override
   @JsonKey(name: 'role')
-  String? get role;
+  UserType? get role;
   @override
   @JsonKey(name: 'name')
   String? get name;
