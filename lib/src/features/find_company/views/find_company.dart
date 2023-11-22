@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
-import 'package:jobpilot/src/features/browse_section/views/widgets/featured_jobs.dart';
 import 'package:jobpilot/src/features/browse_section/views/widgets/search_box.dart';
+import 'package:jobpilot/src/global/widgets/app/single_company_card.dart';
 import 'package:jobpilot/src/global/widgets/circular_paginator.dart';
 import 'package:jobpilot/src/services/theme/app_theme.dart';
 import 'package:jobpilot/src/utilities/extensions/size_utilities.dart';
 
-class FindJobsPage extends StatelessWidget {
-  const FindJobsPage({
+class FindCompanyPage extends StatelessWidget {
+  const FindCompanyPage({
     super.key,
   });
 
@@ -24,16 +24,14 @@ class FindJobsPage extends StatelessWidget {
             delegate: SliverChildBuilderDelegate(
               (context, index) => Padding(
                 padding: vertical6,
-                child: SingleFeaturedJobCard(
-                  bookmarked: false,
-                  postType: "FULL-TIME",
-                  companyName: "Facebook Inc.",
-                  postName: "Junior Graphic Designer",
-                  companyLocation: "Dhaka, Bangladesh.",
-                  salaryRange: "\$20,$index\00-\$30,$index\00",
-                  companyIcon:
-                      "https://img.icons8.com/?size=48&id=118497&format=png",
-                  onBookmarkCallback: () {},
+                child: SingleCompanyCardWidget(
+                  icon:
+                      "https://img.icons8.com/?size=50&id=vR39khPUVuj4&format=png",
+                  isFeatured: true,
+                  positionCount: index,
+                  name: "Dribble",
+                  location: "Dhaka, Bangladesh.",
+                  onOpenPositionTap: () {},
                 ),
               ),
               childCount: 20,
@@ -75,7 +73,7 @@ class FindJobsSettings extends StatelessWidget {
         children: [
           18.height,
           Text(
-            "Find Jobs",
+            "Company List",
             style: context.text.titleLarge?.copyWith(
               fontWeight: FontWeight.bold,
             ),
@@ -84,7 +82,7 @@ class FindJobsSettings extends StatelessWidget {
           SearchBoxWidget(
             onSearchClick: () {},
             onFilterClick: () {},
-            showFilterButton: true,
+            showFilterButton: false,
           ),
           12.height,
           Text(
@@ -112,7 +110,7 @@ class FindJobsSettings extends StatelessWidget {
               "Project Manager",
             ]
                 .map(
-                  (type) => PopularSearchOptionWidget(
+                  (type) => FindCompanyOptionWidget(
                     type: type,
                     isSelected: "PHP" == type,
                   ),
@@ -126,8 +124,8 @@ class FindJobsSettings extends StatelessWidget {
   }
 }
 
-class PopularSearchOptionWidget extends StatelessWidget {
-  const PopularSearchOptionWidget({
+class FindCompanyOptionWidget extends StatelessWidget {
+  const FindCompanyOptionWidget({
     super.key,
     required this.type,
     required this.isSelected,

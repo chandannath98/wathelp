@@ -17,6 +17,7 @@ final class Assets {
   static const menuIcon = "assets/icon/menu.svg";
   static const homeIcon = "assets/icon/home.svg";
   static const pricingIcon = "assets/icon/pricing.svg";
+  static const editIcon = "assets/icon/edit.svg";
 
   //Reg
   static const candidateUserIcon = "assets/icon/candidate_user.svg";

@@ -18,13 +18,12 @@ class SvgIcon extends StatelessWidget {
     return SizedBox.square(
       dimension: size ?? 24,
       child: FittedBox(
-        child: Builder(
-          builder: (context) => SvgPicture.asset(
-            path,
-            colorFilter: ColorFilter.mode(
-              color ?? Theme.of(context).iconTheme.color ?? Colors.black,
-              BlendMode.srcIn,
-            ),
+        alignment: Alignment.center,
+        child: SvgPicture.asset(
+          path,
+          colorFilter: ColorFilter.mode(
+            color ?? Theme.of(context).iconTheme.color ?? Colors.black,
+            BlendMode.srcIn,
           ),
         ),
       ),

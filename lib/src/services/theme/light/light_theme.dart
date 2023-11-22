@@ -34,6 +34,21 @@ final lightTheme = ThemeData(
       foregroundColor: _primaryColor,
     ),
   ),
+  outlinedButtonTheme: OutlinedButtonThemeData(
+    style: OutlinedButton.styleFrom(
+      minimumSize: const Size.fromHeight(40),
+      foregroundColor: _primaryColor,
+      side: const BorderSide(
+        width: 1.5,
+        color: _primaryColor,
+      ),
+      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 18),
+      textStyle: const TextStyle(
+        fontSize: 16,
+        fontWeight: FontWeight.bold,
+      ),
+    ),
+  ),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
       elevation: 0,

@@ -55,7 +55,7 @@ class HomeMoreVacanciesSection extends StatelessWidget {
                   color: context.color?.primary,
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),

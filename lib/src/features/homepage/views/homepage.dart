@@ -4,7 +4,10 @@ import 'package:get/get.dart' hide ContextExtensionss;
 import 'package:jobpilot/src/constants/assets/assets.dart';
 import 'package:jobpilot/src/features/authentication/views/login_system_switcher.dart';
 import 'package:jobpilot/src/features/browse_section/views/browse_screen.dart';
+import 'package:jobpilot/src/features/dashboard/views/dashboard.dart';
+import 'package:jobpilot/src/features/find_company/views/find_company.dart';
 import 'package:jobpilot/src/features/find_jobs/views/find_jobs.dart';
+import 'package:jobpilot/src/features/job_alert/views/job_alert.dart';
 import 'package:jobpilot/src/services/theme/app_theme.dart';
 import 'package:jobpilot/src/utilities/extensions/overlay_loader.dart';
 import 'package:jobpilot/src/utilities/svg_icon.dart';
@@ -28,9 +31,7 @@ class Homepage extends StatelessWidget {
           appBar: AppBar(
             elevation: 2,
             backgroundColor: context.color?.theme,
-            title: SvgPicture.asset(
-              Assets.appLogoSvg,
-            ),
+            title: SvgPicture.asset(Assets.appLogoSvg),
             actions: [
               HomepageActions(
                 profilePic: profile,
@@ -74,10 +75,12 @@ class Homepage extends StatelessWidget {
                   ? const FindCompanyPage()
                   : const FindJobsPage(),
               controller.isAuthenticated
-                  ? const DashboardScreen()
+                  ? const DashboardPage()
                   : const LoginSystemSwitcher(),
-              Placeholder(),
-              Placeholder(),
+              controller.isAuthenticated
+                  ? const JobAlertPageWidget()
+                  : const PricingPage(),
+              const MenuScreen(),
             ],
           ),
         );
@@ -86,28 +89,32 @@ class Homepage extends StatelessWidget {
   }
 }
 
-class DashboardScreen extends StatelessWidget {
-  const DashboardScreen({
+class MenuScreen extends StatelessWidget {
+  const MenuScreen({
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
     return const Placeholder(
-      child: Text("My Dashboard Page."),
+      child: Center(
+        child: Text("Menu Page."),
+      ),
     );
   }
 }
 
-class FindCompanyPage extends StatelessWidget {
-  const FindCompanyPage({
+class PricingPage extends StatelessWidget {
+  const PricingPage({
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
     return const Placeholder(
-      child: Text("Find Company Page."),
+      child: Center(
+        child: Text("Pricing Page."),
+      ),
     );
   }
 }
