@@ -63,6 +63,7 @@ class NewJobWidget extends StatelessWidget {
                                   "Remote",
                                   style: context.text.bodySmall?.copyWith(
                                     color: context.color?.primary,
+                                    fontSize: 10,
                                   ),
                                 ),
                               ),
@@ -115,10 +116,10 @@ class NewJobWidget extends StatelessWidget {
                     child: OutlinedButton.icon(
                       style: OutlinedButton.styleFrom(),
                       onPressed: () {},
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.arrow_back,
                       ),
-                      label: Text(
+                      label: const Text(
                         "Apply Now",
                       ),
                     ),
@@ -134,7 +135,7 @@ class NewJobWidget extends StatelessWidget {
                     padding: EdgeInsets.zero,
                     visualDensity: VisualDensity.compact,
                     onPressed: () {},
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.bookmark_border_outlined,
                     ),
                   ),

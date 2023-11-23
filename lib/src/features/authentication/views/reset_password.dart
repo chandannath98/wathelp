@@ -133,8 +133,8 @@ class _ResetPasswordSectionWidgetState
                           );
                         } else {}
                       },
-                      icon: Icon(Icons.arrow_back),
-                      label: Text(
+                      icon: const Icon(Icons.arrow_back),
+                      label: const Text(
                         "Reset Password",
                       ),
                     ),

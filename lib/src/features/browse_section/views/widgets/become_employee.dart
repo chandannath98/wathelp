@@ -13,7 +13,7 @@ class BecomeEmployeeSection extends StatelessWidget {
     return DecoratedBox(
       decoration: BoxDecoration(
         color: context.color?.extra ?? Colors.grey,
-        image: DecorationImage(
+        image: const DecorationImage(
           image: NetworkImage(
             "https://images.unsplash.com/photo-1617834659281-1666d3262af4?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjE2fHxibHVlJTIwbWFuJTIwd2VsY29tZXxlbnwwfHwwfHx8MA%3D%3D",
           ),
@@ -55,10 +55,10 @@ class BecomeEmployeeSection extends StatelessWidget {
                         backgroundColor: context.color?.theme,
                       ),
                       onPressed: () {},
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.arrow_back,
                       ),
-                      label: Text(
+                      label: const Text(
                         "Register Now",
                       ),
                     ),

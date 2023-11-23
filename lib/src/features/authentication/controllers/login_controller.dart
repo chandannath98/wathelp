@@ -65,6 +65,7 @@ class LoginController extends GetxController {
       log("#LoginError", error: e, stackTrace: s);
       return null;
     }
+    return null;
   }
 
   // Future<String?> sendPasswordResetOtp({

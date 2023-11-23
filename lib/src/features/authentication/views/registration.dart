@@ -343,14 +343,14 @@ class _RegistrationSectionWidgetState extends State<RegistrationSectionWidget> {
                     textDirection: TextDirection.rtl,
                     child: ElevatedButton.icon(
                       onPressed: onCreateAccountClicked.withOverlay,
-                      icon: Icon(Icons.arrow_back),
-                      label: Text(
+                      icon: const Icon(Icons.arrow_back),
+                      label: const Text(
                         "Create Account",
                       ),
                     ),
                   ),
                   10.height,
-                  Center(
+                  const Center(
                     child: Text(
                       "OR",
                     ),

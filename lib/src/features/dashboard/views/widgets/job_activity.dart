@@ -11,7 +11,7 @@ class JobActivityStatusWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Icon(
+        const Icon(
           Icons.check,
           size: 18,
           color: Colors.green,

@@ -45,5 +45,6 @@ class RegistrationController extends GetxController {
       log("#LoginError", error: e, stackTrace: s);
       return null;
     }
+    return null;
   }
 }

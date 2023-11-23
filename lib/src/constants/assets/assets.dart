@@ -18,6 +18,10 @@ final class Assets {
   static const homeIcon = "assets/icon/home.svg";
   static const pricingIcon = "assets/icon/pricing.svg";
   static const editIcon = "assets/icon/edit.svg";
+  static const facebookIcon = "assets/icon/facebook.svg";
+  static const youtubeIcon = "assets/icon/youtube.svg";
+  static const twitterIcon = "assets/icon/twitter.svg";
+  static const instagramIcon = "assets/icon/instagram.svg";
 
   //Reg
   static const candidateUserIcon = "assets/icon/candidate_user.svg";

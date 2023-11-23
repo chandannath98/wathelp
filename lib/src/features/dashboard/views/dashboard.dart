@@ -112,8 +112,8 @@ class DashboardTopSection extends StatelessWidget {
         DashboardDataTile(
           data: "589",
           title: "Applied Jobs",
-          icon: Icon(
-            Icons.topic_rounded,
+          icon: const Icon(
+            Icons.work_outline_rounded,
           ),
           iconColor: context.color?.primary ?? Colors.blue,
           onTap: () {},
@@ -122,7 +122,7 @@ class DashboardTopSection extends StatelessWidget {
         DashboardDataTile(
           data: "238",
           title: "Favorite Jobs",
-          icon: Icon(
+          icon: const Icon(
             Icons.bookmark_border_rounded,
           ),
           iconColor: Colors.amber,
@@ -132,7 +132,7 @@ class DashboardTopSection extends StatelessWidget {
         DashboardDataTile(
           data: "574",
           title: "Job Alerts",
-          icon: Center(
+          icon: const Center(
             child: SvgIcon(
               Assets.jobsIcon,
             ),

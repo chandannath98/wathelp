@@ -13,7 +13,7 @@ class RegisterNowSection extends StatelessWidget {
     return DecoratedBox(
       decoration: BoxDecoration(
         color: context.color?.extra ?? Colors.grey,
-        image: DecorationImage(
+        image: const DecorationImage(
           image: NetworkImage(
             "https://images.unsplash.com/photo-1629131726692-1accd0c53ce0?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTA2fHxjb21wdXRlcnxlbnwwfHwwfHx8MA%3D%3D",
           ),
@@ -48,10 +48,10 @@ class RegisterNowSection extends StatelessWidget {
                     width: 180,
                     child: ElevatedButton.icon(
                       onPressed: () {},
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.arrow_back,
                       ),
-                      label: Text(
+                      label: const Text(
                         "Register Now",
                       ),
                     ),

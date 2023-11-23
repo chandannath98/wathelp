@@ -19,7 +19,7 @@ class CompleteProfileSection extends StatelessWidget {
             IntrinsicHeight(
               child: Row(
                 children: [
-                  CircleAvatar(
+                  const CircleAvatar(
                     radius: 24,
                   ),
                   10.width,
@@ -60,10 +60,10 @@ class CompleteProfileSection extends StatelessWidget {
                       backgroundColor: context.color?.theme,
                     ),
                     onPressed: () {},
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.arrow_back,
                     ),
-                    label: Text(
+                    label: const Text(
                       "Edit Now",
                     ),
                   ),

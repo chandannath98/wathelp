@@ -101,7 +101,7 @@ class AppliedJobCardWidget extends StatelessWidget {
             12.height,
             Row(
               children: [
-                JobActivityStatusWidget(),
+                const JobActivityStatusWidget(),
                 12.width,
                 Expanded(
                   child: Text(
@@ -121,10 +121,10 @@ class AppliedJobCardWidget extends StatelessWidget {
                   child: OutlinedButton.icon(
                     style: OutlinedButton.styleFrom(),
                     onPressed: () {},
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.arrow_back,
                     ),
-                    label: Text(
+                    label: const Text(
                       "View Details",
                     ),
                   ),

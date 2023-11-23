@@ -8,6 +8,7 @@ import 'package:jobpilot/src/features/dashboard/views/dashboard.dart';
 import 'package:jobpilot/src/features/find_company/views/find_company.dart';
 import 'package:jobpilot/src/features/find_jobs/views/find_jobs.dart';
 import 'package:jobpilot/src/features/job_alert/views/job_alert.dart';
+import 'package:jobpilot/src/features/menu/views/menu.dart';
 import 'package:jobpilot/src/services/theme/app_theme.dart';
 import 'package:jobpilot/src/utilities/extensions/overlay_loader.dart';
 import 'package:jobpilot/src/utilities/svg_icon.dart';
@@ -85,21 +86,6 @@ class Homepage extends StatelessWidget {
           ),
         );
       },
-    );
-  }
-}
-
-class MenuScreen extends StatelessWidget {
-  const MenuScreen({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return const Placeholder(
-      child: Center(
-        child: Text("Menu Page."),
-      ),
     );
   }
 }

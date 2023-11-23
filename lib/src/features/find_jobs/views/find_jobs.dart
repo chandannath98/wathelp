@@ -30,7 +30,7 @@ class FindJobsPage extends StatelessWidget {
                   companyName: "Facebook Inc.",
                   postName: "Junior Graphic Designer",
                   companyLocation: "Dhaka, Bangladesh.",
-                  salaryRange: "\$20,$index\00-\$30,$index\00",
+                  salaryRange: "\$20,${index}00-\$30,${index}00",
                   companyIcon:
                       "https://img.icons8.com/?size=48&id=118497&format=png",
                   onBookmarkCallback: () {},
