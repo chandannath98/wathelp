@@ -12,7 +12,16 @@ import 'package:jobpilot/src/utilities/extensions/size_utilities.dart';
 class NoUserHomeHeader extends StatelessWidget {
   const NoUserHomeHeader({
     super.key,
+    this.liveJobsData,
+    this.companiesData,
+    this.candidatesData,
+    this.newJobsData,
   });
+
+  final String? liveJobsData;
+  final String? companiesData;
+  final String? candidatesData;
+  final String? newJobsData;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +29,7 @@ class NoUserHomeHeader extends StatelessWidget {
       children: [
         16.height,
         Padding(
-          padding: vertical12 /* .add(const EdgeInsets.only(right: 18)) */,
+          padding: vertical12,
           child: Text(
             heading,
             style: context.text.headlineMedium?.copyWith(
@@ -93,25 +102,25 @@ class NoUserHomeHeader extends StatelessWidget {
           crossAxisSpacing: 16,
           childAspectRatio: 198 / 94,
           physics: const NeverScrollableScrollPhysics(),
-          children: const [
+          children: [
             HomeDataCard(
-              icon: Icon(Icons.next_week_outlined),
-              data: "1,75,324",
+              icon: const Icon(Icons.next_week_outlined),
+              data: liveJobsData ?? "...",
               title: "Live Job",
             ),
             HomeDataCard(
-              icon: Icon(Icons.location_city),
-              data: "75,324",
+              icon: const Icon(Icons.location_city),
+              data: companiesData ?? "...",
               title: "Companies",
             ),
             HomeDataCard(
-              icon: Icon(Icons.people_alt_outlined),
-              data: "31,75,324",
+              icon: const Icon(Icons.people_alt_outlined),
+              data: candidatesData ?? "...",
               title: "Candidates",
             ),
             HomeDataCard(
-              icon: Icon(Icons.tour_outlined),
-              data: "5,324",
+              icon: const Icon(Icons.tour_outlined),
+              data: newJobsData ?? "...",
               title: "New Jobs",
             ),
           ],

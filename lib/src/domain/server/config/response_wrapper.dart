@@ -6,6 +6,7 @@ typedef RawToDataPurse<Z> = Z Function(dynamic json);
 class ResponseWrapper<C> {
   final int? status;
   String? message;
+  dynamic rawData;
   dynamic rawResponse;
   Map<String, List<String>>? error;
 
@@ -18,7 +19,8 @@ class ResponseWrapper<C> {
   ResponseWrapper({
     required this.status,
     required this.message,
-    this.rawResponse,
+    required this.rawResponse,
+    this.rawData,
     this.error,
     this.data,
   });
@@ -30,39 +32,53 @@ class ResponseWrapper<C> {
   bool get isSuccess => data != null && error == null;
 
   factory ResponseWrapper.fromMap({
-    required dynamic rawData,
+    required dynamic response,
     required RawToDataPurse<C> purse,
     int? status,
     bool print = false,
   }) {
     if (print) {
-      log(rawData.toString());
+      log(response.toString());
     }
 
-    if (rawData is Map) {
-      final map = Map<String, dynamic>.from(rawData);
-      final isErrorString =
-          (map.containsKey('error') && (map['error'] is String));
-      final String? message = isErrorString ? map['error'] : map['message'];
+    final resIsMap = response is Map;
+    if (resIsMap) {
+      Map<String, List<String>>? error;
+      final map = Map<String, dynamic>.from(response);
+      // Error purse!
+      final hasErrorKey = map.containsKey('error') || map.containsKey('errors');
+      if (hasErrorKey) {
+        final isErrorString =
+            (map.containsKey('error') && (map['error'] is String));
+
+        if (isErrorString) {
+          error = {
+            "error": [map['error']!]
+          };
+        } else {
+          final resData = Map<String, List>.from(map['errors']);
+          error = resData
+              .map((key, value) => MapEntry(key, List<String>.from(value)));
+        }
+      }
+
+      // Data purse!
       final data = _purseResponse(map['data'], purse);
       return ResponseWrapper<C>(
         data: data,
         status: status,
-        message: message,
-        rawResponse: map['data'],
-        error: isErrorString
-            ? {
-                "error": [map['error']!]
-              }
-            : map['error'] == null
-                ? null
-                : Map<String, List<String>>.from(json.decode(map['error'])),
+        rawResponse: response,
+        message: map['message'],
+        rawData: map['data'],
+        error: error,
       );
     } else {
+      log("Response is map (${response is Map}): Response type -> ${response.runtimeType}");
       return ResponseWrapper<C>(
         status: status,
+        rawResponse: response,
         message: "Response was sent in unknown format!",
-        rawResponse: rawData,
+        rawData: response,
         error: {
           'response_error': ["Response was sent in unknown format!"],
         },
@@ -76,7 +92,7 @@ class ResponseWrapper<C> {
     return <String, dynamic>{
       'status': status,
       'message': message,
-      'rawResponse': rawResponse,
+      'rawResponse': rawData,
       'error': error,
     };
   }
@@ -85,12 +101,12 @@ class ResponseWrapper<C> {
 
   @override
   String toString() {
-    return 'ResponseWrapper(status: $status, message: $message, rawResponse: $rawResponse, error: $error)';
+    return 'ResponseWrapper(status: $status, message: $message, rawResponse: $rawData, error: $error)';
   }
 }
 
 C? _purseResponse<C>(
-  Map<String, dynamic> rawResponse,
+  Map<String, dynamic>? rawResponse,
   RawToDataPurse<C> purserFunction,
 ) {
   try {

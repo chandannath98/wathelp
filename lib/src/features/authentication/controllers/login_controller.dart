@@ -4,6 +4,8 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:jobpilot/src/domain/server/config/request_handler.dart';
 import 'package:jobpilot/src/domain/server/repositories/authentication/auth_repo.dart';
+import 'package:jobpilot/src/features/authentication/views/reset_password.dart';
+import 'package:jobpilot/src/features/authentication/views/varify_email.dart';
 import 'package:jobpilot/src/services/authentication/auth_controller.dart';
 import 'package:jobpilot/src/services/authentication/models/auth_credentials/auth_credentials.dart';
 import 'package:jobpilot/src/utilities/scaffold_util.dart';
@@ -68,28 +70,64 @@ class LoginController extends GetxController {
     return null;
   }
 
-  // Future<String?> sendPasswordResetOtp({
-  //   required email,
-  // }) async {
-  //   try {
-  //     final data = await _loginRepo.login(email: email, password: password);
-  //     if (data.isSuccess) {
-  //       showToastSuccess(data.data!.message!);
-  //       await _authStorage.handleNewUser(data.data!.user!);
-  //       await _authStorage.handleNewAuthToken(data.data!.token!);
-  //       if (isRememberMe) {
-  //         await _authStorage.saveAuthCredentials(
-  //             AuthCredentials(email: email, password: password));
-  //       } else {
-  //         await _authStorage.removeAuthCredentials();
-  //       }
-  //     } else {
-  //       showToastError(data.errorMsg);
-  //     }
-  //   } catch (e, s) {
-  //     if (e is RequestException) e.handleError();
-  //     log("#LoginError", error: e, stackTrace: s);
-  //     return null;
-  //   }
-  // }
+  Future<bool> checkCodeSendStatus(String email) async {
+    try {
+      final res = await _authRepo.sendResetOTP(email: email);
+      if (res.isSuccess) {
+        showToastSuccess(res.data!);
+        return true;
+      } else {
+        showToastError(res.errorMsg);
+        return false;
+      }
+    } catch (e, s) {
+      if (e is RequestException) e.handleError();
+      log("#CodeSendError", error: e, stackTrace: s);
+      return false;
+    }
+  }
+
+  Future<String?> requestPasswordReset({
+    required String code,
+    required String email,
+    required String password,
+  }) async {
+    try {
+      final res = await _authRepo.requestResetPassword(
+          code: code, email: email, password: password);
+      if (res.isSuccess) {
+        showLogin = true;
+        showToastSuccess(res.data!);
+        Get.back();
+      } else {
+        showToastError(res.errorMsg);
+      }
+    } catch (e, s) {
+      log("#ResetError", error: e, stackTrace: s);
+      if (e is RequestException) {
+        e.handleError();
+        if (e.statusCode == 400) Get.back();
+      }
+    }
+  }
+
+  Future<String?> forgotPassword({required email}) async {
+    final codeSendState = await checkCodeSendStatus(email);
+    if (codeSendState) {
+      Get.to(
+        () => VerifyEmailScreen(
+          email: email,
+          descriptor: "your verify your account.",
+          onCodeSubmit: ({required String code}) async => Get.off(
+            () => ResetPasswordScreen(
+              email: email,
+              code: code,
+              requestReset: requestPasswordReset,
+            ),
+          ),
+          onResendClick: () async => checkCodeSendStatus(email),
+        ),
+      );
+    }
+  }
 }

@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:jobpilot/src/constants/assets/assets.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
 import 'package:jobpilot/src/services/theme/app_theme.dart';
+import 'package:jobpilot/src/utilities/extensions/overlay_loader.dart';
 import 'package:jobpilot/src/utilities/extensions/size_utilities.dart';
 
 class VerifyEmailScreen extends StatelessWidget {
@@ -18,7 +19,7 @@ class VerifyEmailScreen extends StatelessWidget {
 
   final Future<String?> Function({required String code}) onCodeSubmit;
   final FormFieldValidator<String>? codeValidator;
-  final VoidCallback onResendClick;
+  final Future<void> Function() onResendClick;
   final String email;
   final String descriptor;
 
@@ -56,7 +57,7 @@ class VerifyEmailSectionWidget extends StatefulWidget {
 
   final Future<String?> Function({required String code}) onCodeSubmit;
   final FormFieldValidator<String>? codeValidator;
-  final VoidCallback onResendClick;
+  final Future<void> Function() onResendClick;
   final String email;
   final String descriptor;
 
@@ -67,6 +68,11 @@ class VerifyEmailSectionWidget extends StatefulWidget {
 
 class _VerifyEmailSectionWidgetState extends State<VerifyEmailSectionWidget> {
   final _formKey = GlobalKey<FormState>();
+  final _codeController = TextEditingController();
+
+  onResendTap() async {
+    await widget.onResendClick.withOverlay();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -111,6 +117,7 @@ class _VerifyEmailSectionWidgetState extends State<VerifyEmailSectionWidget> {
                   ),
                   24.height,
                   TextFormField(
+                    controller: _codeController,
                     validator: widget.codeValidator,
                     decoration: const InputDecoration(
                       hintText: "Enter code...",
@@ -123,7 +130,7 @@ class _VerifyEmailSectionWidgetState extends State<VerifyEmailSectionWidget> {
                       onPressed: () {
                         if (_formKey.currentState?.validate() ?? false) {
                           widget.onCodeSubmit(
-                            code: "",
+                            code: _codeController.text,
                           );
                         } else {}
                       },
@@ -137,13 +144,13 @@ class _VerifyEmailSectionWidgetState extends State<VerifyEmailSectionWidget> {
                   RichText(
                     textAlign: TextAlign.center,
                     text: TextSpan(
-                      text: "Didn't recieve any code! ",
+                      text: "Didn't receive any code! ",
                       style: context.text.titleMedium,
                       children: [
                         TextSpan(
                           text: "Resend code.",
                           recognizer: TapGestureRecognizer()
-                            ..onTap = widget.onResendClick,
+                            ..onTap = onResendTap,
                           style: TextStyle(
                             color: context.color?.primary,
                             fontWeight: FontWeight.bold,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jobpilot/src/domain/server/repositories/authentication/models/user/user.dart';
 import 'package:jobpilot/src/features/authentication/views/registration.dart';
 import 'package:jobpilot/src/services/authentication/auth_controller.dart';
 
@@ -7,6 +8,7 @@ class HomepageController extends GetxController {
   final int loginPageIndex = 2;
   int currentIndex = 0;
   bool get isAuthenticated => AuthController.find.isAuthenticated;
+  User? get currentUser => AuthController.find.currentUser;
   bool get isLoginScreen =>
       (!isAuthenticated && currentIndex == loginPageIndex);
   late final PageController pageController;

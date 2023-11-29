@@ -8,9 +8,9 @@ import 'package:jobpilot/src/utilities/svg_icon.dart';
 class HomepageActions extends StatelessWidget {
   const HomepageActions({
     super.key,
+    this.profilePic,
     required this.isAuthenticated,
     required this.showRegisterButton,
-    required this.profilePic,
     required this.onLoginClick,
     required this.onRegisterClick,
     required this.onProfileClick,
@@ -19,7 +19,7 @@ class HomepageActions extends StatelessWidget {
 
   final bool showRegisterButton;
   final bool isAuthenticated;
-  final String profilePic;
+  final String? profilePic;
   final VoidCallback onLoginClick;
   final VoidCallback onRegisterClick;
   final VoidCallback onProfileClick;
@@ -63,7 +63,10 @@ class HomepageActions extends StatelessWidget {
             child: CircleAvatar(
               radius: 16,
               foregroundImage: NetworkImage(
-                profilePic,
+                profilePic ?? "",
+              ),
+              backgroundImage: const AssetImage(
+                Assets.profilePlaceholder,
               ),
             ),
           ),

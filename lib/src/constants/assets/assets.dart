@@ -7,6 +7,7 @@ final class Assets {
   //Homepage
   static const homeHero = "assets/images/home_hero.png";
   static const homeHeroSvg = "assets/images/hero_image.svg";
+  static const profilePlaceholder = "assets/images/profile_placeholder.jpg";
 
   //Icons
   static const browseIcon = "assets/icon/browse.svg";

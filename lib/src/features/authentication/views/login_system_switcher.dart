@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:jobpilot/src/features/authentication/controllers/login_controller.dart';
 import 'package:jobpilot/src/features/authentication/views/forgot_password.dart';
 import 'package:jobpilot/src/services/authentication/auth_controller.dart';
+import 'package:jobpilot/src/utilities/form_validator_helper.dart';
 
 import 'login.dart';
 
@@ -25,16 +26,14 @@ class LoginSystemSwitcher extends StatelessWidget {
               emailController: controller.emailController,
               passwordController: controller.passwordController,
               attemptLogin: controller.login,
-              emailValidator: (value) {
-                if (value == null || value.isEmpty) return "Email is required!";
-                return value.isEmail ? null : "Enter a valid email!";
-              },
-              passwordValidator: (value) {
-                if (value == null || value.length < 6) {
-                  return "Password is too short!";
-                }
-                return null;
-              },
+              emailValidator: FieldValidator.validate(
+                name: "Email",
+                [isRequired, isEmail],
+              ),
+              passwordValidator: FieldValidator.validate(
+                name: "Password",
+                [isRequired, tooShort8],
+              ),
               goForgotPassword: ({String? email}) async =>
                   controller.shiftLoginView(),
               onFacebookClick: () {},
@@ -42,9 +41,7 @@ class LoginSystemSwitcher extends StatelessWidget {
             ),
             secondChild: ForgotPasswordSectionWidget(
               emailController: controller.emailController,
-              onResetCallback: ({String? email}) async {
-                return null;
-              },
+              onResetCallback: controller.forgotPassword,
               onFacebookSignIn: () {},
               goSignIn: () => controller.shiftLoginView(),
               goRegister: () {},

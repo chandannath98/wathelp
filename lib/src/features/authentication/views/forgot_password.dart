@@ -6,6 +6,7 @@ import 'package:jobpilot/src/constants/design/paddings.dart';
 import 'package:jobpilot/src/constants/strings/home_strings.dart';
 import 'package:jobpilot/src/global/widgets/social_login_button.dart';
 import 'package:jobpilot/src/services/theme/app_theme.dart';
+import 'package:jobpilot/src/utilities/extensions/overlay_loader.dart';
 import 'package:jobpilot/src/utilities/extensions/size_utilities.dart';
 import 'package:jobpilot/src/utilities/svg_icon.dart';
 
@@ -86,6 +87,14 @@ class _ForgotPasswordSectionWidgetState
     extends State<ForgotPasswordSectionWidget> {
   final _formKey = GlobalKey<FormState>();
 
+  Future submitEmail() async {
+    if (_formKey.currentState?.validate() ?? false) {
+      final res = await widget.onResetCallback(
+        email: widget.emailController.text,
+      );
+    } else {}
+  }
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -144,8 +153,9 @@ class _ForgotPasswordSectionWidgetState
                   ),
                   24.height,
                   TextFormField(
-                    controller: widget.emailController,
                     validator: widget.emailValidator,
+                    controller: widget.emailController,
+                    onFieldSubmitted: (value) => submitEmail.withOverlay(),
                     decoration: const InputDecoration(
                       hintText: "Email address...",
                     ),
@@ -154,13 +164,7 @@ class _ForgotPasswordSectionWidgetState
                   Directionality(
                     textDirection: TextDirection.rtl,
                     child: ElevatedButton.icon(
-                      onPressed: () {
-                        if (_formKey.currentState?.validate() ?? false) {
-                          widget.onResetCallback(
-                            email: widget.emailController.text,
-                          );
-                        } else {}
-                      },
+                      onPressed: submitEmail.withOverlay,
                       icon: const Icon(Icons.arrow_back),
                       label: const Text(
                         "Reset Password",

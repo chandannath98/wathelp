@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:jobpilot/src/domain/server/config/repository.dart';
 import 'package:jobpilot/src/domain/server/repositories/authentication/models/register_data/register_data.dart';
@@ -17,7 +20,7 @@ class AuthRepository extends ServerRepo {
         }),
       );
       return ResponseWrapper.fromMap(
-        rawData: response.data,
+        response: response.data,
         status: response.statusCode,
         purse: (json) => LoginResponse.fromJson(json),
       );
@@ -48,9 +51,52 @@ class AuthRepository extends ServerRepo {
       );
 
       return ResponseWrapper.fromMap(
-        rawData: response.data,
+        response: response.data,
         status: response.statusCode,
         purse: (json) => RegisterData.fromJson(json),
+      );
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<ResponseWrapper<String>> sendResetOTP({required String email}) async {
+    try {
+      final response = await requestHandler.post(
+        API.forgetPassword,
+        FormData.fromMap({"email": email}),
+      );
+      return ResponseWrapper.fromMap(
+        print: true,
+        response: response.data,
+        status: response.statusCode,
+        purse: (json) => json['message'] as String,
+      );
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<ResponseWrapper<String>> requestResetPassword(
+      {required String code,
+      required String email,
+      required String password}) async {
+    try {
+      final data = {
+        "code": code,
+        "email": email,
+        "password": password,
+      };
+
+      final response = await requestHandler.post(
+        API.resetPassword,
+        FormData.fromMap(data),
+      );
+      return ResponseWrapper.fromMap(
+        print: true,
+        response: response.data,
+        status: response.statusCode,
+        purse: (json) => json['message'] as String,
       );
     } catch (e) {
       rethrow;

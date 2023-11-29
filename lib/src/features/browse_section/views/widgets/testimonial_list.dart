@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
+import 'package:jobpilot/src/domain/server/repositories/home/models/browse/testimonial/testimonial.dart';
 import 'package:jobpilot/src/services/theme/app_theme.dart';
 import 'package:jobpilot/src/utilities/extensions/size_utilities.dart';
 
 class TestimonialListSection extends StatelessWidget {
   const TestimonialListSection({
     super.key,
+    this.dataList,
+    required this.isLoading,
   });
+
+  final bool isLoading;
+  final List<Testimonial>? dataList;
 
   @override
   Widget build(BuildContext context) {
@@ -23,16 +29,14 @@ class TestimonialListSection extends StatelessWidget {
             ),
           ),
           18.height,
-          for (var i in List.generate(6, (index) => index)) ...[
+          for (Testimonial i in dataList ?? <Testimonial>[]) ...[
             8.height,
             SingleTestimonialWidget(
-              starCount: i,
-              name: "Bessie Cooper",
-              jobRole: "UI/UX Designer",
-              quotation:
-                  "Ut ullamcorper hendrerit tempor. Aliquam in rutrum dui. Maecenas ac placerat metus, in faucibus est.",
-              profileImage:
-                  "https://images.unsplash.com/photo-1698854607842-83327fd8690b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw0OXx8fGVufDB8fHx8fA%3D%3D",
+              starCount: 5,
+              name: i.name ?? "",
+              jobRole: i.designation ?? "",
+              quotation: i.description ?? "",
+              profileImage: i.image ?? "",
             ),
             8.height,
           ],

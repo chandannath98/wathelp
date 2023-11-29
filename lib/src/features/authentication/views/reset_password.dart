@@ -3,17 +3,25 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:jobpilot/src/constants/assets/assets.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
 import 'package:jobpilot/src/services/theme/app_theme.dart';
+import 'package:jobpilot/src/utilities/extensions/overlay_loader.dart';
 import 'package:jobpilot/src/utilities/extensions/size_utilities.dart';
+import 'package:jobpilot/src/utilities/scaffold_util.dart';
 
 class ResetPasswordScreen extends StatelessWidget {
   const ResetPasswordScreen({
     super.key,
-    required this.onResetClick,
-    this.passwordValidator,
+    required this.code,
+    required this.email,
+    required this.requestReset,
   });
 
-  final Future<String?> Function({required String password}) onResetClick;
-  final FormFieldValidator<String>? passwordValidator;
+  final String code;
+  final String email;
+  final Future<String?> Function({
+    required String code,
+    required String email,
+    required String password,
+  }) requestReset;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +36,13 @@ class ResetPasswordScreen extends StatelessWidget {
         ),
       ),
       body: ResetPasswordSectionWidget(
-        onResetClick: onResetClick,
+        onResetClick: ({required String password}) async {
+          return await requestReset(
+            code: code,
+            email: email,
+            password: password,
+          );
+        },
       ),
     );
   }
@@ -52,7 +66,21 @@ class ResetPasswordSectionWidget extends StatefulWidget {
 class _ResetPasswordSectionWidgetState
     extends State<ResetPasswordSectionWidget> {
   final _formKey = GlobalKey<FormState>();
-  bool _hidPassword = false;
+  bool _hidePassword = false;
+  bool _hideConfirmPassword = false;
+  final passwordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
+
+  Future resetPassword() async {
+    if (_formKey.currentState?.validate() ?? false) {
+      if (passwordController.text == confirmPasswordController.text) {
+        final res =
+            await widget.onResetClick(password: passwordController.text);
+      } else {
+        showToastWarning("Password didn't matched!");
+      }
+    } else {}
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -84,18 +112,19 @@ class _ResetPasswordSectionWidgetState
                   ),
                   12.height,
                   TextFormField(
-                    obscureText: _hidPassword,
+                    obscureText: _hidePassword,
+                    controller: passwordController,
                     validator: widget.passwordValidator,
                     decoration: InputDecoration(
                       hintText: "New password...",
                       suffixIcon: IconButton(
                         onPressed: () {
                           setState(() {
-                            _hidPassword = !_hidPassword;
+                            _hidePassword = !_hidePassword;
                           });
                         },
                         icon: Icon(
-                          _hidPassword
+                          _hidePassword
                               ? Icons.visibility_off_outlined
                               : Icons.visibility_outlined,
                         ),
@@ -104,18 +133,19 @@ class _ResetPasswordSectionWidgetState
                   ),
                   10.height,
                   TextFormField(
-                    obscureText: _hidPassword,
+                    obscureText: _hideConfirmPassword,
                     validator: widget.passwordValidator,
+                    controller: confirmPasswordController,
                     decoration: InputDecoration(
                       hintText: "Confirm password...",
                       suffixIcon: IconButton(
                         onPressed: () {
                           setState(() {
-                            _hidPassword = !_hidPassword;
+                            _hideConfirmPassword = !_hideConfirmPassword;
                           });
                         },
                         icon: Icon(
-                          _hidPassword
+                          _hidePassword
                               ? Icons.visibility_off_outlined
                               : Icons.visibility_outlined,
                         ),
@@ -126,13 +156,7 @@ class _ResetPasswordSectionWidgetState
                   Directionality(
                     textDirection: TextDirection.rtl,
                     child: ElevatedButton.icon(
-                      onPressed: () {
-                        if (_formKey.currentState?.validate() ?? false) {
-                          widget.onResetClick(
-                            password: "",
-                          );
-                        } else {}
-                      },
+                      onPressed: resetPassword.withOverlay,
                       icon: const Icon(Icons.arrow_back),
                       label: const Text(
                         "Reset Password",

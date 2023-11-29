@@ -34,6 +34,7 @@ class FindJobsPage extends StatelessWidget {
                   companyIcon:
                       "https://img.icons8.com/?size=48&id=118497&format=png",
                   onBookmarkCallback: () {},
+                  onItemClick: () {},
                 ),
               ),
               childCount: 20,

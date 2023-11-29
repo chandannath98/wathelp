@@ -53,11 +53,9 @@ class SingleCompanyCardWidget extends StatelessWidget {
                                   context.color?.secondaryAccent ?? Colors.grey,
                               child: SizedBox.square(
                                 dimension: constraints.maxHeight,
-                                child: Padding(
-                                  padding: all8,
-                                  child: Image.network(
-                                    icon,
-                                  ),
+                                child: Image.network(
+                                  icon,
+                                  fit: BoxFit.cover,
                                 ),
                               ),
                             ),

@@ -11,6 +11,7 @@ import 'package:jobpilot/src/services/authentication/models/user_type/user_type.
 import 'package:jobpilot/src/services/theme/app_theme.dart';
 import 'package:jobpilot/src/utilities/extensions/overlay_loader.dart';
 import 'package:jobpilot/src/utilities/extensions/size_utilities.dart';
+import 'package:jobpilot/src/utilities/form_validator_helper.dart';
 import 'package:jobpilot/src/utilities/functions.dart';
 import 'package:jobpilot/src/utilities/scaffold_util.dart';
 import 'package:jobpilot/src/utilities/svg_icon.dart';
@@ -58,6 +59,11 @@ class RegistrationScreen extends StatelessWidget {
               onCreateAccount: controller.createAccount,
               onFacebookSignUpClick: () {},
               onGoogleSignUpClick: () {},
+              firstNameValidator: [isRequired],
+              lastNameValidator: [isRequired],
+              emailValidator: [isRequired, isEmail],
+              passwordValidator: [isRequired, tooShort8],
+              confirmPasswordValidator: [isRequired, tooShort8],
             ),
           );
         });
@@ -77,11 +83,11 @@ class RegistrationSectionWidget extends StatefulWidget {
     required this.onGoogleSignUpClick,
   });
 
-  final FormFieldValidator<String>? firstNameValidator;
-  final FormFieldValidator<String>? lastNameValidator;
-  final FormFieldValidator<String>? emailValidator;
-  final FormFieldValidator<String>? passwordValidator;
-  final FormFieldValidator<String>? confirmPasswordValidator;
+  final List<Validation>? firstNameValidator;
+  final List<Validation>? lastNameValidator;
+  final List<Validation>? emailValidator;
+  final List<Validation>? passwordValidator;
+  final List<Validation>? confirmPasswordValidator;
 
   final VoidCallback onFacebookSignUpClick;
   final VoidCallback onGoogleSignUpClick;
@@ -113,8 +119,8 @@ class _RegistrationSectionWidgetState extends State<RegistrationSectionWidget> {
   final confirmPasswordFocus = FocusNode();
   final confirmPasswordController = TextEditingController();
 
-  bool showPassword = false;
-  bool showConfirmPassword = true;
+  bool hidePassword = true;
+  bool hideConfirmPassword = true;
   bool agreeTermsPolicy = false;
   UserType selectedUserType = UserType.candidate;
 
@@ -124,7 +130,12 @@ class _RegistrationSectionWidgetState extends State<RegistrationSectionWidget> {
       showToastWarning("Please agree with our privacy policy!");
       return;
     }
+
     if (_formKey.currentState?.validate() ?? false) {
+      if (passwordController.text != confirmPasswordController.text) {
+        showToastWarning("Passwords didn't matched!");
+        return;
+      }
       await widget.onCreateAccount(
         firstName: firstNameController.text,
         lastName: lastNameController.text,
@@ -217,6 +228,10 @@ class _RegistrationSectionWidgetState extends State<RegistrationSectionWidget> {
                         child: TextFormField(
                           focusNode: firstNameFocus,
                           controller: firstNameController,
+                          validator: FieldValidator.validate(
+                            name: "First Name",
+                            widget.firstNameValidator,
+                          ),
                           decoration: const InputDecoration(
                             hintText: "First name...",
                           ),
@@ -229,6 +244,10 @@ class _RegistrationSectionWidgetState extends State<RegistrationSectionWidget> {
                         child: TextFormField(
                           focusNode: lastNameFocus,
                           controller: lastNameController,
+                          validator: FieldValidator.validate(
+                            name: "Last Name",
+                            widget.lastNameValidator,
+                          ),
                           onFieldSubmitted: (value) =>
                               emailFocus.requestFocus(),
                           decoration: const InputDecoration(
@@ -242,6 +261,10 @@ class _RegistrationSectionWidgetState extends State<RegistrationSectionWidget> {
                   TextFormField(
                     focusNode: emailFocus,
                     controller: emailController,
+                    validator: FieldValidator.validate(
+                      name: "Email",
+                      widget.emailValidator,
+                    ),
                     onFieldSubmitted: (value) => passwordFocus.requestFocus(),
                     decoration: const InputDecoration(
                       hintText: "Email address...",
@@ -249,19 +272,23 @@ class _RegistrationSectionWidgetState extends State<RegistrationSectionWidget> {
                   ),
                   12.height,
                   TextFormField(
-                    obscureText: showPassword,
+                    obscureText: hidePassword,
                     focusNode: passwordFocus,
                     controller: passwordController,
+                    validator: FieldValidator.validate(
+                      name: "Password",
+                      widget.passwordValidator,
+                    ),
                     onFieldSubmitted: (value) =>
                         confirmPasswordFocus.requestFocus(),
                     decoration: InputDecoration(
                       hintText: "Password",
                       suffixIcon: IconButton(
                         onPressed: () => setState(() {
-                          showPassword = !showPassword;
+                          hidePassword = !hidePassword;
                         }),
                         icon: Icon(
-                          showPassword
+                          hidePassword
                               ? Icons.visibility_off_outlined
                               : Icons.visibility_outlined,
                         ),
@@ -270,19 +297,23 @@ class _RegistrationSectionWidgetState extends State<RegistrationSectionWidget> {
                   ),
                   12.height,
                   TextFormField(
-                    obscureText: showConfirmPassword,
+                    obscureText: hideConfirmPassword,
                     focusNode: confirmPasswordFocus,
                     controller: confirmPasswordController,
+                    validator: FieldValidator.validate(
+                      name: "Confirm Password",
+                      widget.confirmPasswordValidator,
+                    ),
                     onFieldSubmitted: (value) =>
                         onCreateAccountClicked.withOverlay(),
                     decoration: InputDecoration(
                       hintText: "Confirm password...",
                       suffixIcon: IconButton(
                         onPressed: () => setState(() {
-                          showConfirmPassword = !showConfirmPassword;
+                          hideConfirmPassword = !hideConfirmPassword;
                         }),
                         icon: Icon(
-                          showConfirmPassword
+                          hideConfirmPassword
                               ? Icons.visibility_off_outlined
                               : Icons.visibility_outlined,
                         ),

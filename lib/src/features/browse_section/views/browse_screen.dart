@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
+import 'package:jobpilot/src/features/browse_section/controllers/browse_controller.dart';
 import 'package:jobpilot/src/features/browse_section/views/widgets/testimonial_list.dart';
 import 'package:jobpilot/src/utilities/extensions/size_utilities.dart';
 
@@ -19,48 +21,97 @@ class BrowseScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      slivers: [
-        const SliverToBoxAdapter(
-          child: Padding(
-            padding: horizontal16,
-            child: NoUserHomeHeader(),
-          ),
-        ),
-        SliverToBoxAdapter(
-          child: 32.height,
-        ),
-        const SliverToBoxAdapter(
-          child: HomeMoreVacanciesSection(),
-        ),
-        const SliverToBoxAdapter(
-          child: HomeTutorialSection(),
-        ),
-        const SliverToBoxAdapter(
-          child: HomePopularCategorySection(),
-        ),
-        const SliverToBoxAdapter(
-          child: HomeFeaturedJobsSection(),
-        ),
-        const SliverToBoxAdapter(
-          child: TopCompaniesSection(),
-        ),
-        const SliverToBoxAdapter(
-          child: TestimonialListSection(),
-        ),
-        SliverToBoxAdapter(
-          child: Padding(
-            padding: vertical10 + const EdgeInsets.only(top: 12),
-            child: const RegisterNowSection(),
-          ),
-        ),
-        const SliverToBoxAdapter(
-          child: BecomeEmployeeSection(),
-        ),
-        SliverToBoxAdapter(
-          child: 10.height,
-        ),
-      ],
-    );
+    return GetBuilder(
+        init: BrowseDataController(),
+        builder: (controller) {
+          return CustomScrollView(
+            slivers: [
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: horizontal16,
+                  child: NoUserHomeHeader(
+                    liveJobsData: controller.data?.states?.liveJobs?.toString(),
+                    companiesData:
+                        controller.data?.states?.companies?.toString(),
+                    candidatesData:
+                        controller.data?.states?.candidates?.toString(),
+                    newJobsData: controller.data?.states?.newJobs?.toString(),
+                  ),
+                ),
+              ),
+              SliverToBoxAdapter(
+                child: 32.height,
+              ),
+              SliverToBoxAdapter(
+                child: HomeMoreVacanciesSection(
+                  isLoading: controller.isLoading,
+                  dataList: controller.data?.mostPopularVacancies
+                      ?.map((e) => (
+                            title: e.name!,
+                            count: e.openPositionCount!,
+                            onTap: () {},
+                          ))
+                      .toList(),
+                ),
+              ),
+              const SliverToBoxAdapter(
+                child: HomeTutorialSection(),
+              ),
+              SliverToBoxAdapter(
+                child: HomePopularCategorySection(
+                  isLoading: false,
+                  dataList: controller.data?.popularCategories
+                      ?.map((e) => (
+                            title: e.name!,
+                            count: e.openJobsCount!.toString(),
+                            imageLink: e.image!,
+                            onTap: () {}
+                          ))
+                      .toList(),
+                ),
+              ),
+              SliverToBoxAdapter(
+                child: HomeFeaturedJobsSection(
+                  isLoading: controller.isLoading,
+                  dataList: controller.data?.featuredJobs
+                      ?.map((e) => (
+                            job: e,
+                            onTap: () {},
+                            onBookmark: () {},
+                          ))
+                      .toList(),
+                ),
+              ),
+              SliverToBoxAdapter(
+                child: TopCompaniesSection(
+                  isLoading: controller.isLoading,
+                  data: controller.data?.topCompanies
+                      ?.map(
+                        (e) => (company: e, onTap: () {}),
+                      )
+                      .toList(),
+                ),
+              ),
+              SliverToBoxAdapter(
+                child: TestimonialListSection(
+                  isLoading: controller.isLoading,
+                  dataList: controller.data?.testimonial,
+                ),
+              ),
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: vertical10 + const EdgeInsets.only(top: 12),
+                  child: const RegisterNowSection(),
+                ),
+              ),
+              const SliverToBoxAdapter(
+                child: BecomeEmployeeSection(),
+              ),
+              SliverToBoxAdapter(
+                child: 10.height,
+              ),
+            ],
+          );
+        });
   }
 }

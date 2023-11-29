@@ -42,7 +42,7 @@ class RegistrationController extends GetxController {
       if (e is RequestException) {
         e.handleError();
       }
-      log("#LoginError", error: e, stackTrace: s);
+      log("#CreateAccountError", error: e, stackTrace: s);
       return null;
     }
     return null;

@@ -15,7 +15,7 @@ class RequestHandler extends GetxController {
         BaseOptions(
           baseUrl: API.baseUrl,
           headers: {
-            'Connection': 'keep-alive',
+            'accept': 'application/json',
             if (authToken != null) 'Authorization': 'Bearer $authToken',
           },
         ),
@@ -225,18 +225,22 @@ res: ${res ?? ''}
 
   handleError({String defaultMessage = "Unknown server error!"}) async {
     try {
+      print("Handling Error!");
       final response = ResponseWrapper.fromMap(
-        rawData: data,
+        response: res?.data,
         purse: (json) {},
       );
       showToastError(response.errorMsg);
-    } catch (_) {}
-    if (res?.data != null &&
-        res?.data is Map &&
-        res!.data!.containsKey("error")) {
-      showToastError("${res!.data["error"]}");
-    } else {
-      showToastError(defaultMessage);
+    } catch (e, s) {
+      log("#HandleError", error: e, stackTrace: s);
+      if (res?.data != null &&
+          res?.data is Map &&
+          res!.data!.containsKey("error")) {
+        showToastError("${res!.data["error"]}");
+      } else {
+        print("Showing default error msg!");
+        showToastError(defaultMessage);
+      }
     }
   }
 }

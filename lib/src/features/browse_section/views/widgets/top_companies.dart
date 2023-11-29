@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
+import 'package:jobpilot/src/domain/server/repositories/home/models/browse/company/top_companies.dart';
 import 'package:jobpilot/src/global/widgets/app/single_company_card.dart';
+import 'package:jobpilot/src/global/widgets/app_shimmer.dart';
 import 'package:jobpilot/src/services/theme/app_theme.dart';
 import 'package:jobpilot/src/utilities/extensions/size_utilities.dart';
 
 class TopCompaniesSection extends StatelessWidget {
   const TopCompaniesSection({
     super.key,
+    required this.isLoading,
+    this.data,
   });
+
+  final bool isLoading;
+  final List<({TopCompanies company, VoidCallback onTap})>? data;
 
   @override
   Widget build(BuildContext context) {
@@ -23,15 +30,32 @@ class TopCompaniesSection extends StatelessWidget {
             ),
           ),
           18.height,
-          for (var i in List.generate(6, (index) => index)) ...[
+          // if (isLoading)
+          //   for (var i in List.generate(6, (index) => index)) ...[
+          //     8.height,
+          //     AppShimmer(
+          //       child: SingleCompanyCardWidget(
+          //         icon:
+          //             "https://img.icons8.com/?size=50&id=vR39khPUVuj4&format=png",
+          //         isFeatured: true,
+          //         positionCount: i,
+          //         name: "Dribble",
+          //         location: "Dhaka, Bangladesh.",
+          //         onOpenPositionTap: () {},
+          //       ),
+          //     ),
+          //     8.height,
+          //   ],
+          for (var i
+              in data ?? <({TopCompanies company, VoidCallback onTap})>[]) ...[
             8.height,
             SingleCompanyCardWidget(
-              icon:
+              icon: i.company.companyLogo ??
                   "https://img.icons8.com/?size=50&id=vR39khPUVuj4&format=png",
-              isFeatured: true,
-              positionCount: i,
-              name: "Dribble",
-              location: "Dhaka, Bangladesh.",
+              isFeatured: false,
+              positionCount: i.company.openJobsCount ?? 0,
+              name: i.company.name!,
+              location: i.company.country ?? "",
               onOpenPositionTap: () {},
             ),
             8.height,
