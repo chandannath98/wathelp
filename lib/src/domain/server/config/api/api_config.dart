@@ -9,4 +9,9 @@ class API {
 
   //Home
   static const homeBrowse = "/home";
+
+  //Jobs
+  static const jobSearch = "/jobs";
+  static const jobTypes = "/job-types";
+  static const jobCategories = "/categories";
 }

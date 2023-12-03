@@ -90,6 +90,7 @@ class HomeFeaturedJobsSection extends StatelessWidget {
 class SingleFeaturedJobCard extends StatelessWidget {
   const SingleFeaturedJobCard({
     super.key,
+    this.bgColor,
     required this.bookmarked,
     required this.postName,
     required this.postType,
@@ -100,6 +101,7 @@ class SingleFeaturedJobCard extends StatelessWidget {
     this.onItemClick,
     this.onBookmarkCallback,
   });
+  final Color? bgColor;
   final bool bookmarked;
   final String postName;
   final String postType;
@@ -117,7 +119,7 @@ class SingleFeaturedJobCard extends StatelessWidget {
       borderRadius: BorderRadius.circular(8),
       child: DecoratedBox(
         decoration: BoxDecoration(
-          // color: context.color?.theme,
+          color: bgColor,
           borderRadius: BorderRadius.circular(8),
           border: Border.all(
             color: context.color?.secondaryAccent ?? Colors.grey,

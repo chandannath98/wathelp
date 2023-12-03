@@ -5,6 +5,7 @@ import 'package:jobpilot/src/constants/design/paddings.dart';
 import 'package:jobpilot/src/services/theme/app_theme.dart';
 import 'package:jobpilot/src/utilities/extensions/overlay_loader.dart';
 import 'package:jobpilot/src/utilities/extensions/size_utilities.dart';
+import 'package:jobpilot/src/utilities/form_validator_helper.dart';
 import 'package:jobpilot/src/utilities/scaffold_util.dart';
 
 class ResetPasswordScreen extends StatelessWidget {
@@ -56,7 +57,7 @@ class ResetPasswordSectionWidget extends StatefulWidget {
   });
 
   final Future<String?> Function({required String password}) onResetClick;
-  final FormFieldValidator<String>? passwordValidator;
+  final List<Validation>? passwordValidator;
 
   @override
   State<ResetPasswordSectionWidget> createState() =>
@@ -74,8 +75,9 @@ class _ResetPasswordSectionWidgetState
   Future resetPassword() async {
     if (_formKey.currentState?.validate() ?? false) {
       if (passwordController.text == confirmPasswordController.text) {
-        final res =
-            await widget.onResetClick(password: passwordController.text);
+        final res = await widget.onResetClick(
+          password: passwordController.text,
+        );
       } else {
         showToastWarning("Password didn't matched!");
       }
@@ -114,7 +116,10 @@ class _ResetPasswordSectionWidgetState
                   TextFormField(
                     obscureText: _hidePassword,
                     controller: passwordController,
-                    validator: widget.passwordValidator,
+                    validator: FieldValidator.validate(
+                      name: "Password",
+                      widget.passwordValidator,
+                    ),
                     decoration: InputDecoration(
                       hintText: "New password...",
                       suffixIcon: IconButton(
@@ -134,7 +139,10 @@ class _ResetPasswordSectionWidgetState
                   10.height,
                   TextFormField(
                     obscureText: _hideConfirmPassword,
-                    validator: widget.passwordValidator,
+                    validator: FieldValidator.validate(
+                      name: "Confirm Password",
+                      widget.passwordValidator,
+                    ),
                     controller: confirmPasswordController,
                     decoration: InputDecoration(
                       hintText: "Confirm password...",

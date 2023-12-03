@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
 import 'package:jobpilot/src/features/browse_section/views/widgets/featured_jobs.dart';
 import 'package:jobpilot/src/features/browse_section/views/widgets/search_box.dart';
+import 'package:jobpilot/src/features/find_jobs/controllers/find_jobs_controller.dart';
 import 'package:jobpilot/src/global/widgets/circular_paginator.dart';
+import 'package:jobpilot/src/global/widgets/loading_indicator.dart';
 import 'package:jobpilot/src/services/theme/app_theme.dart';
 import 'package:jobpilot/src/utilities/extensions/size_utilities.dart';
 
@@ -13,59 +16,77 @@ class FindJobsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      slivers: [
-        const SliverToBoxAdapter(
-          child: FindJobsSettings(),
-        ),
-        SliverPadding(
-          padding: horizontal16 + vertical8,
-          sliver: SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (context, index) => Padding(
-                padding: vertical6,
-                child: SingleFeaturedJobCard(
-                  bookmarked: false,
-                  postType: "FULL-TIME",
-                  companyName: "Facebook Inc.",
-                  postName: "Junior Graphic Designer",
-                  companyLocation: "Dhaka, Bangladesh.",
-                  salaryRange: "\$20,${index}00-\$30,${index}00",
-                  companyIcon:
-                      "https://img.icons8.com/?size=48&id=118497&format=png",
-                  onBookmarkCallback: () {},
-                  onItemClick: () {},
+    return GetBuilder(
+        autoRemove: false,
+        dispose: (state) => false,
+        init: FindJobController(),
+        builder: (controller) {
+          return CustomScrollView(
+            slivers: [
+              SliverToBoxAdapter(
+                child: FindJobsSettings(
+                  controller: controller,
                 ),
               ),
-              childCount: 20,
-            ),
-          ),
-        ),
-        SliverToBoxAdapter(
-          child: Padding(
-            padding: (vertical12 + horizontal16) + horizontal16,
-            child: CircularPaginatorWidget(
-              selectedColor: context.color?.primary ?? Colors.blue,
-              actionsList: List.generate(15, (index) => (index + 1))
-                  .map((index) => (
-                        index == 1,
-                        Text((index <= 9) ? "0$index" : "$index"),
-                        () {},
-                      ))
-                  .toList(),
-              onForwardClick: () {},
-            ),
-          ),
-        ),
-      ],
-    );
+              SliverPadding(
+                padding: horizontal16 + vertical8,
+                sliver: controller.isLoading
+                    ? const SliverToBoxAdapter(
+                        child: LoadingIndicator(),
+                      )
+                    : SliverList(
+                        delegate: SliverChildBuilderDelegate(
+                          (context, index) {
+                            final job = controller.currentJobList[index];
+
+                            return Padding(
+                              padding: vertical6,
+                              child: SingleFeaturedJobCard(
+                                bgColor: Colors.white,
+                                bookmarked: false,
+                                postType: job.jobType ?? "",
+                                companyName: job.companyName ?? "",
+                                postName: job.title ?? "",
+                                companyLocation: job.country ?? "",
+                                salaryRange: "\$${job.salary}",
+                                companyIcon: job.companyLogo ?? "",
+                                onBookmarkCallback: () {},
+                                onItemClick: () {},
+                              ),
+                            );
+                          },
+                          childCount: controller.currentJobList.length,
+                        ),
+                      ),
+              ),
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: (vertical12 + horizontal16) + horizontal16,
+                  child: CircularPaginatorWidget(
+                    selectedColor: context.color?.primary ?? Colors.blue,
+                    actionsList: List.generate(15, (index) => (index + 1))
+                        .map((index) => (
+                              index == 1,
+                              Text((index <= 9) ? "0$index" : "$index"),
+                              () {},
+                            ))
+                        .toList(),
+                    onForwardClick: () {},
+                  ),
+                ),
+              ),
+            ],
+          );
+        });
   }
 }
 
 class FindJobsSettings extends StatelessWidget {
   const FindJobsSettings({
     super.key,
+    required this.controller,
   });
+  final FindJobController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -83,8 +104,10 @@ class FindJobsSettings extends StatelessWidget {
           ),
           18.height,
           SearchBoxWidget(
-            onSearchClick: () {},
-            onFilterClick: () {},
+            searchController: controller.searchController,
+            locationController: controller.locationController,
+            onSearchClick: controller.fetchJobsWithCurrentQuery,
+            onFilterClick: controller.goToFilterPage,
             showFilterButton: true,
           ),
           12.height,

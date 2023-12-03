@@ -23,6 +23,26 @@ final lightTheme = ThemeData(
   checkboxTheme: tonedCheckboxTheme,
   scaffoldBackgroundColor: _backgroundColor,
   textTheme: GoogleFonts.interTextTheme(),
+  sliderTheme: SliderThemeData(
+    trackHeight: 8,
+    overlayColor: _theme,
+    thumbColor: _primaryColor,
+    activeTrackColor: _primaryColor,
+    activeTickMarkColor: _primaryColor,
+    overlappingShapeStrokeColor: _primaryColor,
+    inactiveTrackColor: _extraTextColor.withOpacity(0.1),
+  ),
+  appBarTheme: const AppBarTheme(
+    elevation: 1,
+    backgroundColor: _theme,
+    titleTextStyle: TextStyle(
+      color: _extraTextColor,
+      fontSize: 16,
+      fontWeight: FontWeight.w600,
+    ),
+    iconTheme: IconThemeData(color: _opposite),
+    actionsIconTheme: IconThemeData(color: _primaryColor),
+  ),
   iconTheme: const IconThemeData(
     color: _primaryColor,
   ),

@@ -106,7 +106,7 @@ class ResponseWrapper<C> {
 }
 
 C? _purseResponse<C>(
-  Map<String, dynamic>? rawResponse,
+  dynamic rawResponse,
   RawToDataPurse<C> purserFunction,
 ) {
   try {
