@@ -398,14 +398,16 @@ class ActiveFiltersSection extends StatelessWidget {
             runSpacing: 8,
             spacing: 8,
             children: [
-              if (controller.currentQuery.query != null)
+              if (controller.currentQuery.query != null &&
+                  controller.currentQuery.query!.isNotEmpty)
                 ActiveFilterChip(
                   isSelected: false,
                   title: "Search: ${controller.currentQuery.query}",
                   onDelete: () => controller.setCurrentQuery(
                       controller.currentQuery.copyWith(query: null)),
                 ),
-              if (controller.currentQuery.location != null)
+              if (controller.currentQuery.location != null &&
+                  controller.currentQuery.location!.isNotEmpty)
                 ActiveFilterChip(
                   isSelected: true,
                   title: controller.currentQuery.location!,

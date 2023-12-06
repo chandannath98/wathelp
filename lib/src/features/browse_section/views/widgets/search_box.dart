@@ -16,7 +16,7 @@ class SearchBoxWidget extends StatelessWidget {
 
   final bool showFilterButton;
   final VoidCallback? onFilterClick;
-  final VoidCallback onSearchClick;
+  final VoidCallback? onSearchClick;
 
   final TextEditingController? searchController;
   final TextEditingController? locationController;

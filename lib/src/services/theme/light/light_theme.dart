@@ -18,6 +18,7 @@ const _secondaryAccent = Color(0xffE4E5E8);
 const _backgroundColor = Color(0xffEDEFF5);
 // #767F8C
 final lightTheme = ThemeData(
+  useMaterial3: false,
   brightness: Brightness.light,
   primaryColor: _primaryColor,
   checkboxTheme: tonedCheckboxTheme,

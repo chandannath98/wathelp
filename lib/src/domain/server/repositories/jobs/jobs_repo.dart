@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:jobpilot/src/domain/server/config/repository.dart';
 import 'package:jobpilot/src/domain/server/repositories/jobs/models/category/job_category.dart';
+import 'package:jobpilot/src/domain/server/repositories/jobs/models/job_details/job_detail_response/job_detail_response.dart';
 import 'package:jobpilot/src/domain/server/repositories/jobs/models/job_type/job_type.dart';
 
 import 'jobs_repo.dart';
@@ -15,7 +16,7 @@ class JobsRepository extends ServerRepo {
   }) async {
     try {
       final response = await requestHandler.get(
-        API.jobSearch,
+        API.job,
         queryParams: query?.toJson(),
       );
 
@@ -64,6 +65,21 @@ class JobsRepository extends ServerRepo {
               (jobData) => JobCategory.fromJson(jobData),
             )
             .toList(),
+      );
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<ResponseWrapper<JobDetailResponse>> fetchSingleJobDetails(
+      String slug) async {
+    try {
+      final endpoint = "${API.job}/$slug";
+      final response = await requestHandler.get(endpoint);
+      return ResponseWrapper.fromMap(
+        response: response.data,
+        status: response.statusCode,
+        purse: (json) => JobDetailResponse.fromJson(json),
       );
     } catch (e) {
       rethrow;

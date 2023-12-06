@@ -4,18 +4,19 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jobpilot/src/domain/server/repositories/jobs/jobs_repo.dart';
 import 'package:jobpilot/src/features/find_jobs/views/filter_job.dart';
+import 'package:jobpilot/src/features/single_job/views/job_details.dart';
 import 'package:jobpilot/src/utilities/scaffold_util.dart';
 
 class FindJobController extends GetxController {
   final _jobRepo = JobsRepository();
   bool isLoading = false;
-  final searchController = TextEditingController();
-  final locationController = TextEditingController();
-
   setLoadingStatus([bool? newState]) {
     isLoading = newState ?? (!isLoading);
     update();
   }
+
+  final searchController = TextEditingController();
+  final locationController = TextEditingController();
 
   @override
   void onReady() {
@@ -69,4 +70,10 @@ class FindJobController extends GetxController {
       log("#FindJobError", error: e, stackTrace: s);
     }
   }
+
+  onJobClick(String jobSlug) => Get.to(
+        () => JobDetailsScreen(
+          jobSlug: jobSlug,
+        ),
+      );
 }

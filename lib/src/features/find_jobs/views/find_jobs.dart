@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
-import 'package:jobpilot/src/features/browse_section/views/widgets/featured_jobs.dart';
 import 'package:jobpilot/src/features/browse_section/views/widgets/search_box.dart';
 import 'package:jobpilot/src/features/find_jobs/controllers/find_jobs_controller.dart';
+import 'package:jobpilot/src/global/widgets/app/single_job_card.dart';
 import 'package:jobpilot/src/global/widgets/circular_paginator.dart';
 import 'package:jobpilot/src/global/widgets/loading_indicator.dart';
 import 'package:jobpilot/src/services/theme/app_theme.dart';
@@ -51,7 +51,8 @@ class FindJobsPage extends StatelessWidget {
                                 salaryRange: "\$${job.salary}",
                                 companyIcon: job.companyLogo ?? "",
                                 onBookmarkCallback: () {},
-                                onItemClick: () {},
+                                onItemClick: () =>
+                                    controller.onJobClick(job.slug ?? ""),
                               ),
                             );
                           },
@@ -106,7 +107,9 @@ class FindJobsSettings extends StatelessWidget {
           SearchBoxWidget(
             searchController: controller.searchController,
             locationController: controller.locationController,
-            onSearchClick: controller.fetchJobsWithCurrentQuery,
+            onSearchClick: controller.isLoading
+                ? null
+                : controller.fetchJobsWithCurrentQuery,
             onFilterClick: controller.goToFilterPage,
             showFilterButton: true,
           ),

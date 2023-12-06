@@ -155,6 +155,7 @@ class _ForgotPasswordSectionWidgetState
                   TextFormField(
                     validator: widget.emailValidator,
                     controller: widget.emailController,
+                    keyboardType: TextInputType.emailAddress,
                     onFieldSubmitted: (value) => submitEmail.withOverlay(),
                     decoration: const InputDecoration(
                       hintText: "Email address...",

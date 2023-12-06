@@ -148,6 +148,16 @@ class _RegistrationSectionWidgetState extends State<RegistrationSectionWidget> {
   }
 
   @override
+  void dispose() {
+    firstNameFocus.dispose();
+    lastNameFocus.dispose();
+    emailFocus.dispose();
+    passwordFocus.dispose();
+    confirmPasswordFocus.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: MediaQuery.of(context).size.height,
@@ -261,6 +271,7 @@ class _RegistrationSectionWidgetState extends State<RegistrationSectionWidget> {
                   TextFormField(
                     focusNode: emailFocus,
                     controller: emailController,
+                    keyboardType: TextInputType.emailAddress,
                     validator: FieldValidator.validate(
                       name: "Email",
                       widget.emailValidator,

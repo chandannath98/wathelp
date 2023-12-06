@@ -11,7 +11,7 @@ class API {
   static const homeBrowse = "/home";
 
   //Jobs
-  static const jobSearch = "/jobs";
+  static const job = "/jobs";
   static const jobTypes = "/job-types";
   static const jobCategories = "/categories";
 }

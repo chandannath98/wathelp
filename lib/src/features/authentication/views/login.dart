@@ -118,14 +118,6 @@ class _LoginSectionWidgetState extends State<LoginSectionWidget> {
   Future<void> onLoginClick() async {
     rmvFocus();
     if (_formKey.currentState?.validate() ?? false) {
-      // final val = await Get.showOverlay(
-      //   loadingWidget: const OverlayLoadingIndicator(),
-      //   asyncFunction: () => widget.attemptLogin(
-      //     email: widget.emailController.text,
-      //     password: widget.passwordController.text,
-      //     isRememberMe: _isRememberMe,
-      //   ),
-      // );
       final val = await widget.attemptLogin(
         email: widget.emailController.text,
         password: widget.passwordController.text,
@@ -133,6 +125,13 @@ class _LoginSectionWidgetState extends State<LoginSectionWidget> {
       );
       if (val != null) showToastError(val);
     }
+  }
+
+  @override
+  void dispose() {
+    _emailFocusNode.dispose();
+    _passwordFocusNode.dispose();
+    super.dispose();
   }
 
   @override
@@ -160,6 +159,7 @@ class _LoginSectionWidgetState extends State<LoginSectionWidget> {
                     focusNode: _emailFocusNode,
                     controller: widget.emailController,
                     validator: widget.emailValidator,
+                    keyboardType: TextInputType.emailAddress,
                     onFieldSubmitted: (value) =>
                         _passwordFocusNode.requestFocus(),
                     decoration: const InputDecoration(
@@ -172,7 +172,7 @@ class _LoginSectionWidgetState extends State<LoginSectionWidget> {
                     focusNode: _passwordFocusNode,
                     controller: widget.passwordController,
                     validator: widget.passwordValidator,
-                    onFieldSubmitted: (value) => onLoginClick(),
+                    onFieldSubmitted: (value) => onLoginClick.withOverlay(),
                     decoration: InputDecoration(
                       hintText: "Password",
                       suffixIcon: IconButton(
