@@ -5,8 +5,9 @@ import 'package:jobpilot/src/features/authentication/views/registration.dart';
 import 'package:jobpilot/src/services/authentication/auth_controller.dart';
 
 class HomepageController extends GetxController {
-  final int loginPageIndex = 2;
+  static HomepageController get find => Get.find();
   int currentIndex = 0;
+  final int loginPageIndex = 2;
   bool get isAuthenticated => AuthController.find.isAuthenticated;
   User? get currentUser => AuthController.find.currentUser;
   bool get isLoginScreen =>

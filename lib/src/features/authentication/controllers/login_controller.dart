@@ -51,13 +51,16 @@ class LoginController extends GetxController {
       final data = await _authRepo.login(email: email, password: password);
       if (data.isSuccess) {
         showToastSuccess(data.data!.message!);
-        await _authHandler.handleNewUser(data.data!.user!);
-        await _authHandler.handleNewAuthToken(data.data!.token!);
         if (isRememberMe) {
           await _authHandler.saveAuthCredentials(
               AuthCredentials(email: email, password: password));
         } else {
           await _authHandler.removeAuthCredentials();
+        }
+        await _authHandler.handleNewUser(data.data!.user!);
+        await _authHandler.handleNewAuthToken(data.data!.token!);
+        if (Navigator.of(Get.context!).canPop()) {
+          Get.back();
         }
       } else {
         showToastError(data.errorMsg);

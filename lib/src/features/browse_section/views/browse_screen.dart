@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
 import 'package:jobpilot/src/features/browse_section/controllers/browse_controller.dart';
 import 'package:jobpilot/src/features/browse_section/views/widgets/testimonial_list.dart';
+import 'package:jobpilot/src/features/homepage/controllers/homepage_controller.dart';
+import 'package:jobpilot/src/features/single_job/views/job_details.dart';
 import 'package:jobpilot/src/utilities/extensions/size_utilities.dart';
 
 import 'widgets/become_candidate.dart';
@@ -76,7 +78,11 @@ class BrowseScreen extends StatelessWidget {
                   dataList: controller.data?.featuredJobs
                       ?.map((e) => (
                             job: e,
-                            onTap: () {},
+                            onTap: () => Get.to(
+                                  () => JobDetailsScreen(
+                                    jobSlug: e.slug!,
+                                  ),
+                                ),
                             onBookmark: () {},
                           ))
                       .toList(),
@@ -101,11 +107,15 @@ class BrowseScreen extends StatelessWidget {
               SliverToBoxAdapter(
                 child: Padding(
                   padding: vertical10 + const EdgeInsets.only(top: 12),
-                  child: const RegisterNowSection(),
+                  child: RegisterNowSection(
+                    onActionClick: HomepageController.find.onRegisterClick,
+                  ),
                 ),
               ),
-              const SliverToBoxAdapter(
-                child: BecomeEmployeeSection(),
+              SliverToBoxAdapter(
+                child: BecomeEmployeeSection(
+                  onActionClick: HomepageController.find.onRegisterClick,
+                ),
               ),
               SliverToBoxAdapter(
                 child: 10.height,

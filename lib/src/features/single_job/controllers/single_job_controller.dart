@@ -7,8 +7,10 @@ import 'package:jobpilot/src/domain/server/repositories/jobs/models/job_details/
 import 'package:jobpilot/src/domain/server/repositories/jobs/models/job_details/job_detail_response/job_detail_response.dart';
 import 'package:jobpilot/src/domain/server/repositories/jobs/models/job_details/job_details/job_details.dart';
 import 'package:jobpilot/src/domain/server/repositories/jobs/models/job_details/related_jobs/related_job.dart';
+import 'package:jobpilot/src/features/authentication/views/login_system_switcher.dart';
 import 'package:jobpilot/src/features/single_job/views/apply_job.dart';
 import 'package:jobpilot/src/features/single_job/views/job_description.dart';
+import 'package:jobpilot/src/services/authentication/auth_controller.dart';
 import 'package:jobpilot/src/utilities/scaffold_util.dart';
 
 class SingleJobController extends GetxController {
@@ -53,7 +55,14 @@ class SingleJobController extends GetxController {
   }
 
   Future onApplyClick() async {
-    Get.to(() => const ApplyJobScreen());
+    if (AuthController.find.isAuthenticated) {
+      Get.to(() => ApplyJobScreen(jobName: jobDetails?.title ?? ""));
+    } else {
+      await Get.to(() => const LoginSystemScreen());
+      if (AuthController.find.isAuthenticated) {
+        Get.to(() => ApplyJobScreen(jobName: jobDetails?.title ?? ""));
+      }
+    }
   }
 
   Future onBookmarkClick() async {}

@@ -18,13 +18,13 @@ class NavigationBarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colorTheme = context.color;
-    return SafeArea(
-      child: Card(
-        elevation: 5,
-        margin: EdgeInsets.zero,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.zero,
-        ),
+    return Card(
+      elevation: 5,
+      margin: EdgeInsets.zero,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.zero,
+      ),
+      child: SafeArea(
         child: SizedBox(
           height: 70,
           child: Padding(

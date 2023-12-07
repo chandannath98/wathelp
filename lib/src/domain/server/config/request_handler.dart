@@ -203,16 +203,14 @@ class RequestException implements Exception {
     required this.error,
     required this.trace,
   }) {
-    final details = """
-\x1B[35m/*
-method: ($method)
-url: ($url)
-statusCode: ${statusCode ?? 0}
-errorMsg: "${msg ?? ''}"
-data: ${data ?? ''}
-res: ${res ?? ''}
-*/\x1B[0m
-""";
+    final details = "\x1B[35m/*\n"
+        "method: ($method)\n"
+        "url: ($url)\n"
+        "statusCode: ${statusCode ?? 0} \n"
+        "errorMsg: '${msg ?? ''}' \n"
+        "data: ${data ?? ''} \n"
+        "res: ${res ?? ''} \n"
+        "*/\x1B[0m\n";
 
     log(
       details,
@@ -225,7 +223,6 @@ res: ${res ?? ''}
 
   handleError({String defaultMessage = "Unknown server error!"}) async {
     try {
-      print("Handling Error!");
       final response = ResponseWrapper.fromMap(
         response: res?.data,
         purse: (json) {},
@@ -238,7 +235,6 @@ res: ${res ?? ''}
           res!.data!.containsKey("error")) {
         showToastError("${res!.data["error"]}");
       } else {
-        print("Showing default error msg!");
         showToastError(defaultMessage);
       }
     }

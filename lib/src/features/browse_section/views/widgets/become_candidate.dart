@@ -6,7 +6,10 @@ import 'package:jobpilot/src/utilities/extensions/size_utilities.dart';
 class RegisterNowSection extends StatelessWidget {
   const RegisterNowSection({
     super.key,
+    required this.onActionClick,
   });
+
+  final VoidCallback onActionClick;
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +50,7 @@ class RegisterNowSection extends StatelessWidget {
                   child: SizedBox(
                     width: 180,
                     child: ElevatedButton.icon(
-                      onPressed: () {},
+                      onPressed: onActionClick,
                       icon: const Icon(
                         Icons.arrow_back,
                       ),

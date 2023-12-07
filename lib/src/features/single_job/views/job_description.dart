@@ -39,35 +39,42 @@ class JobDescriptionHtmlWidget extends StatelessWidget {
                 ),
               ),
             ),
-            Padding(
-              padding: vertical8,
-              child: Row(
+            SafeArea(
+              child: Column(
                 children: [
-                  Expanded(
-                    child: Directionality(
-                      textDirection: TextDirection.rtl,
-                      child: ElevatedButton.icon(
-                        onPressed: onApplyClick,
-                        icon: const Icon(Icons.arrow_back),
-                        label: const Text(
-                          "Apply Now",
+                  5.height,
+                  Padding(
+                    padding: vertical3,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Directionality(
+                            textDirection: TextDirection.rtl,
+                            child: ElevatedButton.icon(
+                              onPressed: onApplyClick,
+                              icon: const Icon(Icons.arrow_back),
+                              label: const Text(
+                                "Apply Now",
+                              ),
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                  ),
-                  8.width,
-                  InkWell(
-                    onTap: onBookmarkCallback,
-                    borderRadius: BorderRadius.circular(4),
-                    child: Card(
-                      child: Padding(
-                        padding: all8,
-                        child: Icon(
-                          isBookmarked
-                              ? Icons.bookmark
-                              : Icons.bookmark_outline,
+                        8.width,
+                        InkWell(
+                          onTap: onBookmarkCallback,
+                          borderRadius: BorderRadius.circular(4),
+                          child: Card(
+                            child: Padding(
+                              padding: all8,
+                              child: Icon(
+                                isBookmarked
+                                    ? Icons.bookmark
+                                    : Icons.bookmark_outline,
+                              ),
+                            ),
+                          ),
                         ),
-                      ),
+                      ],
                     ),
                   ),
                 ],

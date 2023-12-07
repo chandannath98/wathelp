@@ -86,6 +86,7 @@ class SingleTestimonialWidget extends StatelessWidget {
         child: Padding(
           padding: all16,
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Row(
                 children: List.generate(
@@ -98,13 +99,26 @@ class SingleTestimonialWidget extends StatelessWidget {
                 ),
               ),
               6.height,
-              Expanded(
-                child: Text(
-                  "“${quotation * 2}”",
-                  maxLines: 5,
+              Flexible(
+                fit: FlexFit.tight,
+                child: RichText(
+                  maxLines: 4,
                   softWrap: true,
                   overflow: TextOverflow.ellipsis,
-                  style: context.text.titleLarge,
+                  text: TextSpan(
+                    style: context.text.titleLarge,
+                    children: [
+                      const TextSpan(
+                        text: "“",
+                      ),
+                      TextSpan(
+                        text: quotation,
+                      ),
+                      const TextSpan(
+                        text: "”",
+                      ),
+                    ],
+                  ),
                 ),
               ),
               6.height,
@@ -141,13 +155,15 @@ class SingleTestimonialWidget extends StatelessWidget {
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
-                              8.height,
-                              Text(
-                                jobRole,
-                                style: context.text.bodyMedium?.copyWith(
-                                  color: context.color?.extra,
+                              if (jobRole.isNotEmpty) ...[
+                                8.height,
+                                Text(
+                                  jobRole,
+                                  style: context.text.bodyMedium?.copyWith(
+                                    color: context.color?.extra,
+                                  ),
                                 ),
-                              ),
+                              ],
                             ],
                           ),
                         )

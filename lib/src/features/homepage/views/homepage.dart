@@ -28,6 +28,7 @@ class Homepage extends StatelessWidget {
         return Scaffold(
           backgroundColor: context.color?.background,
           appBar: AppBar(
+            centerTitle: false,
             backgroundColor: context.color?.theme,
             title: SvgPicture.asset(Assets.appLogoSvg),
             actions: [

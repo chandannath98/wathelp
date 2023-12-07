@@ -254,12 +254,6 @@ class JobOverviewSection extends StatelessWidget {
                       ),
                       onTap: () {},
                     ),
-                    SquaredIconButton(
-                      icon: SvgIcon(
-                        Assets.instagramIcon,
-                      ),
-                      onTap: () {},
-                    ),
                   ],
                 ),
               ],
@@ -689,7 +683,7 @@ class JobDetailCompanyHeader extends StatelessWidget {
                 child: Directionality(
                   textDirection: TextDirection.rtl,
                   child: ElevatedButton.icon(
-                    onPressed: controller.onApplyClick.withOverlay,
+                    onPressed: controller.onApplyClick,
                     icon: const Icon(Icons.arrow_back),
                     label: const Text(
                       "Apply Now",

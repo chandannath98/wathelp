@@ -6,7 +6,9 @@ import 'package:jobpilot/src/utilities/extensions/size_utilities.dart';
 class BecomeEmployeeSection extends StatelessWidget {
   const BecomeEmployeeSection({
     super.key,
+    required this.onActionClick,
   });
+  final VoidCallback onActionClick;
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +56,7 @@ class BecomeEmployeeSection extends StatelessWidget {
                         foregroundColor: context.color?.primary,
                         backgroundColor: context.color?.theme,
                       ),
-                      onPressed: () {},
+                      onPressed: onActionClick,
                       icon: const Icon(
                         Icons.arrow_back,
                       ),

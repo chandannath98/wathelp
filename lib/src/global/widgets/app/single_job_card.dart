@@ -50,116 +50,118 @@ class SingleFeaturedJobCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Text(
-                    postName,
-                    style: context.text.titleMedium?.copyWith(
-                      fontWeight: FontWeight.bold,
+                  Expanded(
+                    child: FittedBox(
+                      alignment: Alignment.centerLeft,
+                      fit: BoxFit.scaleDown,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            postName,
+                            style: context.text.titleMedium?.copyWith(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          8.height,
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              DecoratedBox(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(4),
+                                  color: context.color?.mainAccent
+                                      .withOpacity(0.1),
+                                ),
+                                child: Padding(
+                                  padding: vertical6 + horizontal8,
+                                  child: Text(
+                                    postType.toUpperCase(),
+                                    style: context.text.bodySmall?.copyWith(
+                                      color: context.color?.mainAccent,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              8.width,
+                              Text(
+                                salaryRange,
+                                style: context.text.titleMedium?.copyWith(
+                                  color: context.color?.extra,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                  8.height,
-                  IntrinsicHeight(
+                  16.height,
+                  SizedBox(
+                    height: 48,
                     child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        DecoratedBox(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(4),
-                            color: context.color?.mainAccent.withOpacity(0.1),
-                          ),
-                          child: Padding(
-                            padding: vertical6 + horizontal8,
-                            child: Text(
-                              postType.toUpperCase(),
-                              style: context.text.bodySmall?.copyWith(
-                                color: context.color?.mainAccent,
-                                fontWeight: FontWeight.bold,
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(8),
+                          clipBehavior: Clip.hardEdge,
+                          child: ColoredBox(
+                            color:
+                                context.color?.secondaryAccent ?? Colors.grey,
+                            child: SizedBox.square(
+                              dimension: 48,
+                              child: Image.network(
+                                companyIcon,
+                                fit: BoxFit.cover,
                               ),
                             ),
                           ),
                         ),
-                        8.width,
-                        Text(
-                          salaryRange,
-                          style: context.text.titleMedium?.copyWith(
+                        16.width,
+                        Expanded(
+                          child: FittedBox(
+                            fit: BoxFit.scaleDown,
+                            alignment: Alignment.centerLeft,
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  companyName,
+                                  style: context.text.titleSmall?.copyWith(
+                                    color: context.color?.extraText,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                6.height,
+                                IntrinsicHeight(
+                                  child: Row(
+                                    children: [
+                                      Icon(
+                                        Icons.location_on_outlined,
+                                        color: context.color?.extra,
+                                      ),
+                                      Text(
+                                        companyLocation,
+                                        style: context.text.titleMedium,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        IconButton(
+                          onPressed: onBookmarkCallback,
+                          icon: Icon(
+                            Icons.bookmark_border,
                             color: context.color?.extra,
                           ),
                         ),
                       ],
                     ),
-                  ),
-                  16.height,
-                  Expanded(
-                    child: LayoutBuilder(builder: (context, constraints) {
-                      return Row(
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(8),
-                            clipBehavior: Clip.hardEdge,
-                            child: ColoredBox(
-                              color:
-                                  context.color?.secondaryAccent ?? Colors.grey,
-                              child: SizedBox.square(
-                                dimension: constraints.maxHeight,
-                                child: Image.network(
-                                  companyIcon,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            ),
-                          ),
-                          16.width,
-                          Expanded(
-                            child: Padding(
-                              padding: vertical8,
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.stretch,
-                                      children: [
-                                        Text(
-                                          companyName,
-                                          style:
-                                              context.text.titleSmall?.copyWith(
-                                            color: context.color?.extraText,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                        Row(
-                                          children: [
-                                            Icon(
-                                              Icons.location_on_outlined,
-                                              color: context.color?.extra,
-                                            ),
-                                            Expanded(
-                                              child: Text(
-                                                companyLocation,
-                                                style: context.text.titleMedium,
-                                                overflow: TextOverflow.ellipsis,
-                                              ),
-                                            ),
-                                          ],
-                                        )
-                                      ],
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                          IconButton(
-                            onPressed: onBookmarkCallback,
-                            icon: Icon(
-                              Icons.bookmark_border,
-                              color: context.color?.extra,
-                            ),
-                          ),
-                        ],
-                      );
-                    }),
                   ),
                 ],
               ),

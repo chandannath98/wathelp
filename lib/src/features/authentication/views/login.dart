@@ -115,6 +115,12 @@ class _LoginSectionWidgetState extends State<LoginSectionWidget> {
     _passwordFocusNode = FocusNode();
   }
 
+  toggleRememberMe() {
+    setState(() {
+      _isRememberMe = !_isRememberMe;
+    });
+  }
+
   Future<void> onLoginClick() async {
     rmvFocus();
     if (_formKey.currentState?.validate() ?? false) {
@@ -197,16 +203,23 @@ class _LoginSectionWidgetState extends State<LoginSectionWidget> {
                           children: [
                             Checkbox(
                               value: _isRememberMe,
+                              materialTapTargetSize:
+                                  MaterialTapTargetSize.shrinkWrap,
                               visualDensity: VisualDensity.compact,
-                              onChanged: (value) {
-                                setState(() {
-                                  _isRememberMe = value ?? false;
-                                });
-                              },
+                              onChanged: (value) => toggleRememberMe(),
                             ),
-                            const Expanded(
-                              child: Text(
-                                "Remember me",
+                            Expanded(
+                              child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: InkWell(
+                                  onTap: toggleRememberMe,
+                                  child: const Padding(
+                                    padding: all6,
+                                    child: Text(
+                                      "Remember me",
+                                    ),
+                                  ),
+                                ),
                               ),
                             ),
                           ],
