@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:jobpilot/src/constants/assets/assets.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
+import 'package:jobpilot/src/services/authentication/auth_controller.dart';
 import 'package:jobpilot/src/services/theme/extensions.dart';
 import 'package:jobpilot/src/services/theme/extensions/colors_theme.dart';
 import 'package:jobpilot/src/utilities/extensions/size_utilities.dart';
+import 'package:jobpilot/src/utilities/extensions/string_extensions.dart';
 import 'package:jobpilot/src/utilities/svg_icon.dart';
 
+import '../controllers/menu_controller.dart';
 import 'widgets/custom_list_tile.dart';
 import 'widgets/job_pilots_list_today.dart';
 
@@ -25,59 +29,32 @@ class MenuPageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: vertical8,
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            16.height,
+    return GetBuilder(
+        init: MenuPageController(),
+        builder: (controller) {
+          final aboutUsSection = [
             const Padding(
               padding: horizontal16,
-              child: Text("Pages"),
+              child: Text("About Us"),
             ),
-            16.height,
+            10.height,
             MenuPageListTile(
-              onTap: () {},
-              title: "Homepage",
-              icon: const SvgIcon(Assets.homeIcon),
-            ),
-            MenuPageListTile(
-              onTap: () {},
-              title: "Browse Jobs",
-              icon: const Icon(Icons.work_outline_rounded),
+              onTap: controller.gotoBlogs,
+              title: "Blogs",
+              icon: const Icon(Icons.receipt_outlined),
             ),
             MenuPageListTile(
-              onTap: () {},
-              title: "Post Jobs",
-              icon: const Icon(Icons.add_circle_outline),
+              onTap: controller.gotoAbout,
+              title: "About",
+              icon: const Icon(Icons.person_outline_rounded),
             ),
             MenuPageListTile(
-              onTap: () {},
-              title: "Browse Employees",
-              icon: const SvgIcon(Assets.companyIcon),
+              onTap: controller.gotoContact,
+              title: "Contacts",
+              icon: const Icon(Icons.mail_outline_rounded),
             ),
-            MenuPageListTile(
-              onTap: () {},
-              title: "Browse Candidates",
-              icon: const Icon(Icons.people_outline_outlined),
-            ),
-            MenuPageListTile(
-              onTap: () {},
-              title: "Pricing",
-              icon: const Icon(Icons.account_balance_outlined),
-            ),
-            MenuPageListTile(
-              onTap: () {},
-              title: "Create Account",
-              icon: const Icon(Icons.person_add_alt_outlined),
-            ),
-            MenuPageListTile(
-              onTap: () {},
-              title: "Sign In",
-              icon: const SvgIcon(Assets.loginIcon),
-            ),
-            24.height,
+          ];
+          final jobpilotSection = [
             const Padding(
               padding: horizontal16,
               child: Text("Job Pilots"),
@@ -142,57 +119,183 @@ class MenuPageWidget extends StatelessWidget {
                 ],
               ),
             ),
-            12.height,
-            const Padding(
-              padding: horizontal16,
-              child: Text("About Us"),
-            ),
-            10.height,
-            MenuPageListTile(
-              onTap: () {},
-              title: "Blogs",
-              icon: const Icon(Icons.receipt_outlined),
-            ),
-            MenuPageListTile(
-              onTap: () {},
-              title: "About",
-              icon: const Icon(Icons.person_outline_rounded),
-            ),
-            MenuPageListTile(
-              onTap: () {},
-              title: "Contacts",
-              icon: const Icon(Icons.mail_outline_rounded),
-            ),
-            24.height,
+          ];
+          final supportSection = [
             const Padding(
               padding: horizontal16,
               child: Text("Supports"),
             ),
             10.height,
             MenuPageListTile(
-              onTap: () {},
+              onTap: controller.gotoFaq,
               title: "FAQs",
               icon: const Icon(Icons.question_mark_rounded),
             ),
             MenuPageListTile(
-              onTap: () {},
+              onTap: controller.gotoPrivacyPolicy,
               title: "Privacy Policy",
               icon: const Icon(Icons.privacy_tip_outlined),
             ),
             MenuPageListTile(
-              onTap: () {},
+              onTap: controller.gotoTermsAndConditions,
               title: "Terms & Conditions",
               icon: const Icon(Icons.school_outlined),
             ),
             MenuPageListTile(
-              onTap: () {},
+              onTap: controller.gotoRefundPolicy,
               title: "Refund Policy",
               icon: const Icon(Icons.policy_outlined),
             ),
-          ],
-        ),
-      ),
-    );
+          ];
+          final pagesSection = [
+            const Padding(
+              padding: horizontal16,
+              child: Text(
+                "Pages",
+              ),
+            ),
+            16.height,
+            MenuPageListTile(
+              onTap: controller.gotoHomePage,
+              title: "Homepage",
+              icon: const SvgIcon(Assets.homeIcon),
+            ),
+            MenuPageListTile(
+              onTap: controller.gotoBrowsePage,
+              title: "Browse Jobs",
+              icon: const Icon(Icons.work_outline_rounded),
+            ),
+            MenuPageListTile(
+              onTap: controller.gotoLogin,
+              title: "Post Jobs",
+              icon: const Icon(Icons.add_circle_outline),
+            ),
+            MenuPageListTile(
+              onTap: controller.gotoLogin,
+              title: "Browse Employees",
+              icon: const SvgIcon(Assets.companyIcon),
+            ),
+            MenuPageListTile(
+              onTap: controller.gotoLogin,
+              title: "Browse Candidates",
+              icon: const Icon(Icons.people_outline_outlined),
+            ),
+            MenuPageListTile(
+              onTap: controller.gotoPricing,
+              title: "Pricing",
+              icon: const Icon(Icons.account_balance_outlined),
+            ),
+            MenuPageListTile(
+              onTap: controller.gotoRegistration,
+              title: "Create Account",
+              icon: const Icon(Icons.person_add_alt_outlined),
+            ),
+            MenuPageListTile(
+              onTap: controller.gotoLogin,
+              title: "Sign In",
+              icon: const SvgIcon(Assets.loginIcon),
+            ),
+          ];
+          final candidateSection = [
+            Padding(
+              padding: horizontal16,
+              child: Text(
+                AuthController.find.currentUserType!.name.upperCaseFirst,
+              ),
+            ),
+            16.height,
+            MenuPageListTile(
+              onTap: controller.gotoDashboard,
+              title: "Dashboard",
+              icon: const SvgIcon(Assets.dashboardIcon),
+            ),
+            MenuPageListTile(
+              onTap: controller.gotoAppliedJobs,
+              title: "Applied Jobs",
+              icon: const Icon(Icons.work_outline_rounded),
+            ),
+            MenuPageListTile(
+              onTap: controller.gotoFavoriteJobs,
+              title: "Favorite Jobs",
+              icon: const Icon(Icons.bookmark_outline_rounded),
+            ),
+            MenuPageListTile(
+              onTap: controller.gotoAppliedJobs,
+              title: "Job Alert",
+              icon: const SvgIcon(Assets.jobsIcon),
+            ),
+            MenuPageListTile(
+              onTap: controller.gotoSettings,
+              title: "Settings",
+              icon: const Icon(Icons.settings_outlined),
+            ),
+          ];
+          final otherPagesSection = [
+            const Padding(
+              padding: horizontal16,
+              child: Text("Other pages"),
+            ),
+            10.height,
+            MenuPageListTile(
+              onTap: controller.gotoHomePage,
+              title: "Homepage",
+              icon: const SvgIcon(Assets.homeIcon),
+            ),
+            MenuPageListTile(
+              onTap: controller.gotoBrowsePage,
+              title: "Browse Jobs",
+              icon: const Icon(Icons.work_outline_rounded),
+            ),
+            MenuPageListTile(
+              onTap: controller.gotoLogin,
+              title: "Browse Employees",
+              icon: const SvgIcon(Assets.companyIcon),
+            ),
+            MenuPageListTile(
+              onTap: controller.gotoBlogs,
+              title: "Blogs",
+              icon: const Icon(Icons.receipt_outlined),
+            ),
+            MenuPageListTile(
+              onTap: controller.gotoAbout,
+              title: "About",
+              icon: const Icon(Icons.person_outline_rounded),
+            ),
+            MenuPageListTile(
+              onTap: controller.gotoContact,
+              title: "Contacts",
+              icon: const Icon(Icons.mail_outline_rounded),
+            ),
+          ];
+
+          return Padding(
+            padding: vertical8,
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  16.height,
+                  if (controller.isAuthenticated)
+                    ...candidateSection
+                  else
+                    ...pagesSection,
+
+                  if (controller.isAuthenticated) ...[
+                    24.height,
+                    ...otherPagesSection,
+                  ],
+                  24.height,
+                  // Jobpilot section.
+                  ...jobpilotSection,
+                  12.height,
+                  if (!controller.isAuthenticated) ...aboutUsSection,
+                  24.height,
+                  ...supportSection,
+                ],
+              ),
+            ),
+          );
+        });
   }
 }
 

@@ -4,6 +4,7 @@ import 'package:jobpilot/src/constants/assets/assets.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
 import 'package:jobpilot/src/features/dashboard/controllers/dashboard_controller.dart';
 import 'package:jobpilot/src/features/dashboard/views/widgets/complete_profile.dart';
+import 'package:jobpilot/src/global/widgets/loading_indicator.dart';
 import 'package:jobpilot/src/services/theme/extensions.dart';
 import 'package:jobpilot/src/services/theme/extensions/colors_theme.dart';
 import 'package:jobpilot/src/utilities/extensions/size_utilities.dart';
@@ -27,18 +28,20 @@ class DashboardPage extends StatelessWidget {
             SliverToBoxAdapter(
               child: Padding(
                 padding: all16,
-                child: DashboardTopSection(
-                  controller: controller,
+                child: controller.isLoading
+                    ? const LoadingIndicator()
+                    : DashboardTopSection(
+                        controller: controller,
+                      ),
+              ),
+            ),
+            if (!(controller.dashboardData?.isProfileCompleat ?? false))
+              const SliverPadding(
+                padding: vertical16,
+                sliver: SliverToBoxAdapter(
+                  child: CompleteProfileSection(),
                 ),
               ),
-            ),
-            // if (controller.currentProfile.profileComplete == 0)
-            const SliverPadding(
-              padding: vertical16,
-              sliver: SliverToBoxAdapter(
-                child: CompleteProfileSection(),
-              ),
-            ),
             SliverPadding(
               padding: all16,
               sliver: SliverList(
@@ -110,7 +113,7 @@ class DashboardTopSection extends StatelessWidget {
         ),
         12.height,
         DashboardDataTile(
-          data: "589",
+          data: "${controller.dashboardData?.appliedJobs ?? "??"}",
           title: "Applied Jobs",
           icon: const Icon(
             Icons.work_outline_rounded,
@@ -120,7 +123,7 @@ class DashboardTopSection extends StatelessWidget {
         ),
         12.height,
         DashboardDataTile(
-          data: "238",
+          data: "${controller.dashboardData?.favoriteJobs ?? "??"}",
           title: "Favorite Jobs",
           icon: const Icon(
             Icons.bookmark_border_rounded,
@@ -130,7 +133,7 @@ class DashboardTopSection extends StatelessWidget {
         ),
         12.height,
         DashboardDataTile(
-          data: "574",
+          data: "${controller.dashboardData?.notifications ?? "??"}",
           title: "Job Alerts",
           icon: const Center(
             child: SvgIcon(

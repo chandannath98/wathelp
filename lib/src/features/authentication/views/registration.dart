@@ -17,7 +17,9 @@ import 'package:jobpilot/src/utilities/scaffold_util.dart';
 import 'package:jobpilot/src/utilities/svg_icon.dart';
 
 class RegistrationScreen extends StatelessWidget {
-  const RegistrationScreen({super.key});
+  const RegistrationScreen({super.key, this.showLoginButton = true});
+
+  final bool showLoginButton;
 
   @override
   Widget build(BuildContext context) {
@@ -33,26 +35,27 @@ class RegistrationScreen extends StatelessWidget {
                 Assets.appLogoSvg,
               ),
               actions: [
-                Directionality(
-                  textDirection: TextDirection.rtl,
-                  child: TextButton.icon(
-                    onPressed: () {
-                      Get.back();
-                    },
-                    icon: SvgIcon(
-                      Assets.loginIcon,
-                      size: 22,
-                      color: context.color?.primary,
-                    ),
-                    label: Text(
-                      login,
-                      style: context.text.bodyLarge?.copyWith(
-                        fontWeight: FontWeight.bold,
+                if (showLoginButton)
+                  Directionality(
+                    textDirection: TextDirection.rtl,
+                    child: TextButton.icon(
+                      onPressed: () {
+                        Get.back();
+                      },
+                      icon: SvgIcon(
+                        Assets.loginIcon,
+                        size: 22,
                         color: context.color?.primary,
+                      ),
+                      label: Text(
+                        login,
+                        style: context.text.bodyLarge?.copyWith(
+                          fontWeight: FontWeight.bold,
+                          color: context.color?.primary,
+                        ),
                       ),
                     ),
                   ),
-                ),
               ],
             ),
             body: RegistrationSectionWidget(

@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:jobpilot/src/domain/server/config/request_handler.dart';
 import 'package:jobpilot/src/domain/server/repositories/authentication/auth_repo.dart';
 import 'package:jobpilot/src/features/authentication/views/reset_password.dart';
-import 'package:jobpilot/src/features/authentication/views/varify_email.dart';
+import 'package:jobpilot/src/features/authentication/views/verify_email.dart';
 import 'package:jobpilot/src/services/authentication/auth_controller.dart';
 import 'package:jobpilot/src/services/authentication/models/auth_credentials/auth_credentials.dart';
 import 'package:jobpilot/src/utilities/scaffold_util.dart';
@@ -18,6 +18,11 @@ class LoginController extends GetxController {
   late final TextEditingController emailController;
   late final TextEditingController passwordController;
 
+  authCredListener() {
+    emailController.text = _authHandler.userCredentials?.email ?? "";
+    passwordController.text = _authHandler.userCredentials?.password ?? "";
+  }
+
   @override
   onInit() {
     super.onInit();
@@ -25,16 +30,14 @@ class LoginController extends GetxController {
         TextEditingController(text: _authHandler.userCredentials?.email);
     passwordController =
         TextEditingController(text: _authHandler.userCredentials?.password);
-    _authHandler.addListener(() {
-      emailController.text = _authHandler.userCredentials?.email ?? "";
-      passwordController.text = _authHandler.userCredentials?.password ?? "";
-    });
+    _authHandler.addListener(authCredListener);
   }
 
   @override
   onClose() {
     emailController.dispose();
     passwordController.dispose();
+    _authHandler.removeListener(authCredListener);
   }
 
   shiftLoginView() {
@@ -53,7 +56,11 @@ class LoginController extends GetxController {
         showToastSuccess(data.data!.message!);
         if (isRememberMe) {
           await _authHandler.saveAuthCredentials(
-              AuthCredentials(email: email, password: password));
+            AuthCredentials(
+              email: email,
+              password: password,
+            ),
+          );
         } else {
           await _authHandler.removeAuthCredentials();
         }

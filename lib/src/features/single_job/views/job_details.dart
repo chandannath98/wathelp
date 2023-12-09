@@ -6,13 +6,15 @@ import 'package:jobpilot/src/constants/design/paddings.dart';
 import 'package:jobpilot/src/constants/utilities/date_formats.dart';
 import 'package:jobpilot/src/domain/server/repositories/jobs/models/job_details/related_jobs/related_job.dart';
 import 'package:jobpilot/src/features/single_job/controllers/single_job_controller.dart';
+import 'package:jobpilot/src/global/widgets/app/overview_data_tile.dart';
 import 'package:jobpilot/src/global/widgets/app/single_job_card.dart';
+import 'package:jobpilot/src/global/widgets/app/squared_icon_button.dart';
 import 'package:jobpilot/src/global/widgets/loading_indicator.dart';
 import 'package:jobpilot/src/services/theme/extensions.dart';
 import 'package:jobpilot/src/services/theme/extensions/colors_theme.dart';
 import 'package:jobpilot/src/utilities/extensions/overlay_loader.dart';
 import 'package:jobpilot/src/utilities/extensions/size_utilities.dart';
-import 'package:jobpilot/src/utilities/extensions/string_purser.dart';
+import 'package:jobpilot/src/utilities/extensions/string_extensions.dart';
 import 'package:jobpilot/src/utilities/svg_icon.dart';
 
 class JobDetailsScreen extends StatelessWidget {
@@ -164,7 +166,7 @@ class JobOverviewSection extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                  child: JobOverviewDataTile(
+                  child: OverviewDataTile(
                     title: "JOB POSTED: ",
                     data: (controller.jobDetails?.postDate == null)
                         ? "Unknown"
@@ -173,7 +175,7 @@ class JobOverviewSection extends StatelessWidget {
                   ),
                 ),
                 Expanded(
-                  child: JobOverviewDataTile(
+                  child: OverviewDataTile(
                     title: "JOB EXPIRES IN: ",
                     data: dMMMy.format(
                       controller.jobDetails?.expireDate ?? DateTime.now(),
@@ -187,14 +189,14 @@ class JobOverviewSection extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                  child: JobOverviewDataTile(
+                  child: OverviewDataTile(
                     title: "EXPERIENCE",
                     data: controller.jobDetails?.experience ?? "",
                     icon: Icon(Icons.wallet_outlined),
                   ),
                 ),
                 Expanded(
-                  child: JobOverviewDataTile(
+                  child: OverviewDataTile(
                     title: "EDUCATION",
                     data: controller.jobDetails?.education ??
                         (controller.jobDetails?.education ?? ""),
@@ -204,7 +206,7 @@ class JobOverviewSection extends StatelessWidget {
               ],
             ),
             14.height,
-            Divider(),
+            const Divider(),
             14.height,
             Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -221,7 +223,7 @@ class JobOverviewSection extends StatelessWidget {
                   children: [
                     TextButton.icon(
                       style: TextButton.styleFrom(
-                        padding: horizontal12,
+                        padding: horizontal12 + vertical8,
                         backgroundColor:
                             context.color?.primary.withOpacity(0.1),
                       ),
@@ -283,84 +285,6 @@ class JobOverviewSection extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-}
-
-class SquaredIconButton extends StatelessWidget {
-  const SquaredIconButton({
-    super.key,
-    required this.onTap,
-    required this.icon,
-  });
-
-  final VoidCallback onTap;
-  final Widget icon;
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      borderRadius: BorderRadius.circular(4),
-      child: Card(
-        clipBehavior: Clip.hardEdge,
-        child: ColoredBox(
-          color:
-              context.color?.primary.withOpacity(0.1) ?? Colors.blue.shade100,
-          child: Padding(
-            padding: all8,
-            child: icon,
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class JobOverviewDataTile extends StatelessWidget {
-  const JobOverviewDataTile({
-    super.key,
-    required this.title,
-    required this.data,
-    required this.icon,
-  });
-
-  final String title;
-  final String data;
-  final Widget icon;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Align(
-          alignment: Alignment.centerLeft,
-          child: SizedBox.square(
-            dimension: 32,
-            child: FittedBox(
-              child: icon,
-            ),
-          ),
-        ),
-        8.height,
-        Text(
-          title,
-          style: context.text.titleSmall?.copyWith(
-            height: 1,
-            fontSize: 12,
-            color: context.color?.extra,
-            fontWeight: FontWeight.w400,
-          ),
-        ),
-        4.height,
-        Text(
-          data,
-          style: context.text.titleSmall?.copyWith(
-            fontWeight: FontWeight.w500,
-          ),
-        ),
-      ],
     );
   }
 }

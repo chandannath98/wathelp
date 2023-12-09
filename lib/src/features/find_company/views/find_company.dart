@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
 import 'package:jobpilot/src/features/browse_section/views/widgets/search_box.dart';
+import 'package:jobpilot/src/features/find_company/controllers/find_company_controllers.dart';
+import 'package:jobpilot/src/features/single_company/views/single_company.dart';
 import 'package:jobpilot/src/global/widgets/app/single_company_card.dart';
 import 'package:jobpilot/src/global/widgets/circular_paginator.dart';
+import 'package:jobpilot/src/global/widgets/loading_indicator.dart';
 import 'package:jobpilot/src/services/theme/app_theme.dart';
 import 'package:jobpilot/src/utilities/extensions/size_utilities.dart';
 
@@ -13,49 +17,62 @@ class FindCompanyPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      slivers: [
-        const SliverToBoxAdapter(
-          child: FindJobsSettings(),
-        ),
-        SliverPadding(
-          padding: horizontal16 + vertical8,
-          sliver: SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (context, index) => Padding(
-                padding: vertical6,
-                child: SingleCompanyCardWidget(
-                  icon:
-                      "https://img.icons8.com/?size=50&id=vR39khPUVuj4&format=png",
-                  isFeatured: true,
-                  positionCount: index,
-                  name: "Dribble",
-                  location: "Dhaka, Bangladesh.",
-                  onOpenPositionTap: () {},
+    return GetBuilder(
+        init: FindCompanyController(),
+        builder: (controller) {
+          return CustomScrollView(
+            slivers: [
+              const SliverToBoxAdapter(
+                child: FindJobsSettings(),
+              ),
+              SliverPadding(
+                padding: horizontal16 + vertical8,
+                sliver: controller.isLoading
+                    ? const SliverToBoxAdapter(
+                        child: LoadingIndicator(),
+                      )
+                    : SliverList(
+                        delegate: SliverChildBuilderDelegate(
+                          (context, index) {
+                            final company =
+                                controller.currentCompanyList[index];
+                            return Padding(
+                              padding: vertical6,
+                              child: SingleCompanyCardWidget(
+                                icon: company.companyLogo ?? "",
+                                isFeatured: true,
+                                positionCount: company.openJobsCount ?? 0,
+                                name: company.name ?? "",
+                                location: company.country ?? "",
+                                onOpenPositionTap: () => Get.to(() =>
+                                    SingleCompanyDetailsScreen(
+                                        companyDetails: company)),
+                              ),
+                            );
+                          },
+                          childCount: controller.currentCompanyList.length,
+                        ),
+                      ),
+              ),
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: (vertical12 + horizontal16) + horizontal16,
+                  child: CircularPaginatorWidget(
+                    selectedColor: context.color?.primary ?? Colors.blue,
+                    actionsList: List.generate(15, (index) => (index + 1))
+                        .map((index) => (
+                              index == 1,
+                              Text((index <= 9) ? "0$index" : "$index"),
+                              () {},
+                            ))
+                        .toList(),
+                    onForwardClick: () {},
+                  ),
                 ),
               ),
-              childCount: 20,
-            ),
-          ),
-        ),
-        SliverToBoxAdapter(
-          child: Padding(
-            padding: (vertical12 + horizontal16) + horizontal16,
-            child: CircularPaginatorWidget(
-              selectedColor: context.color?.primary ?? Colors.blue,
-              actionsList: List.generate(15, (index) => (index + 1))
-                  .map((index) => (
-                        index == 1,
-                        Text((index <= 9) ? "0$index" : "$index"),
-                        () {},
-                      ))
-                  .toList(),
-              onForwardClick: () {},
-            ),
-          ),
-        ),
-      ],
-    );
+            ],
+          );
+        });
   }
 }
 

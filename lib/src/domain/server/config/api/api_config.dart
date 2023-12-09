@@ -9,9 +9,13 @@ class API {
 
   //Home
   static const homeBrowse = "/home";
+  static const candidateDashboard = "/candidate/dashboard";
 
   //Jobs
   static const job = "/jobs";
   static const jobTypes = "/job-types";
   static const jobCategories = "/categories";
+
+  //Companies
+  static const company = "/companies";
 }

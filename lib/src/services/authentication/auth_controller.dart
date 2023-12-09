@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:get/get.dart';
 import 'package:jobpilot/src/domain/local_storage/repositories/auth_storage/auth_storage.dart';
 import 'package:jobpilot/src/domain/server/repositories/authentication/models/user/user.dart';
@@ -30,6 +32,7 @@ class AuthController extends GetxController {
     _currentToken = _authStorage.currentToken;
     _currentUser = _authStorage.currentProfile;
     _userCredentials = _authStorage.currentUserCred;
+    _currentUserType = _authStorage.currentProfile?.role;
     update();
   }
 
