@@ -206,6 +206,7 @@ class RequestException implements Exception {
     final details = "\x1B[35m/*\n"
         "method: ($method)\n"
         "url: ($url)\n"
+        "token: (${RequestHandler.find.authToken})\n"
         "statusCode: ${statusCode ?? 0} \n"
         "errorMsg: '${msg ?? ''}' \n"
         "data: ${data ?? ''} \n"
@@ -227,7 +228,13 @@ class RequestException implements Exception {
         response: res?.data,
         purse: (json) {},
       );
-      showToastError(response.errorMsg);
+      if (response.status == 401) {
+        log("#AUTHENTICATION_ERROR#");
+        await AuthController.find.logOut();
+        showToastError(response.errorMsg);
+      } else {
+        showToastError(response.errorMsg);
+      }
     } catch (e, s) {
       log("#HandleError", error: e, stackTrace: s);
       if (res?.data != null &&

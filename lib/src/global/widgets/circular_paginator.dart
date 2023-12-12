@@ -6,8 +6,11 @@ import 'package:jobpilot/src/utilities/extensions/size_utilities.dart';
 class CircularPaginatorWidget extends StatelessWidget {
   const CircularPaginatorWidget({
     super.key,
+    this.selectedIndex,
     this.onBackwardClick,
     this.onForwardClick,
+    this.scrollController,
+    required this.actionsList,
     this.keyDimension = 48,
     this.controlColor = Colors.white,
     this.unselectedControlColor = Colors.transparent,
@@ -17,9 +20,8 @@ class CircularPaginatorWidget extends StatelessWidget {
     this.unselectedColor = Colors.transparent,
     this.selectedForegroundColor = Colors.white,
     this.unselectedForegroundColor = Colors.black,
-    required this.actionsList,
   });
-
+  final int? selectedIndex;
   final double keyDimension;
   final Color controlColor;
   final Color unselectedControlColor;
@@ -32,9 +34,20 @@ class CircularPaginatorWidget extends StatelessWidget {
   final List<(bool isSelected, Widget widget, VoidCallback? onTap)> actionsList;
   final VoidCallback? onBackwardClick;
   final VoidCallback? onForwardClick;
+  final ScrollController? scrollController;
 
   @override
   Widget build(BuildContext context) {
+    if (selectedIndex != null) {
+      WidgetsBinding.instance.addPostFrameCallback(
+        (_) => scrollController?.animateTo(
+          keyDimension * (selectedIndex! - 1),
+          curve: Curves.ease,
+          duration: const Duration(milliseconds: 320),
+        ),
+      );
+    }
+
     return Row(
       children: [
         PaginatorKey(
@@ -57,12 +70,15 @@ class CircularPaginatorWidget extends StatelessWidget {
           child: SizedBox(
             height: keyDimension,
             child: ListView.builder(
-              itemCount: actionsList.length,
               padding: EdgeInsets.zero,
+              controller: scrollController,
+              itemCount: actionsList.length,
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
+                final key = ValueKey(index);
                 final selectedRecord = actionsList[index];
                 return PaginatorKey(
+                  key: key,
                   onTap: selectedRecord.$3,
                   isSelected: selectedRecord.$1,
                   selectedColor: selectedColor,

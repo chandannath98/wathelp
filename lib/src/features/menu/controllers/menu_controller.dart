@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:jobpilot/src/features/authentication/views/login.dart';
 import 'package:jobpilot/src/features/authentication/views/registration.dart';
 import 'package:jobpilot/src/features/homepage/controllers/homepage_controller.dart';
+import 'package:jobpilot/src/features/settings/views/settings.dart';
 import 'package:jobpilot/src/services/authentication/auth_controller.dart';
 
 class MenuPageController extends GetxController {
@@ -45,7 +46,7 @@ class MenuPageController extends GetxController {
   gotoDashboard() => _moveToHomePageIndex(2);
   gotoAppliedJobs() {}
   gotoFavoriteJobs() {}
-  gotoSettings() {}
+  gotoSettings() => Get.to(() => const SettingsScreen());
 
 // About Us
   gotoBlogs() {}

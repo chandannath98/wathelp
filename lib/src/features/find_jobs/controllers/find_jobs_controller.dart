@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jobpilot/src/domain/server/repositories/jobs/jobs_repo.dart';
+import 'package:jobpilot/src/domain/server/repositories/jobs/models/search_response/paginated_job_list_response.dart';
 import 'package:jobpilot/src/features/find_jobs/views/filter_job.dart';
 import 'package:jobpilot/src/features/single_job/views/job_details.dart';
 import 'package:jobpilot/src/utilities/scaffold_util.dart';
@@ -34,11 +35,39 @@ class FindJobController extends GetxController {
   void onClose() {
     searchController.dispose();
     locationController.dispose();
+    pageScrollController.dispose();
     super.onClose();
   }
 
   SearchQuery currentQuery = const SearchQuery();
-  List<Job> currentJobList = [];
+
+  /* Pagination */
+  final singlePageSize = 10;
+  final pageScrollController = ScrollController();
+  int get currentPageIndex => paginationData?.currentPage ?? 1;
+  PaginatedJobListResponse? paginationData;
+  List<Job>? get currentJobList => paginationData?.data;
+
+  fetchJobsWithCurrentQuery({int? index}) async {
+    try {
+      setLoadingStatus(true);
+      final searchRes = await _jobRepo.searchJobs(
+        query: currentQuery,
+        pageSize: singlePageSize,
+        pageIndex: index ?? currentPageIndex,
+      );
+      if (searchRes.isSuccess) {
+        paginationData = searchRes.data!;
+        setLoadingStatus();
+      } else {
+        showToastError(searchRes.errorMsg);
+        setLoadingStatus();
+      }
+    } catch (e, s) {
+      setLoadingStatus();
+      log("#FindJobError", error: e, stackTrace: s);
+    }
+  }
 
   goToFilterPage() async {
     final res = await Get.to(
@@ -51,23 +80,6 @@ class FindJobController extends GetxController {
       if (res.query == null) searchController.clear();
       if (res.location == null) locationController.clear();
       update();
-    }
-  }
-
-  fetchJobsWithCurrentQuery() async {
-    try {
-      setLoadingStatus(true);
-      final searchRes = await _jobRepo.searchJobs(query: currentQuery);
-      if (searchRes.isSuccess) {
-        currentJobList = searchRes.data!;
-        setLoadingStatus();
-      } else {
-        showToastError(searchRes.errorMsg);
-        setLoadingStatus();
-      }
-    } catch (e, s) {
-      setLoadingStatus();
-      log("#FindJobError", error: e, stackTrace: s);
     }
   }
 

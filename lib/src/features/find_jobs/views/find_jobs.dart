@@ -28,54 +28,79 @@ class FindJobsPage extends StatelessWidget {
                   controller: controller,
                 ),
               ),
-              SliverPadding(
-                padding: horizontal16 + vertical8,
-                sliver: controller.isLoading
-                    ? const SliverToBoxAdapter(
-                        child: LoadingIndicator(),
-                      )
-                    : SliverList(
-                        delegate: SliverChildBuilderDelegate(
-                          (context, index) {
-                            final job = controller.currentJobList[index];
+              if (controller.isLoading || controller.currentJobList != null)
+                SliverPadding(
+                  padding: horizontal16 + vertical8,
+                  sliver: controller.isLoading
+                      ? const SliverFillRemaining(
+                          child: LoadingIndicator(),
+                        )
+                      : SliverList(
+                          delegate: SliverChildBuilderDelegate(
+                            (context, index) {
+                              final job = controller.currentJobList![index];
 
-                            return Padding(
-                              padding: vertical6,
-                              child: SingleFeaturedJobCard(
-                                bgColor: Colors.white,
-                                bookmarked: false,
-                                postType: job.jobType ?? "",
-                                companyName: job.companyName ?? "",
-                                postName: job.title ?? "",
-                                companyLocation: job.country ?? "",
-                                salaryRange: "\$${job.salary}",
-                                companyIcon: job.companyLogo ?? "",
-                                onBookmarkCallback: () {},
-                                onItemClick: () =>
-                                    controller.onJobClick(job.slug ?? ""),
-                              ),
-                            );
-                          },
-                          childCount: controller.currentJobList.length,
+                              return Padding(
+                                padding: vertical6,
+                                child: SingleFeaturedJobCard(
+                                  bgColor: Colors.white,
+                                  bookmarked: false,
+                                  postType: job.jobType ?? "",
+                                  companyName: job.companyName ?? "",
+                                  postName: job.title ?? "",
+                                  companyLocation: job.country ?? "",
+                                  salaryRange: "\$${job.salary}",
+                                  companyIcon: job.companyLogo ?? "",
+                                  onBookmarkCallback: () {},
+                                  onItemClick: () =>
+                                      controller.onJobClick(job.slug ?? ""),
+                                ),
+                              );
+                            },
+                            childCount: controller.currentJobList!.length,
+                          ),
                         ),
-                      ),
-              ),
-              SliverToBoxAdapter(
-                child: Padding(
-                  padding: (vertical12 + horizontal16) + horizontal16,
-                  child: CircularPaginatorWidget(
-                    selectedColor: context.color?.primary ?? Colors.blue,
-                    actionsList: List.generate(15, (index) => (index + 1))
-                        .map((index) => (
-                              index == 1,
-                              Text((index <= 9) ? "0$index" : "$index"),
-                              () {},
-                            ))
-                        .toList(),
-                    onForwardClick: () {},
+                ),
+              if (!controller.isLoading &&
+                  controller.paginationData?.lastPage != null &&
+                  controller.paginationData!.lastPage! > 1)
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: (vertical12 + horizontal16) + horizontal16,
+                    child: CircularPaginatorWidget(
+                      selectedIndex: controller.currentPageIndex,
+                      scrollController: controller.pageScrollController,
+                      selectedColor: context.color?.primary ?? Colors.blue,
+                      controlColor: context.color?.theme ?? Colors.white,
+                      actionsList: List.generate(
+                        controller.paginationData!.lastPage!,
+                        (index) => (index + 1),
+                      )
+                          .map((index) => (
+                                index == controller.currentPageIndex,
+                                Text((index <= 9) ? "0$index" : "$index"),
+                                (index == controller.currentPageIndex)
+                                    ? () {}
+                                    : () =>
+                                        controller.fetchJobsWithCurrentQuery(
+                                          index: index,
+                                        ),
+                              ))
+                          .toList(),
+                      onForwardClick:
+                          controller.paginationData?.nextPageUrl == null
+                              ? null
+                              : () => controller.fetchJobsWithCurrentQuery(
+                                  index: controller.currentPageIndex + 1),
+                      onBackwardClick:
+                          controller.paginationData?.prevPageUrl == null
+                              ? null
+                              : () => controller.fetchJobsWithCurrentQuery(
+                                    index: controller.currentPageIndex - 1,
+                                  ),
+                    ),
                   ),
                 ),
-              ),
             ],
           );
         });
@@ -109,7 +134,7 @@ class FindJobsSettings extends StatelessWidget {
             locationController: controller.locationController,
             onSearchClick: controller.isLoading
                 ? null
-                : controller.fetchJobsWithCurrentQuery,
+                : () => controller.fetchJobsWithCurrentQuery(index: 1),
             onFilterClick: controller.goToFilterPage,
             showFilterButton: true,
           ),

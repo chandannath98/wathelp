@@ -44,9 +44,11 @@ class FindCompanyPage extends StatelessWidget {
                                 positionCount: company.openJobsCount ?? 0,
                                 name: company.name ?? "",
                                 location: company.country ?? "",
-                                onOpenPositionTap: () => Get.to(() =>
-                                    SingleCompanyDetailsScreen(
-                                        companyDetails: company)),
+                                onOpenPositionTap: () => Get.to(
+                                  () => SingleCompanyDetailsScreen(
+                                    companyUserName: company.username!,
+                                  ),
+                                ),
                               ),
                             );
                           },

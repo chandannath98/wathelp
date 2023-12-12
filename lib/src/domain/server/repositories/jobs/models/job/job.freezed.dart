@@ -33,9 +33,9 @@ mixin _$Job {
   @JsonKey(name: 'job_type')
   String? get jobType => throw _privateConstructorUsedError;
   @JsonKey(name: 'job_role')
-  int? get jobRole => throw _privateConstructorUsedError;
+  String? get jobRole => throw _privateConstructorUsedError;
   @JsonKey(name: 'category')
-  int? get category => throw _privateConstructorUsedError;
+  String? get category => throw _privateConstructorUsedError;
   @JsonKey(name: 'country')
   String? get country => throw _privateConstructorUsedError;
   @JsonKey(name: 'is_featured')
@@ -74,8 +74,8 @@ abstract class $JobCopyWith<$Res> {
       @JsonKey(name: 'company_name') String? companyName,
       @JsonKey(name: 'company_logo') String? companyLogo,
       @JsonKey(name: 'job_type') String? jobType,
-      @JsonKey(name: 'job_role') int? jobRole,
-      @JsonKey(name: 'category') int? category,
+      @JsonKey(name: 'job_role') String? jobRole,
+      @JsonKey(name: 'category') String? category,
       @JsonKey(name: 'country') String? country,
       @JsonKey(name: 'is_featured') bool? isFeatured,
       @JsonKey(name: 'is_highlighted') bool? isHighlighted,
@@ -147,11 +147,11 @@ class _$JobCopyWithImpl<$Res, $Val extends Job> implements $JobCopyWith<$Res> {
       jobRole: freezed == jobRole
           ? _value.jobRole
           : jobRole // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       category: freezed == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       country: freezed == country
           ? _value.country
           : country // ignore: cast_nullable_to_non_nullable
@@ -209,8 +209,8 @@ abstract class _$$JobImplCopyWith<$Res> implements $JobCopyWith<$Res> {
       @JsonKey(name: 'company_name') String? companyName,
       @JsonKey(name: 'company_logo') String? companyLogo,
       @JsonKey(name: 'job_type') String? jobType,
-      @JsonKey(name: 'job_role') int? jobRole,
-      @JsonKey(name: 'category') int? category,
+      @JsonKey(name: 'job_role') String? jobRole,
+      @JsonKey(name: 'category') String? category,
       @JsonKey(name: 'country') String? country,
       @JsonKey(name: 'is_featured') bool? isFeatured,
       @JsonKey(name: 'is_highlighted') bool? isHighlighted,
@@ -279,11 +279,11 @@ class __$$JobImplCopyWithImpl<$Res> extends _$JobCopyWithImpl<$Res, _$JobImpl>
       jobRole: freezed == jobRole
           ? _value.jobRole
           : jobRole // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       category: freezed == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       country: freezed == country
           ? _value.country
           : country // ignore: cast_nullable_to_non_nullable
@@ -374,10 +374,10 @@ class _$JobImpl with DiagnosticableTreeMixin implements _Job {
   final String? jobType;
   @override
   @JsonKey(name: 'job_role')
-  final int? jobRole;
+  final String? jobRole;
   @override
   @JsonKey(name: 'category')
-  final int? category;
+  final String? category;
   @override
   @JsonKey(name: 'country')
   final String? country;
@@ -521,8 +521,8 @@ abstract class _Job implements Job {
       @JsonKey(name: 'company_name') final String? companyName,
       @JsonKey(name: 'company_logo') final String? companyLogo,
       @JsonKey(name: 'job_type') final String? jobType,
-      @JsonKey(name: 'job_role') final int? jobRole,
-      @JsonKey(name: 'category') final int? category,
+      @JsonKey(name: 'job_role') final String? jobRole,
+      @JsonKey(name: 'category') final String? category,
       @JsonKey(name: 'country') final String? country,
       @JsonKey(name: 'is_featured') final bool? isFeatured,
       @JsonKey(name: 'is_highlighted') final bool? isHighlighted,
@@ -557,10 +557,10 @@ abstract class _Job implements Job {
   String? get jobType;
   @override
   @JsonKey(name: 'job_role')
-  int? get jobRole;
+  String? get jobRole;
   @override
   @JsonKey(name: 'category')
-  int? get category;
+  String? get category;
   @override
   @JsonKey(name: 'country')
   String? get country;
