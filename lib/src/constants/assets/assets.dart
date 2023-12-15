@@ -1,8 +1,11 @@
+import 'package:flutter/material.dart';
+
 final class Assets {
   static const appLogo = "assets/images/identity/app_logo.png";
   static const appLogoSvg = "assets/images/identity/app_logo.svg";
   static const onboardSvg = "assets/images/identity/onboard.svg";
   static const appIcon = "assets/images/identity/app_icon.png";
+  static const errorImagePath = "assets/images/error.png";
 
   //Homepage
   static const homeHero = "assets/images/home_hero.png";
@@ -27,4 +30,6 @@ final class Assets {
   //Reg
   static const candidateUserIcon = "assets/icon/candidate_user.svg";
   static const employerBuildingIcon = "assets/icon/employer_building.svg";
+
+  static const ImageProvider errorImage = AssetImage(Assets.errorImagePath);
 }

@@ -1,13 +1,17 @@
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jobpilot/src/constants/design/border_radius.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
 import 'package:jobpilot/src/features/settings/controllers/personal_settings_controller.dart';
-import 'package:jobpilot/src/features/settings/views/widgets/setting_drop_down.dart';
-import 'package:jobpilot/src/features/settings/views/widgets/setting_text_field.dart';
+import 'package:jobpilot/src/global/widgets/app/custom_titled_drop_down.dart';
+import 'package:jobpilot/src/global/widgets/app/custom_titled_text_field.dart';
+import 'package:jobpilot/src/global/widgets/pick_image.dart';
 import 'package:jobpilot/src/services/theme/app_theme.dart';
 import 'package:jobpilot/src/utilities/extensions/size_utilities.dart';
 import 'package:jobpilot/src/utilities/form_validator_helper.dart';
+
+import 'widgets/save_changes_button.dart';
 
 class PersonalInformationTab extends StatelessWidget {
   const PersonalInformationTab({
@@ -71,28 +75,29 @@ class ResumeListSection extends StatelessWidget {
           separatorBuilder: (context, index) => 16.height,
           itemBuilder: (context, index) => const ResumeListTile(),
         ),
-        ListTile(
-          tileColor: context.color?.theme,
-          onTap: () {},
-          shape: RoundedRectangleBorder(
-            borderRadius: br4,
-            side: BorderSide(
-              color: context.color?.extra ?? Colors.grey,
+        DottedBorder(
+          padding: EdgeInsets.zero,
+          borderType: BorderType.RRect,
+          radius: const Radius.circular(4),
+          color: context.color?.extra ?? Colors.grey,
+          child: ListTile(
+            tileColor: context.color?.theme,
+            onTap: controller.onAddResumeClick,
+            shape: RoundedRectangleBorder(borderRadius: br4),
+            title: Text(
+              "Add Cv/Resume",
+              style: context.text.titleMedium?.copyWith(
+                fontWeight: FontWeight.w600,
+              ),
             ),
-          ),
-          title: Text(
-            "Add Cv/Resume",
-            style: context.text.titleMedium?.copyWith(
-              fontWeight: FontWeight.w600,
+            subtitle: Text(
+              "Browse file or drop here. only pdf",
             ),
-          ),
-          subtitle: Text(
-            "Browse file or drop here. only pdf",
-          ),
-          leading: Icon(
-            Icons.add_circle_outline_outlined,
-            size: 32,
-            color: context.color?.primary,
+            leading: Icon(
+              Icons.add_circle_outline_outlined,
+              size: 32,
+              color: context.color?.primary,
+            ),
           ),
         ),
       ],
@@ -185,17 +190,16 @@ class BasicInformationSection extends StatelessWidget {
         8.height,
         Align(
           alignment: Alignment.centerLeft,
-          child: DecoratedBox(
-            decoration: BoxDecoration(
-              borderRadius: br8,
-              border: Border.all(
-                width: 1.5,
-                color: context.color?.extra ?? Colors.grey,
-              ),
-            ),
+          child: DottedBorder(
+            borderType: BorderType.RRect,
+            radius: const Radius.circular(8),
+            color: context.color?.extra ?? Colors.grey,
             child: InkWell(
               borderRadius: br8,
-              onTap: () {},
+              onTap: () async {
+                final res = await pickImage(context);
+                if (res != null) {}
+              },
               child: Padding(
                 padding: all20,
                 child: Column(
@@ -278,11 +282,11 @@ class BasicInformationSection extends StatelessWidget {
           ],
         ),
         16.height,
-        SettingTextFormField(
+        CustomTitledTextFormField(
           title: "Title/Headline",
         ),
         16.height,
-        SettingDropdownField(
+        CustomTitledDropdownField(
           title: "Experience",
           onChange: (value) {},
           fieldList: [
@@ -293,7 +297,7 @@ class BasicInformationSection extends StatelessWidget {
           ],
         ),
         16.height,
-        SettingDropdownField(
+        CustomTitledDropdownField(
           title: "Education",
           onChange: (value) {},
           fieldList: [
@@ -327,31 +331,6 @@ class BasicInformationSection extends StatelessWidget {
           onTap: () {},
         ),
       ],
-    );
-  }
-}
-
-class SaveChangesButton extends StatelessWidget {
-  const SaveChangesButton({
-    super.key,
-    required this.onTap,
-  });
-
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return Align(
-      alignment: Alignment.centerLeft,
-      child: SizedBox(
-        width: 160,
-        child: ElevatedButton(
-          onPressed: onTap,
-          child: const Text(
-            "Save Changes",
-          ),
-        ),
-      ),
     );
   }
 }

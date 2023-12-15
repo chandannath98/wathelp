@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:jobpilot/src/utilities/extensions/size_utilities.dart';
 
-class SettingDropdownField<T> extends StatelessWidget {
-  const SettingDropdownField({
+class CustomTitledDropdownField<T> extends StatelessWidget {
+  const CustomTitledDropdownField({
     super.key,
     this.value,
     this.hintText,
     this.onChange,
+    this.validator,
+    this.fieldList,
     required this.title,
-    required this.fieldList,
   });
 
   final T? value;
   final String title;
   final String? hintText;
   final ValueChanged<T?>? onChange;
-  final List<({T value, String title})> fieldList;
+  final FormFieldValidator<T>? validator;
+  final List<({T value, String title})>? fieldList;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +29,7 @@ class SettingDropdownField<T> extends StatelessWidget {
         DropdownButtonFormField<T>(
           value: value,
           items: fieldList
-              .map(
+              ?.map(
                 (field) => DropdownMenuItem(
                   value: field.value,
                   child: Text(field.title),
@@ -35,8 +37,9 @@ class SettingDropdownField<T> extends StatelessWidget {
               )
               .toList(),
           onChanged: onChange,
-          decoration: InputDecoration(
-            hintText: hintText ?? "Choose...",
+          validator: validator,
+          hint: Text(
+            hintText ?? "Choose...",
           ),
         )
       ],

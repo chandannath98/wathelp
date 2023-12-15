@@ -13,9 +13,18 @@ class API {
 
   //Jobs
   static const job = "/jobs";
+  static const candidateJob = "/candidate/jobs";
+  static const candidateJobApply = "/candidate/jobs/apply";
   static const jobTypes = "/job-types";
   static const jobCategories = "/categories";
+  static const jobBookmarkSuffix = "/bookmark";
 
   //Companies
   static const company = "/companies";
+
+  //Settings
+  static const resumeList = "/candidate/resumes";
+
+  //Others
+  static const popularTag = "/popular-tags";
 }

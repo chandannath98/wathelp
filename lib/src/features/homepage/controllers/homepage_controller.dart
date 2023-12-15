@@ -17,7 +17,7 @@ class HomepageController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    pageController = PageController();
+    pageController = PageController(keepPage: true);
     AuthController.find.addListener(() => update());
   }
 

@@ -25,7 +25,7 @@ class SingleCompanyDetailsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         titleSpacing: 0,
-        title: Text(
+        title: const Text(
           "Company Description",
         ),
       ),
@@ -45,13 +45,17 @@ class SingleCompanyDetailsScreen extends StatelessWidget {
                         controller: controller,
                       ),
                       24.height,
-                      CompanyDescriptionWidget(controller: controller),
+                      CompanyDescriptionWidget(
+                        controller: controller,
+                      ),
                       24.height,
                       CompanyOverviewSection(
                         controller: controller,
                       ),
                       24.height,
-                      CompanyContactSection(),
+                      CompanyContactSection(
+                        controller: controller,
+                      ),
                       24.height,
                       // 24.height,
                     ],
@@ -95,6 +99,10 @@ class CompanyDetailsHeader extends StatelessWidget {
                   child: ClipRRect(
                     child: Image.network(
                       controller.detailResponse?.companyDetails?.logo ?? "",
+                      errorBuilder: (context, error, stackTrace) => const Image(
+                        image: Assets.errorImage,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                 ),
@@ -211,7 +219,10 @@ class OpenJobsSection extends StatelessWidget {
 class CompanyContactSection extends StatelessWidget {
   const CompanyContactSection({
     super.key,
+    required this.controller,
   });
+
+  final SingleCompanyController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -241,32 +252,35 @@ class CompanyContactSection extends StatelessWidget {
               ),
             ),
             16.height,
-            const ContactInformationTile(
-              leading: Icon(
-                Icons.language,
-                size: 32,
+            if (controller.detailResponse?.companyDetails?.website != null)
+              ContactInformationTile(
+                leading: Icon(
+                  Icons.language,
+                  size: 32,
+                ),
+                title: "WEBSITE",
+                data: controller.detailResponse?.companyDetails?.website ?? "",
               ),
-              title: "WEBSITE",
-              data: "www.estherhoward.com",
-            ),
             divider,
-            const ContactInformationTile(
-              leading: Icon(
-                Icons.ring_volume_outlined,
-                size: 32,
+            if (controller.detailResponse?.user?.contactInfo?.phone != null)
+              ContactInformationTile(
+                leading: Icon(
+                  Icons.ring_volume_outlined,
+                  size: 32,
+                ),
+                title: "PHONE",
+                data: controller.detailResponse?.user?.contactInfo?.phone ?? "",
               ),
-              title: "PHONE",
-              data: "+880 19694-68616",
-            ),
             divider,
-            const ContactInformationTile(
-              leading: Icon(
-                Icons.mail_outline,
-                size: 32,
+            if (controller.detailResponse?.user?.contactInfo?.email != null)
+              ContactInformationTile(
+                leading: Icon(
+                  Icons.mail_outline,
+                  size: 32,
+                ),
+                title: "EMAIL ADDRESS",
+                data: controller.detailResponse?.user?.contactInfo?.email ?? "",
               ),
-              title: "EMAIL ADDRESS",
-              data: "test.fest@gmail.com",
-            ),
             divider,
             20.height,
             Text(
@@ -397,7 +411,7 @@ class CompanyOverviewSection extends StatelessWidget {
               children: [
                 Expanded(
                   child: OverviewDataTile(
-                    title: "JOB POSTED: ",
+                    title: "FOUNDED IN: ",
                     data: (controller.detailResponse?.companyDetails
                                 ?.establishmentDate ==
                             null)
@@ -413,8 +427,10 @@ class CompanyOverviewSection extends StatelessWidget {
                 ),
                 Expanded(
                   child: OverviewDataTile(
-                    title: "JOB EXPIRES IN: ",
-                    data: "",
+                    title: "ORGANIZATION TYPE",
+                    data: controller.detailResponse?.companyDetails
+                            ?.organization?.name ??
+                        "",
                     icon: Icon(Icons.timer_outlined),
                   ),
                 ),
@@ -425,15 +441,19 @@ class CompanyOverviewSection extends StatelessWidget {
               children: [
                 Expanded(
                   child: OverviewDataTile(
-                    title: "EXPERIENCE",
-                    data: "",
+                    title: "TEAM SIZE",
+                    data: controller
+                            .detailResponse?.companyDetails?.teamSize?.name ??
+                        "",
                     icon: Icon(Icons.wallet_outlined),
                   ),
                 ),
                 Expanded(
                   child: OverviewDataTile(
-                    title: "EDUCATION",
-                    data: "",
+                    title: "INDUSTRY TYPES  ",
+                    data: controller
+                            .detailResponse?.companyDetails?.industry?.name ??
+                        "",
                     icon: Icon(Icons.work_outline_rounded),
                   ),
                 ),

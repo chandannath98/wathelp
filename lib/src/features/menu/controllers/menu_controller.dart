@@ -44,7 +44,7 @@ class MenuPageController extends GetxController {
 
 // Candidate Section
   gotoDashboard() => _moveToHomePageIndex(2);
-  gotoAppliedJobs() {}
+  gotoAppliedJobs() => _moveToHomePageIndex(3);
   gotoFavoriteJobs() {}
   gotoSettings() => Get.to(() => const SettingsScreen());
 

@@ -6,6 +6,7 @@ part 'company.g.dart';
 @freezed
 class Company with _$Company {
   const factory Company({
+    @JsonKey(name: 'id') int? id,
     @JsonKey(name: 'name') String? name,
     @JsonKey(name: 'username') String? username,
     @JsonKey(name: 'logo_url') String? companyLogo,

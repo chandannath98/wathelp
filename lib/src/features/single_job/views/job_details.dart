@@ -617,7 +617,7 @@ class JobDetailCompanyHeader extends StatelessWidget {
               ),
               8.width,
               InkWell(
-                onTap: controller.onBookmarkClick.withOverlay,
+                onTap: controller.onBookmarkJobClick.withOverlay,
                 borderRadius: BorderRadius.circular(4),
                 child: Card(
                   child: Padding(

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
-import 'package:jobpilot/src/features/settings/views/personal_tab.dart';
 import 'package:jobpilot/src/services/theme/app_theme.dart';
 import 'package:jobpilot/src/utilities/extensions/size_utilities.dart';
 
 import '../controllers/profile_settings_controller.dart';
-import 'widgets/setting_drop_down.dart';
+import '../../../global/widgets/app/custom_titled_drop_down.dart';
+import 'widgets/save_changes_button.dart';
 
 class ProfileInformationTab extends StatelessWidget {
   const ProfileInformationTab({
@@ -25,7 +25,7 @@ class ProfileInformationTab extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   24.height,
-                  SettingDropdownField(
+                  CustomTitledDropdownField(
                     title: "Nationality",
                     onChange: (value) {},
                     fieldList: const [
@@ -48,7 +48,7 @@ class ProfileInformationTab extends StatelessWidget {
                     ),
                   ),
                   16.height,
-                  SettingDropdownField(
+                  CustomTitledDropdownField(
                     title: "Gender",
                     onChange: (value) {},
                     fieldList: const [
@@ -59,7 +59,7 @@ class ProfileInformationTab extends StatelessWidget {
                     ],
                   ),
                   16.height,
-                  SettingDropdownField(
+                  CustomTitledDropdownField(
                     title: "Marital State",
                     onChange: (value) {},
                     fieldList: const [
@@ -70,7 +70,7 @@ class ProfileInformationTab extends StatelessWidget {
                     ],
                   ),
                   16.height,
-                  SettingDropdownField(
+                  CustomTitledDropdownField(
                     title: "Education",
                     onChange: (value) {},
                     fieldList: const [
@@ -81,7 +81,7 @@ class ProfileInformationTab extends StatelessWidget {
                     ],
                   ),
                   16.height,
-                  SettingDropdownField(
+                  CustomTitledDropdownField(
                     title: "Experience",
                     onChange: (value) {},
                     fieldList: const [

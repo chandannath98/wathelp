@@ -1,6 +1,8 @@
 import 'dart:developer' show log;
 
+import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio/dio.dart';
+import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:get/get.dart' hide Response;
 import 'package:jobpilot/src/domain/server/config/repository.dart';
 import 'package:jobpilot/src/services/authentication/auth_controller.dart';
@@ -8,18 +10,21 @@ import 'package:jobpilot/src/utilities/scaffold_util.dart';
 
 class RequestHandler extends GetxController {
   static RequestHandler get find => Get.find();
-
+  final CookieJar cookieJar = CookieJar();
   String? get authToken => AuthController.find.currentToken;
 
   Dio get dio => Dio(
         BaseOptions(
           baseUrl: API.baseUrl,
+          persistentConnection: true,
+          connectTimeout: const Duration(seconds: 10),
           headers: {
+            'connection': 'keep-alive',
             'accept': 'application/json',
             if (authToken != null) 'Authorization': 'Bearer $authToken',
           },
         ),
-      );
+      )..interceptors.add(CookieManager(cookieJar));
 
   String get mainUrl => API.baseUrl;
 
@@ -228,10 +233,11 @@ class RequestException implements Exception {
         response: res?.data,
         purse: (json) {},
       );
-      if (response.status == 401) {
+      if (statusCode == 401) {
         log("#AUTHENTICATION_ERROR#");
         await AuthController.find.logOut();
         showToastError(response.errorMsg);
+        return;
       } else {
         showToastError(response.errorMsg);
       }

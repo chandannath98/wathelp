@@ -104,6 +104,7 @@ final lightTheme = ThemeData(
         color: _extraColor,
       ),
     ),
+    outlineBorder: BorderSide(),
     focusedBorder: OutlineInputBorder(
       borderSide: BorderSide(
         color: _primaryColor,

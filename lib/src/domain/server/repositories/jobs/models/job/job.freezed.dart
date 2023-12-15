@@ -20,6 +20,8 @@ Job _$JobFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Job {
+  @JsonKey(name: 'id')
+  int? get id => throw _privateConstructorUsedError;
   @JsonKey(name: 'title')
   String? get title => throw _privateConstructorUsedError;
   @JsonKey(name: 'slug')
@@ -68,7 +70,8 @@ abstract class $JobCopyWith<$Res> {
       _$JobCopyWithImpl<$Res, Job>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'title') String? title,
+      {@JsonKey(name: 'id') int? id,
+      @JsonKey(name: 'title') String? title,
       @JsonKey(name: 'slug') String? slug,
       @JsonKey(name: 'job_details') String? jobDetails,
       @JsonKey(name: 'company_name') String? companyName,
@@ -100,6 +103,7 @@ class _$JobCopyWithImpl<$Res, $Val extends Job> implements $JobCopyWith<$Res> {
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = freezed,
     Object? title = freezed,
     Object? slug = freezed,
     Object? jobDetails = freezed,
@@ -120,6 +124,10 @@ class _$JobCopyWithImpl<$Res, $Val extends Job> implements $JobCopyWith<$Res> {
     Object? allAppliedJobsCount = freezed,
   }) {
     return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
       title: freezed == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -203,7 +211,8 @@ abstract class _$$JobImplCopyWith<$Res> implements $JobCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'title') String? title,
+      {@JsonKey(name: 'id') int? id,
+      @JsonKey(name: 'title') String? title,
       @JsonKey(name: 'slug') String? slug,
       @JsonKey(name: 'job_details') String? jobDetails,
       @JsonKey(name: 'company_name') String? companyName,
@@ -232,6 +241,7 @@ class __$$JobImplCopyWithImpl<$Res> extends _$JobCopyWithImpl<$Res, _$JobImpl>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = freezed,
     Object? title = freezed,
     Object? slug = freezed,
     Object? jobDetails = freezed,
@@ -252,6 +262,10 @@ class __$$JobImplCopyWithImpl<$Res> extends _$JobCopyWithImpl<$Res, _$JobImpl>
     Object? allAppliedJobsCount = freezed,
   }) {
     return _then(_$JobImpl(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
       title: freezed == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -332,7 +346,8 @@ class __$$JobImplCopyWithImpl<$Res> extends _$JobCopyWithImpl<$Res, _$JobImpl>
 @JsonSerializable()
 class _$JobImpl with DiagnosticableTreeMixin implements _Job {
   const _$JobImpl(
-      {@JsonKey(name: 'title') this.title,
+      {@JsonKey(name: 'id') this.id,
+      @JsonKey(name: 'title') this.title,
       @JsonKey(name: 'slug') this.slug,
       @JsonKey(name: 'job_details') this.jobDetails,
       @JsonKey(name: 'company_name') this.companyName,
@@ -354,6 +369,9 @@ class _$JobImpl with DiagnosticableTreeMixin implements _Job {
   factory _$JobImpl.fromJson(Map<String, dynamic> json) =>
       _$$JobImplFromJson(json);
 
+  @override
+  @JsonKey(name: 'id')
+  final int? id;
   @override
   @JsonKey(name: 'title')
   final String? title;
@@ -411,7 +429,7 @@ class _$JobImpl with DiagnosticableTreeMixin implements _Job {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Job(title: $title, slug: $slug, jobDetails: $jobDetails, companyName: $companyName, companyLogo: $companyLogo, jobType: $jobType, jobRole: $jobRole, category: $category, country: $country, isFeatured: $isFeatured, isHighlighted: $isHighlighted, deadline: $deadline, salary: $salary, salaryMode: $salaryMode, minSalary: $minSalary, maxSalary: $maxSalary, bookmarked: $bookmarked, allAppliedJobsCount: $allAppliedJobsCount)';
+    return 'Job(id: $id, title: $title, slug: $slug, jobDetails: $jobDetails, companyName: $companyName, companyLogo: $companyLogo, jobType: $jobType, jobRole: $jobRole, category: $category, country: $country, isFeatured: $isFeatured, isHighlighted: $isHighlighted, deadline: $deadline, salary: $salary, salaryMode: $salaryMode, minSalary: $minSalary, maxSalary: $maxSalary, bookmarked: $bookmarked, allAppliedJobsCount: $allAppliedJobsCount)';
   }
 
   @override
@@ -419,6 +437,7 @@ class _$JobImpl with DiagnosticableTreeMixin implements _Job {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'Job'))
+      ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('title', title))
       ..add(DiagnosticsProperty('slug', slug))
       ..add(DiagnosticsProperty('jobDetails', jobDetails))
@@ -444,6 +463,7 @@ class _$JobImpl with DiagnosticableTreeMixin implements _Job {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$JobImpl &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.slug, slug) || other.slug == slug) &&
             (identical(other.jobDetails, jobDetails) ||
@@ -478,26 +498,28 @@ class _$JobImpl with DiagnosticableTreeMixin implements _Job {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      title,
-      slug,
-      jobDetails,
-      companyName,
-      companyLogo,
-      jobType,
-      jobRole,
-      category,
-      country,
-      isFeatured,
-      isHighlighted,
-      deadline,
-      salary,
-      salaryMode,
-      minSalary,
-      maxSalary,
-      bookmarked,
-      allAppliedJobsCount);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        id,
+        title,
+        slug,
+        jobDetails,
+        companyName,
+        companyLogo,
+        jobType,
+        jobRole,
+        category,
+        country,
+        isFeatured,
+        isHighlighted,
+        deadline,
+        salary,
+        salaryMode,
+        minSalary,
+        maxSalary,
+        bookmarked,
+        allAppliedJobsCount
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -515,7 +537,8 @@ class _$JobImpl with DiagnosticableTreeMixin implements _Job {
 
 abstract class _Job implements Job {
   const factory _Job(
-      {@JsonKey(name: 'title') final String? title,
+      {@JsonKey(name: 'id') final int? id,
+      @JsonKey(name: 'title') final String? title,
       @JsonKey(name: 'slug') final String? slug,
       @JsonKey(name: 'job_details') final String? jobDetails,
       @JsonKey(name: 'company_name') final String? companyName,
@@ -537,6 +560,9 @@ abstract class _Job implements Job {
 
   factory _Job.fromJson(Map<String, dynamic> json) = _$JobImpl.fromJson;
 
+  @override
+  @JsonKey(name: 'id')
+  int? get id;
   @override
   @JsonKey(name: 'title')
   String? get title;

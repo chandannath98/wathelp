@@ -20,6 +20,8 @@ Company _$CompanyFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Company {
+  @JsonKey(name: 'id')
+  int? get id => throw _privateConstructorUsedError;
   @JsonKey(name: 'name')
   String? get name => throw _privateConstructorUsedError;
   @JsonKey(name: 'username')
@@ -42,7 +44,8 @@ abstract class $CompanyCopyWith<$Res> {
       _$CompanyCopyWithImpl<$Res, Company>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'name') String? name,
+      {@JsonKey(name: 'id') int? id,
+      @JsonKey(name: 'name') String? name,
       @JsonKey(name: 'username') String? username,
       @JsonKey(name: 'logo_url') String? companyLogo,
       @JsonKey(name: 'country') String? country,
@@ -62,6 +65,7 @@ class _$CompanyCopyWithImpl<$Res, $Val extends Company>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = freezed,
     Object? name = freezed,
     Object? username = freezed,
     Object? companyLogo = freezed,
@@ -69,6 +73,10 @@ class _$CompanyCopyWithImpl<$Res, $Val extends Company>
     Object? openJobsCount = freezed,
   }) {
     return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -101,7 +109,8 @@ abstract class _$$CompanyImplCopyWith<$Res> implements $CompanyCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'name') String? name,
+      {@JsonKey(name: 'id') int? id,
+      @JsonKey(name: 'name') String? name,
       @JsonKey(name: 'username') String? username,
       @JsonKey(name: 'logo_url') String? companyLogo,
       @JsonKey(name: 'country') String? country,
@@ -119,6 +128,7 @@ class __$$CompanyImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = freezed,
     Object? name = freezed,
     Object? username = freezed,
     Object? companyLogo = freezed,
@@ -126,6 +136,10 @@ class __$$CompanyImplCopyWithImpl<$Res>
     Object? openJobsCount = freezed,
   }) {
     return _then(_$CompanyImpl(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -154,7 +168,8 @@ class __$$CompanyImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$CompanyImpl with DiagnosticableTreeMixin implements _Company {
   const _$CompanyImpl(
-      {@JsonKey(name: 'name') this.name,
+      {@JsonKey(name: 'id') this.id,
+      @JsonKey(name: 'name') this.name,
       @JsonKey(name: 'username') this.username,
       @JsonKey(name: 'logo_url') this.companyLogo,
       @JsonKey(name: 'country') this.country,
@@ -163,6 +178,9 @@ class _$CompanyImpl with DiagnosticableTreeMixin implements _Company {
   factory _$CompanyImpl.fromJson(Map<String, dynamic> json) =>
       _$$CompanyImplFromJson(json);
 
+  @override
+  @JsonKey(name: 'id')
+  final int? id;
   @override
   @JsonKey(name: 'name')
   final String? name;
@@ -181,7 +199,7 @@ class _$CompanyImpl with DiagnosticableTreeMixin implements _Company {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Company(name: $name, username: $username, companyLogo: $companyLogo, country: $country, openJobsCount: $openJobsCount)';
+    return 'Company(id: $id, name: $name, username: $username, companyLogo: $companyLogo, country: $country, openJobsCount: $openJobsCount)';
   }
 
   @override
@@ -189,6 +207,7 @@ class _$CompanyImpl with DiagnosticableTreeMixin implements _Company {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'Company'))
+      ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('name', name))
       ..add(DiagnosticsProperty('username', username))
       ..add(DiagnosticsProperty('companyLogo', companyLogo))
@@ -201,6 +220,7 @@ class _$CompanyImpl with DiagnosticableTreeMixin implements _Company {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$CompanyImpl &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.username, username) ||
                 other.username == username) &&
@@ -214,7 +234,7 @@ class _$CompanyImpl with DiagnosticableTreeMixin implements _Company {
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, name, username, companyLogo, country, openJobsCount);
+      runtimeType, id, name, username, companyLogo, country, openJobsCount);
 
   @JsonKey(ignore: true)
   @override
@@ -232,7 +252,8 @@ class _$CompanyImpl with DiagnosticableTreeMixin implements _Company {
 
 abstract class _Company implements Company {
   const factory _Company(
-      {@JsonKey(name: 'name') final String? name,
+      {@JsonKey(name: 'id') final int? id,
+      @JsonKey(name: 'name') final String? name,
       @JsonKey(name: 'username') final String? username,
       @JsonKey(name: 'logo_url') final String? companyLogo,
       @JsonKey(name: 'country') final String? country,
@@ -240,6 +261,9 @@ abstract class _Company implements Company {
 
   factory _Company.fromJson(Map<String, dynamic> json) = _$CompanyImpl.fromJson;
 
+  @override
+  @JsonKey(name: 'id')
+  int? get id;
   @override
   @JsonKey(name: 'name')
   String? get name;

@@ -29,6 +29,7 @@ class AuthController extends GetxController {
   }
 
   initializeAuthSystem() async {
+    log("CurrentToken: ${_authStorage.currentToken}");
     _currentToken = _authStorage.currentToken;
     _currentUser = _authStorage.currentProfile;
     _userCredentials = _authStorage.currentUserCred;
@@ -45,6 +46,7 @@ class AuthController extends GetxController {
 
   handleNewAuthToken(String token) async {
     _currentToken = token;
+    log(token);
     await _authStorage.saveToken(token);
     update();
   }

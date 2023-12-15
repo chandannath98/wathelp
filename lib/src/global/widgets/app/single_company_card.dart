@@ -88,6 +88,8 @@ class SingleCompanyCardWidget extends StatelessWidget {
                                                 ),
                                               ),
                                             ),
+                                            // FIXME: If Company Featured key is available. Comment out this section.
+                                            /* 
                                             if (isFeatured) ...[
                                               12.width,
                                               DecoratedBox(
@@ -113,6 +115,7 @@ class SingleCompanyCardWidget extends StatelessWidget {
                                                 ),
                                               ),
                                             ],
+                                            */
                                           ],
                                         ),
                                         Expanded(

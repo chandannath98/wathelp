@@ -56,27 +56,55 @@ class SingleJobController extends GetxController {
 
   Future onApplyClick() async {
     if (AuthController.find.isAuthenticated) {
-      Get.to(() => ApplyJobScreen(jobName: jobDetails?.title ?? ""));
+      Get.to(
+        () => ApplyJobScreen(
+          jobId: jobDetails!.id!,
+          jobName: jobDetails?.title ?? "",
+        ),
+      );
     } else {
       await Get.to(() => const LoginSystemScreen());
       if (AuthController.find.isAuthenticated) {
-        Get.to(() => ApplyJobScreen(jobName: jobDetails?.title ?? ""));
+        Get.to(
+          () => ApplyJobScreen(
+            jobId: jobDetails!.id!,
+            jobName: jobDetails?.title ?? "",
+          ),
+        );
       }
     }
   }
 
-  Future onBookmarkClick() async {}
+  Future onBookmarkJobClick() async {
+    log("Is bookmarked : ${detailResponse!.job!.bookmarked}");
 
-  fetchJobDetails() async {
     try {
-      setLoadingStatus();
+      final res = await _jobRepo.toggleJobBookmark(jobDetails!.id!);
+      if (res.isSuccess) {
+        showToastSuccess(res.data!.message!);
+      } else {
+        showToastError(res.errorMsg);
+      }
+      await fetchJobDetails(isRefresh: true);
+      log("Is bookmarked : ${detailResponse!.job!.bookmarked}");
+    } catch (e, s) {
+      log("#ToggleJobBookmarkError", error: e, stackTrace: s);
+      if (e is RequestException) e.handleError();
+    }
+  }
+
+  fetchJobDetails({
+    bool isRefresh = false,
+  }) async {
+    try {
+      if (!isRefresh) setLoadingStatus();
       final res = await _jobRepo.fetchSingleJobDetails(slug);
       if (res.isSuccess) {
         detailResponse = res.data!;
       } else {
         showToastError(res.errorMsg);
       }
-      setLoadingStatus();
+      setLoadingStatus(false);
     } catch (e, s) {
       log("#FetchJobDetailsError", error: e, stackTrace: s);
       setLoadingStatus(false);

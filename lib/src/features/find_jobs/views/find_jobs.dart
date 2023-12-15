@@ -7,7 +7,9 @@ import 'package:jobpilot/src/global/widgets/app/single_job_card.dart';
 import 'package:jobpilot/src/global/widgets/circular_paginator.dart';
 import 'package:jobpilot/src/global/widgets/loading_indicator.dart';
 import 'package:jobpilot/src/services/theme/app_theme.dart';
+import 'package:jobpilot/src/utilities/extensions/overlay_loader.dart';
 import 'package:jobpilot/src/utilities/extensions/size_utilities.dart';
+import 'package:jobpilot/src/utilities/extensions/string_extensions.dart';
 
 class FindJobsPage extends StatelessWidget {
   const FindJobsPage({
@@ -33,25 +35,28 @@ class FindJobsPage extends StatelessWidget {
                   padding: horizontal16 + vertical8,
                   sliver: controller.isLoading
                       ? const SliverFillRemaining(
-                          child: LoadingIndicator(),
+                          child: FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: LoadingIndicator(),
+                          ),
                         )
                       : SliverList(
                           delegate: SliverChildBuilderDelegate(
                             (context, index) {
                               final job = controller.currentJobList![index];
-
                               return Padding(
                                 padding: vertical6,
                                 child: SingleFeaturedJobCard(
                                   bgColor: Colors.white,
-                                  bookmarked: false,
+                                  bookmarked: job.bookmarked ?? false,
                                   postType: job.jobType ?? "",
                                   companyName: job.companyName ?? "",
                                   postName: job.title ?? "",
                                   companyLocation: job.country ?? "",
                                   salaryRange: "\$${job.salary}",
                                   companyIcon: job.companyLogo ?? "",
-                                  onBookmarkCallback: () {},
+                                  onBookmarkCallback: (() => controller
+                                      .onBookmarkJobClick(job.id!)).withOverlay,
                                   onItemClick: () =>
                                       controller.onJobClick(job.slug ?? ""),
                                 ),
@@ -61,9 +66,7 @@ class FindJobsPage extends StatelessWidget {
                           ),
                         ),
                 ),
-              if (!controller.isLoading &&
-                  controller.paginationData?.lastPage != null &&
-                  controller.paginationData!.lastPage! > 1)
+              if (controller.needPaginationControl)
                 SliverToBoxAdapter(
                   child: Padding(
                     padding: (vertical12 + horizontal16) + horizontal16,
@@ -144,34 +147,33 @@ class FindJobsSettings extends StatelessWidget {
             style: context.text.bodySmall,
           ),
           8.height,
-          Wrap(
-            spacing: 12,
-            runSpacing: 8,
-            crossAxisAlignment: WrapCrossAlignment.center,
-            children: [
-              "Front-end",
-              "Back-end",
-              "Bootstrap",
-              "Development",
-              "Team Lead",
-              "Project Manager",
-              "Front-end",
-              "Back-end",
-              "Bootstrap",
-              "PHP",
-              "Development",
-              "Team Lead",
-              "Project Manager",
-            ]
-                .map(
-                  (type) => PopularSearchOptionWidget(
-                    type: type,
-                    isSelected: "PHP" == type,
-                  ),
-                )
-                .toList(),
-          ),
-          8.height,
+          if (controller.popularTags?.isNotEmpty ?? true) ...[
+            Wrap(
+              spacing: 12,
+              runSpacing: 8,
+              crossAxisAlignment: WrapCrossAlignment.center,
+              children: (controller.popularTags == null)
+                  ? const [
+                      PopularSearchOptionWidget(
+                        type: "...",
+                        isSelected: false,
+                      ),
+                      PopularSearchOptionWidget(
+                        type: "...",
+                        isSelected: false,
+                      ),
+                    ]
+                  : controller.popularTags!
+                      .map(
+                        (type) => PopularSearchOptionWidget(
+                          isSelected: false,
+                          type: type.name!.upperCaseFirst,
+                        ),
+                      )
+                      .toList(),
+            ),
+            8.height,
+          ],
         ],
       ),
     );

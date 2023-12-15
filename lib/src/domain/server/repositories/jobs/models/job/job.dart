@@ -7,6 +7,7 @@ part 'job.g.dart';
 @freezed
 class Job with _$Job {
   const factory Job({
+    @JsonKey(name: 'id') int? id,
     @JsonKey(name: 'title') String? title,
     @JsonKey(name: 'slug') String? slug,
     @JsonKey(name: 'job_details') String? jobDetails,

@@ -1,6 +1,6 @@
-import 'dart:developer';
-
+import 'package:dio/dio.dart';
 import 'package:jobpilot/src/domain/server/config/repository.dart';
+import 'package:jobpilot/src/domain/server/repositories/jobs/models/bookmark/bookmark.dart';
 import 'package:jobpilot/src/domain/server/repositories/jobs/models/category/job_category.dart';
 import 'package:jobpilot/src/domain/server/repositories/jobs/models/job_details/job_detail_response/job_detail_response.dart';
 import 'package:jobpilot/src/domain/server/repositories/jobs/models/job_type/job_type.dart';
@@ -26,8 +26,6 @@ class JobsRepository extends ServerRepo {
           ...?query?.toJson(),
         },
       );
-
-      log("This search query : ${query?.toJson()}");
       return ResponseWrapper.fromMap(
         response: response.data,
         status: response.statusCode,
@@ -75,7 +73,8 @@ class JobsRepository extends ServerRepo {
   }
 
   Future<ResponseWrapper<JobDetailResponse>> fetchSingleJobDetails(
-      String slug) async {
+    String slug,
+  ) async {
     try {
       final endpoint = "${API.job}/$slug";
       final response = await requestHandler.get(endpoint);
@@ -83,6 +82,48 @@ class JobsRepository extends ServerRepo {
         response: response.data,
         status: response.statusCode,
         purse: (json) => JobDetailResponse.fromJson(json),
+      );
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<ResponseWrapper<Bookmark>> toggleJobBookmark(int jobId) async {
+    try {
+      final endpoint = "${API.candidateJob}/$jobId${API.jobBookmarkSuffix}";
+      final response = await requestHandler.post(endpoint, {});
+      return ResponseWrapper.fromMap(
+        print: true,
+        response: response.data,
+        status: response.statusCode,
+        purse: (json) => Bookmark.fromJson(json),
+      );
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<ResponseWrapper> candidateApplyJob({
+    required int jobId,
+    required int resumeId,
+    required String coverLetter,
+  }) async {
+    try {
+      final Map<String, dynamic> data = {
+        "job_id": jobId,
+        "resume_id": resumeId,
+        "cover_letter": coverLetter,
+      };
+
+      final response = await requestHandler.post(
+        API.candidateJobApply,
+        FormData.fromMap(data),
+      );
+      return ResponseWrapper.fromMap(
+        print: true,
+        response: response.data,
+        status: response.statusCode,
+        purse: (json) => json,
       );
     } catch (e) {
       rethrow;
