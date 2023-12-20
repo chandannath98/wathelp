@@ -6,6 +6,7 @@ import 'package:jobpilot/src/domain/server/repositories/jobs/jobs_repo.dart';
 import 'package:jobpilot/src/domain/server/repositories/jobs/models/job_details/company/company.dart';
 import 'package:jobpilot/src/domain/server/repositories/jobs/models/job_details/job_detail_response/job_detail_response.dart';
 import 'package:jobpilot/src/domain/server/repositories/jobs/models/job_details/job_details/job_details.dart';
+import 'package:jobpilot/src/domain/server/repositories/jobs/models/job_details/job_resume/job_resume.dart';
 import 'package:jobpilot/src/domain/server/repositories/jobs/models/job_details/related_jobs/related_job.dart';
 import 'package:jobpilot/src/features/authentication/views/login_system_switcher.dart';
 import 'package:jobpilot/src/features/single_job/views/apply_job.dart';
@@ -38,7 +39,7 @@ class SingleJobController extends GetxController {
   JobDetails? get jobDetails => detailResponse?.job;
   Company? get company => detailResponse?.job?.company;
   List<RelatedJob>? get relatedJobs => detailResponse?.relatedJobs;
-  List<String>? get resumes => detailResponse?.resumes;
+  List<JobResume>? get resumes => detailResponse?.resumes;
 
   showFullDescription() async {
     Get.to(
@@ -54,30 +55,30 @@ class SingleJobController extends GetxController {
     );
   }
 
+  _gotoApplyPageSystem() async {
+    final res = await Get.to(
+      () => ApplyJobScreen(
+        jobId: jobDetails!.id!,
+        jobName: jobDetails?.title ?? "",
+      ),
+    );
+    if (res is bool && res == true) {
+      fetchJobDetails();
+    }
+  }
+
   Future onApplyClick() async {
     if (AuthController.find.isAuthenticated) {
-      Get.to(
-        () => ApplyJobScreen(
-          jobId: jobDetails!.id!,
-          jobName: jobDetails?.title ?? "",
-        ),
-      );
+      await _gotoApplyPageSystem();
     } else {
       await Get.to(() => const LoginSystemScreen());
       if (AuthController.find.isAuthenticated) {
-        Get.to(
-          () => ApplyJobScreen(
-            jobId: jobDetails!.id!,
-            jobName: jobDetails?.title ?? "",
-          ),
-        );
+        await _gotoApplyPageSystem();
       }
     }
   }
 
   Future onBookmarkJobClick() async {
-    log("Is bookmarked : ${detailResponse!.job!.bookmarked}");
-
     try {
       final res = await _jobRepo.toggleJobBookmark(jobDetails!.id!);
       if (res.isSuccess) {

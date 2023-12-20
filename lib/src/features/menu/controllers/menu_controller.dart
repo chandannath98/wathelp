@@ -1,10 +1,16 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:jobpilot/src/features/authentication/views/login.dart';
+import 'package:jobpilot/src/domain/server/config/repository.dart';
+import 'package:jobpilot/src/features/authentication/views/login_system_switcher.dart';
 import 'package:jobpilot/src/features/authentication/views/registration.dart';
+import 'package:jobpilot/src/features/browse_section/views/browse_screen.dart';
 import 'package:jobpilot/src/features/homepage/controllers/homepage_controller.dart';
+import 'package:jobpilot/src/features/menu/views/choose_language.dart';
 import 'package:jobpilot/src/features/settings/views/settings.dart';
 import 'package:jobpilot/src/services/authentication/auth_controller.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MenuPageController extends GetxController {
   bool get isAuthenticated => AuthController.find.isAuthenticated;
@@ -13,6 +19,21 @@ class MenuPageController extends GetxController {
   void onInit() {
     super.onInit();
     AuthController.find.addListener(() => update());
+  }
+
+  _openLinks(String url) async {
+    try {
+      final base = API.baseUrl.replaceAll("/api", "");
+      final fullURL = base + url;
+      final pursedUrl = Uri.parse(fullURL);
+      if (await canLaunchUrl(pursedUrl)) {
+        launchUrl(pursedUrl, mode: LaunchMode.inAppBrowserView);
+      } else {
+        log("Can't launch [$fullURL]");
+      }
+    } catch (e, s) {
+      log("#UrlLaunchError", error: e, stackTrace: s);
+    }
   }
 
   _moveToHomePageIndex(int index) {
@@ -32,15 +53,20 @@ class MenuPageController extends GetxController {
         ),
       );
   gotoLogin() => Get.to(
-        () => const LoginScreen(
+        () => const LoginSystemScreen(
             // showLoginButton: false,
             ),
       );
 
 // Pages
-  gotoHomePage() => _moveToHomePageIndex(0);
+  gotoHomePage() => (!isAuthenticated)
+      ? _moveToHomePageIndex(0)
+      : Get.to(() => const BrowseScreen());
   gotoBrowsePage() => _moveToHomePageIndex(1);
   gotoPricing() => _moveToHomePageIndex(3);
+
+// Jobpilot Section
+  gotoChooseLanguage() => Get.to(() => const ChooseLanguageScreen());
 
 // Candidate Section
   gotoDashboard() => _moveToHomePageIndex(2);
@@ -49,13 +75,13 @@ class MenuPageController extends GetxController {
   gotoSettings() => Get.to(() => const SettingsScreen());
 
 // About Us
-  gotoBlogs() {}
-  gotoAbout() {}
-  gotoContact() {}
+  gotoBlogs() => _openLinks(API.posts);
+  gotoAbout() => _openLinks(API.about);
+  gotoContact() => _openLinks(API.contacts);
 
 // Support Section
-  gotoFaq() {}
-  gotoPrivacyPolicy() {}
-  gotoTermsAndConditions() {}
-  gotoRefundPolicy() {}
+  gotoFaq() => _openLinks(API.faq);
+  gotoPrivacyPolicy() => _openLinks(API.privacyPolicy);
+  gotoTermsAndConditions() => _openLinks(API.termCondition);
+  gotoRefundPolicy() => _openLinks(API.refundPolicy);
 }

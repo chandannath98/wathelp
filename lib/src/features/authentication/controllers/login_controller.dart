@@ -66,6 +66,7 @@ class LoginController extends GetxController {
         }
         await _authHandler.handleNewUser(data.data!.user!);
         await _authHandler.handleNewAuthToken(data.data!.token!);
+        Get.deleteAll();
         if (Navigator.of(Get.context!).canPop()) {
           Get.back();
         }
@@ -73,7 +74,7 @@ class LoginController extends GetxController {
         showToastError(data.errorMsg);
       }
     } catch (e, s) {
-      if (e is RequestException) e.handleError();
+      if (e is RequestException) e.handleError(checkAuth: false);
       log("#LoginError", error: e, stackTrace: s);
       return null;
     }

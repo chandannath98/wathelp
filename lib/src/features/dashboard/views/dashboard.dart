@@ -21,6 +21,8 @@ class DashboardPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder(
+      autoRemove: false,
+      dispose: (state) => false,
       init: DashboardController(),
       builder: (controller) {
         return CustomScrollView(
@@ -54,28 +56,44 @@ class DashboardPage extends StatelessWidget {
                       ),
                     ),
                     10.height,
-                    ListView(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      children: List.generate(
-                        10,
-                        (index) => const AppliedJobCardWidget(),
-                      ),
-                    ),
+                    (controller.currentAppliedJobList == null)
+                        ? const SizedBox(
+                            height: 300,
+                            child: Center(
+                              child: LoadingIndicator(),
+                            ),
+                          )
+                        : ListView(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            children: List.generate(
+                              controller.currentAppliedJobList!.length,
+                              (index) => AppliedJobCardWidget(
+                                jobData:
+                                    controller.currentAppliedJobList![index],
+                                onViewDetailsTap:
+                                    controller.onViewJobDetailsTap,
+                              ),
+                            ),
+                          ),
                     16.height,
-                    InkWell(
-                      onTap: () {
-                        print("Click");
-                      },
-                      child: Text(
-                        "Load More Vacancies",
-                        style: context.text.titleMedium?.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: context.color?.primary,
+                    if (controller.currentAppliedJobList?.isNotEmpty ??
+                        false) ...[
+                      InkWell(
+                        onTap: controller.onViewAllJobsTap,
+                        child: Padding(
+                          padding: horizontal8 + vertical3,
+                          child: Text(
+                            "View All Applied Jobs",
+                            style: context.text.titleMedium?.copyWith(
+                              fontWeight: FontWeight.bold,
+                              color: context.color?.primary,
+                            ),
+                          ),
                         ),
                       ),
-                    ),
-                    16.height,
+                      16.height,
+                    ],
                   ],
                 ),
               ),

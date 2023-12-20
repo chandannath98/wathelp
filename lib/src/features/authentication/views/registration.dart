@@ -24,52 +24,53 @@ class RegistrationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder(
-        init: RegistrationController(),
-        builder: (controller) {
-          return Scaffold(
-            appBar: AppBar(
-              elevation: 2,
-              automaticallyImplyLeading: false,
-              backgroundColor: context.color?.theme,
-              title: SvgPicture.asset(
-                Assets.appLogoSvg,
-              ),
-              actions: [
-                if (showLoginButton)
-                  Directionality(
-                    textDirection: TextDirection.rtl,
-                    child: TextButton.icon(
-                      onPressed: () {
-                        Get.back();
-                      },
-                      icon: SvgIcon(
-                        Assets.loginIcon,
-                        size: 22,
+      init: RegistrationController(),
+      builder: (controller) {
+        return Scaffold(
+          appBar: AppBar(
+            elevation: 2,
+            automaticallyImplyLeading: false,
+            backgroundColor: context.color?.theme,
+            title: SvgPicture.asset(
+              Assets.appLogoSvg,
+            ),
+            actions: [
+              if (showLoginButton)
+                Directionality(
+                  textDirection: TextDirection.rtl,
+                  child: TextButton.icon(
+                    onPressed: () {
+                      Get.back();
+                    },
+                    icon: SvgIcon(
+                      Assets.loginIcon,
+                      size: 22,
+                      color: context.color?.primary,
+                    ),
+                    label: Text(
+                      login,
+                      style: context.text.bodyLarge?.copyWith(
+                        fontWeight: FontWeight.bold,
                         color: context.color?.primary,
-                      ),
-                      label: Text(
-                        login,
-                        style: context.text.bodyLarge?.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: context.color?.primary,
-                        ),
                       ),
                     ),
                   ),
-              ],
-            ),
-            body: RegistrationSectionWidget(
-              onCreateAccount: controller.createAccount,
-              onFacebookSignUpClick: () {},
-              onGoogleSignUpClick: () {},
-              firstNameValidator: [isRequired],
-              lastNameValidator: [isRequired],
-              emailValidator: [isRequired, isEmail],
-              passwordValidator: [isRequired, tooShort8],
-              confirmPasswordValidator: [isRequired, tooShort8],
-            ),
-          );
-        });
+                ),
+            ],
+          ),
+          body: RegistrationSectionWidget(
+            onCreateAccount: controller.createAccount,
+            onFacebookSignUpClick: () {},
+            onGoogleSignUpClick: () {},
+            firstNameValidator: [isRequired],
+            lastNameValidator: [isRequired],
+            emailValidator: [isRequired, isEmail],
+            passwordValidator: [isRequired, tooShort8],
+            confirmPasswordValidator: [isRequired, tooShort8],
+          ),
+        );
+      },
+    );
   }
 }
 

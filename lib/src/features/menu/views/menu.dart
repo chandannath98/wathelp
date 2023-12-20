@@ -57,7 +57,7 @@ class MenuPageWidget extends StatelessWidget {
         ),
         10.height,
         MenuJobPilotListTile(
-          onTap: () {},
+          onTap: controller.gotoChooseLanguage,
           data: "English",
           title: "Language",
           icon: const Icon(Icons.language_rounded),

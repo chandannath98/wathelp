@@ -85,9 +85,9 @@ class LoginSystemSwitcher extends StatelessWidget {
             secondChild: ForgotPasswordSectionWidget(
               emailController: controller.emailController,
               onResetCallback: controller.forgotPassword,
-              onFacebookSignIn: () {},
               goSignIn: () => controller.shiftLoginView(),
-              goRegister: () {},
+              goRegister: () => Get.to(() => const RegistrationScreen()),
+              onFacebookSignIn: () {},
               onGoogleSignIn: () {},
             ),
           );

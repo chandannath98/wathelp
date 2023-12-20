@@ -4,8 +4,8 @@ import 'package:jobpilot/src/global/widgets/app/vertical_icon_text.dart';
 import 'package:jobpilot/src/services/theme/app_theme.dart';
 import 'package:jobpilot/src/utilities/extensions/size_utilities.dart';
 
-class NewJobWidget extends StatelessWidget {
-  const NewJobWidget({
+class SingleJobAlertWidget extends StatelessWidget {
+  const SingleJobAlertWidget({
     super.key,
   });
 

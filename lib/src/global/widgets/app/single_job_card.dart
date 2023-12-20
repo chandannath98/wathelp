@@ -7,18 +7,18 @@ class SingleFeaturedJobCard extends StatelessWidget {
   const SingleFeaturedJobCard({
     super.key,
     this.bgColor,
-    required this.bookmarked,
+    this.bookmarked,
+    this.onItemClick,
+    this.onBookmarkCallback,
     required this.postName,
     required this.postType,
     required this.salaryRange,
     required this.companyName,
     required this.companyIcon,
     required this.companyLocation,
-    this.onItemClick,
-    this.onBookmarkCallback,
   });
   final Color? bgColor;
-  final bool bookmarked;
+  final bool? bookmarked;
   final String postName;
   final String postType;
   final String salaryRange;
@@ -153,13 +153,18 @@ class SingleFeaturedJobCard extends StatelessWidget {
                             ),
                           ),
                         ),
-                        IconButton(
-                          onPressed: onBookmarkCallback,
-                          icon: Icon(
-                            Icons.bookmark_border,
-                            color: context.color?.extra,
+                        if (bookmarked != null)
+                          IconButton(
+                            onPressed: onBookmarkCallback,
+                            icon: Icon(
+                              bookmarked!
+                                  ? Icons.bookmark
+                                  : Icons.bookmark_border,
+                              color: bookmarked!
+                                  ? context.color?.primary
+                                  : context.color?.extra,
+                            ),
                           ),
-                        ),
                       ],
                     ),
                   ),

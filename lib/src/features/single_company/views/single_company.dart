@@ -4,13 +4,17 @@ import 'package:jobpilot/src/constants/assets/assets.dart';
 import 'package:jobpilot/src/constants/design/border_radius.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
 import 'package:jobpilot/src/constants/utilities/date_formats.dart';
+import 'package:jobpilot/src/domain/server/repositories/company/models/single_company/open_positions/paginated_open_positions_data.dart';
+import 'package:jobpilot/src/features/find_jobs/controllers/find_jobs_controller.dart';
 import 'package:jobpilot/src/features/single_company/controllers/single_company_controller.dart';
 import 'package:jobpilot/src/global/widgets/app/overview_data_tile.dart';
+import 'package:jobpilot/src/global/widgets/app/single_job_card.dart';
 import 'package:jobpilot/src/global/widgets/app/squared_icon_button.dart';
 import 'package:jobpilot/src/global/widgets/loading_indicator.dart';
 import 'package:jobpilot/src/services/theme/app_theme.dart';
 import 'package:jobpilot/src/utilities/extensions/size_utilities.dart';
 import 'package:jobpilot/src/utilities/svg_icon.dart';
+import 'package:readmore/readmore.dart';
 
 class SingleCompanyDetailsScreen extends StatelessWidget {
   const SingleCompanyDetailsScreen({
@@ -36,30 +40,55 @@ class SingleCompanyDetailsScreen extends StatelessWidget {
               ? const Center(
                   child: LoadingIndicator(),
                 )
-              : SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      24.height,
-                      CompanyDetailsHeader(
-                        controller: controller,
+              : CustomScrollView(
+                  slivers: [
+                    SliverToBoxAdapter(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          24.height,
+                          CompanyDetailsHeader(
+                            controller: controller,
+                          ),
+                          24.height,
+                          CompanyDescriptionWidget(
+                            controller: controller,
+                          ),
+                          24.height,
+                          CompanyOverviewSection(
+                            controller: controller,
+                          ),
+                          24.height,
+                          CompanyContactSection(
+                            controller: controller,
+                          ),
+                          24.height,
+                          // 24.height,
+                        ],
                       ),
-                      24.height,
-                      CompanyDescriptionWidget(
-                        controller: controller,
-                      ),
-                      24.height,
-                      CompanyOverviewSection(
-                        controller: controller,
-                      ),
-                      24.height,
-                      CompanyContactSection(
-                        controller: controller,
-                      ),
-                      24.height,
-                      // 24.height,
-                    ],
-                  ),
+                    ),
+                    if (controller.openJobs != null)
+                      SliverToBoxAdapter(
+                        child: GetBuilder(
+                            tag: "#SINGLE_COMPANY_OPEN_JOBS",
+                            init: FindJobController(),
+                            builder: (jobController) {
+                              return OpenJobsSection(
+                                onLoadMoreClick:
+                                    controller.onOpenPositionsClick,
+                                relatedJobs: controller.openJobs!
+                                    .map((job) => (
+                                          job: job,
+                                          onTap: () => jobController
+                                              .onJobClick(job.slug!),
+                                          onBookmark: () => jobController
+                                              .onBookmarkJobClick(job.id!),
+                                        ))
+                                    .toList(),
+                              );
+                            }),
+                      )
+                  ],
                 );
         },
       ),
@@ -143,7 +172,7 @@ class CompanyDetailsHeader extends StatelessWidget {
           child: Directionality(
             textDirection: TextDirection.rtl,
             child: ElevatedButton.icon(
-              onPressed: () {},
+              onPressed: () => controller.onOpenPositionsClick(),
               icon: const Icon(Icons.arrow_back),
               label: Text(
                 "Open Positions",
@@ -159,11 +188,14 @@ class CompanyDetailsHeader extends StatelessWidget {
 class OpenJobsSection extends StatelessWidget {
   const OpenJobsSection({
     super.key,
+    this.onLoadMoreClick,
     required this.relatedJobs,
   });
 
-  final List<String> relatedJobs;
+  final List<({OpenJob job, VoidCallback onTap, VoidCallback onBookmark})>?
+      relatedJobs;
 
+  final VoidCallback? onLoadMoreClick;
   @override
   Widget build(BuildContext context) {
     return ColoredBox(
@@ -174,41 +206,42 @@ class OpenJobsSection extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
-              "Related Jobs",
+              "Open Positions",
               style: context.text.titleLarge?.copyWith(
                 fontWeight: FontWeight.bold,
               ),
             ),
             18.height,
-            // for (var i in relatedJobs) ...[
-            //   8.height,
-            //   SingleFeaturedJobCard(
-            //     bookmarked: true,
-            //     postName: i.title!,
-            //     postType: i.jobType!,
-            //     salaryRange: "Salary: \$${i.minSalary} - \$${i.maxSalary}",
-            //     companyName: i.companyName!,
-            //     companyLocation: i.country!,
-            //     companyIcon: i.companyLogo!,
-            //     onItemClick: () {},
-            //     onBookmarkCallback: () {},
-            //   ),
-            //   8.height,
-            // ],
+            for (var i in relatedJobs!) ...[
+              8.height,
+              SingleFeaturedJobCard(
+                bookmarked: null,
+                postName: i.job.title!,
+                postType: i.job.jobType!.name!,
+                salaryRange:
+                    "Salary: \$${i.job.minSalary} - \$${i.job.maxSalary}",
+                companyName: i.job.company?.user?.name ?? "",
+                companyLocation: i.job.country!,
+                companyIcon: i.job.company!.logo!,
+                onItemClick: i.onTap,
+                onBookmarkCallback: i.onBookmark,
+              ),
+              8.height,
+            ],
             18.height,
-            InkWell(
-              onTap: () {
-                print("Click");
-              },
-              child: Text(
-                "Load More Feature Jobs",
-                style: context.text.titleMedium?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: context.color?.primary,
+            if (onLoadMoreClick != null) ...[
+              InkWell(
+                onTap: onLoadMoreClick,
+                child: Text(
+                  "Load More Feature Jobs",
+                  style: context.text.titleMedium?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: context.color?.primary,
+                  ),
                 ),
               ),
-            ),
-            18.height,
+              18.height,
+            ],
           ],
         ),
       ),
@@ -490,6 +523,25 @@ class CompanyDescriptionWidget extends StatelessWidget {
             ),
           ),
           12.height,
+          ReadMoreText(
+            controller.detailResponse?.companyDetails?.bio ?? "",
+            trimLines: 5,
+            trimMode: TrimMode.Line,
+            trimExpandedText: " Read Less",
+            trimCollapsedText: " Read Full Description",
+            style: context.text.bodyMedium?.copyWith(
+              color: context.color?.extraText,
+            ),
+            lessStyle: context.text.bodyLarge?.copyWith(
+              fontWeight: FontWeight.bold,
+              color: context.color?.primary,
+            ),
+            moreStyle: context.text.bodyLarge?.copyWith(
+              fontWeight: FontWeight.bold,
+              color: context.color?.primary,
+            ),
+          ),
+          /* 6.height,
           LimitedBox(
             maxHeight: 350,
             child: InkWell(
@@ -541,7 +593,7 @@ class CompanyDescriptionWidget extends StatelessWidget {
                 ],
               ),
             ),
-          )
+          ) */
         ],
       ),
     );

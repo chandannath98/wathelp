@@ -18,8 +18,7 @@ class InitializationController extends GetxController {
     rmvFocus();
     // initializeDateFormatting(locale, url)
     await HiveConfig.initialize();
-    final authController = Get.put(AuthController(), permanent: true);
-    await authController.initializeAuthSystem();
+    Get.put(AuthController(), permanent: true);
 
     Get.put(RequestHandler(), permanent: true);
     await afterInit();

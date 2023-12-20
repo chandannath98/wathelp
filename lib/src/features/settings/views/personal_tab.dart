@@ -1,13 +1,18 @@
+import 'dart:io';
+
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jobpilot/src/constants/design/border_radius.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
+import 'package:jobpilot/src/domain/server/repositories/settings/models/resume/resume_data/resume_data.dart';
 import 'package:jobpilot/src/features/settings/controllers/personal_settings_controller.dart';
 import 'package:jobpilot/src/global/widgets/app/custom_titled_drop_down.dart';
 import 'package:jobpilot/src/global/widgets/app/custom_titled_text_field.dart';
+import 'package:jobpilot/src/global/widgets/loading_indicator.dart';
 import 'package:jobpilot/src/global/widgets/pick_image.dart';
 import 'package:jobpilot/src/services/theme/app_theme.dart';
+import 'package:jobpilot/src/utilities/extensions/overlay_loader.dart';
 import 'package:jobpilot/src/utilities/extensions/size_utilities.dart';
 import 'package:jobpilot/src/utilities/form_validator_helper.dart';
 
@@ -20,29 +25,35 @@ class PersonalInformationTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: horizontal16,
-        child: GetBuilder(
-          init: PersonalSettingsController(),
-          builder: (controller) {
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                24.height,
-                BasicInformationSection(
-                  controller: controller,
+    return GetBuilder(
+      init: PersonalSettingsController(),
+      builder: (controller) {
+        return (controller.isLoading)
+            ? const SizedBox.expand(
+                child: Center(
+                  child: LoadingIndicator(),
                 ),
-                24.height,
-                ResumeListSection(
-                  controller: controller,
+              )
+            : SingleChildScrollView(
+                child: Padding(
+                  padding: horizontal16,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      24.height,
+                      BasicInformationSection(
+                        controller: controller,
+                      ),
+                      24.height,
+                      ResumeListSection(
+                        controller: controller,
+                      ),
+                      24.height,
+                    ],
+                  ),
                 ),
-                24.height,
-              ],
-            );
-          },
-        ),
-      ),
+              );
+      },
     );
   }
 }
@@ -67,14 +78,17 @@ class ResumeListSection extends StatelessWidget {
             fontWeight: FontWeight.w600,
           ),
         ),
-        ListView.separated(
-          itemCount: 4,
-          shrinkWrap: true,
-          padding: vertical16,
-          physics: const NeverScrollableScrollPhysics(),
-          separatorBuilder: (context, index) => 16.height,
-          itemBuilder: (context, index) => const ResumeListTile(),
-        ),
+        if (controller.resumeList != null)
+          ListView.separated(
+            itemCount: controller.resumeList!.length,
+            shrinkWrap: true,
+            padding: vertical16,
+            physics: const NeverScrollableScrollPhysics(),
+            separatorBuilder: (context, index) => 16.height,
+            itemBuilder: (context, index) => ResumeListTile(
+              resumeData: controller.resumeList![index],
+            ),
+          ),
         DottedBorder(
           padding: EdgeInsets.zero,
           borderType: BorderType.RRect,
@@ -108,7 +122,10 @@ class ResumeListSection extends StatelessWidget {
 class ResumeListTile extends StatelessWidget {
   const ResumeListTile({
     super.key,
+    required this.resumeData,
   });
+
+  final ResumeData resumeData;
 
   @override
   Widget build(BuildContext context) {
@@ -118,10 +135,10 @@ class ResumeListTile extends StatelessWidget {
         borderRadius: br4,
       ),
       title: Text(
-        "Professional Resume",
+        resumeData.name ?? "",
       ),
       subtitle: Text(
-        "Size: 4.5MB",
+        "Size: ${resumeData.fileSize ?? "??"}",
       ),
       trailing: PopupMenuButton(
         padding: vertical8,
@@ -190,147 +207,172 @@ class BasicInformationSection extends StatelessWidget {
         8.height,
         Align(
           alignment: Alignment.centerLeft,
-          child: DottedBorder(
-            borderType: BorderType.RRect,
-            radius: const Radius.circular(8),
-            color: context.color?.extra ?? Colors.grey,
-            child: InkWell(
-              borderRadius: br8,
-              onTap: () async {
-                final res = await pickImage(context);
-                if (res != null) {}
-              },
-              child: Padding(
-                padding: all20,
-                child: Column(
-                  children: [
-                    40.height,
-                    Icon(
-                      Icons.file_upload_outlined,
-                      size: 64,
-                      color: context.color?.extra,
-                    ),
-                    20.height,
-                    RichText(
-                      text: TextSpan(
-                        children: [
-                          TextSpan(
-                            text: "Attach a photo",
-                            style: context.text.titleMedium?.copyWith(
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          TextSpan(
-                            text: " or take one.",
-                            style: context.text.titleMedium?.copyWith(
-                              color: context.color?.extra,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    8.height,
-                    Text(
-                      "A photo larger than 400 pixels work best.\nMax photo size 5 MB.",
-                      textAlign: TextAlign.center,
-                      style: context.text.bodySmall?.copyWith(
-                        color: context.color?.extra,
-                      ),
-                    ),
-                    40.height,
-                  ],
-                ),
-              ),
-            ),
+          child: SetProfilePictureWidget(
+            newFile: controller.profileImage,
+            currentImage: controller.currentPersonalData?.imageUrl,
+            onTap: () async {
+              final res = await pickImage(context);
+              if (res != null) {
+                controller.updateProfileImage(res);
+              }
+            },
           ),
         ),
         16.height,
-        Text("Name"),
         6.height,
-        Row(
-          children: [
-            Expanded(
-              child: TextFormField(
-                focusNode: controller.firstNameFocus,
-                controller: controller.firstNameController,
-                validator: FieldValidator.validate(
-                  name: "First Name",
-                  [],
-                ),
-                decoration: const InputDecoration(
-                  hintText: "First name...",
-                ),
-                onFieldSubmitted: (value) =>
-                    controller.lastNameFocus.requestFocus(),
-              ),
-            ),
-            12.width,
-            Expanded(
-              child: TextFormField(
-                focusNode: controller.lastNameFocus,
-                controller: controller.lastNameController,
-                validator: FieldValidator.validate(
-                  name: "Last Name",
-                  [],
-                ),
-                // onFieldSubmitted: (value) => emailFocus.requestFocus(),
-                decoration: const InputDecoration(
-                  hintText: "Last name...",
-                ),
-              ),
-            ),
-          ],
+        CustomTitledTextFormField(
+          title: "Name",
+          initialValue: controller.currentPersonalData?.name,
+          onChange: (value) => controller.updateName(value),
         ),
         16.height,
         CustomTitledTextFormField(
           title: "Title/Headline",
+          initialValue: controller.currentPersonalData?.title,
+          onChange: (value) => controller.updateTitle(value),
         ),
         16.height,
         CustomTitledDropdownField(
           title: "Experience",
-          onChange: (value) {},
-          fieldList: [
-            (value: 1, title: "Education"),
-            (value: 2, title: "Vacation"),
-            (value: 3, title: "Chillox"),
-            (value: 4, title: "Finished"),
-          ],
+          onChange: (value) => controller.updateExperienceId(value!),
+          value: controller.currentPersonalData?.experienceId,
+          fieldList: controller.experienceOptions
+              ?.map((e) => (
+                    value: e.id,
+                    title: e.name ?? "",
+                  ))
+              .toList(),
         ),
         16.height,
         CustomTitledDropdownField(
           title: "Education",
-          onChange: (value) {},
-          fieldList: [
-            (value: 1, title: "Education"),
-            (value: 2, title: "Vacation"),
-            (value: 3, title: "Chillox"),
-            (value: 4, title: "Finished"),
-          ],
+          onChange: (value) => controller.updateEducationId(value!),
+          value: controller.currentPersonalData?.educationId,
+          fieldList: controller.educationOptions
+              ?.map((e) => (
+                    value: e.id,
+                    title: e.name ?? "",
+                  ))
+              .toList(),
         ),
         16.height,
-        Text("Personal Website"),
-        6.height,
-        TextFormField(
-          focusNode: controller.firstNameFocus,
-          controller: controller.firstNameController,
-          validator: FieldValidator.validate(
-            name: "First Name",
-            [],
+        CustomTitledTextFormField(
+          hintText: "DD/MM/YYYY",
+          title: "Date of Birth",
+          inputType: TextInputType.datetime,
+          onChange: (value) => controller.updateBirthDate(value),
+          initialValue: controller.currentPersonalData?.dateOfBirth,
+          prefixIcon: Icon(
+            Icons.calendar_today_outlined,
+            color: context.color?.primary,
           ),
-          decoration: InputDecoration(
-            hintText: "Link/Url...",
-            prefixIcon: Icon(
-              Icons.link_rounded,
-              color: context.color?.primary,
-            ),
+        ),
+        16.height,
+        CustomTitledTextFormField(
+          hintText: "Link/Url...",
+          title: "Personal Website",
+          onChange: (value) => controller.updateWebsite(value),
+          initialValue: controller.currentPersonalData?.website,
+          prefixIcon: Icon(
+            Icons.link_rounded,
+            color: context.color?.primary,
           ),
-          onFieldSubmitted: (value) => controller.lastNameFocus.requestFocus(),
         ),
         16.height,
         SaveChangesButton(
-          onTap: () {},
+          onTap: controller.saveCurrentPersonalData.withOverlay,
         ),
       ],
+    );
+  }
+}
+
+class SetProfilePictureWidget extends StatelessWidget {
+  const SetProfilePictureWidget({
+    super.key,
+    required this.onTap,
+    this.newFile,
+    this.currentImage,
+  });
+
+  final VoidCallback onTap;
+  final File? newFile;
+  final String? currentImage;
+
+  @override
+  Widget build(BuildContext context) {
+    ImageProvider? provider;
+    if (newFile != null) {
+      provider = FileImage(newFile!);
+    } else if (currentImage != null) {
+      provider = NetworkImage(currentImage!);
+    }
+    return SizedBox.square(
+      dimension: MediaQuery.sizeOf(context).width * 0.7,
+      child: DottedBorder(
+        borderType: BorderType.RRect,
+        radius: const Radius.circular(8),
+        color: context.color?.extra ?? Colors.grey,
+        child: InkWell(
+          borderRadius: br8,
+          onTap: onTap,
+          child: (provider != null)
+              ? Padding(
+                  padding: all3,
+                  child: ClipRRect(
+                    borderRadius: br5,
+                    child: SizedBox.expand(
+                      child: Image(
+                        image: provider,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                )
+              : Padding(
+                  padding: all20,
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.file_upload_outlined,
+                          size: 64,
+                          color: context.color?.extra,
+                        ),
+                        20.height,
+                        RichText(
+                          text: TextSpan(
+                            children: [
+                              TextSpan(
+                                text: "Attach a photo",
+                                style: context.text.titleMedium?.copyWith(
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              TextSpan(
+                                text: " or take one.",
+                                style: context.text.titleMedium?.copyWith(
+                                  color: context.color?.extra,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        8.height,
+                        Text(
+                          "A photo larger than 400 pixels work best.\n Max photo size 5 MB.",
+                          textAlign: TextAlign.center,
+                          style: context.text.bodySmall?.copyWith(
+                            color: context.color?.extra,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+        ),
+      ),
     );
   }
 }

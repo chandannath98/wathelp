@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
+import 'package:jobpilot/src/features/settings/views/settings.dart';
+import 'package:jobpilot/src/services/authentication/auth_controller.dart';
 import 'package:jobpilot/src/services/theme/app_theme.dart';
 import 'package:jobpilot/src/utilities/extensions/size_utilities.dart';
 
@@ -19,8 +22,11 @@ class CompleteProfileSection extends StatelessWidget {
             IntrinsicHeight(
               child: Row(
                 children: [
-                  const CircleAvatar(
+                  CircleAvatar(
                     radius: 24,
+                    foregroundImage: NetworkImage(
+                      AuthController.find.currentUser?.photoUrl ?? "",
+                    ),
                   ),
                   10.width,
                   Expanded(
@@ -59,7 +65,7 @@ class CompleteProfileSection extends StatelessWidget {
                       foregroundColor: Colors.red.shade900,
                       backgroundColor: context.color?.theme,
                     ),
-                    onPressed: () {},
+                    onPressed: () => Get.to(() => const SettingsScreen()),
                     icon: const Icon(
                       Icons.arrow_back,
                     ),

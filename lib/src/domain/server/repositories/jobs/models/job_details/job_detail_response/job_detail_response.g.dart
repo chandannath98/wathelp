@@ -12,8 +12,9 @@ _$JobDetailResponseImpl _$$JobDetailResponseImplFromJson(
       job: json['job'] == null
           ? null
           : JobDetails.fromJson(json['job'] as Map<String, dynamic>),
-      resumes:
-          (json['resumes'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      resumes: (json['resumes'] as List<dynamic>?)
+          ?.map((e) => JobResume.fromJson(e as Map<String, dynamic>))
+          .toList(),
       relatedJobs: (json['related_jobs'] as List<dynamic>?)
           ?.map((e) => RelatedJob.fromJson(e as Map<String, dynamic>))
           .toList(),

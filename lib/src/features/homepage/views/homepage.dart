@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart' hide ContextExtensionss;
 import 'package:jobpilot/src/constants/assets/assets.dart';
 import 'package:jobpilot/src/features/authentication/views/login_system_switcher.dart';
@@ -9,6 +8,7 @@ import 'package:jobpilot/src/features/find_company/views/find_company.dart';
 import 'package:jobpilot/src/features/find_jobs/views/find_jobs.dart';
 import 'package:jobpilot/src/features/job_alert/views/job_alert.dart';
 import 'package:jobpilot/src/features/menu/views/menu.dart';
+import 'package:jobpilot/src/global/widgets/app/app_logo_app_bar.dart';
 import 'package:jobpilot/src/services/theme/app_theme.dart';
 import 'package:jobpilot/src/utilities/extensions/overlay_loader.dart';
 import 'package:jobpilot/src/utilities/svg_icon.dart';
@@ -27,10 +27,7 @@ class Homepage extends StatelessWidget {
       builder: (controller) {
         return Scaffold(
           backgroundColor: context.color?.background,
-          appBar: AppBar(
-            centerTitle: false,
-            backgroundColor: context.color?.theme,
-            title: SvgPicture.asset(Assets.appLogoSvg),
+          appBar: AppLogoAppBar(
             actions: [
               HomepageActions(
                 profilePic: controller.currentUser?.photoUrl ?? "",
@@ -69,7 +66,7 @@ class Homepage extends StatelessWidget {
             children: [
               controller.isAuthenticated
                   ? const FindJobsPage()
-                  : const BrowseScreen(),
+                  : const BrowsePage(),
               controller.isAuthenticated
                   ? const FindCompanyPage()
                   : const FindJobsPage(),

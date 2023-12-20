@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:jobpilot/src/domain/local_storage/config/hive_config.dart';
-import 'package:jobpilot/src/domain/server/repositories/settings/models/resume/resume_data.dart';
+import 'package:jobpilot/src/domain/server/repositories/settings/models/resume/resume_data/resume_data.dart';
 
 class SettingsStorage {
   final config = HiveConfig();

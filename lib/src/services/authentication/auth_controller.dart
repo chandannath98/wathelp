@@ -22,13 +22,19 @@ class AuthController extends GetxController {
 
   bool get isAuthenticated => _currentUser != null && _currentToken != null;
 
+  @override
+  onInit() {
+    super.onInit();
+    initializeAuthSystem();
+  }
+
   removeAuthCredentials() async {
     _userCredentials = null;
     await _authStorage.clearCred();
     update();
   }
 
-  initializeAuthSystem() async {
+  initializeAuthSystem() {
     log("CurrentToken: ${_authStorage.currentToken}");
     _currentToken = _authStorage.currentToken;
     _currentUser = _authStorage.currentProfile;

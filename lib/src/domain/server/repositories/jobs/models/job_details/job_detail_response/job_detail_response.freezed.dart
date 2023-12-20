@@ -23,7 +23,7 @@ mixin _$JobDetailResponse {
   @JsonKey(name: 'job')
   JobDetails? get job => throw _privateConstructorUsedError;
   @JsonKey(name: 'resumes')
-  List<String>? get resumes => throw _privateConstructorUsedError;
+  List<JobResume>? get resumes => throw _privateConstructorUsedError;
   @JsonKey(name: 'related_jobs')
   List<RelatedJob>? get relatedJobs => throw _privateConstructorUsedError;
 
@@ -41,7 +41,7 @@ abstract class $JobDetailResponseCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'job') JobDetails? job,
-      @JsonKey(name: 'resumes') List<String>? resumes,
+      @JsonKey(name: 'resumes') List<JobResume>? resumes,
       @JsonKey(name: 'related_jobs') List<RelatedJob>? relatedJobs});
 
   $JobDetailsCopyWith<$Res>? get job;
@@ -72,7 +72,7 @@ class _$JobDetailResponseCopyWithImpl<$Res, $Val extends JobDetailResponse>
       resumes: freezed == resumes
           ? _value.resumes
           : resumes // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
+              as List<JobResume>?,
       relatedJobs: freezed == relatedJobs
           ? _value.relatedJobs
           : relatedJobs // ignore: cast_nullable_to_non_nullable
@@ -103,7 +103,7 @@ abstract class _$$JobDetailResponseImplCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: 'job') JobDetails? job,
-      @JsonKey(name: 'resumes') List<String>? resumes,
+      @JsonKey(name: 'resumes') List<JobResume>? resumes,
       @JsonKey(name: 'related_jobs') List<RelatedJob>? relatedJobs});
 
   @override
@@ -133,7 +133,7 @@ class __$$JobDetailResponseImplCopyWithImpl<$Res>
       resumes: freezed == resumes
           ? _value._resumes
           : resumes // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
+              as List<JobResume>?,
       relatedJobs: freezed == relatedJobs
           ? _value._relatedJobs
           : relatedJobs // ignore: cast_nullable_to_non_nullable
@@ -149,7 +149,7 @@ class _$JobDetailResponseImpl
     implements _JobDetailResponse {
   const _$JobDetailResponseImpl(
       {@JsonKey(name: 'job') this.job,
-      @JsonKey(name: 'resumes') final List<String>? resumes,
+      @JsonKey(name: 'resumes') final List<JobResume>? resumes,
       @JsonKey(name: 'related_jobs') final List<RelatedJob>? relatedJobs})
       : _resumes = resumes,
         _relatedJobs = relatedJobs;
@@ -160,10 +160,10 @@ class _$JobDetailResponseImpl
   @override
   @JsonKey(name: 'job')
   final JobDetails? job;
-  final List<String>? _resumes;
+  final List<JobResume>? _resumes;
   @override
   @JsonKey(name: 'resumes')
-  List<String>? get resumes {
+  List<JobResume>? get resumes {
     final value = _resumes;
     if (value == null) return null;
     if (_resumes is EqualUnmodifiableListView) return _resumes;
@@ -234,7 +234,7 @@ class _$JobDetailResponseImpl
 abstract class _JobDetailResponse implements JobDetailResponse {
   const factory _JobDetailResponse(
           {@JsonKey(name: 'job') final JobDetails? job,
-          @JsonKey(name: 'resumes') final List<String>? resumes,
+          @JsonKey(name: 'resumes') final List<JobResume>? resumes,
           @JsonKey(name: 'related_jobs') final List<RelatedJob>? relatedJobs}) =
       _$JobDetailResponseImpl;
 
@@ -246,7 +246,7 @@ abstract class _JobDetailResponse implements JobDetailResponse {
   JobDetails? get job;
   @override
   @JsonKey(name: 'resumes')
-  List<String>? get resumes;
+  List<JobResume>? get resumes;
   @override
   @JsonKey(name: 'related_jobs')
   List<RelatedJob>? get relatedJobs;

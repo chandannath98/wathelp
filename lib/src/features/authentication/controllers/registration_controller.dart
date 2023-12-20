@@ -39,9 +39,7 @@ class RegistrationController extends GetxController {
         showToastError(data.errorMsg);
       }
     } catch (e, s) {
-      if (e is RequestException) {
-        e.handleError();
-      }
+      if (e is RequestException) e.handleError(checkAuth: false);
       log("#CreateAccountError", error: e, stackTrace: s);
       return null;
     }

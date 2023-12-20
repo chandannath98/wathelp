@@ -5,9 +5,11 @@ import 'package:get/get.dart';
 import 'package:jobpilot/src/constants/assets/assets.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
 import 'package:jobpilot/src/constants/strings/home_strings.dart';
+import 'package:jobpilot/src/features/browse_section/controllers/browse_controller.dart';
 import 'package:jobpilot/src/features/browse_section/views/widgets/search_box.dart';
 import 'package:jobpilot/src/services/theme/app_theme.dart';
 import 'package:jobpilot/src/utilities/extensions/size_utilities.dart';
+import 'package:jobpilot/src/utilities/extensions/string_extensions.dart';
 
 class NoUserHomeHeader extends StatelessWidget {
   const NoUserHomeHeader({
@@ -16,12 +18,14 @@ class NoUserHomeHeader extends StatelessWidget {
     this.companiesData,
     this.candidatesData,
     this.newJobsData,
+    required this.controller,
   });
 
   final String? liveJobsData;
   final String? companiesData;
   final String? candidatesData;
   final String? newJobsData;
+  final BrowseDataController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -47,51 +51,36 @@ class NoUserHomeHeader extends StatelessWidget {
         16.height,
         SearchBoxWidget(
           showFilterButton: false,
-          onSearchClick: () {},
+          searchController: controller.searchController,
+          locationController: controller.locationController,
+          onSearchClick: controller.onSearchClick,
         ),
         8.height,
-        RichText(
-          text: TextSpan(
-            text: "Suggestion: ",
-            style: context.text.bodySmall,
-            children: [
-              "Designer",
-              "Programming",
-              "Digital Marketing",
-              "Video",
-              "Animation"
-            ]
-                .map(
-                  (e) => TextSpan(
-                    text: "$e, ",
-                    recognizer: TapGestureRecognizer()
-                      ..onTap = () {
-                        if (Get.isSnackbarOpen) {
-                          Get.closeAllSnackbars();
-                        }
-                        Get.showSnackbar(
-                          GetSnackBar(
-                            message: e,
-                            duration: const Duration(seconds: 3),
-                          ),
-                        );
-                      },
-                    style: TextStyle(
-                      color: (e == "Digital Marketing")
-                          ? context.color?.primary
-                          : context.color?.opposite,
+        if (controller.popularTags != null)
+          RichText(
+            text: TextSpan(
+              text: "Suggestion: ",
+              style: context.text.bodySmall,
+              children: controller.popularTags!
+                  .take(5)
+                  .map(
+                    (e) => TextSpan(
+                      text: "${e.name?.upperCaseFirst}, ",
+                      recognizer: TapGestureRecognizer()..onTap = () {},
+                      style: TextStyle(
+                        color: context.color?.opposite,
+                      ),
                     ),
+                  )
+                  .toList()
+                ..add(
+                  const TextSpan(
+                    text: "etc.",
                   ),
-                )
-                .toList()
-              ..add(
-                const TextSpan(
-                  text: "etc.",
                 ),
-              ),
+            ),
+            textAlign: TextAlign.center,
           ),
-          textAlign: TextAlign.center,
-        ),
         32.height,
         SvgPicture.asset(Assets.homeHeroSvg),
         32.height,

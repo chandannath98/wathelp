@@ -1,0 +1,3010 @@
+{
+	"info": {
+		"_postman_id": "496c048f-3f20-4ac2-8287-fe145832c545",
+		"name": "Jobpilot",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11852020"
+	},
+	"item": [
+		{
+			"name": "Public",
+			"item": [
+				{
+					"name": "About Us",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/about",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"about"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Home",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/home",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"home"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Jobs",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{JOBPILOT_API}}/jobs?keyword&category&job_role&price_min&price_max&tag&location&experience&education&is_remote=&job_type&sort_by&paginate=10",
+							"host": [
+								"{{JOBPILOT_API}}"
+							],
+							"path": [
+								"jobs"
+							],
+							"query": [
+								{
+									"key": "keyword",
+									"value": null,
+									"description": "Job title"
+								},
+								{
+									"key": "category",
+									"value": null,
+									"description": "Category ID"
+								},
+								{
+									"key": "job_role",
+									"value": null,
+									"description": "Job Role ID"
+								},
+								{
+									"key": "price_min",
+									"value": null,
+									"description": "Min Salary"
+								},
+								{
+									"key": "price_max",
+									"value": null,
+									"description": "Max Salary"
+								},
+								{
+									"key": "tag",
+									"value": null,
+									"description": "Tag name"
+								},
+								{
+									"key": "location",
+									"value": null,
+									"description": "Country name"
+								},
+								{
+									"key": "experience",
+									"value": null,
+									"description": "Experience ID"
+								},
+								{
+									"key": "education",
+									"value": null,
+									"description": "Education ID"
+								},
+								{
+									"key": "is_remote",
+									"value": "",
+									"description": "0 = Onsite Jobs & 1 = Remote Jobs"
+								},
+								{
+									"key": "job_type",
+									"value": null,
+									"description": "Job Type Id"
+								},
+								{
+									"key": "sort_by",
+									"value": null,
+									"description": "latest, featured"
+								},
+								{
+									"key": "paginate",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Countries",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/countries",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"countries"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Categories",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/categories",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Job Roles",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/job-roles",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"job-roles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Experiences",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/experiences",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"experiences"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Educations",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/educations",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"educations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Job Types",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/job-types",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"job-types"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Popular Tags",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/popular-tags",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"popular-tags"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Job Details",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/jobs/frontend-developer_1702567592_6226582654",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"jobs",
+								"frontend-developer_1702567592_6226582654"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pricing",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/pricing",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"pricing"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Privacy Policy",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/privacy-policy",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"privacy-policy"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Terms Condition",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/terms-condition",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"terms-condition"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Refund Policy",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/refund-policy",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"refund-policy"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Faq",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/faq",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"faq"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Candidates",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/candidates",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"candidates"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Candidate Details",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiOWMyOTk2Nzg1MGE4ZDA1N2YyYmZlYzM5NGQ4MGI4YTNjY2FlZmFlZWY5MWU1NTFkOWU1MGIwMDI5YzM3ZjZhYjA4Y2Y5MTQ0OGYxYTA0OTkiLCJpYXQiOjE2ODQzNzk4NTYuMzczODQ4LCJuYmYiOjE2ODQzNzk4NTYuMzczODUsImV4cCI6MTcwMDI3NzQ1Ni4zNjQ3ODQsInN1YiI6IjEiLCJzY29wZXMiOltdfQ.erm_BgFY9p8ZC51ZhMube_1EJxKD3tfGWxhzzQ3BGBmY2YNXHZQQwURqNW6WWu9RvnZhUQ6d0CYAbx0sPQtYKVKiMfJYnWfUhn6YTrP7H4xfllpHIqWaojJ1N-YXt9jOXaUlL18ZGEQf376AJxJh66wDS5p01m0gN2shOyesfnXajXJIo5XW_ndW43mB5ZvNlioFHEBF34WAhIPTbRNW7Z-kLjXAn5M1iuXJ7jnhK6BOjX_GQXifbtx_8-8rDU1kxzmKg9KErVKehw8Lw57B9kvfmm155AmjqjXGjaXYNGzRCX5Qeo-NVX5hOYZLKu2AYn54GpGk3JqCzFInzdNRkU24dWQKPpyZVNBdmh_OcEe-Y8zfNq1Go5ZAIqJsGU306T0-wWQHEUfWr9ddvFrfZq36eDasiWYDUtUkx2wGZ_J1L3dbYroBNDG_UgAqVBykeYFUMB2Hk4qJja8nDBCfx_g2KBkJkaU2AbONG1qYw2Ki-n5kjvcHuwZCmvPNNrPyvV4iHoBb3oSRYga3I8LNPj9zz5Ah1lB2eA5Hm491yDyknvm93dxH_EY_HbR-2axzphKpI2gCo7lf8CbruaunXejHHephsaIVZwwqqsbl8W0FEH3wgd1V3j4ayjQtOAeCdRdbfULJnFo5COXsEAZvaAB-cCze3L_W2RomU8vtLs4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/candidates/johndoe",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"candidates",
+								"johndoe"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Posts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/posts",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post Details",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/post/ut-odio-accusamus-est-voluptatem-quod-ad",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"post",
+								"ut-odio-accusamus-est-voluptatem-quod-ad"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Companies",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "keyword",
+									"value": "",
+									"description": "Search by company name",
+									"type": "text"
+								},
+								{
+									"key": "sortBy",
+									"value": "latest",
+									"description": "Sort by latest or oldest",
+									"type": "text"
+								},
+								{
+									"key": "location",
+									"value": "",
+									"description": "any country location",
+									"type": "text"
+								},
+								{
+									"key": "paginate",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/companies",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"companies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Company Details",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/companies/templatecookie",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"companies",
+								"templatecookie"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Languages",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/languages",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"languages"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change Language",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/change-language/bn",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"change-language",
+								"bn"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Page List",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{JOBPILOT_API}}/page-list",
+							"host": [
+								"{{JOBPILOT_API}}"
+							],
+							"path": [
+								"page-list"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set('JOBPILOT_TOKEN', pm.response.json().data.token)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "candidate2@mail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{JOBPILOT_API}}/login",
+							"host": [
+								"{{JOBPILOT_API}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Profile",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{JOBPILOT_API}}/profile",
+							"host": [
+								"{{JOBPILOT_API}}"
+							],
+							"path": [
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Candidate2",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "candidate2@mail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "password_confirmation",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "candidate",
+									"description": "candidate, company",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{JOBPILOT_API}}/register",
+							"host": [
+								"{{JOBPILOT_API}}"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Forget Password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "candidate@mail.com",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://apijobpilot.templatecookie.com/api/password/email",
+							"protocol": "https",
+							"host": [
+								"apijobpilot",
+								"templatecookie",
+								"com"
+							],
+							"path": [
+								"api",
+								"password",
+								"email"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reset Password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "candidate@mail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "code",
+									"value": "188604",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://apijobpilot.templatecookie.com/api/password/reset",
+							"protocol": "https",
+							"host": [
+								"apijobpilot",
+								"templatecookie",
+								"com"
+							],
+							"path": [
+								"api",
+								"password",
+								"reset"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Candidate",
+			"item": [
+				{
+					"name": "Resume",
+					"item": [
+						{
+							"name": "Resume List",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{JOBPILOT_API}}/candidate/resumes",
+									"host": [
+										"{{JOBPILOT_API}}"
+									],
+									"path": [
+										"candidate",
+										"resumes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Upload Resume",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "Demo 4",
+											"description": "Resume Name",
+											"type": "text"
+										},
+										{
+											"key": "resume_file",
+											"description": "Resume PDF",
+											"type": "file",
+											"src": "/run/user/1000/doc/4b6648b/1694002245.pdf"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{JOBPILOT_API}}/candidate/upload-resume",
+									"host": [
+										"{{JOBPILOT_API}}"
+									],
+									"path": [
+										"candidate",
+										"upload-resume"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Resume",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "Demo",
+											"description": "Resume Name",
+											"type": "text"
+										},
+										{
+											"key": "resume_file",
+											"description": "Resume PDF",
+											"type": "file",
+											"src": "/home/arif/Downloads/Academic Year.pdf"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{JOBPILOT_API}}/candidate/update-resume/21",
+									"host": [
+										"{{JOBPILOT_API}}"
+									],
+									"path": [
+										"candidate",
+										"update-resume",
+										"21"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Resume",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{JOBPILOT_API}}/candidate/delete-resume/23",
+									"host": [
+										"{{JOBPILOT_API}}"
+									],
+									"path": [
+										"candidate",
+										"delete-resume",
+										"23"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Settings",
+					"item": [
+						{
+							"name": "Fetch Setting Info",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{JOBPILOT_API}}/candidate/settings?type=social",
+									"host": [
+										"{{JOBPILOT_API}}"
+									],
+									"path": [
+										"candidate",
+										"settings"
+									],
+									"query": [
+										{
+											"key": "type",
+											"value": "social",
+											"description": "personal, profile, social, contact"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Personal Setting Update",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "type",
+											"value": "personal",
+											"description": "Do not change the value",
+											"type": "text"
+										},
+										{
+											"key": "image",
+											"type": "file",
+											"src": "/home/arif/Pictures/2023-03-04_12-33.png"
+										},
+										{
+											"key": "name",
+											"value": "Candidate",
+											"type": "text"
+										},
+										{
+											"key": "title",
+											"value": "My title",
+											"type": "text"
+										},
+										{
+											"key": "experience_id",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "education_id",
+											"value": "2",
+											"type": "text"
+										},
+										{
+											"key": "website",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "birth_date",
+											"value": "26-12-2023",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{JOBPILOT_API}}/candidate/settings",
+									"host": [
+										"{{JOBPILOT_API}}"
+									],
+									"path": [
+										"candidate",
+										"settings"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Profile Setting Update",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "type",
+											"value": "profile",
+											"description": "Do not change the value",
+											"type": "text"
+										},
+										{
+											"key": "gender",
+											"value": "male",
+											"description": "Value should be: male or female or other",
+											"type": "text"
+										},
+										{
+											"key": "marital_status",
+											"value": "married",
+											"description": "Value should be: married or single",
+											"type": "text"
+										},
+										{
+											"key": "profession",
+											"value": "doctor",
+											"type": "text"
+										},
+										{
+											"key": "bio",
+											"value": "Bolmu na",
+											"type": "text"
+										},
+										{
+											"key": "status",
+											"value": "available",
+											"description": "Value should be: available or not_available or available_in",
+											"type": "text"
+										},
+										{
+											"key": "available_in",
+											"value": "",
+											"description": "If value is available_in then fill this filed with any available date",
+											"type": "text"
+										},
+										{
+											"key": "skills[]",
+											"value": "php",
+											"type": "text"
+										},
+										{
+											"key": "skills[]",
+											"value": "js",
+											"type": "text"
+										},
+										{
+											"key": "languages[]",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "languages[]",
+											"value": "2",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{JOBPILOT_API}}/candidate/settings",
+									"host": [
+										"{{JOBPILOT_API}}"
+									],
+									"path": [
+										"candidate",
+										"settings"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Social Setting Update",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "type",
+											"value": "social",
+											"description": "Do not change the value",
+											"type": "text"
+										},
+										{
+											"key": "social_media[]",
+											"value": "facebook",
+											"description": "Value should be: facebook or twitter or instagram or youtube or linkedin or pinterest or reddit or github or other",
+											"type": "text"
+										},
+										{
+											"key": "url[]",
+											"value": "https://jobpilot.templatecookie.com/candidate/settings",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{JOBPILOT_API}}/candidate/settings",
+									"host": [
+										"{{JOBPILOT_API}}"
+									],
+									"path": [
+										"candidate",
+										"settings"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Contact Setting Update",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "type",
+											"value": "contact",
+											"description": "Do not change the value",
+											"type": "text"
+										},
+										{
+											"key": "phone",
+											"value": "123456",
+											"type": "text"
+										},
+										{
+											"key": "secondary_phone",
+											"value": "123456",
+											"type": "text"
+										},
+										{
+											"key": "whatsapp_number",
+											"value": "123456",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "123456@mail.com",
+											"type": "text"
+										},
+										{
+											"key": "address",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "country",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "long",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "lat",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "exact_location",
+											"value": "",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{JOBPILOT_API}}/candidate/settings",
+									"host": [
+										"{{JOBPILOT_API}}"
+									],
+									"path": [
+										"candidate",
+										"settings"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Password Setting Update",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "type",
+											"value": "password",
+											"description": "Do not change the value",
+											"type": "text"
+										},
+										{
+											"key": "current_password",
+											"value": "password",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "password",
+											"type": "text"
+										},
+										{
+											"key": "password_confirmation",
+											"value": "password",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{JOBPILOT_API}}/candidate/settings",
+									"host": [
+										"{{JOBPILOT_API}}"
+									],
+									"path": [
+										"candidate",
+										"settings"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Account Setting",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "type",
+											"value": "account-delete",
+											"description": "Do not change the value",
+											"type": "text"
+										},
+										{
+											"key": "current_password",
+											"value": "password",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{JOBPILOT_API}}/candidate/settings",
+									"host": [
+										"{{JOBPILOT_API}}"
+									],
+									"path": [
+										"candidate",
+										"settings"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Dashboard",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{JOBPILOT_API}}/candidate/dashboard",
+							"host": [
+								"{{JOBPILOT_API}}"
+							],
+							"path": [
+								"candidate",
+								"dashboard"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Job Apply",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "job_id",
+									"value": "7",
+									"type": "text"
+								},
+								{
+									"key": "resume_id",
+									"value": "22",
+									"type": "text"
+								},
+								{
+									"key": "cover_letter",
+									"value": "Hello",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{JOBPILOT_API}}/candidate/jobs/apply",
+							"host": [
+								"{{JOBPILOT_API}}"
+							],
+							"path": [
+								"candidate",
+								"jobs",
+								"apply"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Bookmark Job",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{JOBPILOT_API}}/candidate/jobs/1280/bookmark",
+							"host": [
+								"{{JOBPILOT_API}}"
+							],
+							"path": [
+								"candidate",
+								"jobs",
+								"1280",
+								"bookmark"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Applied Job List",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{JOBPILOT_API}}/candidate/applied-jobs?paginate=1",
+							"host": [
+								"{{JOBPILOT_API}}"
+							],
+							"path": [
+								"candidate",
+								"applied-jobs"
+							],
+							"query": [
+								{
+									"key": "paginate",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Job Alert",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{JOBPILOT_API}}/candidate/job-alert?paginate=8",
+							"host": [
+								"{{JOBPILOT_API}}"
+							],
+							"path": [
+								"candidate",
+								"job-alert"
+							],
+							"query": [
+								{
+									"key": "paginate",
+									"value": "8"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Company",
+			"item": [
+				{
+					"name": "Account Setup",
+					"item": [
+						{
+							"name": "Fetch Account Progress Data",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiOWMyOTk2Nzg1MGE4ZDA1N2YyYmZlYzM5NGQ4MGI4YTNjY2FlZmFlZWY5MWU1NTFkOWU1MGIwMDI5YzM3ZjZhYjA4Y2Y5MTQ0OGYxYTA0OTkiLCJpYXQiOjE2ODQzNzk4NTYuMzczODQ4LCJuYmYiOjE2ODQzNzk4NTYuMzczODUsImV4cCI6MTcwMDI3NzQ1Ni4zNjQ3ODQsInN1YiI6IjEiLCJzY29wZXMiOltdfQ.erm_BgFY9p8ZC51ZhMube_1EJxKD3tfGWxhzzQ3BGBmY2YNXHZQQwURqNW6WWu9RvnZhUQ6d0CYAbx0sPQtYKVKiMfJYnWfUhn6YTrP7H4xfllpHIqWaojJ1N-YXt9jOXaUlL18ZGEQf376AJxJh66wDS5p01m0gN2shOyesfnXajXJIo5XW_ndW43mB5ZvNlioFHEBF34WAhIPTbRNW7Z-kLjXAn5M1iuXJ7jnhK6BOjX_GQXifbtx_8-8rDU1kxzmKg9KErVKehw8Lw57B9kvfmm155AmjqjXGjaXYNGzRCX5Qeo-NVX5hOYZLKu2AYn54GpGk3JqCzFInzdNRkU24dWQKPpyZVNBdmh_OcEe-Y8zfNq1Go5ZAIqJsGU306T0-wWQHEUfWr9ddvFrfZq36eDasiWYDUtUkx2wGZ_J1L3dbYroBNDG_UgAqVBykeYFUMB2Hk4qJja8nDBCfx_g2KBkJkaU2AbONG1qYw2Ki-n5kjvcHuwZCmvPNNrPyvV4iHoBb3oSRYga3I8LNPj9zz5Ah1lB2eA5Hm491yDyknvm93dxH_EY_HbR-2axzphKpI2gCo7lf8CbruaunXejHHephsaIVZwwqqsbl8W0FEH3wgd1V3j4ayjQtOAeCdRdbfULJnFo5COXsEAZvaAB-cCze3L_W2RomU8vtLs4",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/company/account-progress",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"company",
+										"account-progress"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Submit(Step - 1) - Company Information",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMjQ2NTQzNTQ5MGFhOTFjNzZmNWU2NjQ0YmE1OWUwN2M1ZWNjM2Y3NGFiNzhhOTA3MTU2MzIzYWY2MmExYzA5YTUwNjcxYTQ4NDA2OTQ3MGIiLCJpYXQiOjE2ODQ0OTIzMDUuNjAyMzkzLCJuYmYiOjE2ODQ0OTIzMDUuNjAyMzk2LCJleHAiOjE3MDAzODk5MDUuNTQzNTE3LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.AKRzyHgEHxVMuDjQYXa3Q5Fe0qIyHrT6dfWbr6FG236DQVSGC4aF91jZge78kNUiFdKDw_3gYw651d5vU_u2-BInl1ecgTlVwWdFaD1ahzNFEsDBMWy4Y4x9Plzf2EQxyK_TtTpGxKnAWGdrVEwSU_MB_4HEwoJauonWNwIrGXXrzU_HVwA86fa3Sl5evzyhof1Xs-Ft_BYBp0-s6-k28X8QPCNbtA_JSMMI9o2T-vhk4uTdLR4hzcHQqn7ppUcpMQOkk0pyWow_fei9Bz1qfFHfS9wS4UnJo_PwhinRSiY5wlTCOgQk0X_lGaxs1pjtSoBm1TFvn9IXvU0TgVd0CQkddlE7pPKmrfK2eKrlbA8BFMCZPQ_LjU2LCKs31l6ywSYcIobE74L17SZ2_nzNPY2quew0l4QFLmddLXnI5s7l2m7N_3IR7AaznGkeNgWs_mUFg0zpFkJ7OtzdvtMkdK6lzbm2DxNVC-wxyDFVJhvz3BN9E2t5a7KJhwnQH65nloiGD6bUuj7DeMVJ45f1TFiv5n1TMtO9095ZhuLCGkBpIhKf-fF0FWxHw1wRSsFKRLNpbU_ioaY1Qxh9gEyJM5Q7GcHtl_CQrMpXhZqqvglS2wG4kT--iXI2ZMHOCSlPya7yVzOVMiSr68DKlT2lfPraYRksB3nHrNTBst1LBrg",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "step",
+											"value": "company",
+											"type": "text"
+										},
+										{
+											"key": "logo",
+											"type": "file",
+											"src": []
+										},
+										{
+											"key": "banner",
+											"type": "file",
+											"src": []
+										},
+										{
+											"key": "name",
+											"value": "Company",
+											"type": "text"
+										},
+										{
+											"key": "bio",
+											"value": "Company Bio",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/company/account-progress",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"company",
+										"account-progress"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Submit(Step - 2) - Founding Information",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiOWMyOTk2Nzg1MGE4ZDA1N2YyYmZlYzM5NGQ4MGI4YTNjY2FlZmFlZWY5MWU1NTFkOWU1MGIwMDI5YzM3ZjZhYjA4Y2Y5MTQ0OGYxYTA0OTkiLCJpYXQiOjE2ODQzNzk4NTYuMzczODQ4LCJuYmYiOjE2ODQzNzk4NTYuMzczODUsImV4cCI6MTcwMDI3NzQ1Ni4zNjQ3ODQsInN1YiI6IjEiLCJzY29wZXMiOltdfQ.erm_BgFY9p8ZC51ZhMube_1EJxKD3tfGWxhzzQ3BGBmY2YNXHZQQwURqNW6WWu9RvnZhUQ6d0CYAbx0sPQtYKVKiMfJYnWfUhn6YTrP7H4xfllpHIqWaojJ1N-YXt9jOXaUlL18ZGEQf376AJxJh66wDS5p01m0gN2shOyesfnXajXJIo5XW_ndW43mB5ZvNlioFHEBF34WAhIPTbRNW7Z-kLjXAn5M1iuXJ7jnhK6BOjX_GQXifbtx_8-8rDU1kxzmKg9KErVKehw8Lw57B9kvfmm155AmjqjXGjaXYNGzRCX5Qeo-NVX5hOYZLKu2AYn54GpGk3JqCzFInzdNRkU24dWQKPpyZVNBdmh_OcEe-Y8zfNq1Go5ZAIqJsGU306T0-wWQHEUfWr9ddvFrfZq36eDasiWYDUtUkx2wGZ_J1L3dbYroBNDG_UgAqVBykeYFUMB2Hk4qJja8nDBCfx_g2KBkJkaU2AbONG1qYw2Ki-n5kjvcHuwZCmvPNNrPyvV4iHoBb3oSRYga3I8LNPj9zz5Ah1lB2eA5Hm491yDyknvm93dxH_EY_HbR-2axzphKpI2gCo7lf8CbruaunXejHHephsaIVZwwqqsbl8W0FEH3wgd1V3j4ayjQtOAeCdRdbfULJnFo5COXsEAZvaAB-cCze3L_W2RomU8vtLs4",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "step",
+											"value": "founding",
+											"type": "text"
+										},
+										{
+											"key": "organization_type_id",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "industry_type_id",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "establishment_date",
+											"value": "31-05-2023",
+											"type": "text"
+										},
+										{
+											"key": "website",
+											"value": "https://www.templatecookie.com",
+											"type": "text"
+										},
+										{
+											"key": "vision",
+											"value": "My vision",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/company/account-progress",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"company",
+										"account-progress"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Submit(Step - 3) - Social Information",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiOWMyOTk2Nzg1MGE4ZDA1N2YyYmZlYzM5NGQ4MGI4YTNjY2FlZmFlZWY5MWU1NTFkOWU1MGIwMDI5YzM3ZjZhYjA4Y2Y5MTQ0OGYxYTA0OTkiLCJpYXQiOjE2ODQzNzk4NTYuMzczODQ4LCJuYmYiOjE2ODQzNzk4NTYuMzczODUsImV4cCI6MTcwMDI3NzQ1Ni4zNjQ3ODQsInN1YiI6IjEiLCJzY29wZXMiOltdfQ.erm_BgFY9p8ZC51ZhMube_1EJxKD3tfGWxhzzQ3BGBmY2YNXHZQQwURqNW6WWu9RvnZhUQ6d0CYAbx0sPQtYKVKiMfJYnWfUhn6YTrP7H4xfllpHIqWaojJ1N-YXt9jOXaUlL18ZGEQf376AJxJh66wDS5p01m0gN2shOyesfnXajXJIo5XW_ndW43mB5ZvNlioFHEBF34WAhIPTbRNW7Z-kLjXAn5M1iuXJ7jnhK6BOjX_GQXifbtx_8-8rDU1kxzmKg9KErVKehw8Lw57B9kvfmm155AmjqjXGjaXYNGzRCX5Qeo-NVX5hOYZLKu2AYn54GpGk3JqCzFInzdNRkU24dWQKPpyZVNBdmh_OcEe-Y8zfNq1Go5ZAIqJsGU306T0-wWQHEUfWr9ddvFrfZq36eDasiWYDUtUkx2wGZ_J1L3dbYroBNDG_UgAqVBykeYFUMB2Hk4qJja8nDBCfx_g2KBkJkaU2AbONG1qYw2Ki-n5kjvcHuwZCmvPNNrPyvV4iHoBb3oSRYga3I8LNPj9zz5Ah1lB2eA5Hm491yDyknvm93dxH_EY_HbR-2axzphKpI2gCo7lf8CbruaunXejHHephsaIVZwwqqsbl8W0FEH3wgd1V3j4ayjQtOAeCdRdbfULJnFo5COXsEAZvaAB-cCze3L_W2RomU8vtLs4",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"step\": \"social\",\n    \"social_media\": [\n        \"facebook\",\n        \"twitter\",\n        \"instagram\",\n        \"linkedin\" \n    ],\n    \"url\": [\n    \"https://www.facebook.com/\",\n    \"https://www.twitter.com/\",\n    \"https://www.instagram.com/\",\n    \"https://www.linkedin.com/\"\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/company/account-progress",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"company",
+										"account-progress"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Submit(Step - 4) - Contact Information",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiOWMyOTk2Nzg1MGE4ZDA1N2YyYmZlYzM5NGQ4MGI4YTNjY2FlZmFlZWY5MWU1NTFkOWU1MGIwMDI5YzM3ZjZhYjA4Y2Y5MTQ0OGYxYTA0OTkiLCJpYXQiOjE2ODQzNzk4NTYuMzczODQ4LCJuYmYiOjE2ODQzNzk4NTYuMzczODUsImV4cCI6MTcwMDI3NzQ1Ni4zNjQ3ODQsInN1YiI6IjEiLCJzY29wZXMiOltdfQ.erm_BgFY9p8ZC51ZhMube_1EJxKD3tfGWxhzzQ3BGBmY2YNXHZQQwURqNW6WWu9RvnZhUQ6d0CYAbx0sPQtYKVKiMfJYnWfUhn6YTrP7H4xfllpHIqWaojJ1N-YXt9jOXaUlL18ZGEQf376AJxJh66wDS5p01m0gN2shOyesfnXajXJIo5XW_ndW43mB5ZvNlioFHEBF34WAhIPTbRNW7Z-kLjXAn5M1iuXJ7jnhK6BOjX_GQXifbtx_8-8rDU1kxzmKg9KErVKehw8Lw57B9kvfmm155AmjqjXGjaXYNGzRCX5Qeo-NVX5hOYZLKu2AYn54GpGk3JqCzFInzdNRkU24dWQKPpyZVNBdmh_OcEe-Y8zfNq1Go5ZAIqJsGU306T0-wWQHEUfWr9ddvFrfZq36eDasiWYDUtUkx2wGZ_J1L3dbYroBNDG_UgAqVBykeYFUMB2Hk4qJja8nDBCfx_g2KBkJkaU2AbONG1qYw2Ki-n5kjvcHuwZCmvPNNrPyvV4iHoBb3oSRYga3I8LNPj9zz5Ah1lB2eA5Hm491yDyknvm93dxH_EY_HbR-2axzphKpI2gCo7lf8CbruaunXejHHephsaIVZwwqqsbl8W0FEH3wgd1V3j4ayjQtOAeCdRdbfULJnFo5COXsEAZvaAB-cCze3L_W2RomU8vtLs4",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "step",
+											"value": "contact",
+											"type": "text"
+										},
+										{
+											"key": "phone",
+											"value": "01234567891",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "test@mail.com",
+											"type": "text"
+										},
+										{
+											"key": "location",
+											"value": "adabor, dhaka",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/company/account-progress",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"company",
+										"account-progress"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Job Posting",
+					"item": [
+						{
+							"name": "Fetch Job Data",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiOWMyOTk2Nzg1MGE4ZDA1N2YyYmZlYzM5NGQ4MGI4YTNjY2FlZmFlZWY5MWU1NTFkOWU1MGIwMDI5YzM3ZjZhYjA4Y2Y5MTQ0OGYxYTA0OTkiLCJpYXQiOjE2ODQzNzk4NTYuMzczODQ4LCJuYmYiOjE2ODQzNzk4NTYuMzczODUsImV4cCI6MTcwMDI3NzQ1Ni4zNjQ3ODQsInN1YiI6IjEiLCJzY29wZXMiOltdfQ.erm_BgFY9p8ZC51ZhMube_1EJxKD3tfGWxhzzQ3BGBmY2YNXHZQQwURqNW6WWu9RvnZhUQ6d0CYAbx0sPQtYKVKiMfJYnWfUhn6YTrP7H4xfllpHIqWaojJ1N-YXt9jOXaUlL18ZGEQf376AJxJh66wDS5p01m0gN2shOyesfnXajXJIo5XW_ndW43mB5ZvNlioFHEBF34WAhIPTbRNW7Z-kLjXAn5M1iuXJ7jnhK6BOjX_GQXifbtx_8-8rDU1kxzmKg9KErVKehw8Lw57B9kvfmm155AmjqjXGjaXYNGzRCX5Qeo-NVX5hOYZLKu2AYn54GpGk3JqCzFInzdNRkU24dWQKPpyZVNBdmh_OcEe-Y8zfNq1Go5ZAIqJsGU306T0-wWQHEUfWr9ddvFrfZq36eDasiWYDUtUkx2wGZ_J1L3dbYroBNDG_UgAqVBykeYFUMB2Hk4qJja8nDBCfx_g2KBkJkaU2AbONG1qYw2Ki-n5kjvcHuwZCmvPNNrPyvV4iHoBb3oSRYga3I8LNPj9zz5Ah1lB2eA5Hm491yDyknvm93dxH_EY_HbR-2axzphKpI2gCo7lf8CbruaunXejHHephsaIVZwwqqsbl8W0FEH3wgd1V3j4ayjQtOAeCdRdbfULJnFo5COXsEAZvaAB-cCze3L_W2RomU8vtLs4",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/company/create/job",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"company",
+										"create",
+										"job"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Post Job",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiOWMyOTk2Nzg1MGE4ZDA1N2YyYmZlYzM5NGQ4MGI4YTNjY2FlZmFlZWY5MWU1NTFkOWU1MGIwMDI5YzM3ZjZhYjA4Y2Y5MTQ0OGYxYTA0OTkiLCJpYXQiOjE2ODQzNzk4NTYuMzczODQ4LCJuYmYiOjE2ODQzNzk4NTYuMzczODUsImV4cCI6MTcwMDI3NzQ1Ni4zNjQ3ODQsInN1YiI6IjEiLCJzY29wZXMiOltdfQ.erm_BgFY9p8ZC51ZhMube_1EJxKD3tfGWxhzzQ3BGBmY2YNXHZQQwURqNW6WWu9RvnZhUQ6d0CYAbx0sPQtYKVKiMfJYnWfUhn6YTrP7H4xfllpHIqWaojJ1N-YXt9jOXaUlL18ZGEQf376AJxJh66wDS5p01m0gN2shOyesfnXajXJIo5XW_ndW43mB5ZvNlioFHEBF34WAhIPTbRNW7Z-kLjXAn5M1iuXJ7jnhK6BOjX_GQXifbtx_8-8rDU1kxzmKg9KErVKehw8Lw57B9kvfmm155AmjqjXGjaXYNGzRCX5Qeo-NVX5hOYZLKu2AYn54GpGk3JqCzFInzdNRkU24dWQKPpyZVNBdmh_OcEe-Y8zfNq1Go5ZAIqJsGU306T0-wWQHEUfWr9ddvFrfZq36eDasiWYDUtUkx2wGZ_J1L3dbYroBNDG_UgAqVBykeYFUMB2Hk4qJja8nDBCfx_g2KBkJkaU2AbONG1qYw2Ki-n5kjvcHuwZCmvPNNrPyvV4iHoBb3oSRYga3I8LNPj9zz5Ah1lB2eA5Hm491yDyknvm93dxH_EY_HbR-2axzphKpI2gCo7lf8CbruaunXejHHephsaIVZwwqqsbl8W0FEH3wgd1V3j4ayjQtOAeCdRdbfULJnFo5COXsEAZvaAB-cCze3L_W2RomU8vtLs4",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"title\": \"Test Job\",\n    \"category_id\": \"1\",\n    \"tags\": [\n        \"1\",\n        \"3\"\n    ],\n    \"role_id\": \"1\",\n    \"salary_mode\": \"range\",\n    \"custom_salary\": \"Competitive\",\n    \"min_salary\": \"50.00\",\n    \"max_salary\": \"100.00\",\n    \"salary_type\": \"1\",\n    \"education\": \"1\",\n    \"experience\": \"1\",\n    \"job_type\": \"1\",\n    \"vacancies\": \"1\",\n    \"deadline\": \"17-06-2023\",\n    \"benefits\": [\n        \"1\",\n        \"8\",\n        \"14\"\n    ],\n    \"description\": \"<p>Job Description</p>\",\n    \"apply_on\": \"app\",\n    \"apply_url\": null,\n    \"apply_email\": null\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/company/store/job",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"company",
+										"store",
+										"job"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Promote Job",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiOWMyOTk2Nzg1MGE4ZDA1N2YyYmZlYzM5NGQ4MGI4YTNjY2FlZmFlZWY5MWU1NTFkOWU1MGIwMDI5YzM3ZjZhYjA4Y2Y5MTQ0OGYxYTA0OTkiLCJpYXQiOjE2ODQzNzk4NTYuMzczODQ4LCJuYmYiOjE2ODQzNzk4NTYuMzczODUsImV4cCI6MTcwMDI3NzQ1Ni4zNjQ3ODQsInN1YiI6IjEiLCJzY29wZXMiOltdfQ.erm_BgFY9p8ZC51ZhMube_1EJxKD3tfGWxhzzQ3BGBmY2YNXHZQQwURqNW6WWu9RvnZhUQ6d0CYAbx0sPQtYKVKiMfJYnWfUhn6YTrP7H4xfllpHIqWaojJ1N-YXt9jOXaUlL18ZGEQf376AJxJh66wDS5p01m0gN2shOyesfnXajXJIo5XW_ndW43mB5ZvNlioFHEBF34WAhIPTbRNW7Z-kLjXAn5M1iuXJ7jnhK6BOjX_GQXifbtx_8-8rDU1kxzmKg9KErVKehw8Lw57B9kvfmm155AmjqjXGjaXYNGzRCX5Qeo-NVX5hOYZLKu2AYn54GpGk3JqCzFInzdNRkU24dWQKPpyZVNBdmh_OcEe-Y8zfNq1Go5ZAIqJsGU306T0-wWQHEUfWr9ddvFrfZq36eDasiWYDUtUkx2wGZ_J1L3dbYroBNDG_UgAqVBykeYFUMB2Hk4qJja8nDBCfx_g2KBkJkaU2AbONG1qYw2Ki-n5kjvcHuwZCmvPNNrPyvV4iHoBb3oSRYga3I8LNPj9zz5Ah1lB2eA5Hm491yDyknvm93dxH_EY_HbR-2axzphKpI2gCo7lf8CbruaunXejHHephsaIVZwwqqsbl8W0FEH3wgd1V3j4ayjQtOAeCdRdbfULJnFo5COXsEAZvaAB-cCze3L_W2RomU8vtLs4",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "slug",
+											"value": "test-job-1684398870-6465e31610874",
+											"type": "text"
+										},
+										{
+											"key": "badge",
+											"value": "featured",
+											"description": "featured, highlight",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/company/promote/job",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"company",
+										"promote",
+										"job"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Edit Job",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiOWMyOTk2Nzg1MGE4ZDA1N2YyYmZlYzM5NGQ4MGI4YTNjY2FlZmFlZWY5MWU1NTFkOWU1MGIwMDI5YzM3ZjZhYjA4Y2Y5MTQ0OGYxYTA0OTkiLCJpYXQiOjE2ODQzNzk4NTYuMzczODQ4LCJuYmYiOjE2ODQzNzk4NTYuMzczODUsImV4cCI6MTcwMDI3NzQ1Ni4zNjQ3ODQsInN1YiI6IjEiLCJzY29wZXMiOltdfQ.erm_BgFY9p8ZC51ZhMube_1EJxKD3tfGWxhzzQ3BGBmY2YNXHZQQwURqNW6WWu9RvnZhUQ6d0CYAbx0sPQtYKVKiMfJYnWfUhn6YTrP7H4xfllpHIqWaojJ1N-YXt9jOXaUlL18ZGEQf376AJxJh66wDS5p01m0gN2shOyesfnXajXJIo5XW_ndW43mB5ZvNlioFHEBF34WAhIPTbRNW7Z-kLjXAn5M1iuXJ7jnhK6BOjX_GQXifbtx_8-8rDU1kxzmKg9KErVKehw8Lw57B9kvfmm155AmjqjXGjaXYNGzRCX5Qeo-NVX5hOYZLKu2AYn54GpGk3JqCzFInzdNRkU24dWQKPpyZVNBdmh_OcEe-Y8zfNq1Go5ZAIqJsGU306T0-wWQHEUfWr9ddvFrfZq36eDasiWYDUtUkx2wGZ_J1L3dbYroBNDG_UgAqVBykeYFUMB2Hk4qJja8nDBCfx_g2KBkJkaU2AbONG1qYw2Ki-n5kjvcHuwZCmvPNNrPyvV4iHoBb3oSRYga3I8LNPj9zz5Ah1lB2eA5Hm491yDyknvm93dxH_EY_HbR-2axzphKpI2gCo7lf8CbruaunXejHHephsaIVZwwqqsbl8W0FEH3wgd1V3j4ayjQtOAeCdRdbfULJnFo5COXsEAZvaAB-cCze3L_W2RomU8vtLs4",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/company/edit/test-job-1684398870-6465e31610874/job",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"company",
+										"edit",
+										"test-job-1684398870-6465e31610874",
+										"job"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Job",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiOWMyOTk2Nzg1MGE4ZDA1N2YyYmZlYzM5NGQ4MGI4YTNjY2FlZmFlZWY5MWU1NTFkOWU1MGIwMDI5YzM3ZjZhYjA4Y2Y5MTQ0OGYxYTA0OTkiLCJpYXQiOjE2ODQzNzk4NTYuMzczODQ4LCJuYmYiOjE2ODQzNzk4NTYuMzczODUsImV4cCI6MTcwMDI3NzQ1Ni4zNjQ3ODQsInN1YiI6IjEiLCJzY29wZXMiOltdfQ.erm_BgFY9p8ZC51ZhMube_1EJxKD3tfGWxhzzQ3BGBmY2YNXHZQQwURqNW6WWu9RvnZhUQ6d0CYAbx0sPQtYKVKiMfJYnWfUhn6YTrP7H4xfllpHIqWaojJ1N-YXt9jOXaUlL18ZGEQf376AJxJh66wDS5p01m0gN2shOyesfnXajXJIo5XW_ndW43mB5ZvNlioFHEBF34WAhIPTbRNW7Z-kLjXAn5M1iuXJ7jnhK6BOjX_GQXifbtx_8-8rDU1kxzmKg9KErVKehw8Lw57B9kvfmm155AmjqjXGjaXYNGzRCX5Qeo-NVX5hOYZLKu2AYn54GpGk3JqCzFInzdNRkU24dWQKPpyZVNBdmh_OcEe-Y8zfNq1Go5ZAIqJsGU306T0-wWQHEUfWr9ddvFrfZq36eDasiWYDUtUkx2wGZ_J1L3dbYroBNDG_UgAqVBykeYFUMB2Hk4qJja8nDBCfx_g2KBkJkaU2AbONG1qYw2Ki-n5kjvcHuwZCmvPNNrPyvV4iHoBb3oSRYga3I8LNPj9zz5Ah1lB2eA5Hm491yDyknvm93dxH_EY_HbR-2axzphKpI2gCo7lf8CbruaunXejHHephsaIVZwwqqsbl8W0FEH3wgd1V3j4ayjQtOAeCdRdbfULJnFo5COXsEAZvaAB-cCze3L_W2RomU8vtLs4",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"title\": \"Test Job\",\n    \"category_id\": \"1\",\n    \"tags\": [\n        \"1\",\n        \"3\"\n    ],\n    \"role_id\": \"1\",\n    \"salary_mode\": \"range\",\n    \"custom_salary\": \"Competitive\",\n    \"min_salary\": \"50.00\",\n    \"max_salary\": \"100.00\",\n    \"salary_type\": \"1\",\n    \"education\": \"1\",\n    \"experience\": \"1\",\n    \"job_type\": \"1\",\n    \"vacancies\": \"1\",\n    \"deadline\": \"17-06-2023\",\n    \"benefits\": [\n        \"1\",\n        \"8\",\n        \"14\"\n    ],\n    \"description\": \"<p>Job Description</p>\",\n    \"apply_on\": \"app\",\n    \"apply_url\": null,\n    \"apply_email\": null\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/company/update/test-job-1684398870-6465e31610874/job",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"company",
+										"update",
+										"test-job-1684398870-6465e31610874",
+										"job"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Clone Job",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiOWMyOTk2Nzg1MGE4ZDA1N2YyYmZlYzM5NGQ4MGI4YTNjY2FlZmFlZWY5MWU1NTFkOWU1MGIwMDI5YzM3ZjZhYjA4Y2Y5MTQ0OGYxYTA0OTkiLCJpYXQiOjE2ODQzNzk4NTYuMzczODQ4LCJuYmYiOjE2ODQzNzk4NTYuMzczODUsImV4cCI6MTcwMDI3NzQ1Ni4zNjQ3ODQsInN1YiI6IjEiLCJzY29wZXMiOltdfQ.erm_BgFY9p8ZC51ZhMube_1EJxKD3tfGWxhzzQ3BGBmY2YNXHZQQwURqNW6WWu9RvnZhUQ6d0CYAbx0sPQtYKVKiMfJYnWfUhn6YTrP7H4xfllpHIqWaojJ1N-YXt9jOXaUlL18ZGEQf376AJxJh66wDS5p01m0gN2shOyesfnXajXJIo5XW_ndW43mB5ZvNlioFHEBF34WAhIPTbRNW7Z-kLjXAn5M1iuXJ7jnhK6BOjX_GQXifbtx_8-8rDU1kxzmKg9KErVKehw8Lw57B9kvfmm155AmjqjXGjaXYNGzRCX5Qeo-NVX5hOYZLKu2AYn54GpGk3JqCzFInzdNRkU24dWQKPpyZVNBdmh_OcEe-Y8zfNq1Go5ZAIqJsGU306T0-wWQHEUfWr9ddvFrfZq36eDasiWYDUtUkx2wGZ_J1L3dbYroBNDG_UgAqVBykeYFUMB2Hk4qJja8nDBCfx_g2KBkJkaU2AbONG1qYw2Ki-n5kjvcHuwZCmvPNNrPyvV4iHoBb3oSRYga3I8LNPj9zz5Ah1lB2eA5Hm491yDyknvm93dxH_EY_HbR-2axzphKpI2gCo7lf8CbruaunXejHHephsaIVZwwqqsbl8W0FEH3wgd1V3j4ayjQtOAeCdRdbfULJnFo5COXsEAZvaAB-cCze3L_W2RomU8vtLs4",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "slug",
+											"value": "test-job-1684403408-6465f4d0d6141",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/company/clone/job",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"company",
+										"clone",
+										"job"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Job Status",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiOWMyOTk2Nzg1MGE4ZDA1N2YyYmZlYzM5NGQ4MGI4YTNjY2FlZmFlZWY5MWU1NTFkOWU1MGIwMDI5YzM3ZjZhYjA4Y2Y5MTQ0OGYxYTA0OTkiLCJpYXQiOjE2ODQzNzk4NTYuMzczODQ4LCJuYmYiOjE2ODQzNzk4NTYuMzczODUsImV4cCI6MTcwMDI3NzQ1Ni4zNjQ3ODQsInN1YiI6IjEiLCJzY29wZXMiOltdfQ.erm_BgFY9p8ZC51ZhMube_1EJxKD3tfGWxhzzQ3BGBmY2YNXHZQQwURqNW6WWu9RvnZhUQ6d0CYAbx0sPQtYKVKiMfJYnWfUhn6YTrP7H4xfllpHIqWaojJ1N-YXt9jOXaUlL18ZGEQf376AJxJh66wDS5p01m0gN2shOyesfnXajXJIo5XW_ndW43mB5ZvNlioFHEBF34WAhIPTbRNW7Z-kLjXAn5M1iuXJ7jnhK6BOjX_GQXifbtx_8-8rDU1kxzmKg9KErVKehw8Lw57B9kvfmm155AmjqjXGjaXYNGzRCX5Qeo-NVX5hOYZLKu2AYn54GpGk3JqCzFInzdNRkU24dWQKPpyZVNBdmh_OcEe-Y8zfNq1Go5ZAIqJsGU306T0-wWQHEUfWr9ddvFrfZq36eDasiWYDUtUkx2wGZ_J1L3dbYroBNDG_UgAqVBykeYFUMB2Hk4qJja8nDBCfx_g2KBkJkaU2AbONG1qYw2Ki-n5kjvcHuwZCmvPNNrPyvV4iHoBb3oSRYga3I8LNPj9zz5Ah1lB2eA5Hm491yDyknvm93dxH_EY_HbR-2axzphKpI2gCo7lf8CbruaunXejHHephsaIVZwwqqsbl8W0FEH3wgd1V3j4ayjQtOAeCdRdbfULJnFo5COXsEAZvaAB-cCze3L_W2RomU8vtLs4",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "slug",
+											"value": "test-job-1684403408-6465f4d0d6141",
+											"type": "text"
+										},
+										{
+											"key": "status",
+											"value": "active",
+											"description": "active, expire",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/company/change-status/job",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"company",
+										"change-status",
+										"job"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Application Group",
+					"item": [
+						{
+							"name": "Fetch Application Group",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMjQ2NTQzNTQ5MGFhOTFjNzZmNWU2NjQ0YmE1OWUwN2M1ZWNjM2Y3NGFiNzhhOTA3MTU2MzIzYWY2MmExYzA5YTUwNjcxYTQ4NDA2OTQ3MGIiLCJpYXQiOjE2ODQ0OTIzMDUuNjAyMzkzLCJuYmYiOjE2ODQ0OTIzMDUuNjAyMzk2LCJleHAiOjE3MDAzODk5MDUuNTQzNTE3LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.AKRzyHgEHxVMuDjQYXa3Q5Fe0qIyHrT6dfWbr6FG236DQVSGC4aF91jZge78kNUiFdKDw_3gYw651d5vU_u2-BInl1ecgTlVwWdFaD1ahzNFEsDBMWy4Y4x9Plzf2EQxyK_TtTpGxKnAWGdrVEwSU_MB_4HEwoJauonWNwIrGXXrzU_HVwA86fa3Sl5evzyhof1Xs-Ft_BYBp0-s6-k28X8QPCNbtA_JSMMI9o2T-vhk4uTdLR4hzcHQqn7ppUcpMQOkk0pyWow_fei9Bz1qfFHfS9wS4UnJo_PwhinRSiY5wlTCOgQk0X_lGaxs1pjtSoBm1TFvn9IXvU0TgVd0CQkddlE7pPKmrfK2eKrlbA8BFMCZPQ_LjU2LCKs31l6ywSYcIobE74L17SZ2_nzNPY2quew0l4QFLmddLXnI5s7l2m7N_3IR7AaznGkeNgWs_mUFg0zpFkJ7OtzdvtMkdK6lzbm2DxNVC-wxyDFVJhvz3BN9E2t5a7KJhwnQH65nloiGD6bUuj7DeMVJ45f1TFiv5n1TMtO9095ZhuLCGkBpIhKf-fF0FWxHw1wRSsFKRLNpbU_ioaY1Qxh9gEyJM5Q7GcHtl_CQrMpXhZqqvglS2wG4kT--iXI2ZMHOCSlPya7yVzOVMiSr68DKlT2lfPraYRksB3nHrNTBst1LBrg",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/company/application/group",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"company",
+										"application",
+										"group"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Application Group",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMjQ2NTQzNTQ5MGFhOTFjNzZmNWU2NjQ0YmE1OWUwN2M1ZWNjM2Y3NGFiNzhhOTA3MTU2MzIzYWY2MmExYzA5YTUwNjcxYTQ4NDA2OTQ3MGIiLCJpYXQiOjE2ODQ0OTIzMDUuNjAyMzkzLCJuYmYiOjE2ODQ0OTIzMDUuNjAyMzk2LCJleHAiOjE3MDAzODk5MDUuNTQzNTE3LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.AKRzyHgEHxVMuDjQYXa3Q5Fe0qIyHrT6dfWbr6FG236DQVSGC4aF91jZge78kNUiFdKDw_3gYw651d5vU_u2-BInl1ecgTlVwWdFaD1ahzNFEsDBMWy4Y4x9Plzf2EQxyK_TtTpGxKnAWGdrVEwSU_MB_4HEwoJauonWNwIrGXXrzU_HVwA86fa3Sl5evzyhof1Xs-Ft_BYBp0-s6-k28X8QPCNbtA_JSMMI9o2T-vhk4uTdLR4hzcHQqn7ppUcpMQOkk0pyWow_fei9Bz1qfFHfS9wS4UnJo_PwhinRSiY5wlTCOgQk0X_lGaxs1pjtSoBm1TFvn9IXvU0TgVd0CQkddlE7pPKmrfK2eKrlbA8BFMCZPQ_LjU2LCKs31l6ywSYcIobE74L17SZ2_nzNPY2quew0l4QFLmddLXnI5s7l2m7N_3IR7AaznGkeNgWs_mUFg0zpFkJ7OtzdvtMkdK6lzbm2DxNVC-wxyDFVJhvz3BN9E2t5a7KJhwnQH65nloiGD6bUuj7DeMVJ45f1TFiv5n1TMtO9095ZhuLCGkBpIhKf-fF0FWxHw1wRSsFKRLNpbU_ioaY1Qxh9gEyJM5Q7GcHtl_CQrMpXhZqqvglS2wG4kT--iXI2ZMHOCSlPya7yVzOVMiSr68DKlT2lfPraYRksB3nHrNTBst1LBrg",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/company/application/group",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"company",
+										"application",
+										"group"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Application Group",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMjQ2NTQzNTQ5MGFhOTFjNzZmNWU2NjQ0YmE1OWUwN2M1ZWNjM2Y3NGFiNzhhOTA3MTU2MzIzYWY2MmExYzA5YTUwNjcxYTQ4NDA2OTQ3MGIiLCJpYXQiOjE2ODQ0OTIzMDUuNjAyMzkzLCJuYmYiOjE2ODQ0OTIzMDUuNjAyMzk2LCJleHAiOjE3MDAzODk5MDUuNTQzNTE3LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.AKRzyHgEHxVMuDjQYXa3Q5Fe0qIyHrT6dfWbr6FG236DQVSGC4aF91jZge78kNUiFdKDw_3gYw651d5vU_u2-BInl1ecgTlVwWdFaD1ahzNFEsDBMWy4Y4x9Plzf2EQxyK_TtTpGxKnAWGdrVEwSU_MB_4HEwoJauonWNwIrGXXrzU_HVwA86fa3Sl5evzyhof1Xs-Ft_BYBp0-s6-k28X8QPCNbtA_JSMMI9o2T-vhk4uTdLR4hzcHQqn7ppUcpMQOkk0pyWow_fei9Bz1qfFHfS9wS4UnJo_PwhinRSiY5wlTCOgQk0X_lGaxs1pjtSoBm1TFvn9IXvU0TgVd0CQkddlE7pPKmrfK2eKrlbA8BFMCZPQ_LjU2LCKs31l6ywSYcIobE74L17SZ2_nzNPY2quew0l4QFLmddLXnI5s7l2m7N_3IR7AaznGkeNgWs_mUFg0zpFkJ7OtzdvtMkdK6lzbm2DxNVC-wxyDFVJhvz3BN9E2t5a7KJhwnQH65nloiGD6bUuj7DeMVJ45f1TFiv5n1TMtO9095ZhuLCGkBpIhKf-fF0FWxHw1wRSsFKRLNpbU_ioaY1Qxh9gEyJM5Q7GcHtl_CQrMpXhZqqvglS2wG4kT--iXI2ZMHOCSlPya7yVzOVMiSr68DKlT2lfPraYRksB3nHrNTBst1LBrg",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "aaa",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/company/application/group",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"company",
+										"application",
+										"group"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Application Group",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMjQ2NTQzNTQ5MGFhOTFjNzZmNWU2NjQ0YmE1OWUwN2M1ZWNjM2Y3NGFiNzhhOTA3MTU2MzIzYWY2MmExYzA5YTUwNjcxYTQ4NDA2OTQ3MGIiLCJpYXQiOjE2ODQ0OTIzMDUuNjAyMzkzLCJuYmYiOjE2ODQ0OTIzMDUuNjAyMzk2LCJleHAiOjE3MDAzODk5MDUuNTQzNTE3LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.AKRzyHgEHxVMuDjQYXa3Q5Fe0qIyHrT6dfWbr6FG236DQVSGC4aF91jZge78kNUiFdKDw_3gYw651d5vU_u2-BInl1ecgTlVwWdFaD1ahzNFEsDBMWy4Y4x9Plzf2EQxyK_TtTpGxKnAWGdrVEwSU_MB_4HEwoJauonWNwIrGXXrzU_HVwA86fa3Sl5evzyhof1Xs-Ft_BYBp0-s6-k28X8QPCNbtA_JSMMI9o2T-vhk4uTdLR4hzcHQqn7ppUcpMQOkk0pyWow_fei9Bz1qfFHfS9wS4UnJo_PwhinRSiY5wlTCOgQk0X_lGaxs1pjtSoBm1TFvn9IXvU0TgVd0CQkddlE7pPKmrfK2eKrlbA8BFMCZPQ_LjU2LCKs31l6ywSYcIobE74L17SZ2_nzNPY2quew0l4QFLmddLXnI5s7l2m7N_3IR7AaznGkeNgWs_mUFg0zpFkJ7OtzdvtMkdK6lzbm2DxNVC-wxyDFVJhvz3BN9E2t5a7KJhwnQH65nloiGD6bUuj7DeMVJ45f1TFiv5n1TMtO9095ZhuLCGkBpIhKf-fF0FWxHw1wRSsFKRLNpbU_ioaY1Qxh9gEyJM5Q7GcHtl_CQrMpXhZqqvglS2wG4kT--iXI2ZMHOCSlPya7yVzOVMiSr68DKlT2lfPraYRksB3nHrNTBst1LBrg",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/company/application/group/6",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"company",
+										"application",
+										"group",
+										"6"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Bookmark Candidate",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiOWMyOTk2Nzg1MGE4ZDA1N2YyYmZlYzM5NGQ4MGI4YTNjY2FlZmFlZWY5MWU1NTFkOWU1MGIwMDI5YzM3ZjZhYjA4Y2Y5MTQ0OGYxYTA0OTkiLCJpYXQiOjE2ODQzNzk4NTYuMzczODQ4LCJuYmYiOjE2ODQzNzk4NTYuMzczODUsImV4cCI6MTcwMDI3NzQ1Ni4zNjQ3ODQsInN1YiI6IjEiLCJzY29wZXMiOltdfQ.erm_BgFY9p8ZC51ZhMube_1EJxKD3tfGWxhzzQ3BGBmY2YNXHZQQwURqNW6WWu9RvnZhUQ6d0CYAbx0sPQtYKVKiMfJYnWfUhn6YTrP7H4xfllpHIqWaojJ1N-YXt9jOXaUlL18ZGEQf376AJxJh66wDS5p01m0gN2shOyesfnXajXJIo5XW_ndW43mB5ZvNlioFHEBF34WAhIPTbRNW7Z-kLjXAn5M1iuXJ7jnhK6BOjX_GQXifbtx_8-8rDU1kxzmKg9KErVKehw8Lw57B9kvfmm155AmjqjXGjaXYNGzRCX5Qeo-NVX5hOYZLKu2AYn54GpGk3JqCzFInzdNRkU24dWQKPpyZVNBdmh_OcEe-Y8zfNq1Go5ZAIqJsGU306T0-wWQHEUfWr9ddvFrfZq36eDasiWYDUtUkx2wGZ_J1L3dbYroBNDG_UgAqVBykeYFUMB2Hk4qJja8nDBCfx_g2KBkJkaU2AbONG1qYw2Ki-n5kjvcHuwZCmvPNNrPyvV4iHoBb3oSRYga3I8LNPj9zz5Ah1lB2eA5Hm491yDyknvm93dxH_EY_HbR-2axzphKpI2gCo7lf8CbruaunXejHHephsaIVZwwqqsbl8W0FEH3wgd1V3j4ayjQtOAeCdRdbfULJnFo5COXsEAZvaAB-cCze3L_W2RomU8vtLs4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/company/bookmark/candidates",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"company",
+								"bookmark",
+								"candidates"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fetch Bookmark Categories",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiOWMyOTk2Nzg1MGE4ZDA1N2YyYmZlYzM5NGQ4MGI4YTNjY2FlZmFlZWY5MWU1NTFkOWU1MGIwMDI5YzM3ZjZhYjA4Y2Y5MTQ0OGYxYTA0OTkiLCJpYXQiOjE2ODQzNzk4NTYuMzczODQ4LCJuYmYiOjE2ODQzNzk4NTYuMzczODUsImV4cCI6MTcwMDI3NzQ1Ni4zNjQ3ODQsInN1YiI6IjEiLCJzY29wZXMiOltdfQ.erm_BgFY9p8ZC51ZhMube_1EJxKD3tfGWxhzzQ3BGBmY2YNXHZQQwURqNW6WWu9RvnZhUQ6d0CYAbx0sPQtYKVKiMfJYnWfUhn6YTrP7H4xfllpHIqWaojJ1N-YXt9jOXaUlL18ZGEQf376AJxJh66wDS5p01m0gN2shOyesfnXajXJIo5XW_ndW43mB5ZvNlioFHEBF34WAhIPTbRNW7Z-kLjXAn5M1iuXJ7jnhK6BOjX_GQXifbtx_8-8rDU1kxzmKg9KErVKehw8Lw57B9kvfmm155AmjqjXGjaXYNGzRCX5Qeo-NVX5hOYZLKu2AYn54GpGk3JqCzFInzdNRkU24dWQKPpyZVNBdmh_OcEe-Y8zfNq1Go5ZAIqJsGU306T0-wWQHEUfWr9ddvFrfZq36eDasiWYDUtUkx2wGZ_J1L3dbYroBNDG_UgAqVBykeYFUMB2Hk4qJja8nDBCfx_g2KBkJkaU2AbONG1qYw2Ki-n5kjvcHuwZCmvPNNrPyvV4iHoBb3oSRYga3I8LNPj9zz5Ah1lB2eA5Hm491yDyknvm93dxH_EY_HbR-2axzphKpI2gCo7lf8CbruaunXejHHephsaIVZwwqqsbl8W0FEH3wgd1V3j4ayjQtOAeCdRdbfULJnFo5COXsEAZvaAB-cCze3L_W2RomU8vtLs4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/company/bookmark/categories",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"company",
+								"bookmark",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Store Bookmark Category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiOWMyOTk2Nzg1MGE4ZDA1N2YyYmZlYzM5NGQ4MGI4YTNjY2FlZmFlZWY5MWU1NTFkOWU1MGIwMDI5YzM3ZjZhYjA4Y2Y5MTQ0OGYxYTA0OTkiLCJpYXQiOjE2ODQzNzk4NTYuMzczODQ4LCJuYmYiOjE2ODQzNzk4NTYuMzczODUsImV4cCI6MTcwMDI3NzQ1Ni4zNjQ3ODQsInN1YiI6IjEiLCJzY29wZXMiOltdfQ.erm_BgFY9p8ZC51ZhMube_1EJxKD3tfGWxhzzQ3BGBmY2YNXHZQQwURqNW6WWu9RvnZhUQ6d0CYAbx0sPQtYKVKiMfJYnWfUhn6YTrP7H4xfllpHIqWaojJ1N-YXt9jOXaUlL18ZGEQf376AJxJh66wDS5p01m0gN2shOyesfnXajXJIo5XW_ndW43mB5ZvNlioFHEBF34WAhIPTbRNW7Z-kLjXAn5M1iuXJ7jnhK6BOjX_GQXifbtx_8-8rDU1kxzmKg9KErVKehw8Lw57B9kvfmm155AmjqjXGjaXYNGzRCX5Qeo-NVX5hOYZLKu2AYn54GpGk3JqCzFInzdNRkU24dWQKPpyZVNBdmh_OcEe-Y8zfNq1Go5ZAIqJsGU306T0-wWQHEUfWr9ddvFrfZq36eDasiWYDUtUkx2wGZ_J1L3dbYroBNDG_UgAqVBykeYFUMB2Hk4qJja8nDBCfx_g2KBkJkaU2AbONG1qYw2Ki-n5kjvcHuwZCmvPNNrPyvV4iHoBb3oSRYga3I8LNPj9zz5Ah1lB2eA5Hm491yDyknvm93dxH_EY_HbR-2axzphKpI2gCo7lf8CbruaunXejHHephsaIVZwwqqsbl8W0FEH3wgd1V3j4ayjQtOAeCdRdbfULJnFo5COXsEAZvaAB-cCze3L_W2RomU8vtLs4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "aa aass",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/company/bookmark/categories",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"company",
+								"bookmark",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Bookmark Category",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiOWMyOTk2Nzg1MGE4ZDA1N2YyYmZlYzM5NGQ4MGI4YTNjY2FlZmFlZWY5MWU1NTFkOWU1MGIwMDI5YzM3ZjZhYjA4Y2Y5MTQ0OGYxYTA0OTkiLCJpYXQiOjE2ODQzNzk4NTYuMzczODQ4LCJuYmYiOjE2ODQzNzk4NTYuMzczODUsImV4cCI6MTcwMDI3NzQ1Ni4zNjQ3ODQsInN1YiI6IjEiLCJzY29wZXMiOltdfQ.erm_BgFY9p8ZC51ZhMube_1EJxKD3tfGWxhzzQ3BGBmY2YNXHZQQwURqNW6WWu9RvnZhUQ6d0CYAbx0sPQtYKVKiMfJYnWfUhn6YTrP7H4xfllpHIqWaojJ1N-YXt9jOXaUlL18ZGEQf376AJxJh66wDS5p01m0gN2shOyesfnXajXJIo5XW_ndW43mB5ZvNlioFHEBF34WAhIPTbRNW7Z-kLjXAn5M1iuXJ7jnhK6BOjX_GQXifbtx_8-8rDU1kxzmKg9KErVKehw8Lw57B9kvfmm155AmjqjXGjaXYNGzRCX5Qeo-NVX5hOYZLKu2AYn54GpGk3JqCzFInzdNRkU24dWQKPpyZVNBdmh_OcEe-Y8zfNq1Go5ZAIqJsGU306T0-wWQHEUfWr9ddvFrfZq36eDasiWYDUtUkx2wGZ_J1L3dbYroBNDG_UgAqVBykeYFUMB2Hk4qJja8nDBCfx_g2KBkJkaU2AbONG1qYw2Ki-n5kjvcHuwZCmvPNNrPyvV4iHoBb3oSRYga3I8LNPj9zz5Ah1lB2eA5Hm491yDyknvm93dxH_EY_HbR-2axzphKpI2gCo7lf8CbruaunXejHHephsaIVZwwqqsbl8W0FEH3wgd1V3j4ayjQtOAeCdRdbfULJnFo5COXsEAZvaAB-cCze3L_W2RomU8vtLs4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/company/bookmark/categories/1/edit",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"company",
+								"bookmark",
+								"categories",
+								"1",
+								"edit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Bookmark Category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiOWMyOTk2Nzg1MGE4ZDA1N2YyYmZlYzM5NGQ4MGI4YTNjY2FlZmFlZWY5MWU1NTFkOWU1MGIwMDI5YzM3ZjZhYjA4Y2Y5MTQ0OGYxYTA0OTkiLCJpYXQiOjE2ODQzNzk4NTYuMzczODQ4LCJuYmYiOjE2ODQzNzk4NTYuMzczODUsImV4cCI6MTcwMDI3NzQ1Ni4zNjQ3ODQsInN1YiI6IjEiLCJzY29wZXMiOltdfQ.erm_BgFY9p8ZC51ZhMube_1EJxKD3tfGWxhzzQ3BGBmY2YNXHZQQwURqNW6WWu9RvnZhUQ6d0CYAbx0sPQtYKVKiMfJYnWfUhn6YTrP7H4xfllpHIqWaojJ1N-YXt9jOXaUlL18ZGEQf376AJxJh66wDS5p01m0gN2shOyesfnXajXJIo5XW_ndW43mB5ZvNlioFHEBF34WAhIPTbRNW7Z-kLjXAn5M1iuXJ7jnhK6BOjX_GQXifbtx_8-8rDU1kxzmKg9KErVKehw8Lw57B9kvfmm155AmjqjXGjaXYNGzRCX5Qeo-NVX5hOYZLKu2AYn54GpGk3JqCzFInzdNRkU24dWQKPpyZVNBdmh_OcEe-Y8zfNq1Go5ZAIqJsGU306T0-wWQHEUfWr9ddvFrfZq36eDasiWYDUtUkx2wGZ_J1L3dbYroBNDG_UgAqVBykeYFUMB2Hk4qJja8nDBCfx_g2KBkJkaU2AbONG1qYw2Ki-n5kjvcHuwZCmvPNNrPyvV4iHoBb3oSRYga3I8LNPj9zz5Ah1lB2eA5Hm491yDyknvm93dxH_EY_HbR-2axzphKpI2gCo7lf8CbruaunXejHHephsaIVZwwqqsbl8W0FEH3wgd1V3j4ayjQtOAeCdRdbfULJnFo5COXsEAZvaAB-cCze3L_W2RomU8vtLs4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "aa aassaa",
+									"type": "text"
+								},
+								{
+									"key": "_method",
+									"value": "put",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/company/bookmark/categories/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"company",
+								"bookmark",
+								"categories",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Bookmark Category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiOWMyOTk2Nzg1MGE4ZDA1N2YyYmZlYzM5NGQ4MGI4YTNjY2FlZmFlZWY5MWU1NTFkOWU1MGIwMDI5YzM3ZjZhYjA4Y2Y5MTQ0OGYxYTA0OTkiLCJpYXQiOjE2ODQzNzk4NTYuMzczODQ4LCJuYmYiOjE2ODQzNzk4NTYuMzczODUsImV4cCI6MTcwMDI3NzQ1Ni4zNjQ3ODQsInN1YiI6IjEiLCJzY29wZXMiOltdfQ.erm_BgFY9p8ZC51ZhMube_1EJxKD3tfGWxhzzQ3BGBmY2YNXHZQQwURqNW6WWu9RvnZhUQ6d0CYAbx0sPQtYKVKiMfJYnWfUhn6YTrP7H4xfllpHIqWaojJ1N-YXt9jOXaUlL18ZGEQf376AJxJh66wDS5p01m0gN2shOyesfnXajXJIo5XW_ndW43mB5ZvNlioFHEBF34WAhIPTbRNW7Z-kLjXAn5M1iuXJ7jnhK6BOjX_GQXifbtx_8-8rDU1kxzmKg9KErVKehw8Lw57B9kvfmm155AmjqjXGjaXYNGzRCX5Qeo-NVX5hOYZLKu2AYn54GpGk3JqCzFInzdNRkU24dWQKPpyZVNBdmh_OcEe-Y8zfNq1Go5ZAIqJsGU306T0-wWQHEUfWr9ddvFrfZq36eDasiWYDUtUkx2wGZ_J1L3dbYroBNDG_UgAqVBykeYFUMB2Hk4qJja8nDBCfx_g2KBkJkaU2AbONG1qYw2Ki-n5kjvcHuwZCmvPNNrPyvV4iHoBb3oSRYga3I8LNPj9zz5Ah1lB2eA5Hm491yDyknvm93dxH_EY_HbR-2axzphKpI2gCo7lf8CbruaunXejHHephsaIVZwwqqsbl8W0FEH3wgd1V3j4ayjQtOAeCdRdbfULJnFo5COXsEAZvaAB-cCze3L_W2RomU8vtLs4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/company/bookmark/categories/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"company",
+								"bookmark",
+								"categories",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{JOBPILOT_TOKEN}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

@@ -2,22 +2,20 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jobpilot/src/domain/server/config/request_handler.dart';
 import 'package:jobpilot/src/domain/server/repositories/jobs/jobs_repo.dart';
-import 'package:jobpilot/src/domain/server/repositories/jobs/models/search_response/paginated_job_list_response.dart';
+import 'package:jobpilot/src/domain/server/repositories/jobs/models/job_alert/paginated_response/paginated_job_alert_response.dart';
 import 'package:jobpilot/src/features/single_job/views/job_details.dart';
+import 'package:jobpilot/src/services/controller_mixin/controller_mixins.dart';
+import 'package:jobpilot/src/utilities/scaffold_util.dart';
 
-class JobAlertController extends GetxController {
+class JobAlertController extends GetxController with BaseControllerSystem {
   final _jobRepo = JobsRepository();
-  bool isLoading = false;
-  setLoadingStatus([bool? newState]) {
-    isLoading = newState ?? (!isLoading);
-    update();
-  }
 
   @override
   void onReady() {
     super.onReady();
-    fetchJobsWithCurrentQuery();
+    fetchJobAlerts();
   }
 
   @override
@@ -30,27 +28,31 @@ class JobAlertController extends GetxController {
   final singlePageSize = 10;
   final pageScrollController = ScrollController();
   int get currentPageIndex => paginationData?.currentPage ?? 1;
-  PaginatedJobListResponse? paginationData;
-  List<Job>? get currentJobList => paginationData?.data;
+  PaginatedJobAlertData? paginationData;
+  List<String>? get currentJobList => paginationData?.data;
 
-  fetchJobsWithCurrentQuery({int? index}) async {
+  bool get needPaginationControl =>
+      !isLoading &&
+      paginationData?.lastPage != null &&
+      paginationData!.lastPage! > 1;
+
+  fetchJobAlerts({int? index}) async {
     try {
-      // setLoadingStatus(true);
-      // final searchRes = await _jobRepo.searchJobs(
-      //   query: currentQuery,
-      //   pageSize: singlePageSize,
-      //   pageIndex: index ?? currentPageIndex,
-      // );
-      // if (searchRes.isSuccess) {
-      //   paginationData = searchRes.data!;
-      //   setLoadingStatus();
-      // } else {
-      //   showToastError(searchRes.errorMsg);
-      //   setLoadingStatus();
-      // }
+      setLoadingStatus(true);
+      final searchRes = await _jobRepo.fetchCandidateJobAlerts(
+        pageSize: singlePageSize,
+        pageIndex: index ?? currentPageIndex,
+      );
+      if (searchRes.isSuccess) {
+        paginationData = searchRes.data!.notifications;
+      } else {
+        showToastError(searchRes.errorMsg);
+      }
+      setLoadingStatus(false);
     } catch (e, s) {
-      setLoadingStatus();
-      log("#FindJobError", error: e, stackTrace: s);
+      setLoadingStatus(false);
+      log("#FetchJobAlertsError", error: e, stackTrace: s);
+      if (e is RequestException) e.handleError();
     }
   }
 

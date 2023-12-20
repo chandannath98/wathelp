@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:jobpilot/src/constants/assets/assets.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
 import 'package:jobpilot/src/constants/strings/home_strings.dart';
+import 'package:jobpilot/src/features/authentication/controllers/login_controller.dart';
+import 'package:jobpilot/src/features/authentication/views/registration.dart';
 import 'package:jobpilot/src/global/widgets/social_login_button.dart';
 import 'package:jobpilot/src/services/theme/app_theme.dart';
 import 'package:jobpilot/src/utilities/extensions/size_utilities.dart';
@@ -11,7 +14,7 @@ import 'package:jobpilot/src/utilities/scaffold_util.dart';
 import 'package:jobpilot/src/utilities/svg_icon.dart';
 
 import 'package:jobpilot/src/utilities/extensions/overlay_loader.dart';
-
+/* 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
@@ -29,7 +32,7 @@ class LoginScreen extends StatelessWidget {
           Directionality(
             textDirection: TextDirection.rtl,
             child: TextButton.icon(
-              onPressed: () {},
+              onPressed: () => Get.to(() => const RegistrationScreen()),
               icon: SvgIcon(
                 Assets.loginIcon,
                 size: 22,
@@ -46,22 +49,27 @@ class LoginScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: LoginSectionWidget(
-        emailController: TextEditingController(),
-        passwordController: TextEditingController(),
-        attemptLogin: (
-            {required email, required isRememberMe, required password}) async {
-          return null;
-        },
-        goForgotPassword: ({String? email}) async {
-          print(email);
-        },
-        onFacebookClick: () {},
-        onGoogleClick: () {},
-      ),
+      body: GetBuilder(
+          init: LoginController(),
+          builder: (controller) {
+            return LoginSectionWidget(
+              emailController: TextEditingController(),
+              passwordController: TextEditingController(),
+              attemptLogin: (
+                  {required email,
+                  required isRememberMe,
+                  required password}) async {
+                return null;
+              },
+              goForgotPassword: ({String? email}) async =>
+                  controller.shiftLoginView(),
+              onFacebookClick: () {},
+              onGoogleClick: () {},
+            );
+          }),
     );
   }
-}
+} */
 
 typedef LoginCallback = Future<String?> Function({
   required String email,

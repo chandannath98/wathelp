@@ -23,6 +23,7 @@ class JobDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder(
+      tag: jobSlug,
       init: SingleJobController(slug: jobSlug),
       builder: (controller) {
         return Scaffold(
@@ -98,17 +99,20 @@ class RelatedJobsSection extends StatelessWidget {
               ),
             ),
             18.height,
-            for (var i in relatedJobs) ...[
+            for (RelatedJob i in relatedJobs) ...[
               8.height,
               SingleFeaturedJobCard(
-                bookmarked: true,
+                bookmarked: i.bookmarked,
                 postName: i.title!,
                 postType: i.jobType!,
-                salaryRange: "Salary: \$${i.minSalary} - \$${i.maxSalary}",
+                salaryRange: i.salary ?? "",
                 companyName: i.companyName!,
                 companyLocation: i.country!,
                 companyIcon: i.companyLogo!,
-                onItemClick: () {},
+                onItemClick: () => Get.to(
+                  () => JobDetailsScreen(jobSlug: i.slug!),
+                  preventDuplicates: false,
+                ),
                 onBookmarkCallback: () {},
               ),
               8.height,
@@ -604,16 +608,24 @@ class JobDetailCompanyHeader extends StatelessWidget {
           Row(
             children: [
               Expanded(
-                child: Directionality(
-                  textDirection: TextDirection.rtl,
-                  child: ElevatedButton.icon(
-                    onPressed: controller.onApplyClick,
-                    icon: const Icon(Icons.arrow_back),
-                    label: const Text(
-                      "Apply Now",
-                    ),
-                  ),
-                ),
+                child: (controller.jobDetails?.applied ?? false)
+                    ? ElevatedButton.icon(
+                        onPressed: null,
+                        icon: const Icon(Icons.check_rounded),
+                        label: const Text(
+                          "Applied",
+                        ),
+                      )
+                    : Directionality(
+                        textDirection: TextDirection.rtl,
+                        child: ElevatedButton.icon(
+                          onPressed: controller.onApplyClick,
+                          icon: const Icon(Icons.arrow_back),
+                          label: const Text(
+                            "Apply Now",
+                          ),
+                        ),
+                      ),
               ),
               8.width,
               InkWell(

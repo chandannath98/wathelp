@@ -4,17 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jobpilot/src/domain/server/config/request_handler.dart';
 import 'package:jobpilot/src/domain/server/repositories/jobs/jobs_repo.dart';
-import 'package:jobpilot/src/domain/server/repositories/settings/models/resume/resume_data.dart';
+import 'package:jobpilot/src/domain/server/repositories/settings/models/resume/resume_data/resume_data.dart';
 import 'package:jobpilot/src/domain/server/repositories/settings/settings_repo.dart';
+import 'package:jobpilot/src/services/controller_mixin/controller_mixins.dart';
 import 'package:jobpilot/src/utilities/scaffold_util.dart';
 
-class ApplyJobController extends GetxController {
-  bool isLoading = false;
-  setLoadingStatus([bool? newState]) {
-    isLoading = newState ?? (!isLoading);
-    update();
-  }
-
+class ApplyJobController extends GetxController with BaseControllerSystem {
   final int jobId;
   ApplyJobController({required this.jobId});
 
@@ -37,7 +32,7 @@ class ApplyJobController extends GetxController {
   getResumeList() async {
     try {
       setLoadingStatus(true);
-      final res = await _settingsRepo.fetchPopularTags();
+      final res = await _settingsRepo.fetchResumeList();
       if (res.isSuccess) {
         resumeList = res.data!;
         update();
@@ -58,16 +53,21 @@ class ApplyJobController extends GetxController {
     update();
   }
 
-  apply() async {
+  Future apply() async {
     try {
+      if (selectedResumeId == null) {
+        showToastWarning("Select a resume first!");
+        return;
+      }
+
       final res = await _jobRepo.candidateApplyJob(
         jobId: jobId,
         resumeId: selectedResumeId!,
         coverLetter: coverLetterController.text,
       );
       if (res.isSuccess) {
-        showToastSuccess(res.message!);
-        Get.back();
+        showToastSuccess(res.data!.message!);
+        Get.back(result: res.data?.status);
       } else {
         showToastError(res.errorMsg);
       }

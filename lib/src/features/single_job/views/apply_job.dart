@@ -4,6 +4,7 @@ import 'package:jobpilot/src/constants/design/paddings.dart';
 import 'package:jobpilot/src/features/single_job/controllers/apply_job_controller.dart';
 import 'package:jobpilot/src/global/widgets/app/custom_titled_drop_down.dart';
 import 'package:jobpilot/src/services/theme/extensions.dart';
+import 'package:jobpilot/src/utilities/extensions/overlay_loader.dart';
 import 'package:jobpilot/src/utilities/extensions/size_utilities.dart';
 
 class ApplyJobScreen extends StatelessWidget {
@@ -41,12 +42,23 @@ class ApplyJobScreen extends StatelessWidget {
                           CustomTitledDropdownField(
                             title: "CV/Resume",
                             hintText: "Choose resume...",
-                            onChange: (value) {},
+                            onChange: (value) =>
+                                controller.onResumeSelect(value!),
                             fieldList: controller.resumeList
                                 ?.map((resume) =>
                                     (title: resume.name!, value: resume.id!))
                                 .toList(),
                           ),
+                          if (controller.resumeList != null &&
+                              controller.resumeList!.isEmpty) ...[
+                            6.height,
+                            Text(
+                              "*You currently don't have any resume. Go to settings and add resume to apply.",
+                              style: context.text.bodyMedium?.copyWith(
+                                color: Colors.red,
+                              ),
+                            ),
+                          ],
                           24.height,
                           Text(
                             "Cover Letter",
@@ -63,6 +75,7 @@ class ApplyJobScreen extends StatelessWidget {
                             child: TextFormField(
                               minLines: 15,
                               maxLines: null,
+                              controller: controller.coverLetterController,
                               decoration: InputDecoration(
                                 hintText: "Write down your biography here. "
                                     "Let the employers know who you are...",
@@ -85,7 +98,9 @@ class ApplyJobScreen extends StatelessWidget {
                         child: Directionality(
                           textDirection: TextDirection.rtl,
                           child: ElevatedButton.icon(
-                            onPressed: () {},
+                            onPressed: (controller.isLoading)
+                                ? null
+                                : controller.apply.withOverlay,
                             icon: const Icon(Icons.arrow_back),
                             label: const Text(
                               "Apply Now",

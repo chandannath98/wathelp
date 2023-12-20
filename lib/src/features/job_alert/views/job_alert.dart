@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart' hide ContextExtensionss;
 import 'package:jobpilot/src/constants/assets/assets.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
+import 'package:jobpilot/src/features/job_alert/controllers/job_alert_controller.dart';
 import 'package:jobpilot/src/features/job_alert/views/widgets/new_job.dart';
 import 'package:jobpilot/src/global/widgets/circular_paginator.dart';
+import 'package:jobpilot/src/global/widgets/loading_indicator.dart';
 import 'package:jobpilot/src/services/theme/app_theme.dart';
 import 'package:jobpilot/src/utilities/extensions/size_utilities.dart';
 import 'package:jobpilot/src/utilities/svg_icon.dart';
@@ -14,71 +17,106 @@ class JobAlertPageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      slivers: [
-        SliverToBoxAdapter(
-          child: Padding(
-            padding: horizontal16,
-            child: Column(
-              children: [
-                16.height,
-                Row(
-                  children: [
-                    Text(
-                      "Job Alerts",
-                      style: context.text.titleLarge?.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Expanded(
-                      child: Align(
-                        alignment: Alignment.centerRight,
-                        child: TextButton.icon(
-                          onPressed: () {},
-                          icon: const SvgIcon(
-                            Assets.editIcon,
+    return GetBuilder(
+        init: JobAlertController(),
+        builder: (controller) {
+          return CustomScrollView(
+            slivers: [
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: horizontal16,
+                  child: Column(
+                    children: [
+                      16.height,
+                      Row(
+                        children: [
+                          Text(
+                            "Job Alerts",
+                            style: context.text.titleLarge?.copyWith(
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                          label: const Text(
-                            "Edit Job Alerts",
+                          Expanded(
+                            child: Align(
+                              alignment: Alignment.centerRight,
+                              child: TextButton.icon(
+                                onPressed: () {},
+                                icon: const SvgIcon(
+                                  Assets.editIcon,
+                                ),
+                                label: const Text(
+                                  "Edit Job Alerts",
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              if (controller.isLoading || controller.currentJobList != null)
+                SliverPadding(
+                  padding: horizontal16 + vertical8,
+                  sliver: controller.isLoading
+                      ? const SliverFillRemaining(
+                          child: FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: LoadingIndicator(),
+                          ),
+                        )
+                      : SliverList(
+                          delegate: SliverChildBuilderDelegate(
+                            (context, index) {
+                              final job = controller.currentJobList![index];
+                              return const Padding(
+                                padding: vertical6,
+                                child: SingleJobAlertWidget(),
+                              );
+                            },
+                            childCount: controller.currentJobList!.length,
                           ),
                         ),
-                      ),
-                    ),
-                  ],
                 ),
-              ],
-            ),
-          ),
-        ),
-        SliverPadding(
-          padding: horizontal16 + vertical8,
-          sliver: SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (context, index) => const Padding(
-                padding: vertical6,
-                child: NewJobWidget(),
-              ),
-              childCount: 20,
-            ),
-          ),
-        ),
-        SliverToBoxAdapter(
-          child: Padding(
-            padding: (vertical12 + horizontal16) + horizontal16,
-            child: CircularPaginatorWidget(
-              selectedColor: context.color?.primary ?? Colors.blue,
-              actionsList: List.generate(15, (index) => (index + 1))
-                  .map((index) => (
-                        index == 1,
-                        Text((index <= 9) ? "0$index" : "$index"),
-                        () {},
-                      ))
-                  .toList(),
-              onForwardClick: () {},
-            ),
-          ),
-        ),
-      ],
-    );
+              if (controller.needPaginationControl)
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: (vertical12 + horizontal16) + horizontal16,
+                    child: CircularPaginatorWidget(
+                      selectedIndex: controller.currentPageIndex,
+                      scrollController: controller.pageScrollController,
+                      selectedColor: context.color?.primary ?? Colors.blue,
+                      controlColor: context.color?.theme ?? Colors.white,
+                      actionsList: List.generate(
+                        controller.paginationData!.lastPage!,
+                        (index) => (index + 1),
+                      )
+                          .map((index) => (
+                                index == controller.currentPageIndex,
+                                Text((index <= 9) ? "0$index" : "$index"),
+                                (index == controller.currentPageIndex)
+                                    ? () {}
+                                    : () =>
+                                        controller.fetchJobAlerts(index: index),
+                              ))
+                          .toList(),
+                      onForwardClick:
+                          controller.paginationData?.nextPageUrl == null
+                              ? null
+                              : () => controller.fetchJobAlerts(
+                                  index: controller.currentPageIndex + 1),
+                      onBackwardClick:
+                          controller.paginationData?.prevPageUrl == null
+                              ? null
+                              : () => controller.fetchJobAlerts(
+                                    index: controller.currentPageIndex - 1,
+                                  ),
+                    ),
+                  ),
+                ),
+            ],
+          );
+        });
   }
 }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:jobpilot/src/constants/assets/assets.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
+import 'package:jobpilot/src/domain/server/repositories/jobs/models/applied_jobs/job/applied_job.dart';
 import 'package:jobpilot/src/global/widgets/app/vertical_icon_text.dart';
 import 'package:jobpilot/src/services/theme/app_theme.dart';
 import 'package:jobpilot/src/utilities/extensions/size_utilities.dart';
@@ -9,7 +11,12 @@ import 'job_activity.dart';
 class AppliedJobCardWidget extends StatelessWidget {
   const AppliedJobCardWidget({
     super.key,
+    required this.jobData,
+    required this.onViewDetailsTap,
   });
+
+  final AppliedJob jobData;
+  final ValueChanged<String> onViewDetailsTap;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +34,11 @@ class AppliedJobCardWidget extends StatelessWidget {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(4),
                       child: Image.network(
-                        "https://cdn.iconscout.com/icon/premium/png-512-thumb/upwork-2752038-2284855.png?f=webp&w=256",
+                        jobData.companyLogo ?? "",
+                        errorBuilder: (context, error, stackTrace) =>
+                            const Image(
+                          image: Assets.errorImage,
+                        ),
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -45,50 +56,62 @@ class AppliedJobCardWidget extends StatelessWidget {
                             children: [
                               Flexible(
                                 child: Text(
-                                  "Networking Engineer",
+                                  jobData.title ?? "",
+                                  overflow: TextOverflow.ellipsis,
                                   style: context.text.titleMedium?.copyWith(
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
                               ),
-                              12.width,
-                              DecoratedBox(
-                                decoration: BoxDecoration(
-                                  color:
-                                      context.color?.primary.withOpacity(0.1),
-                                  borderRadius: BorderRadius.circular(4),
-                                ),
-                                child: Padding(
-                                  padding: all6,
-                                  child: Text(
-                                    "Remote",
-                                    style: context.text.bodySmall?.copyWith(
-                                      color: context.color?.primary,
+                              if (jobData.isRemote == 1) ...[
+                                12.width,
+                                DecoratedBox(
+                                  decoration: BoxDecoration(
+                                    color:
+                                        context.color?.primary.withOpacity(0.1),
+                                    borderRadius: BorderRadius.circular(4),
+                                  ),
+                                  child: Padding(
+                                    padding: all6,
+                                    child: Text(
+                                      "Remote",
+                                      style: context.text.bodySmall?.copyWith(
+                                        color: context.color?.primary,
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
+                              ],
                             ],
                           ),
+                          3.height,
                           Expanded(
-                            child: Row(
-                              children: [
-                                VerticalIconText(
-                                  icon: Icon(
-                                    Icons.location_on_outlined,
-                                    color: context.color?.extra,
+                            child: IntrinsicWidth(
+                              child: Row(
+                                children: [
+                                  Flexible(
+                                    child: VerticalIconText(
+                                      icon: Icon(
+                                        Icons.location_on_outlined,
+                                        color: context.color?.extra,
+                                      ),
+                                      flexText: true,
+                                      text: jobData.country ?? "",
+                                    ),
                                   ),
-                                  text: "Washington",
-                                ),
-                                12.width,
-                                VerticalIconText(
-                                  text: "\$15k-20k/month",
-                                  icon: Icon(
-                                    Icons.attach_money_rounded,
-                                    color: context.color?.extra,
+                                  12.width,
+                                  Flexible(
+                                    child: VerticalIconText(
+                                      flexText: true,
+                                      text: jobData.salary ?? "",
+                                      icon: Icon(
+                                        Icons.attach_money_rounded,
+                                        color: context.color?.extra,
+                                      ),
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         ],
@@ -101,11 +124,13 @@ class AppliedJobCardWidget extends StatelessWidget {
             12.height,
             Row(
               children: [
-                const JobActivityStatusWidget(),
+                JobActivityStatusWidget(
+                  status: jobData.status!,
+                ),
                 12.width,
                 Expanded(
                   child: Text(
-                    "Applied Date: Feb 2, 2019 19:28",
+                    "Applied Date: ${jobData.appliedHumanTime}",
                     style: context.text.bodySmall,
                   ),
                 ),
@@ -120,7 +145,7 @@ class AppliedJobCardWidget extends StatelessWidget {
                   width: 160,
                   child: OutlinedButton.icon(
                     style: OutlinedButton.styleFrom(),
-                    onPressed: () {},
+                    onPressed: () => onViewDetailsTap(jobData.slug!),
                     icon: const Icon(
                       Icons.arrow_back,
                     ),

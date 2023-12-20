@@ -8,7 +8,7 @@ import 'package:jobpilot/src/domain/server/repositories/jobs/jobs_repo.dart';
 import 'package:jobpilot/src/domain/server/repositories/jobs/models/search_response/paginated_job_list_response.dart';
 import 'package:jobpilot/src/domain/server/repositories/server_static/popular_tag/popular_tag.dart';
 import 'package:jobpilot/src/domain/server/repositories/server_static/server_static_repo.dart';
-import 'package:jobpilot/src/features/authentication/views/login.dart';
+import 'package:jobpilot/src/features/authentication/views/login_system_switcher.dart';
 import 'package:jobpilot/src/features/find_jobs/views/filter_job.dart';
 import 'package:jobpilot/src/features/single_job/views/job_details.dart';
 import 'package:jobpilot/src/services/authentication/auth_controller.dart';
@@ -22,12 +22,22 @@ class FindJobController extends GetxController {
     update();
   }
 
-  final searchController = TextEditingController();
-  final locationController = TextEditingController();
+  final String? searchText;
+  final String? locationText;
+  FindJobController({this.searchText, this.locationText});
+
+  late final TextEditingController searchController;
+  late final TextEditingController locationController;
 
   @override
-  void onReady() {
-    super.onReady();
+  void onInit() {
+    super.onInit();
+    currentQuery = currentQuery.copyWith(
+      query: searchText,
+      location: locationText,
+    );
+    searchController = TextEditingController(text: searchText);
+    locationController = TextEditingController(text: locationText);
     searchController.addListener(() {
       currentQuery = currentQuery.copyWith(query: searchController.text);
     });
@@ -116,7 +126,8 @@ class FindJobController extends GetxController {
 
   Future onBookmarkJobClick(int jobId) async {
     if (!AuthController.find.isAuthenticated) {
-      Get.to(() => const LoginScreen());
+      print("going login screen!");
+      Get.to(() => const LoginSystemScreen());
       return;
     }
     try {
