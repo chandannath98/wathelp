@@ -17,6 +17,7 @@ import 'package:jobpilot/src/utilities/functions.dart';
 import 'package:jobpilot/src/utilities/scaffold_util.dart';
 
 class DashboardController extends GetxController with BaseControllerSystem {
+  static DashboardController get find => Get.find();
   final _dashboardRepo = CandidateDashboardRepository();
   User get currentProfile => AuthController.find.currentUser!;
 

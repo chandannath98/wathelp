@@ -1,7 +1,6 @@
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jobpilot/src/domain/server/config/request_handler.dart';
 import 'package:jobpilot/src/domain/server/repositories/settings/models/personal_settings/personal_settings_response/personal_setting_data.dart';
@@ -24,6 +23,32 @@ class PersonalSettingsController extends GetxController
     final res = await Get.to(() => const EditResumeScreen());
     if (res is bool && res == true) {
       getResumeList(isRefresh: true);
+    }
+  }
+
+  onEditResume(ResumeData data) async {
+    final res = await Get.to(
+      () => EditResumeScreen(
+        resumeData: data,
+      ),
+    );
+    if (res is bool && res == true) {
+      getResumeList(isRefresh: true);
+    }
+  }
+
+  onDeleteResume(ResumeData data) async {
+    try {
+      final res = await _settingsRepo.deleteResume(id: data.id!);
+      if (res.isSuccess) {
+        await getResumeList(isRefresh: true);
+        showToastSuccess(res.data!.message!);
+      } else {
+        showToastError(res.errorMsg);
+      }
+    } catch (e, s) {
+      log("#DeleteResumeError", error: e, stackTrace: s);
+      if (e is RequestException) e.handleError();
     }
   }
 

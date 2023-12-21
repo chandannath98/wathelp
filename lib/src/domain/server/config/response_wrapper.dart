@@ -28,7 +28,7 @@ class ResponseWrapper<C> {
   /* Actual data pursing : Start*/
 
   late final C? data;
-  bool get isError => error != null && data == null;
+  bool get isError => error != null || data == null;
   bool get isSuccess => data != null && error == null;
 
   factory ResponseWrapper.fromMap({

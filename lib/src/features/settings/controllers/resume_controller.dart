@@ -33,7 +33,11 @@ class ResumeController extends GetxController with BaseControllerSystem {
   Map<String, String> errorMap = {};
   File? selectedResumeFile;
   double? resumeSize;
-  String? get resumeName => selectedResumeFile?.path.split("/").lastOrNull;
+  double? get getResumeSize =>
+      resumeSize ??
+      double.tryParse(currentResume?.fileSize?.split(" ").firstOrNull ?? "");
+  String? get resumeName =>
+      selectedResumeFile?.path.split("/").lastOrNull ?? currentResume?.name;
 
   nameValidationCheck() {
     if (resumeNameController.text.isEmpty) {
@@ -95,12 +99,12 @@ class ResumeController extends GetxController with BaseControllerSystem {
     try {
       final res = await _settingsController.updateResume(
         id: currentResume!.id!,
-        resumeFileName: resumeName!,
-        resumeFile: selectedResumeFile!,
+        resumeFileName: resumeName,
+        resumeFile: selectedResumeFile,
         resumeName: resumeNameController.text,
       );
       if (res.isSuccess) {
-        Get.back();
+        Get.back(result: res.data!.data!.id != null);
       } else {
         showToastError(res.errorMsg);
       }

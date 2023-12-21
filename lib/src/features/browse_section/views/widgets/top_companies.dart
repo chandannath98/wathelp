@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
 import 'package:jobpilot/src/domain/server/repositories/home/models/browse/company/top_companies.dart';
+import 'package:jobpilot/src/features/single_company/views/single_company.dart';
 import 'package:jobpilot/src/global/widgets/app/single_company_card.dart';
 import 'package:jobpilot/src/global/widgets/app_shimmer.dart';
 import 'package:jobpilot/src/services/theme/app_theme.dart';
@@ -56,7 +58,11 @@ class TopCompaniesSection extends StatelessWidget {
               positionCount: i.company.openJobsCount ?? 0,
               name: i.company.name!,
               location: i.company.country ?? "",
-              onOpenPositionTap: () {},
+              onOpenPositionTap: () => Get.to(
+                () => SingleCompanyDetailsScreen(
+                  companyUserName: i.company.username ?? "",
+                ),
+              ),
             ),
             8.height,
           ],

@@ -16,6 +16,8 @@ class PaginatedOpenPositionsData with _$PaginatedOpenPositionsData {
     @JsonKey(name: 'per_page') int? perPage,
     @JsonKey(name: 'prev_page_url') String? prevPageUrl,
     @JsonKey(name: 'to') int? to,
+    @JsonKey(name: 'last_page') int? lastPage,
+    @JsonKey(name: 'last_page_url') String? lastPageUrl,
   }) = _PaginatedOpenPositionsData;
 
   factory PaginatedOpenPositionsData.fromJson(Map<String, Object?> json) =>
@@ -61,8 +63,8 @@ class OpenJob with _$OpenJob {
     @JsonKey(name: 'postcode') String? postcode,
     @JsonKey(name: 'region') String? region,
     @JsonKey(name: 'country') String? country,
-    @JsonKey(name: 'long') String? long,
-    @JsonKey(name: 'lat') String? lat,
+    @JsonKey(name: 'long') double? long,
+    @JsonKey(name: 'lat') double? lat,
     @JsonKey(name: 'parent_job_id') String? parentJobId,
     @JsonKey(name: 'waiting_for_edit_approval') int? waitingForEditApproval,
     @JsonKey(name: 'salary_mode') String? salaryMode,

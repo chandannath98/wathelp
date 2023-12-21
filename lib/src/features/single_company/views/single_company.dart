@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:jobpilot/src/constants/assets/assets.dart';
 import 'package:jobpilot/src/constants/design/border_radius.dart';
@@ -74,8 +77,7 @@ class SingleCompanyDetailsScreen extends StatelessWidget {
                             init: FindJobController(),
                             builder: (jobController) {
                               return OpenJobsSection(
-                                onLoadMoreClick:
-                                    controller.onOpenPositionsClick,
+                                onLoadMoreClick: controller.onMoreOpenClick,
                                 relatedJobs: controller.openJobs!
                                     .map((job) => (
                                           job: job,
@@ -172,7 +174,7 @@ class CompanyDetailsHeader extends StatelessWidget {
           child: Directionality(
             textDirection: TextDirection.rtl,
             child: ElevatedButton.icon(
-              onPressed: () => controller.onOpenPositionsClick(),
+              onPressed: () => controller.onMoreOpenClick(),
               icon: const Icon(Icons.arrow_back),
               label: Text(
                 "Open Positions",
@@ -321,14 +323,32 @@ class CompanyContactSection extends StatelessWidget {
               style: context.text.titleMedium,
             ),
             12.height,
-            Row(
+            Wrap(
               children: [
                 TextButton.icon(
                   style: TextButton.styleFrom(
                     padding: horizontal12 + vertical8,
                     backgroundColor: context.color?.primary.withOpacity(0.1),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    try {
+                      Clipboard.setData(
+                        ClipboardData(
+                          text: "akjsdhfkj",
+                        ),
+                      );
+
+                      ScaffoldMessenger.maybeOf(context)?.showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            "Copied!",
+                          ),
+                        ),
+                      );
+                    } catch (e, s) {
+                      log("#CopyClipboardError", error: e, stackTrace: s);
+                    }
+                  },
                   icon: Transform.rotate(
                     angle: 15,
                     child: Icon(
@@ -336,7 +356,7 @@ class CompanyContactSection extends StatelessWidget {
                     ),
                   ),
                   label: Text(
-                    "Copy Links",
+                    "Copy Link",
                   ),
                 ),
                 SquaredIconButton(

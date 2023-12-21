@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
 import 'package:jobpilot/src/features/settings/controllers/social_settings_controller.dart';
+import 'package:jobpilot/src/global/widgets/loading_indicator.dart';
 import 'package:jobpilot/src/services/theme/app_theme.dart';
 import 'package:jobpilot/src/utilities/extensions/size_utilities.dart';
+import 'package:jobpilot/src/utilities/extensions/string_extensions.dart';
 
 class SocialInformationTab extends StatelessWidget {
   const SocialInformationTab({
@@ -12,45 +14,56 @@ class SocialInformationTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: horizontal16,
-        child: GetBuilder(
-            init: SocialSettingsController(),
-            builder: (controller) {
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  24.height,
-                  for (var i in List.generate(
-                    5,
-                    (index) => SingleSocialSettingTile(
-                      linkIndex: index + 1,
-                      title: "Facebook",
-                      controller: TextEditingController(),
-                      icon: Image.network(
-                        "https://cdn-icons-png.flaticon.com/128/4401/4401395.png",
-                      ),
-                      onRemoveCall: (value) {},
-                    ),
-                  )) ...[
-                    i,
-                    16.height,
-                  ],
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: TextButton.icon(
-                      onPressed: () {},
-                      label: Text("Add New Social Link"),
-                      icon: Icon(Icons.add_circle_outline_rounded),
+    return GetBuilder(
+        init: SocialSettingsController(),
+        builder: (controller) {
+          return (controller.isLoading)
+              ? const SizedBox.expand(
+                  child: Center(
+                    child: LoadingIndicator(),
+                  ),
+                )
+              : SingleChildScrollView(
+                  child: Padding(
+                    padding: horizontal16,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        24.height,
+                        if (controller.userSocials != null)
+                          ListView.separated(
+                            itemBuilder: (context, index) {
+                              final userSocial = controller.userSocials![index];
+                              return SingleSocialSettingTile(
+                                linkIndex: index + 1,
+                                title: userSocial.socialMedia?.upperCaseFirst ??
+                                    "",
+                                link: userSocial.url ?? "",
+                                icon: Image.network(
+                                  "https://cdn-icons-png.flaticon.com/128/4401/4401395.png",
+                                ),
+                                onRemoveCall: (value) {},
+                              );
+                            },
+                            shrinkWrap: true,
+                            itemCount: controller.userSocials!.length,
+                            separatorBuilder: (context, index) => 16.height,
+                          ),
+                        16.height,
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: TextButton.icon(
+                            onPressed: () {},
+                            label: const Text("Add New Social Link"),
+                            icon: const Icon(Icons.add_circle_outline_rounded),
+                          ),
+                        ),
+                        24.height,
+                      ],
                     ),
                   ),
-                  24.height,
-                ],
-              );
-            }),
-      ),
-    );
+                );
+        });
   }
 }
 
@@ -61,14 +74,14 @@ class SingleSocialSettingTile extends StatelessWidget {
     required this.title,
     required this.linkIndex,
     required this.onRemoveCall,
-    required this.controller,
+    required this.link,
   });
 
   final Widget icon;
   final String title;
   final int linkIndex;
   final ValueChanged<int> onRemoveCall;
-  final TextEditingController controller;
+  final String link;
 
   @override
   Widget build(BuildContext context) {
@@ -131,8 +144,16 @@ class SingleSocialSettingTile extends StatelessWidget {
                 height: 40,
                 child: Align(
                   alignment: Alignment.centerLeft,
-                  child: TextFormField(
-                    controller: controller,
+                  child: Padding(
+                    padding: vertical8 + horizontal16,
+                    child: Text(
+                      link,
+                      style: context.text.bodyLarge?.copyWith(
+                        color: context.color?.extra,
+                      ),
+                    ),
+                  ),
+                  /* TextFormField(
                     decoration: InputDecoration(
                       hintText: "Link/Url",
                       isDense: true,
@@ -141,7 +162,7 @@ class SingleSocialSettingTile extends StatelessWidget {
                       enabledBorder: InputBorder.none,
                       contentPadding: vertical8 + horizontal16,
                     ),
-                  ),
+                  ) */
                 ),
               ),
             ],

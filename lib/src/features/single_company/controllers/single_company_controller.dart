@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jobpilot/src/domain/server/config/request_handler.dart';
 import 'package:jobpilot/src/domain/server/repositories/company/company_repo.dart';
@@ -8,6 +9,7 @@ import 'package:jobpilot/src/domain/server/repositories/company/models/single_co
 import 'package:jobpilot/src/domain/server/repositories/company/models/single_company/open_positions/paginated_open_positions_data.dart';
 import 'package:jobpilot/src/domain/server/repositories/company/models/single_company/user_info/user/user.dart';
 import 'package:jobpilot/src/features/single_company/views/open_jobs.dart';
+import 'package:jobpilot/src/features/single_job/views/job_details.dart';
 import 'package:jobpilot/src/utilities/scaffold_util.dart';
 
 class SingleCompanyController extends GetxController {
@@ -37,25 +39,45 @@ class SingleCompanyController extends GetxController {
 
   showFullDescription() async {}
 
-  Future onOpenPositionsClick() async =>
+  Future onMoreOpenClick() async =>
       Get.to(() => const SingleCompanyOpenJobsScreen());
+
+  Future onOpenJobClick(String slug) async => Get.to(
+        () => JobDetailsScreen(
+          jobSlug: slug,
+        ),
+      );
 
   Future onBookmarkClick() async {}
 
-  fetchCompanyDetails() async {
+/* Pagination */
+  final singlePageSize = 10;
+  final pageScrollController = ScrollController();
+  PaginatedOpenPositionsData? get paginationData => detailResponse?.openJobs;
+
+  int get currentPageIndex => paginationData?.currentPage ?? 1;
+  bool get needPaginationControl =>
+      !isLoading &&
+      paginationData?.lastPage != null &&
+      paginationData!.lastPage! > 1;
+
+  fetchCompanyDetails({int? index, bool isRefresh = false}) async {
     try {
-      setLoadingStatus();
-      final res =
-          await _companyRepo.fetchCompanyDetailsData(userName: userName);
+      if (!isRefresh) setLoadingStatus();
+      final res = await _companyRepo.fetchCompanyDetailsData(
+        pageSize: singlePageSize,
+        pageIndex: index ?? currentPageIndex,
+        userName: userName,
+      );
       if (res.isSuccess) {
         detailResponse = res.data!;
       } else {
         showToastError(res.errorMsg);
       }
-      setLoadingStatus();
+      if (!isRefresh) setLoadingStatus(false);
     } catch (e, s) {
+      if (!isRefresh) setLoadingStatus(false);
       log("#FetchJobDetailsError", error: e, stackTrace: s);
-      setLoadingStatus(false);
       if (e is RequestException) e.handleError();
     }
   }

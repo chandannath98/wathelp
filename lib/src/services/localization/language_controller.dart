@@ -22,6 +22,7 @@ class LanguageController extends GetxController with BaseControllerSystem {
 
   fetchServerLanguageList() async {
     try {
+      setLoadingStatus();
       final res = await _settingsRepo.fetchLanguages();
       if (res.isSuccess) {
         serverLanguageSetting = res.data!;
@@ -29,7 +30,9 @@ class LanguageController extends GetxController with BaseControllerSystem {
       } else {
         showToastError(res.errorMsg);
       }
+      setLoadingStatus(false);
     } catch (e, s) {
+      setLoadingStatus(false);
       log("#FetchServerLanguageError", error: e, stackTrace: s);
       if (e is RequestException) e.handleError();
     }

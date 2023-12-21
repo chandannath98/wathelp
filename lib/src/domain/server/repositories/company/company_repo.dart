@@ -30,11 +30,19 @@ class CompanyRepository extends ServerRepo {
   }
 
   Future<ResponseWrapper<CompanyDetailsResponse>> fetchCompanyDetailsData({
+    required int pageIndex,
+    required int pageSize,
     required String userName,
   }) async {
     try {
       final path = "${API.company}/$userName";
-      final response = await requestHandler.get(path);
+      final response = await requestHandler.get(
+        path,
+        queryParams: {
+          "page": pageIndex,
+          "paginate": pageSize,
+        },
+      );
       return ResponseWrapper.fromMap(
         response: response.data,
         status: response.statusCode,

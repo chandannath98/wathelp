@@ -6,8 +6,10 @@ import 'package:jobpilot/src/domain/server/config/repository.dart';
 import 'package:jobpilot/src/domain/server/repositories/settings/models/language/language_response/language_response.dart';
 import 'package:jobpilot/src/domain/server/repositories/settings/models/personal_settings/personal_settings_response/personal_setting_data.dart';
 import 'package:jobpilot/src/domain/server/repositories/settings/models/personal_settings/update_personal_setting/update_personal_setting_response.dart';
+import 'package:jobpilot/src/domain/server/repositories/settings/models/resume/resume_delete/resume_delete_response.dart';
 import 'package:jobpilot/src/domain/server/repositories/settings/models/resume/resume_update/resume_update_response.dart';
 import 'package:jobpilot/src/domain/server/repositories/settings/models/resume/resume_upload/resume_upload_response.dart';
+import 'package:jobpilot/src/domain/server/repositories/settings/models/social_settings/response/social_setting_data.dart';
 
 import 'models/resume/resume_data/resume_data.dart';
 
@@ -74,9 +76,9 @@ class SettingsRepository extends ServerRepo {
 
   Future<ResponseWrapper<ResumeUpdateResponse>> updateResume({
     File? resumeFile,
+    String? resumeFileName,
     required int id,
     required String resumeName,
-    required String resumeFileName,
   }) async {
     try {
       final data = {
@@ -99,6 +101,24 @@ class SettingsRepository extends ServerRepo {
         print: true,
         status: response.statusCode,
         purse: (json) => ResumeUpdateResponse.fromJson(json),
+      );
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<ResponseWrapper<ResumeDeleteResponse>> deleteResume({
+    required int id,
+  }) async {
+    try {
+      final filePath = "${API.deleteCandidateResume}/$id";
+      final response = await requestHandler.delete(filePath, {});
+
+      return ResponseWrapper.fromMap(
+        response: response.data,
+        print: true,
+        status: response.statusCode,
+        purse: (json) => ResumeDeleteResponse.fromJson(json),
       );
     } catch (e) {
       rethrow;
@@ -151,6 +171,22 @@ class SettingsRepository extends ServerRepo {
         response: response.data,
         status: response.statusCode,
         purse: (json) => UpdatePersonalSettingResponse.fromJson(json),
+      );
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<ResponseWrapper<SocialSettingData>> fetchCandidateSocialData() async {
+    try {
+      final response = await requestHandler.get(
+        API.candidateSettings,
+        queryParams: {"type": CandidateSettingSections.social.name},
+      );
+      return ResponseWrapper.fromMap(
+        response: response.data,
+        status: response.statusCode,
+        purse: (json) => SocialSettingData.fromJson(json),
       );
     } catch (e) {
       rethrow;

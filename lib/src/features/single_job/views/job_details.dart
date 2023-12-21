@@ -65,6 +65,7 @@ class JobDetailsScreen extends StatelessWidget {
                     SliverToBoxAdapter(
                       child: RelatedJobsSection(
                         relatedJobs: controller.relatedJobs ?? [],
+                        onLoadMoreClick: controller.onLoadMoreClick,
                       ),
                     ),
                   ],
@@ -79,9 +80,11 @@ class RelatedJobsSection extends StatelessWidget {
   const RelatedJobsSection({
     super.key,
     required this.relatedJobs,
+    required this.onLoadMoreClick,
   });
 
   final List<RelatedJob> relatedJobs;
+  final VoidCallback onLoadMoreClick;
 
   @override
   Widget build(BuildContext context) {
@@ -113,20 +116,20 @@ class RelatedJobsSection extends StatelessWidget {
                   () => JobDetailsScreen(jobSlug: i.slug!),
                   preventDuplicates: false,
                 ),
-                onBookmarkCallback: () {},
               ),
               8.height,
             ],
             18.height,
             InkWell(
-              onTap: () {
-                print("Click");
-              },
-              child: Text(
-                "Load More Feature Jobs",
-                style: context.text.titleMedium?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: context.color?.primary,
+              onTap: onLoadMoreClick,
+              child: Padding(
+                padding: horizontal10 + vertical3,
+                child: Text(
+                  "Load More Related Jobs",
+                  style: context.text.titleMedium?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: context.color?.primary,
+                  ),
                 ),
               ),
             ),

@@ -20,6 +20,8 @@ _$PaginatedOpenPositionsDataImpl _$$PaginatedOpenPositionsDataImplFromJson(
       perPage: json['per_page'] as int?,
       prevPageUrl: json['prev_page_url'] as String?,
       to: json['to'] as int?,
+      lastPage: json['last_page'] as int?,
+      lastPageUrl: json['last_page_url'] as String?,
     );
 
 Map<String, dynamic> _$$PaginatedOpenPositionsDataImplToJson(
@@ -34,6 +36,8 @@ Map<String, dynamic> _$$PaginatedOpenPositionsDataImplToJson(
       'per_page': instance.perPage,
       'prev_page_url': instance.prevPageUrl,
       'to': instance.to,
+      'last_page': instance.lastPage,
+      'last_page_url': instance.lastPageUrl,
     };
 
 _$OpenJobImpl _$$OpenJobImplFromJson(Map<String, dynamic> json) =>
@@ -74,8 +78,8 @@ _$OpenJobImpl _$$OpenJobImplFromJson(Map<String, dynamic> json) =>
       postcode: json['postcode'] as String?,
       region: json['region'] as String?,
       country: json['country'] as String?,
-      long: json['long'] as String?,
-      lat: json['lat'] as String?,
+      long: (json['long'] as num?)?.toDouble(),
+      lat: (json['lat'] as num?)?.toDouble(),
       parentJobId: json['parent_job_id'] as String?,
       waitingForEditApproval: json['waiting_for_edit_approval'] as int?,
       salaryMode: json['salary_mode'] as String?,

@@ -7,6 +7,7 @@ import 'package:jobpilot/src/constants/design/border_radius.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
 import 'package:jobpilot/src/domain/server/repositories/settings/models/resume/resume_data/resume_data.dart';
 import 'package:jobpilot/src/features/settings/controllers/personal_settings_controller.dart';
+import 'package:jobpilot/src/features/settings/views/edit_resume.dart';
 import 'package:jobpilot/src/global/widgets/app/custom_titled_drop_down.dart';
 import 'package:jobpilot/src/global/widgets/app/custom_titled_text_field.dart';
 import 'package:jobpilot/src/global/widgets/loading_indicator.dart';
@@ -14,7 +15,6 @@ import 'package:jobpilot/src/global/widgets/pick_image.dart';
 import 'package:jobpilot/src/services/theme/app_theme.dart';
 import 'package:jobpilot/src/utilities/extensions/overlay_loader.dart';
 import 'package:jobpilot/src/utilities/extensions/size_utilities.dart';
-import 'package:jobpilot/src/utilities/form_validator_helper.dart';
 
 import 'widgets/save_changes_button.dart';
 
@@ -87,6 +87,8 @@ class ResumeListSection extends StatelessWidget {
             separatorBuilder: (context, index) => 16.height,
             itemBuilder: (context, index) => ResumeListTile(
               resumeData: controller.resumeList![index],
+              onEditResumeClick: controller.onEditResume,
+              onDeleteResumeClick: controller.onDeleteResume,
             ),
           ),
         DottedBorder(
@@ -123,9 +125,13 @@ class ResumeListTile extends StatelessWidget {
   const ResumeListTile({
     super.key,
     required this.resumeData,
+    required this.onEditResumeClick,
+    required this.onDeleteResumeClick,
   });
 
   final ResumeData resumeData;
+  final ValueChanged<ResumeData> onEditResumeClick;
+  final ValueChanged<ResumeData> onDeleteResumeClick;
 
   @override
   Widget build(BuildContext context) {
@@ -141,32 +147,28 @@ class ResumeListTile extends StatelessWidget {
         "Size: ${resumeData.fileSize ?? "??"}",
       ),
       trailing: PopupMenuButton(
-        padding: vertical8,
-        icon: Icon(Icons.more_horiz),
+        padding: vertical12,
+        icon: const Icon(Icons.more_horiz),
         splashRadius: 0.1,
         itemBuilder: (context) => [
           PopupMenuItem(
+            height: 0,
             padding: EdgeInsets.zero,
-            child: ColoredBox(
-              color: context.color?.primary.withOpacity(0.3) ?? Colors.grey,
-              child: Padding(
-                padding: horizontal12,
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.edit_note_rounded,
-                      size: 20,
-                    ),
-                    12.width,
-                    Text(
-                      "Edit Resume",
-                      style: context.text.bodyMedium?.copyWith(
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+            onTap: () async => onEditResumeClick(resumeData),
+            child: ResumeActionMenuOption(
+              title: "Edit Resume",
+              icon: Icons.edit_square,
+              baseColor: context.color?.primary ?? Colors.green,
+            ),
+          ),
+          PopupMenuItem(
+            height: 0,
+            padding: EdgeInsets.zero,
+            onTap: (() async => onDeleteResumeClick(resumeData)).withOverlay,
+            child: ResumeActionMenuOption(
+              title: "Delete Resume",
+              icon: Icons.delete_outline_rounded,
+              baseColor: Colors.red.shade700,
             ),
           ),
         ],
@@ -175,6 +177,48 @@ class ResumeListTile extends StatelessWidget {
         Icons.view_timeline_rounded,
         size: 32,
         color: context.color?.primary,
+      ),
+    );
+  }
+}
+
+class ResumeActionMenuOption extends StatelessWidget {
+  const ResumeActionMenuOption({
+    super.key,
+    required this.title,
+    required this.icon,
+    required this.baseColor,
+  });
+
+  final String title;
+  final IconData icon;
+  final Color baseColor;
+
+  @override
+  Widget build(BuildContext context) {
+    return ColoredBox(
+      color: baseColor.withOpacity(0.1),
+      child: Padding(
+        padding: horizontal16 + vertical12,
+        child: Row(
+          children: [
+            Icon(
+              icon,
+              size: 20,
+              color: baseColor,
+            ),
+            12.width,
+            Expanded(
+              child: Text(
+                title,
+                style: context.text.labelLarge?.copyWith(
+                  fontWeight: FontWeight.w500,
+                  color: baseColor,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

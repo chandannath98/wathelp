@@ -29,7 +29,7 @@ class TestimonialListSection extends StatelessWidget {
             ),
           ),
           18.height,
-          for (Testimonial i in dataList ?? <Testimonial>[]) ...[
+          for (Testimonial i in dataList?.take(5) ?? <Testimonial>[]) ...[
             8.height,
             SingleTestimonialWidget(
               starCount: 5,

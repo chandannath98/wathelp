@@ -85,7 +85,7 @@ class EditResumeScreen extends StatelessWidget {
                           8.height,
                           PickResumeWidget(
                             fileName: controller.resumeName,
-                            fileSizeMB: controller.resumeSize,
+                            fileSizeMB: controller.getResumeSize,
                             onAddFileClick: () async {
                               final res = await _pickPdfResume();
                               if (res != null) {

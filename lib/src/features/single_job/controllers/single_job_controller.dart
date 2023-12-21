@@ -9,6 +9,7 @@ import 'package:jobpilot/src/domain/server/repositories/jobs/models/job_details/
 import 'package:jobpilot/src/domain/server/repositories/jobs/models/job_details/job_resume/job_resume.dart';
 import 'package:jobpilot/src/domain/server/repositories/jobs/models/job_details/related_jobs/related_job.dart';
 import 'package:jobpilot/src/features/authentication/views/login_system_switcher.dart';
+import 'package:jobpilot/src/features/find_jobs/views/find_jobs.dart';
 import 'package:jobpilot/src/features/single_job/views/apply_job.dart';
 import 'package:jobpilot/src/features/single_job/views/job_description.dart';
 import 'package:jobpilot/src/services/authentication/auth_controller.dart';
@@ -40,6 +41,8 @@ class SingleJobController extends GetxController {
   Company? get company => detailResponse?.job?.company;
   List<RelatedJob>? get relatedJobs => detailResponse?.relatedJobs;
   List<JobResume>? get resumes => detailResponse?.resumes;
+
+  onLoadMoreClick() async => Get.to(() => const FindJobScreen());
 
   showFullDescription() async {
     Get.to(

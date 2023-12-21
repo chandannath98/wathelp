@@ -39,6 +39,10 @@ mixin _$PaginatedOpenPositionsData {
   String? get prevPageUrl => throw _privateConstructorUsedError;
   @JsonKey(name: 'to')
   int? get to => throw _privateConstructorUsedError;
+  @JsonKey(name: 'last_page')
+  int? get lastPage => throw _privateConstructorUsedError;
+  @JsonKey(name: 'last_page_url')
+  String? get lastPageUrl => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -62,7 +66,9 @@ abstract class $PaginatedOpenPositionsDataCopyWith<$Res> {
       @JsonKey(name: 'path') String? path,
       @JsonKey(name: 'per_page') int? perPage,
       @JsonKey(name: 'prev_page_url') String? prevPageUrl,
-      @JsonKey(name: 'to') int? to});
+      @JsonKey(name: 'to') int? to,
+      @JsonKey(name: 'last_page') int? lastPage,
+      @JsonKey(name: 'last_page_url') String? lastPageUrl});
 }
 
 /// @nodoc
@@ -88,6 +94,8 @@ class _$PaginatedOpenPositionsDataCopyWithImpl<$Res,
     Object? perPage = freezed,
     Object? prevPageUrl = freezed,
     Object? to = freezed,
+    Object? lastPage = freezed,
+    Object? lastPageUrl = freezed,
   }) {
     return _then(_value.copyWith(
       currentPage: freezed == currentPage
@@ -126,6 +134,14 @@ class _$PaginatedOpenPositionsDataCopyWithImpl<$Res,
           ? _value.to
           : to // ignore: cast_nullable_to_non_nullable
               as int?,
+      lastPage: freezed == lastPage
+          ? _value.lastPage
+          : lastPage // ignore: cast_nullable_to_non_nullable
+              as int?,
+      lastPageUrl: freezed == lastPageUrl
+          ? _value.lastPageUrl
+          : lastPageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -148,7 +164,9 @@ abstract class _$$PaginatedOpenPositionsDataImplCopyWith<$Res>
       @JsonKey(name: 'path') String? path,
       @JsonKey(name: 'per_page') int? perPage,
       @JsonKey(name: 'prev_page_url') String? prevPageUrl,
-      @JsonKey(name: 'to') int? to});
+      @JsonKey(name: 'to') int? to,
+      @JsonKey(name: 'last_page') int? lastPage,
+      @JsonKey(name: 'last_page_url') String? lastPageUrl});
 }
 
 /// @nodoc
@@ -173,6 +191,8 @@ class __$$PaginatedOpenPositionsDataImplCopyWithImpl<$Res>
     Object? perPage = freezed,
     Object? prevPageUrl = freezed,
     Object? to = freezed,
+    Object? lastPage = freezed,
+    Object? lastPageUrl = freezed,
   }) {
     return _then(_$PaginatedOpenPositionsDataImpl(
       currentPage: freezed == currentPage
@@ -211,6 +231,14 @@ class __$$PaginatedOpenPositionsDataImplCopyWithImpl<$Res>
           ? _value.to
           : to // ignore: cast_nullable_to_non_nullable
               as int?,
+      lastPage: freezed == lastPage
+          ? _value.lastPage
+          : lastPage // ignore: cast_nullable_to_non_nullable
+              as int?,
+      lastPageUrl: freezed == lastPageUrl
+          ? _value.lastPageUrl
+          : lastPageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -229,7 +257,9 @@ class _$PaginatedOpenPositionsDataImpl
       @JsonKey(name: 'path') this.path,
       @JsonKey(name: 'per_page') this.perPage,
       @JsonKey(name: 'prev_page_url') this.prevPageUrl,
-      @JsonKey(name: 'to') this.to})
+      @JsonKey(name: 'to') this.to,
+      @JsonKey(name: 'last_page') this.lastPage,
+      @JsonKey(name: 'last_page_url') this.lastPageUrl})
       : _data = data;
 
   factory _$PaginatedOpenPositionsDataImpl.fromJson(
@@ -271,10 +301,16 @@ class _$PaginatedOpenPositionsDataImpl
   @override
   @JsonKey(name: 'to')
   final int? to;
+  @override
+  @JsonKey(name: 'last_page')
+  final int? lastPage;
+  @override
+  @JsonKey(name: 'last_page_url')
+  final String? lastPageUrl;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'PaginatedOpenPositionsData(currentPage: $currentPage, data: $data, firstPageUrl: $firstPageUrl, from: $from, nextPageUrl: $nextPageUrl, path: $path, perPage: $perPage, prevPageUrl: $prevPageUrl, to: $to)';
+    return 'PaginatedOpenPositionsData(currentPage: $currentPage, data: $data, firstPageUrl: $firstPageUrl, from: $from, nextPageUrl: $nextPageUrl, path: $path, perPage: $perPage, prevPageUrl: $prevPageUrl, to: $to, lastPage: $lastPage, lastPageUrl: $lastPageUrl)';
   }
 
   @override
@@ -290,7 +326,9 @@ class _$PaginatedOpenPositionsDataImpl
       ..add(DiagnosticsProperty('path', path))
       ..add(DiagnosticsProperty('perPage', perPage))
       ..add(DiagnosticsProperty('prevPageUrl', prevPageUrl))
-      ..add(DiagnosticsProperty('to', to));
+      ..add(DiagnosticsProperty('to', to))
+      ..add(DiagnosticsProperty('lastPage', lastPage))
+      ..add(DiagnosticsProperty('lastPageUrl', lastPageUrl));
   }
 
   @override
@@ -310,7 +348,11 @@ class _$PaginatedOpenPositionsDataImpl
             (identical(other.perPage, perPage) || other.perPage == perPage) &&
             (identical(other.prevPageUrl, prevPageUrl) ||
                 other.prevPageUrl == prevPageUrl) &&
-            (identical(other.to, to) || other.to == to));
+            (identical(other.to, to) || other.to == to) &&
+            (identical(other.lastPage, lastPage) ||
+                other.lastPage == lastPage) &&
+            (identical(other.lastPageUrl, lastPageUrl) ||
+                other.lastPageUrl == lastPageUrl));
   }
 
   @JsonKey(ignore: true)
@@ -325,7 +367,9 @@ class _$PaginatedOpenPositionsDataImpl
       path,
       perPage,
       prevPageUrl,
-      to);
+      to,
+      lastPage,
+      lastPageUrl);
 
   @JsonKey(ignore: true)
   @override
@@ -345,15 +389,18 @@ class _$PaginatedOpenPositionsDataImpl
 abstract class _PaginatedOpenPositionsData
     implements PaginatedOpenPositionsData {
   const factory _PaginatedOpenPositionsData(
-      {@JsonKey(name: 'current_page') final int? currentPage,
-      @JsonKey(name: 'data') final List<OpenJob>? data,
-      @JsonKey(name: 'first_page_url') final String? firstPageUrl,
-      @JsonKey(name: 'from') final int? from,
-      @JsonKey(name: 'next_page_url') final String? nextPageUrl,
-      @JsonKey(name: 'path') final String? path,
-      @JsonKey(name: 'per_page') final int? perPage,
-      @JsonKey(name: 'prev_page_url') final String? prevPageUrl,
-      @JsonKey(name: 'to') final int? to}) = _$PaginatedOpenPositionsDataImpl;
+          {@JsonKey(name: 'current_page') final int? currentPage,
+          @JsonKey(name: 'data') final List<OpenJob>? data,
+          @JsonKey(name: 'first_page_url') final String? firstPageUrl,
+          @JsonKey(name: 'from') final int? from,
+          @JsonKey(name: 'next_page_url') final String? nextPageUrl,
+          @JsonKey(name: 'path') final String? path,
+          @JsonKey(name: 'per_page') final int? perPage,
+          @JsonKey(name: 'prev_page_url') final String? prevPageUrl,
+          @JsonKey(name: 'to') final int? to,
+          @JsonKey(name: 'last_page') final int? lastPage,
+          @JsonKey(name: 'last_page_url') final String? lastPageUrl}) =
+      _$PaginatedOpenPositionsDataImpl;
 
   factory _PaginatedOpenPositionsData.fromJson(Map<String, dynamic> json) =
       _$PaginatedOpenPositionsDataImpl.fromJson;
@@ -385,6 +432,12 @@ abstract class _PaginatedOpenPositionsData
   @override
   @JsonKey(name: 'to')
   int? get to;
+  @override
+  @JsonKey(name: 'last_page')
+  int? get lastPage;
+  @override
+  @JsonKey(name: 'last_page_url')
+  String? get lastPageUrl;
   @override
   @JsonKey(ignore: true)
   _$$PaginatedOpenPositionsDataImplCopyWith<_$PaginatedOpenPositionsDataImpl>
@@ -470,9 +523,9 @@ mixin _$OpenJob {
   @JsonKey(name: 'country')
   String? get country => throw _privateConstructorUsedError;
   @JsonKey(name: 'long')
-  String? get long => throw _privateConstructorUsedError;
+  double? get long => throw _privateConstructorUsedError;
   @JsonKey(name: 'lat')
-  String? get lat => throw _privateConstructorUsedError;
+  double? get lat => throw _privateConstructorUsedError;
   @JsonKey(name: 'parent_job_id')
   String? get parentJobId => throw _privateConstructorUsedError;
   @JsonKey(name: 'waiting_for_edit_approval')
@@ -543,8 +596,8 @@ abstract class $OpenJobCopyWith<$Res> {
       @JsonKey(name: 'postcode') String? postcode,
       @JsonKey(name: 'region') String? region,
       @JsonKey(name: 'country') String? country,
-      @JsonKey(name: 'long') String? long,
-      @JsonKey(name: 'lat') String? lat,
+      @JsonKey(name: 'long') double? long,
+      @JsonKey(name: 'lat') double? lat,
       @JsonKey(name: 'parent_job_id') String? parentJobId,
       @JsonKey(name: 'waiting_for_edit_approval') int? waitingForEditApproval,
       @JsonKey(name: 'salary_mode') String? salaryMode,
@@ -772,11 +825,11 @@ class _$OpenJobCopyWithImpl<$Res, $Val extends OpenJob>
       long: freezed == long
           ? _value.long
           : long // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as double?,
       lat: freezed == lat
           ? _value.lat
           : lat // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as double?,
       parentJobId: freezed == parentJobId
           ? _value.parentJobId
           : parentJobId // ignore: cast_nullable_to_non_nullable
@@ -893,8 +946,8 @@ abstract class _$$OpenJobImplCopyWith<$Res> implements $OpenJobCopyWith<$Res> {
       @JsonKey(name: 'postcode') String? postcode,
       @JsonKey(name: 'region') String? region,
       @JsonKey(name: 'country') String? country,
-      @JsonKey(name: 'long') String? long,
-      @JsonKey(name: 'lat') String? lat,
+      @JsonKey(name: 'long') double? long,
+      @JsonKey(name: 'lat') double? lat,
       @JsonKey(name: 'parent_job_id') String? parentJobId,
       @JsonKey(name: 'waiting_for_edit_approval') int? waitingForEditApproval,
       @JsonKey(name: 'salary_mode') String? salaryMode,
@@ -1122,11 +1175,11 @@ class __$$OpenJobImplCopyWithImpl<$Res>
       long: freezed == long
           ? _value.long
           : long // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as double?,
       lat: freezed == lat
           ? _value.lat
           : lat // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as double?,
       parentJobId: freezed == parentJobId
           ? _value.parentJobId
           : parentJobId // ignore: cast_nullable_to_non_nullable
@@ -1342,10 +1395,10 @@ class _$OpenJobImpl with DiagnosticableTreeMixin implements _OpenJob {
   final String? country;
   @override
   @JsonKey(name: 'long')
-  final String? long;
+  final double? long;
   @override
   @JsonKey(name: 'lat')
-  final String? lat;
+  final double? lat;
   @override
   @JsonKey(name: 'parent_job_id')
   final String? parentJobId;
@@ -1640,8 +1693,8 @@ abstract class _OpenJob implements OpenJob {
       @JsonKey(name: 'postcode') final String? postcode,
       @JsonKey(name: 'region') final String? region,
       @JsonKey(name: 'country') final String? country,
-      @JsonKey(name: 'long') final String? long,
-      @JsonKey(name: 'lat') final String? lat,
+      @JsonKey(name: 'long') final double? long,
+      @JsonKey(name: 'lat') final double? lat,
       @JsonKey(name: 'parent_job_id') final String? parentJobId,
       @JsonKey(name: 'waiting_for_edit_approval')
       final int? waitingForEditApproval,
@@ -1767,10 +1820,10 @@ abstract class _OpenJob implements OpenJob {
   String? get country;
   @override
   @JsonKey(name: 'long')
-  String? get long;
+  double? get long;
   @override
   @JsonKey(name: 'lat')
-  String? get lat;
+  double? get lat;
   @override
   @JsonKey(name: 'parent_job_id')
   String? get parentJobId;

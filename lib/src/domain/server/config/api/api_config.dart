@@ -38,6 +38,7 @@ class API {
   static const candidateSettings = "/candidate/settings";
   static const uploadCandidateResume = "/candidate/upload-resume";
   static const updateCandidateResume = "/candidate/update-resume";
+  static const deleteCandidateResume = "/candidate/delete-resume";
 
   //Others
   static const popularTag = "/popular-tags";
