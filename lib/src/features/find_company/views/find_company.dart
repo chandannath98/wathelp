@@ -3,13 +3,28 @@ import 'package:get/get.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
 import 'package:jobpilot/src/features/browse_section/views/widgets/search_box.dart';
 import 'package:jobpilot/src/features/find_company/controllers/find_company_controllers.dart';
-import 'package:jobpilot/src/features/single_company/views/single_company.dart';
+import 'package:jobpilot/src/global/widgets/app/app_logo_app_bar.dart';
 import 'package:jobpilot/src/global/widgets/app/single_company_card.dart';
 import 'package:jobpilot/src/global/widgets/circular_paginator.dart';
 import 'package:jobpilot/src/global/widgets/loading_indicator.dart';
 import 'package:jobpilot/src/services/theme/app_theme.dart';
 import 'package:jobpilot/src/utilities/extensions/size_utilities.dart';
 import 'package:jobpilot/src/utilities/extensions/string_extensions.dart';
+
+class FindCompanyScreen extends StatelessWidget {
+  const FindCompanyScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Scaffold(
+      appBar: AppLogoAppBar(
+        centerTitle: true,
+        autoLeading: true,
+      ),
+      body: FindCompanyPage(),
+    );
+  }
+}
 
 class FindCompanyPage extends StatelessWidget {
   const FindCompanyPage({
@@ -49,10 +64,13 @@ class FindCompanyPage extends StatelessWidget {
                                   positionCount: company.openJobsCount ?? 0,
                                   name: company.name ?? "",
                                   location: company.country ?? "",
-                                  onOpenPositionTap: () => Get.to(
-                                    () => SingleCompanyDetailsScreen(
-                                      companyUserName: company.username!,
-                                    ),
+                                  onCardTap: () =>
+                                      FindCompanyController.openCompanyPage(
+                                    company.username!,
+                                  ),
+                                  onOpenPositionTap: () => FindCompanyController
+                                      .openOpenPositionsClick(
+                                    company.username!,
                                   ),
                                 ),
                               );

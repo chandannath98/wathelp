@@ -70,9 +70,11 @@ class JobAlertPageWidget extends StatelessWidget {
                           delegate: SliverChildBuilderDelegate(
                             (context, index) {
                               final job = controller.currentJobList![index];
-                              return const Padding(
+                              return Padding(
                                 padding: vertical6,
-                                child: SingleJobAlertWidget(),
+                                child: SingleJobAlertWidget(
+                                  jobData: job,
+                                ),
                               );
                             },
                             childCount: controller.currentJobList!.length,

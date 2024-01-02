@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:jobpilot/src/domain/server/config/repository.dart';
 import 'package:jobpilot/src/domain/server/repositories/jobs/models/applied_jobs/paginated_applied_jobs/response/paginated_applied_jobs_response.dart';
@@ -21,6 +23,7 @@ class JobsRepository extends ServerRepo {
     SearchQuery? query,
   }) async {
     try {
+      log("Job Search : ${query?.toJson()}");
       final response = await requestHandler.get(
         API.job,
         queryParams: {

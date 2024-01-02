@@ -37,12 +37,11 @@ class MenuPageController extends GetxController {
   }
 
   _moveToHomePageIndex(int index) {
-    if (!HomepageController.find.isClosed &&
-        HomepageController.find.pageController.hasClients) {
-      HomepageController.find.pageController.animateToPage(
+    if (HomepageController.find.pageController.hasClients) {
+      HomepageController.find.pageController.jumpToPage(
         index,
-        duration: 320.milliseconds,
-        curve: Curves.ease,
+        // duration: 320.milliseconds,
+        // curve: Curves.ease,
       );
     }
   }
@@ -73,8 +72,11 @@ class MenuPageController extends GetxController {
   gotoAppliedJobs() => _moveToHomePageIndex(3);
   gotoFavoriteJobs() {}
   gotoSettings() => Get.to(() => const SettingsScreen());
+  signOut() => AuthController.find.logOut();
 
 // About Us
+  browseEmployers() =>
+      (isAuthenticated) ? _moveToHomePageIndex(1) : _moveToHomePageIndex(3);
   gotoBlogs() => _openLinks(API.posts);
   gotoAbout() => _openLinks(API.about);
   gotoContact() => _openLinks(API.contacts);

@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:get/get.dart';
+import 'package:jobpilot/src/domain/server/config/repository.dart';
 import 'package:jobpilot/src/domain/server/config/request_handler.dart';
 import 'package:jobpilot/src/domain/server/repositories/jobs/jobs_repo.dart';
 import 'package:jobpilot/src/domain/server/repositories/jobs/models/job_details/company/company.dart';
@@ -13,6 +14,7 @@ import 'package:jobpilot/src/features/find_jobs/views/find_jobs.dart';
 import 'package:jobpilot/src/features/single_job/views/apply_job.dart';
 import 'package:jobpilot/src/features/single_job/views/job_description.dart';
 import 'package:jobpilot/src/services/authentication/auth_controller.dart';
+import 'package:jobpilot/src/utilities/functions.dart';
 import 'package:jobpilot/src/utilities/scaffold_util.dart';
 
 class SingleJobController extends GetxController {
@@ -82,6 +84,10 @@ class SingleJobController extends GetxController {
   }
 
   Future onBookmarkJobClick() async {
+    if (!AuthController.find.isAuthenticated) {
+      Get.to(() => const LoginSystemScreen());
+      return;
+    }
     try {
       final res = await _jobRepo.toggleJobBookmark(jobDetails!.id!);
       if (res.isSuccess) {
@@ -115,4 +121,7 @@ class SingleJobController extends GetxController {
       if (e is RequestException) e.handleError();
     }
   }
+
+  copyWebLink() async =>
+      await copyClipboard("${API.baseUrl.replaceAll("/api", "")}/job/$slug");
 }

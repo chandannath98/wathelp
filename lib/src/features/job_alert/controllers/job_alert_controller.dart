@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jobpilot/src/domain/server/config/request_handler.dart';
 import 'package:jobpilot/src/domain/server/repositories/jobs/jobs_repo.dart';
+import 'package:jobpilot/src/domain/server/repositories/jobs/models/job_alert/alert_job/alert_job.dart';
 import 'package:jobpilot/src/domain/server/repositories/jobs/models/job_alert/paginated_response/paginated_job_alert_response.dart';
 import 'package:jobpilot/src/features/single_job/views/job_details.dart';
 import 'package:jobpilot/src/services/controller_mixin/controller_mixins.dart';
@@ -29,7 +30,7 @@ class JobAlertController extends GetxController with BaseControllerSystem {
   final pageScrollController = ScrollController();
   int get currentPageIndex => paginationData?.currentPage ?? 1;
   PaginatedJobAlertData? paginationData;
-  List<String>? get currentJobList => paginationData?.data;
+  List<AlertJob>? get currentJobList => paginationData?.data;
 
   bool get needPaginationControl =>
       !isLoading &&

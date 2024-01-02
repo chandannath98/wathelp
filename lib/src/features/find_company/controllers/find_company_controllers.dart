@@ -10,6 +10,9 @@ import 'package:jobpilot/src/domain/server/repositories/company/models/company_q
 import 'package:jobpilot/src/domain/server/repositories/company/models/search_response/response/paginated_company_list.dart';
 import 'package:jobpilot/src/domain/server/repositories/server_static/popular_tag/popular_tag.dart';
 import 'package:jobpilot/src/domain/server/repositories/server_static/server_static_repo.dart';
+import 'package:jobpilot/src/features/single_company/controllers/single_company_controller.dart';
+import 'package:jobpilot/src/features/single_company/views/open_jobs.dart';
+import 'package:jobpilot/src/features/single_company/views/single_company.dart';
 import 'package:jobpilot/src/utilities/functions.dart';
 import 'package:jobpilot/src/utilities/scaffold_util.dart';
 
@@ -36,6 +39,20 @@ class FindCompanyController extends GetxController {
     locationController.dispose();
     super.onClose();
   }
+
+//NOTE: Used all over the application!
+  static openCompanyPage(String userName) => Get.to(
+        () => SingleCompanyDetailsScreen(
+          companyUserName: userName,
+        ),
+      );
+
+//NOTE: Used all over the application!
+  static openOpenPositionsClick(String userName) => Get.to(
+        () => SingleCompanyOpenJobsScreen(
+          userName: userName,
+        ),
+      );
 
   final _staticStorage = StaticStorage();
   final _staticRepo = ServerStaticRepository();

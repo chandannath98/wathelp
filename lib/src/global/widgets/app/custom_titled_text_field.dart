@@ -16,6 +16,7 @@ class CustomTitledTextFormField extends StatelessWidget {
     this.prefixIcon,
     this.suffixIcon,
     this.inputType,
+    this.replacementFunction,
   });
 
   final String title;
@@ -29,28 +30,39 @@ class CustomTitledTextFormField extends StatelessWidget {
   final ValueChanged<String>? submit;
   final ValueChanged<String>? onChange;
   final TextEditingController? controller;
+  final VoidCallback? replacementFunction;
 
   @override
   Widget build(BuildContext context) {
+    Widget formField = TextFormField(
+      focusNode: focus,
+      onChanged: onChange,
+      controller: controller,
+      onFieldSubmitted: submit,
+      keyboardType: inputType,
+      initialValue: initialValue,
+      decoration: InputDecoration(
+        hintText: hintText ?? title,
+        prefixIcon: prefixIcon,
+        suffixIcon: suffixIcon,
+      ),
+      validator: FieldValidator.validate(name: title, validators ?? []),
+    );
+    if (replacementFunction != null) {
+      formField = InkWell(
+        onTap: replacementFunction,
+        child: AbsorbPointer(
+          absorbing: true,
+          child: formField,
+        ),
+      );
+    }
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Text(title),
         6.height,
-        TextFormField(
-          focusNode: focus,
-          onChanged: onChange,
-          controller: controller,
-          onFieldSubmitted: submit,
-          keyboardType: inputType,
-          initialValue: initialValue,
-          decoration: InputDecoration(
-            hintText: hintText ?? title,
-            prefixIcon: prefixIcon,
-            suffixIcon: suffixIcon,
-          ),
-          validator: FieldValidator.validate(name: title, validators ?? []),
-        ),
+        formField,
       ],
     );
   }

@@ -9,11 +9,25 @@ import 'package:jobpilot/src/services/theme/app_theme.dart';
 import 'package:jobpilot/src/utilities/extensions/size_utilities.dart';
 
 class SingleCompanyOpenJobsScreen extends StatelessWidget {
-  const SingleCompanyOpenJobsScreen({super.key});
+  const SingleCompanyOpenJobsScreen({
+    super.key,
+    this.userName,
+    this.controller,
+  }) : assert(
+          !(userName == null && controller == null),
+          "BOTH (userName) AND (controller) CAN'T BE NULL TOGETHER!",
+        );
+
+  final String? userName;
+  final SingleCompanyController? controller;
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder<SingleCompanyController>(
+      init: controller ??
+          SingleCompanyController(
+            userName: userName!,
+          ),
       builder: (controller) {
         return Scaffold(
           appBar: AppBar(

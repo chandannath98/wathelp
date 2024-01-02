@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
 import 'package:jobpilot/src/utilities/extensions/size_utilities.dart';
 
@@ -34,8 +35,11 @@ class JobDescriptionHtmlWidget extends StatelessWidget {
           children: [
             Expanded(
               child: SingleChildScrollView(
-                child: Html(
-                  data: htmlText,
+                child: HtmlWidget(
+                  htmlText,
+                  textStyle: const TextStyle(
+                    fontSize: 18,
+                  ),
                 ),
               ),
             ),
@@ -55,6 +59,7 @@ class JobDescriptionHtmlWidget extends StatelessWidget {
                               icon: const Icon(Icons.arrow_back),
                               label: const Text(
                                 "Apply Now",
+                                textAlign: TextAlign.center,
                               ),
                             ),
                           ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
+import 'package:jobpilot/src/domain/server/repositories/jobs/models/job_alert/alert_job/alert_job.dart';
 import 'package:jobpilot/src/global/widgets/app/vertical_icon_text.dart';
 import 'package:jobpilot/src/services/theme/app_theme.dart';
 import 'package:jobpilot/src/utilities/extensions/size_utilities.dart';
@@ -7,7 +8,10 @@ import 'package:jobpilot/src/utilities/extensions/size_utilities.dart';
 class SingleJobAlertWidget extends StatelessWidget {
   const SingleJobAlertWidget({
     super.key,
+    required this.jobData,
   });
+
+  final AlertJob jobData;
 
   @override
   Widget build(BuildContext context) {
@@ -121,6 +125,7 @@ class SingleJobAlertWidget extends StatelessWidget {
                       ),
                       label: const Text(
                         "Apply Now",
+                        textAlign: TextAlign.center,
                       ),
                     ),
                   ),

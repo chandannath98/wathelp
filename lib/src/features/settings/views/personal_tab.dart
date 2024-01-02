@@ -3,11 +3,13 @@ import 'dart:io';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:jobpilot/src/constants/design/border_radius.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
 import 'package:jobpilot/src/domain/server/repositories/settings/models/resume/resume_data/resume_data.dart';
 import 'package:jobpilot/src/features/settings/controllers/personal_settings_controller.dart';
 import 'package:jobpilot/src/features/settings/views/edit_resume.dart';
+import 'package:jobpilot/src/features/settings/views/widgets/date_picker.dart';
 import 'package:jobpilot/src/global/widgets/app/custom_titled_drop_down.dart';
 import 'package:jobpilot/src/global/widgets/app/custom_titled_text_field.dart';
 import 'package:jobpilot/src/global/widgets/loading_indicator.dart';
@@ -266,13 +268,13 @@ class BasicInformationSection extends StatelessWidget {
         6.height,
         CustomTitledTextFormField(
           title: "Name",
-          initialValue: controller.currentPersonalData?.name,
+          controller: controller.nameTextController,
           onChange: (value) => controller.updateName(value),
         ),
         16.height,
         CustomTitledTextFormField(
           title: "Title/Headline",
-          initialValue: controller.currentPersonalData?.title,
+          controller: controller.headlineTextController,
           onChange: (value) => controller.updateTitle(value),
         ),
         16.height,
@@ -301,11 +303,18 @@ class BasicInformationSection extends StatelessWidget {
         ),
         16.height,
         CustomTitledTextFormField(
-          hintText: "DD/MM/YYYY",
+          hintText: "DD-MM-YYYY",
           title: "Date of Birth",
           inputType: TextInputType.datetime,
+          controller: controller.birthDateTextController,
           onChange: (value) => controller.updateBirthDate(value),
-          initialValue: controller.currentPersonalData?.dateOfBirth,
+          replacementFunction: () async {
+            final date = await pickDate(
+              context,
+              converter: (date) => DateFormat("d-M-y").format(date),
+            );
+            if (date != null) controller.updateBirthDate(date.text!);
+          },
           prefixIcon: Icon(
             Icons.calendar_today_outlined,
             color: context.color?.primary,
@@ -315,8 +324,8 @@ class BasicInformationSection extends StatelessWidget {
         CustomTitledTextFormField(
           hintText: "Link/Url...",
           title: "Personal Website",
+          controller: controller.websiteTextController,
           onChange: (value) => controller.updateWebsite(value),
-          initialValue: controller.currentPersonalData?.website,
           prefixIcon: Icon(
             Icons.link_rounded,
             color: context.color?.primary,

@@ -105,7 +105,10 @@ class LoginController extends GetxController {
   }) async {
     try {
       final res = await _authRepo.requestResetPassword(
-          code: code, email: email, password: password);
+        code: code,
+        email: email,
+        password: password,
+      );
       if (res.isSuccess) {
         showLogin = true;
         showToastSuccess(res.data!);

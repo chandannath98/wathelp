@@ -40,7 +40,7 @@ class TestimonialListSection extends StatelessWidget {
             ),
             8.height,
           ],
-          18.height,
+          /* 18.height,
           InkWell(
             onTap: () {},
             child: Text(
@@ -50,7 +50,7 @@ class TestimonialListSection extends StatelessWidget {
                 color: context.color?.primary,
               ),
             ),
-          ),
+          ), */
           18.height,
         ],
       ),

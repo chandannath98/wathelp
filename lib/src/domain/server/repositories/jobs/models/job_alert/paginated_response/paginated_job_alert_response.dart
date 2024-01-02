@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:jobpilot/src/domain/server/repositories/jobs/models/job_alert/alert_job/alert_job.dart';
 
 import '../links/links.dart';
 
@@ -21,7 +22,7 @@ class PaginatedJobAlertResponse with _$PaginatedJobAlertResponse {
 class PaginatedJobAlertData with _$PaginatedJobAlertData {
   const factory PaginatedJobAlertData({
     @JsonKey(name: 'current_page') int? currentPage,
-    @JsonKey(name: 'data') List<String>? data,
+    @JsonKey(name: 'data') List<AlertJob>? data,
     @JsonKey(name: 'first_page_url') String? firstPageUrl,
     @JsonKey(name: 'from') int? from,
     @JsonKey(name: 'last_page') int? lastPage,

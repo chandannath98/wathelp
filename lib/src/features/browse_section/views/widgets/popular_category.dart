@@ -53,7 +53,8 @@ class HomePopularCategorySection extends StatelessWidget {
                       onTap: i.onTap,
                     ),
                 10.height,
-                InkWell(
+                // Removed bcz categories are limited!
+                /* InkWell(
                   onTap: () {
                     print("Click");
                   },
@@ -64,7 +65,7 @@ class HomePopularCategorySection extends StatelessWidget {
                       color: context.color?.primary,
                     ),
                   ),
-                ),
+                ), */
               ],
             ),
           );

@@ -23,7 +23,6 @@ class Homepage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomepageController>(
-      init: HomepageController(),
       builder: (controller) {
         return Scaffold(
           backgroundColor: context.color?.background,
@@ -55,7 +54,8 @@ class Homepage extends StatelessWidget {
                   : const (SvgIcon(Assets.loginIcon), "Login"),
               controller.isAuthenticated
                   ? const (SvgIcon(Assets.jobsIcon), "Job Alert")
-                  : const (SvgIcon(Assets.pricingIcon), "Pricing"),
+                  : const (SvgIcon(Assets.companyIcon), "Company"),
+              // : const (SvgIcon(Assets.pricingIcon), "Pricing"),
               const (SvgIcon(Assets.menuIcon), "Menu"),
             ],
             onItemClick: controller.changePage,
@@ -75,7 +75,7 @@ class Homepage extends StatelessWidget {
                   : const LoginSystemSwitcher(),
               controller.isAuthenticated
                   ? const JobAlertPageWidget()
-                  : const PricingPage(),
+                  : const FindCompanyPage(),
               const MenuScreen(),
             ],
           ),

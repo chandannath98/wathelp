@@ -228,7 +228,7 @@ mixin _$PaginatedJobAlertData {
   @JsonKey(name: 'current_page')
   int? get currentPage => throw _privateConstructorUsedError;
   @JsonKey(name: 'data')
-  List<String>? get data => throw _privateConstructorUsedError;
+  List<AlertJob>? get data => throw _privateConstructorUsedError;
   @JsonKey(name: 'first_page_url')
   String? get firstPageUrl => throw _privateConstructorUsedError;
   @JsonKey(name: 'from')
@@ -266,7 +266,7 @@ abstract class $PaginatedJobAlertDataCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'current_page') int? currentPage,
-      @JsonKey(name: 'data') List<String>? data,
+      @JsonKey(name: 'data') List<AlertJob>? data,
       @JsonKey(name: 'first_page_url') String? firstPageUrl,
       @JsonKey(name: 'from') int? from,
       @JsonKey(name: 'last_page') int? lastPage,
@@ -316,7 +316,7 @@ class _$PaginatedJobAlertDataCopyWithImpl<$Res,
       data: freezed == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
+              as List<AlertJob>?,
       firstPageUrl: freezed == firstPageUrl
           ? _value.firstPageUrl
           : firstPageUrl // ignore: cast_nullable_to_non_nullable
@@ -376,7 +376,7 @@ abstract class _$$PaginatedJobAlertDataImplCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: 'current_page') int? currentPage,
-      @JsonKey(name: 'data') List<String>? data,
+      @JsonKey(name: 'data') List<AlertJob>? data,
       @JsonKey(name: 'first_page_url') String? firstPageUrl,
       @JsonKey(name: 'from') int? from,
       @JsonKey(name: 'last_page') int? lastPage,
@@ -424,7 +424,7 @@ class __$$PaginatedJobAlertDataImplCopyWithImpl<$Res>
       data: freezed == data
           ? _value._data
           : data // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
+              as List<AlertJob>?,
       firstPageUrl: freezed == firstPageUrl
           ? _value.firstPageUrl
           : firstPageUrl // ignore: cast_nullable_to_non_nullable
@@ -480,7 +480,7 @@ class _$PaginatedJobAlertDataImpl
     implements _PaginatedJobAlertData {
   const _$PaginatedJobAlertDataImpl(
       {@JsonKey(name: 'current_page') this.currentPage,
-      @JsonKey(name: 'data') final List<String>? data,
+      @JsonKey(name: 'data') final List<AlertJob>? data,
       @JsonKey(name: 'first_page_url') this.firstPageUrl,
       @JsonKey(name: 'from') this.from,
       @JsonKey(name: 'last_page') this.lastPage,
@@ -501,10 +501,10 @@ class _$PaginatedJobAlertDataImpl
   @override
   @JsonKey(name: 'current_page')
   final int? currentPage;
-  final List<String>? _data;
+  final List<AlertJob>? _data;
   @override
   @JsonKey(name: 'data')
-  List<String>? get data {
+  List<AlertJob>? get data {
     final value = _data;
     if (value == null) return null;
     if (_data is EqualUnmodifiableListView) return _data;
@@ -641,7 +641,7 @@ class _$PaginatedJobAlertDataImpl
 abstract class _PaginatedJobAlertData implements PaginatedJobAlertData {
   const factory _PaginatedJobAlertData(
       {@JsonKey(name: 'current_page') final int? currentPage,
-      @JsonKey(name: 'data') final List<String>? data,
+      @JsonKey(name: 'data') final List<AlertJob>? data,
       @JsonKey(name: 'first_page_url') final String? firstPageUrl,
       @JsonKey(name: 'from') final int? from,
       @JsonKey(name: 'last_page') final int? lastPage,
@@ -662,7 +662,7 @@ abstract class _PaginatedJobAlertData implements PaginatedJobAlertData {
   int? get currentPage;
   @override
   @JsonKey(name: 'data')
-  List<String>? get data;
+  List<AlertJob>? get data;
   @override
   @JsonKey(name: 'first_page_url')
   String? get firstPageUrl;

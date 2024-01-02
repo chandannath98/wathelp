@@ -27,7 +27,9 @@ _$PaginatedJobAlertDataImpl _$$PaginatedJobAlertDataImplFromJson(
         Map<String, dynamic> json) =>
     _$PaginatedJobAlertDataImpl(
       currentPage: json['current_page'] as int?,
-      data: (json['data'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      data: (json['data'] as List<dynamic>?)
+          ?.map((e) => AlertJob.fromJson(e as Map<String, dynamic>))
+          .toList(),
       firstPageUrl: json['first_page_url'] as String?,
       from: json['from'] as int?,
       lastPage: json['last_page'] as int?,

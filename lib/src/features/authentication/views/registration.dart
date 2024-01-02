@@ -29,7 +29,7 @@ class RegistrationScreen extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             elevation: 2,
-            automaticallyImplyLeading: false,
+            automaticallyImplyLeading: !showLoginButton,
             backgroundColor: context.color?.theme,
             title: SvgPicture.asset(
               Assets.appLogoSvg,
@@ -243,11 +243,13 @@ class _RegistrationSectionWidgetState extends State<RegistrationSectionWidget> {
                           focusNode: firstNameFocus,
                           controller: firstNameController,
                           validator: FieldValidator.validate(
-                            name: "First Name",
+                            name: "First name",
                             widget.firstNameValidator,
                           ),
                           decoration: const InputDecoration(
                             hintText: "First name...",
+                            prefix: Padding(padding: horizontal6),
+                            contentPadding: EdgeInsets.only(left: 0),
                           ),
                           onFieldSubmitted: (value) =>
                               lastNameFocus.requestFocus(),
@@ -259,7 +261,7 @@ class _RegistrationSectionWidgetState extends State<RegistrationSectionWidget> {
                           focusNode: lastNameFocus,
                           controller: lastNameController,
                           validator: FieldValidator.validate(
-                            name: "Last Name",
+                            name: "Last name",
                             widget.lastNameValidator,
                           ),
                           onFieldSubmitted: (value) =>
@@ -283,6 +285,8 @@ class _RegistrationSectionWidgetState extends State<RegistrationSectionWidget> {
                     onFieldSubmitted: (value) => passwordFocus.requestFocus(),
                     decoration: const InputDecoration(
                       hintText: "Email address...",
+                      prefix: Padding(padding: horizontal6),
+                      contentPadding: EdgeInsets.only(left: 0),
                     ),
                   ),
                   12.height,
@@ -298,6 +302,8 @@ class _RegistrationSectionWidgetState extends State<RegistrationSectionWidget> {
                         confirmPasswordFocus.requestFocus(),
                     decoration: InputDecoration(
                       hintText: "Password",
+                      prefix: const Padding(padding: horizontal6),
+                      contentPadding: const EdgeInsets.only(left: 0),
                       suffixIcon: IconButton(
                         onPressed: () => setState(() {
                           hidePassword = !hidePassword;
@@ -323,6 +329,8 @@ class _RegistrationSectionWidgetState extends State<RegistrationSectionWidget> {
                         onCreateAccountClicked.withOverlay(),
                     decoration: InputDecoration(
                       hintText: "Confirm password...",
+                      prefix: const Padding(padding: horizontal6),
+                      contentPadding: const EdgeInsets.only(left: 0),
                       suffixIcon: IconButton(
                         onPressed: () => setState(() {
                           hideConfirmPassword = !hideConfirmPassword;

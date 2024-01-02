@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -144,18 +146,15 @@ class _VerifyEmailSectionWidgetState extends State<VerifyEmailSectionWidget> {
                   RichText(
                     textAlign: TextAlign.center,
                     text: TextSpan(
-                      text: "Didn't receive any code! ",
+                      text: "Didn't receive any code!",
                       style: context.text.titleMedium,
                       children: [
-                        TextSpan(
-                          text: "Resend code.",
-                          recognizer: TapGestureRecognizer()
-                            ..onTap = onResendTap,
-                          style: TextStyle(
-                            color: context.color?.primary,
-                            fontWeight: FontWeight.bold,
+                        WidgetSpan(
+                          alignment: PlaceholderAlignment.middle,
+                          child: ResendTimerButton(
+                            onTap: onResendTap,
                           ),
-                        ),
+                        )
                       ],
                     ),
                   ),
@@ -164,6 +163,61 @@ class _VerifyEmailSectionWidgetState extends State<VerifyEmailSectionWidget> {
             ),
           ),
         ),
+      ),
+    );
+  }
+}
+
+class ResendTimerButton extends StatefulWidget {
+  const ResendTimerButton({
+    super.key,
+    required this.onTap,
+  });
+
+  final VoidCallback onTap;
+
+  @override
+  State<ResendTimerButton> createState() => _ResendTimerButtonState();
+}
+
+class _ResendTimerButtonState extends State<ResendTimerButton> {
+  Timer? resetTimer;
+
+  onButtonClick() {
+    resetTimer?.cancel();
+    resetTimer = Timer.periodic(
+      const Duration(seconds: 1),
+      (timer) {
+        setState(() {});
+        if (resetTimer == null || timer.tick == 60) {
+          resetTimer!.cancel();
+          resetTimer = null;
+        }
+      },
+    );
+    widget.onTap();
+  }
+
+  @override
+  void dispose() {
+    resetTimer?.cancel();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final onClick = resetTimer != null ? null : onButtonClick;
+    final timeText = resetTimer == null ? "" : " (${60 - resetTimer!.tick})";
+    return TextButton(
+      style: TextButton.styleFrom(
+        padding: horizontal8,
+        textStyle: context.text.titleMedium?.copyWith(
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      onPressed: onClick,
+      child: Text(
+        "Resend code$timeText.",
       ),
     );
   }

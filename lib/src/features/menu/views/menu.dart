@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jobpilot/src/constants/assets/assets.dart';
@@ -8,6 +10,7 @@ import 'package:jobpilot/src/services/theme/extensions/colors_theme.dart';
 import 'package:jobpilot/src/utilities/extensions/size_utilities.dart';
 import 'package:jobpilot/src/utilities/extensions/string_extensions.dart';
 import 'package:jobpilot/src/utilities/svg_icon.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../controllers/menu_controller.dart';
 import 'widgets/custom_list_tile.dart';
@@ -35,7 +38,7 @@ class MenuPageWidget extends StatelessWidget {
         10.height,
         MenuPageListTile(
           onTap: controller.gotoBlogs,
-          title: "Blogs",
+          title: "Blog",
           icon: const Icon(Icons.receipt_outlined),
         ),
         MenuPageListTile(
@@ -45,7 +48,7 @@ class MenuPageWidget extends StatelessWidget {
         ),
         MenuPageListTile(
           onTap: controller.gotoContact,
-          title: "Contacts",
+          title: "Contact",
           icon: const Icon(Icons.mail_outline_rounded),
         ),
       ];
@@ -53,7 +56,7 @@ class MenuPageWidget extends StatelessWidget {
   List<Widget> getJobPilotSection(MenuPageController controller) => [
         const Padding(
           padding: horizontal16,
-          child: Text("Job Pilots"),
+          child: Text("Jobpilots"),
         ),
         10.height,
         MenuJobPilotListTile(
@@ -74,7 +77,9 @@ class MenuPageWidget extends StatelessWidget {
           title: "Country",
           icon: const Icon(Icons.flag_outlined),
         ),
-        const CallNowWidget(),
+        const CallNowWidget(
+          phoneNumber: "(315) 155-1276",
+        ),
         8.height,
         const Padding(
           padding: horizontal16,
@@ -120,12 +125,12 @@ class MenuPageWidget extends StatelessWidget {
   List<Widget> getSupportSection(MenuPageController controller) => [
         const Padding(
           padding: horizontal16,
-          child: Text("Supports"),
+          child: Text("Support"),
         ),
         10.height,
         MenuPageListTile(
           onTap: controller.gotoFaq,
-          title: "FAQs",
+          title: "FAQ",
           icon: const Icon(Icons.question_mark_rounded),
         ),
         MenuPageListTile(
@@ -163,17 +168,17 @@ class MenuPageWidget extends StatelessWidget {
           title: "Browse Jobs",
           icon: const Icon(Icons.work_outline_rounded),
         ),
-        MenuPageListTile(
+        /* MenuPageListTile(
           onTap: controller.gotoLogin,
           title: "Post Jobs",
           icon: const Icon(Icons.add_circle_outline),
-        ),
+        ), */
         MenuPageListTile(
-          onTap: controller.gotoLogin,
-          title: "Browse Employees",
+          onTap: controller.browseEmployers,
+          title: "Browse Employers",
           icon: const SvgIcon(Assets.companyIcon),
         ),
-        MenuPageListTile(
+        /* MenuPageListTile(
           onTap: controller.gotoLogin,
           title: "Browse Candidates",
           icon: const Icon(Icons.people_outline_outlined),
@@ -182,7 +187,7 @@ class MenuPageWidget extends StatelessWidget {
           onTap: controller.gotoPricing,
           title: "Pricing",
           icon: const Icon(Icons.account_balance_outlined),
-        ),
+        ), */
         MenuPageListTile(
           onTap: controller.gotoRegistration,
           title: "Create Account",
@@ -225,8 +230,13 @@ class MenuPageWidget extends StatelessWidget {
         ),
         MenuPageListTile(
           onTap: controller.gotoSettings,
-          title: "Settings",
+          title: "Setting",
           icon: const Icon(Icons.settings_outlined),
+        ),
+        MenuPageListTile(
+          onTap: controller.signOut,
+          title: "Sign Out",
+          icon: const Icon(Icons.logout),
         ),
       ];
 
@@ -247,8 +257,8 @@ class MenuPageWidget extends StatelessWidget {
           icon: const Icon(Icons.work_outline_rounded),
         ),
         MenuPageListTile(
-          onTap: controller.gotoLogin,
-          title: "Browse Employees",
+          onTap: controller.browseEmployers,
+          title: "Browse Employers",
           icon: const SvgIcon(Assets.companyIcon),
         ),
         MenuPageListTile(
@@ -307,12 +317,24 @@ class MenuPageWidget extends StatelessWidget {
 class CallNowWidget extends StatelessWidget {
   const CallNowWidget({
     super.key,
+    required this.phoneNumber,
   });
+
+  final String phoneNumber;
+
+  _call() {
+    try {
+      final uri = Uri(scheme: "tel", path: phoneNumber);
+      launchUrl(uri);
+    } catch (e, s) {
+      log("#NumberDialError", error: e, stackTrace: s);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: _call,
       child: Padding(
         padding: horizontal16 + vertical3,
         child: RichText(
@@ -334,7 +356,7 @@ class CallNowWidget extends StatelessWidget {
               ),
               const TextSpan(text: "Call Now:  "),
               TextSpan(
-                text: "(315) 155-1276",
+                text: phoneNumber,
                 style: TextStyle(
                   fontWeight: FontWeight.w800,
                   color: context.color?.opposite,

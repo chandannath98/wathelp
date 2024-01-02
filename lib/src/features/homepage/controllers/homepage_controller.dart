@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jobpilot/src/domain/server/repositories/authentication/models/user/user.dart';
 import 'package:jobpilot/src/features/authentication/views/registration.dart';
+import 'package:jobpilot/src/features/settings/views/settings.dart';
 import 'package:jobpilot/src/services/authentication/auth_controller.dart';
 
 class HomepageController extends GetxController {
@@ -35,10 +36,10 @@ class HomepageController extends GetxController {
   }
 
   void onLoginClick() {
-    pageController.animateToPage(
+    pageController.jumpToPage(
       loginPageIndex,
-      curve: Curves.ease,
-      duration: const Duration(milliseconds: 380),
+      // curve: Curves.ease,
+      // duration: const Duration(milliseconds: 380),
     );
     update();
   }
@@ -54,7 +55,6 @@ class HomepageController extends GetxController {
   void onNotificationClick() {}
 
   Future<void> onProfileClick() async {
-    await AuthController.find.logOut();
-    update();
+    Get.to(() => const SettingsScreen());
   }
 }

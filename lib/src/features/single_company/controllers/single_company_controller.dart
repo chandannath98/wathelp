@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jobpilot/src/domain/server/config/repository.dart';
 import 'package:jobpilot/src/domain/server/config/request_handler.dart';
 import 'package:jobpilot/src/domain/server/repositories/company/company_repo.dart';
 import 'package:jobpilot/src/domain/server/repositories/company/models/single_company/company_details/company_details.dart';
@@ -10,6 +11,7 @@ import 'package:jobpilot/src/domain/server/repositories/company/models/single_co
 import 'package:jobpilot/src/domain/server/repositories/company/models/single_company/user_info/user/user.dart';
 import 'package:jobpilot/src/features/single_company/views/open_jobs.dart';
 import 'package:jobpilot/src/features/single_job/views/job_details.dart';
+import 'package:jobpilot/src/utilities/functions.dart';
 import 'package:jobpilot/src/utilities/scaffold_util.dart';
 
 class SingleCompanyController extends GetxController {
@@ -39,8 +41,11 @@ class SingleCompanyController extends GetxController {
 
   showFullDescription() async {}
 
-  Future onMoreOpenClick() async =>
-      Get.to(() => const SingleCompanyOpenJobsScreen());
+  Future onMoreOpenClick() async => Get.to(
+        () => SingleCompanyOpenJobsScreen(
+          controller: this,
+        ),
+      );
 
   Future onOpenJobClick(String slug) async => Get.to(
         () => JobDetailsScreen(
@@ -81,4 +86,7 @@ class SingleCompanyController extends GetxController {
       if (e is RequestException) e.handleError();
     }
   }
+
+  void copyWebLink() =>
+      copyClipboard("${API.baseUrl.replaceAll("/api", "")}/employer/$userName");
 }

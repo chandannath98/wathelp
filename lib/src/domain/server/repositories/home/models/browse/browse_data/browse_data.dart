@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
+import 'package:jobpilot/src/domain/server/repositories/home/models/browse/home_categories/home_top_categories.dart';
 
 import '../category/popular_categories.dart';
 import '../company/top_companies.dart';
@@ -22,6 +23,7 @@ class BrowseData with _$BrowseData {
     @JsonKey(name: 'popular_categories')
     List<PopularCategories>? popularCategories,
     @JsonKey(name: 'testimonial') List<Testimonial>? testimonial,
+    @JsonKey(name: 'top_categories') List<HomeTopCategories>? topCategories,
   }) = _BrowseData;
 
   factory BrowseData.fromJson(Map<String, Object?> json) =>

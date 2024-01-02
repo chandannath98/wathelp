@@ -3,9 +3,11 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:jobpilot/src/domain/server/config/repository.dart';
+import 'package:jobpilot/src/domain/server/repositories/settings/models/contact_settings/candidate_contact_setting/candidate_contact_setting_data.dart';
 import 'package:jobpilot/src/domain/server/repositories/settings/models/language/language_response/language_response.dart';
 import 'package:jobpilot/src/domain/server/repositories/settings/models/personal_settings/personal_settings_response/personal_setting_data.dart';
 import 'package:jobpilot/src/domain/server/repositories/settings/models/personal_settings/update_personal_setting/update_personal_setting_response.dart';
+import 'package:jobpilot/src/domain/server/repositories/settings/models/profile_settings/candidate_profile_settings/candidate_profile_setting_data.dart';
 import 'package:jobpilot/src/domain/server/repositories/settings/models/resume/resume_delete/resume_delete_response.dart';
 import 'package:jobpilot/src/domain/server/repositories/settings/models/resume/resume_update/resume_update_response.dart';
 import 'package:jobpilot/src/domain/server/repositories/settings/models/resume/resume_upload/resume_upload_response.dart';
@@ -134,8 +136,43 @@ class SettingsRepository extends ServerRepo {
       );
       return ResponseWrapper.fromMap(
         response: response.data,
+        print: true,
         status: response.statusCode,
         purse: (json) => PersonalSettingData.fromJson(json),
+      );
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<ResponseWrapper<CandidateContactSettingData>>
+      fetchCandidateContactData() async {
+    try {
+      final response = await requestHandler.get(
+        API.candidateSettings,
+        queryParams: {"type": CandidateSettingSections.contact.name},
+      );
+      return ResponseWrapper.fromMap(
+        response: response.data,
+        status: response.statusCode,
+        purse: (json) => CandidateContactSettingData.fromJson(json),
+      );
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<ResponseWrapper<CandidateProfileSettingData>>
+      fetchCandidateProfileData() async {
+    try {
+      final response = await requestHandler.get(
+        API.candidateSettings,
+        queryParams: {"type": CandidateSettingSections.profile.name},
+      );
+      return ResponseWrapper.fromMap(
+        response: response.data,
+        status: response.statusCode,
+        purse: (json) => CandidateProfileSettingData.fromJson(json),
       );
     } catch (e) {
       rethrow;
@@ -169,6 +206,7 @@ class SettingsRepository extends ServerRepo {
       );
       return ResponseWrapper.fromMap(
         response: response.data,
+        print: true,
         status: response.statusCode,
         purse: (json) => UpdatePersonalSettingResponse.fromJson(json),
       );
@@ -187,6 +225,27 @@ class SettingsRepository extends ServerRepo {
         response: response.data,
         status: response.statusCode,
         purse: (json) => SocialSettingData.fromJson(json),
+      );
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<ResponseWrapper> submitNewSocialData(
+      ({String key, String url}) data) async {
+    try {
+      final response = await requestHandler.post(
+        API.candidateSettings,
+        FormData.fromMap({
+          'type': CandidateSettingSections.social.name,
+          'social_media[]': data.key,
+          'url[]': data.url,
+        }),
+      );
+      return ResponseWrapper.fromMap(
+        response: response.data,
+        status: response.statusCode,
+        purse: (json) => (json),
       );
     } catch (e) {
       rethrow;

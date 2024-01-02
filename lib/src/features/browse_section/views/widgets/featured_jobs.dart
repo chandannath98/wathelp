@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
 import 'package:jobpilot/src/domain/server/repositories/home/models/browse/feature_job/featured_jobs.dart';
+import 'package:jobpilot/src/domain/server/repositories/jobs/jobs_repo.dart';
+import 'package:jobpilot/src/features/find_jobs/views/find_jobs.dart';
 import 'package:jobpilot/src/global/widgets/app/single_job_card.dart';
 import 'package:jobpilot/src/global/widgets/app_shimmer.dart';
 import 'package:jobpilot/src/services/theme/app_theme.dart';
@@ -72,14 +75,19 @@ class HomeFeaturedJobsSection extends StatelessWidget {
                     ],
                   18.height,
                   InkWell(
-                    onTap: () {
-                      print("Click");
-                    },
-                    child: Text(
-                      "Load More Feature Jobs",
-                      style: context.text.titleMedium?.copyWith(
-                        fontWeight: FontWeight.bold,
-                        color: context.color?.primary,
+                    onTap: () => Get.to(
+                      () => const FindJobScreen(
+                        query: SearchQuery(),
+                      ),
+                    ),
+                    child: Padding(
+                      padding: vertical3 + horizontal10,
+                      child: Text(
+                        "Load More Feature Jobs",
+                        style: context.text.titleMedium?.copyWith(
+                          fontWeight: FontWeight.bold,
+                          color: context.color?.primary,
+                        ),
                       ),
                     ),
                   ),

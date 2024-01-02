@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:jobpilot/src/constants/assets/assets.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
+import 'package:jobpilot/src/domain/server/repositories/jobs/jobs_repo.dart';
 import 'package:jobpilot/src/features/browse_section/views/widgets/search_box.dart';
 import 'package:jobpilot/src/features/find_jobs/controllers/find_jobs_controller.dart';
 import 'package:jobpilot/src/global/widgets/app/single_job_card.dart';
@@ -16,12 +17,14 @@ import 'package:jobpilot/src/utilities/extensions/string_extensions.dart';
 class FindJobScreen extends StatelessWidget {
   const FindJobScreen({
     super.key,
+    this.query,
     this.searchText,
     this.locationText,
   });
 
   final String? searchText;
   final String? locationText;
+  final SearchQuery? query;
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +38,7 @@ class FindJobScreen extends StatelessWidget {
         autoRemove: true,
         tag: "#FIND_JOB_SCREEN",
         init: FindJobController(
+          query: query,
           searchText: searchText,
           locationText: locationText,
         ),
@@ -117,7 +121,7 @@ class JobSearchWidget extends StatelessWidget {
                                     controller.onBookmarkJobClick(job.id!))
                                 .withOverlay,
                             onItemClick: () =>
-                                controller.onJobClick(job.slug ?? ""),
+                                FindJobController.onJobClick(job.slug ?? ""),
                           ),
                         );
                       },

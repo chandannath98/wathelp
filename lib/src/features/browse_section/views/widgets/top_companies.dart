@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
 import 'package:jobpilot/src/domain/server/repositories/home/models/browse/company/top_companies.dart';
+import 'package:jobpilot/src/features/find_company/controllers/find_company_controllers.dart';
+import 'package:jobpilot/src/features/find_company/views/find_company.dart';
 import 'package:jobpilot/src/features/single_company/views/single_company.dart';
 import 'package:jobpilot/src/global/widgets/app/single_company_card.dart';
 import 'package:jobpilot/src/global/widgets/app_shimmer.dart';
@@ -58,24 +60,27 @@ class TopCompaniesSection extends StatelessWidget {
               positionCount: i.company.openJobsCount ?? 0,
               name: i.company.name!,
               location: i.company.country ?? "",
-              onOpenPositionTap: () => Get.to(
-                () => SingleCompanyDetailsScreen(
-                  companyUserName: i.company.username ?? "",
-                ),
+              onOpenPositionTap: () =>
+                  FindCompanyController.openOpenPositionsClick(
+                i.company.username!,
+              ),
+              onCardTap: () => FindCompanyController.openCompanyPage(
+                i.company.username!,
               ),
             ),
             8.height,
           ],
           18.height,
           InkWell(
-            onTap: () {
-              print("Click");
-            },
-            child: Text(
-              "Load More Companies",
-              style: context.text.titleMedium?.copyWith(
-                fontWeight: FontWeight.bold,
-                color: context.color?.primary,
+            onTap: () => Get.to(() => const FindCompanyScreen()),
+            child: Padding(
+              padding: vertical3 + horizontal10,
+              child: Text(
+                "Load More Companies",
+                style: context.text.titleMedium?.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: context.color?.primary,
+                ),
               ),
             ),
           ),

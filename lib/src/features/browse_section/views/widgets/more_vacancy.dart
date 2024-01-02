@@ -3,7 +3,6 @@ import 'package:jobpilot/src/constants/design/paddings.dart';
 import 'package:jobpilot/src/global/widgets/app_shimmer.dart';
 import 'package:jobpilot/src/services/theme/app_theme.dart';
 import 'package:jobpilot/src/utilities/extensions/size_utilities.dart';
-import 'package:shimmer/shimmer.dart';
 
 class HomeMoreVacanciesSection extends StatelessWidget {
   const HomeMoreVacanciesSection({
@@ -74,7 +73,8 @@ class HomeMoreVacanciesSection extends StatelessWidget {
                           Icons.arrow_forward,
                         ),
                       ),
-                  10.height,
+                  // Removed bcz Vacancies are limited!
+                  /* 10.height,
                   InkWell(
                     onTap: () {
                       print("Click");
@@ -86,7 +86,7 @@ class HomeMoreVacanciesSection extends StatelessWidget {
                         color: context.color?.primary,
                       ),
                     ),
-                  ),
+                  ), */
                 ],
               ),
             ),

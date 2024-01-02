@@ -234,31 +234,27 @@ class JobOverviewSection extends StatelessWidget {
                         backgroundColor:
                             context.color?.primary.withOpacity(0.1),
                       ),
-                      onPressed: () {},
+                      label: const Text("Copy Link"),
+                      onPressed: controller.copyWebLink,
                       icon: Transform.rotate(
                         angle: 15,
-                        child: Icon(
-                          Icons.insert_link_rounded,
-                        ),
-                      ),
-                      label: Text(
-                        "Copy Links",
+                        child: const Icon(Icons.insert_link_rounded),
                       ),
                     ),
                     SquaredIconButton(
-                      icon: SvgIcon(
+                      icon: const SvgIcon(
                         Assets.twitterIcon,
                       ),
                       onTap: () {},
                     ),
                     SquaredIconButton(
-                      icon: SvgIcon(
+                      icon: const SvgIcon(
                         Assets.facebookIcon,
                       ),
                       onTap: () {},
                     ),
                     SquaredIconButton(
-                      icon: SvgIcon(
+                      icon: const SvgIcon(
                         Assets.instagramIcon,
                       ),
                       onTap: () {},
@@ -268,7 +264,7 @@ class JobOverviewSection extends StatelessWidget {
               ],
             ),
             16.height,
-            Text("Job tags:"),
+            const Text("Job tags:"),
             8.height,
             Wrap(
               spacing: 8,
@@ -545,23 +541,26 @@ class JobDetailCompanyHeader extends StatelessWidget {
                           ),
                         ),
                         8.height,
-                        Row(
+                        Wrap(
                           children: [
-                            const Text(
-                              "at",
-                            ),
-                            4.width,
-                            Flexible(
-                              child: Text(
-                                controller.company?.name ?? "",
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: context.text.titleMedium?.copyWith(
-                                  fontWeight: FontWeight.w600,
-                                ),
+                            RichText(
+                              text: TextSpan(
+                                text: "at",
+                                style: context.text.bodyMedium,
+                                children: [
+                                  WidgetSpan(
+                                    child: 6.width,
+                                  ),
+                                  TextSpan(
+                                    text: controller.company?.name ?? "",
+                                    style: context.text.titleMedium?.copyWith(
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                            4.width,
+                            6.width,
                             DecoratedBox(
                               decoration: BoxDecoration(
                                 color: context.color?.mainAccent,
@@ -580,7 +579,8 @@ class JobDetailCompanyHeader extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            ...[
+                            //TODO: Change this if the JOB Feature system gets added to server!
+                            /* if(false) ...[
                               4.width,
                               DecoratedBox(
                                 decoration: BoxDecoration(
@@ -597,7 +597,7 @@ class JobDetailCompanyHeader extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                            ],
+                            ], */
                           ],
                         ),
                       ],
@@ -626,6 +626,7 @@ class JobDetailCompanyHeader extends StatelessWidget {
                           icon: const Icon(Icons.arrow_back),
                           label: const Text(
                             "Apply Now",
+                            textAlign: TextAlign.center,
                           ),
                         ),
                       ),

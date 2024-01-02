@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -173,7 +175,8 @@ class _ForgotPasswordSectionWidgetState
                     ),
                   ),
                   10.height,
-                  const Center(
+                  //Removed on very first testing phase!
+                  /* const Center(
                     child: Text(
                       "OR",
                     ),
@@ -191,7 +194,7 @@ class _ForgotPasswordSectionWidgetState
                     iconLink:
                         "https://img.icons8.com/?size=48&id=17949&format=png",
                     onTap: widget.onGoogleSignIn,
-                  ),
+                  ), */
                 ],
               ),
             ),

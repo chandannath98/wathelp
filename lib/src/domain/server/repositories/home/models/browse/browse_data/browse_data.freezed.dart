@@ -34,6 +34,9 @@ mixin _$BrowseData {
       throw _privateConstructorUsedError;
   @JsonKey(name: 'testimonial')
   List<Testimonial>? get testimonial => throw _privateConstructorUsedError;
+  @JsonKey(name: 'top_categories')
+  List<HomeTopCategories>? get topCategories =>
+      throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -55,7 +58,8 @@ abstract class $BrowseDataCopyWith<$Res> {
       List<MostPopularVacancies>? mostPopularVacancies,
       @JsonKey(name: 'popular_categories')
       List<PopularCategories>? popularCategories,
-      @JsonKey(name: 'testimonial') List<Testimonial>? testimonial});
+      @JsonKey(name: 'testimonial') List<Testimonial>? testimonial,
+      @JsonKey(name: 'top_categories') List<HomeTopCategories>? topCategories});
 
   $StatesCopyWith<$Res>? get states;
 }
@@ -79,6 +83,7 @@ class _$BrowseDataCopyWithImpl<$Res, $Val extends BrowseData>
     Object? mostPopularVacancies = freezed,
     Object? popularCategories = freezed,
     Object? testimonial = freezed,
+    Object? topCategories = freezed,
   }) {
     return _then(_value.copyWith(
       topCompanies: freezed == topCompanies
@@ -105,6 +110,10 @@ class _$BrowseDataCopyWithImpl<$Res, $Val extends BrowseData>
           ? _value.testimonial
           : testimonial // ignore: cast_nullable_to_non_nullable
               as List<Testimonial>?,
+      topCategories: freezed == topCategories
+          ? _value.topCategories
+          : topCategories // ignore: cast_nullable_to_non_nullable
+              as List<HomeTopCategories>?,
     ) as $Val);
   }
 
@@ -137,7 +146,8 @@ abstract class _$$BrowseDataImplCopyWith<$Res>
       List<MostPopularVacancies>? mostPopularVacancies,
       @JsonKey(name: 'popular_categories')
       List<PopularCategories>? popularCategories,
-      @JsonKey(name: 'testimonial') List<Testimonial>? testimonial});
+      @JsonKey(name: 'testimonial') List<Testimonial>? testimonial,
+      @JsonKey(name: 'top_categories') List<HomeTopCategories>? topCategories});
 
   @override
   $StatesCopyWith<$Res>? get states;
@@ -160,6 +170,7 @@ class __$$BrowseDataImplCopyWithImpl<$Res>
     Object? mostPopularVacancies = freezed,
     Object? popularCategories = freezed,
     Object? testimonial = freezed,
+    Object? topCategories = freezed,
   }) {
     return _then(_$BrowseDataImpl(
       topCompanies: freezed == topCompanies
@@ -186,6 +197,10 @@ class __$$BrowseDataImplCopyWithImpl<$Res>
           ? _value._testimonial
           : testimonial // ignore: cast_nullable_to_non_nullable
               as List<Testimonial>?,
+      topCategories: freezed == topCategories
+          ? _value._topCategories
+          : topCategories // ignore: cast_nullable_to_non_nullable
+              as List<HomeTopCategories>?,
     ));
   }
 }
@@ -201,12 +216,15 @@ class _$BrowseDataImpl with DiagnosticableTreeMixin implements _BrowseData {
       final List<MostPopularVacancies>? mostPopularVacancies,
       @JsonKey(name: 'popular_categories')
       final List<PopularCategories>? popularCategories,
-      @JsonKey(name: 'testimonial') final List<Testimonial>? testimonial})
+      @JsonKey(name: 'testimonial') final List<Testimonial>? testimonial,
+      @JsonKey(name: 'top_categories')
+      final List<HomeTopCategories>? topCategories})
       : _topCompanies = topCompanies,
         _featuredJobs = featuredJobs,
         _mostPopularVacancies = mostPopularVacancies,
         _popularCategories = popularCategories,
-        _testimonial = testimonial;
+        _testimonial = testimonial,
+        _topCategories = topCategories;
 
   factory _$BrowseDataImpl.fromJson(Map<String, dynamic> json) =>
       _$$BrowseDataImplFromJson(json);
@@ -271,9 +289,20 @@ class _$BrowseDataImpl with DiagnosticableTreeMixin implements _BrowseData {
     return EqualUnmodifiableListView(value);
   }
 
+  final List<HomeTopCategories>? _topCategories;
+  @override
+  @JsonKey(name: 'top_categories')
+  List<HomeTopCategories>? get topCategories {
+    final value = _topCategories;
+    if (value == null) return null;
+    if (_topCategories is EqualUnmodifiableListView) return _topCategories;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'BrowseData(topCompanies: $topCompanies, featuredJobs: $featuredJobs, states: $states, mostPopularVacancies: $mostPopularVacancies, popularCategories: $popularCategories, testimonial: $testimonial)';
+    return 'BrowseData(topCompanies: $topCompanies, featuredJobs: $featuredJobs, states: $states, mostPopularVacancies: $mostPopularVacancies, popularCategories: $popularCategories, testimonial: $testimonial, topCategories: $topCategories)';
   }
 
   @override
@@ -286,7 +315,8 @@ class _$BrowseDataImpl with DiagnosticableTreeMixin implements _BrowseData {
       ..add(DiagnosticsProperty('states', states))
       ..add(DiagnosticsProperty('mostPopularVacancies', mostPopularVacancies))
       ..add(DiagnosticsProperty('popularCategories', popularCategories))
-      ..add(DiagnosticsProperty('testimonial', testimonial));
+      ..add(DiagnosticsProperty('testimonial', testimonial))
+      ..add(DiagnosticsProperty('topCategories', topCategories));
   }
 
   @override
@@ -304,7 +334,9 @@ class _$BrowseDataImpl with DiagnosticableTreeMixin implements _BrowseData {
             const DeepCollectionEquality()
                 .equals(other._popularCategories, _popularCategories) &&
             const DeepCollectionEquality()
-                .equals(other._testimonial, _testimonial));
+                .equals(other._testimonial, _testimonial) &&
+            const DeepCollectionEquality()
+                .equals(other._topCategories, _topCategories));
   }
 
   @JsonKey(ignore: true)
@@ -316,7 +348,8 @@ class _$BrowseDataImpl with DiagnosticableTreeMixin implements _BrowseData {
       states,
       const DeepCollectionEquality().hash(_mostPopularVacancies),
       const DeepCollectionEquality().hash(_popularCategories),
-      const DeepCollectionEquality().hash(_testimonial));
+      const DeepCollectionEquality().hash(_testimonial),
+      const DeepCollectionEquality().hash(_topCategories));
 
   @JsonKey(ignore: true)
   @override
@@ -341,8 +374,9 @@ abstract class _BrowseData implements BrowseData {
       final List<MostPopularVacancies>? mostPopularVacancies,
       @JsonKey(name: 'popular_categories')
       final List<PopularCategories>? popularCategories,
-      @JsonKey(name: 'testimonial')
-      final List<Testimonial>? testimonial}) = _$BrowseDataImpl;
+      @JsonKey(name: 'testimonial') final List<Testimonial>? testimonial,
+      @JsonKey(name: 'top_categories')
+      final List<HomeTopCategories>? topCategories}) = _$BrowseDataImpl;
 
   factory _BrowseData.fromJson(Map<String, dynamic> json) =
       _$BrowseDataImpl.fromJson;
@@ -365,6 +399,9 @@ abstract class _BrowseData implements BrowseData {
   @override
   @JsonKey(name: 'testimonial')
   List<Testimonial>? get testimonial;
+  @override
+  @JsonKey(name: 'top_categories')
+  List<HomeTopCategories>? get topCategories;
   @override
   @JsonKey(ignore: true)
   _$$BrowseDataImplCopyWith<_$BrowseDataImpl> get copyWith =>

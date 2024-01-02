@@ -3,8 +3,11 @@ import 'dart:developer';
 import 'package:get/get.dart';
 import 'package:jobpilot/src/domain/local_storage/repositories/auth_storage/auth_storage.dart';
 import 'package:jobpilot/src/domain/server/repositories/authentication/models/user/user.dart';
+import 'package:jobpilot/src/features/homepage/controllers/homepage_controller.dart';
+import 'package:jobpilot/src/features/homepage/views/homepage.dart';
 import 'package:jobpilot/src/services/authentication/models/auth_credentials/auth_credentials.dart';
 import 'package:jobpilot/src/services/authentication/models/user_type/user_type.dart';
+import 'package:jobpilot/src/utilities/scaffold_util.dart';
 
 class AuthController extends GetxController {
   static AuthController get find => Get.find();
@@ -67,6 +70,14 @@ class AuthController extends GetxController {
     _currentToken = null;
     _currentUser = null;
     await _authStorage.clearAuth();
+    showToastSuccess("Logged out successfully!");
     update();
+  }
+
+  handleTokenError({String? message}) async {
+    await logOut();
+    Get.until((route) => route.isFirst);
+    HomepageController.find.onLoginClick();
+    showToastError(message ?? "Login expired! Please login again.");
   }
 }

@@ -128,6 +128,7 @@ class AdvanceJobFilter extends StatelessWidget {
                                   Get.back(result: controller.currentQuery),
                               child: const Text(
                                 "Apply Filter",
+                                textAlign: TextAlign.center,
                               ),
                             ),
                           ),
@@ -265,7 +266,7 @@ class SalaryLimitSection extends StatelessWidget {
         Padding(
           padding: horizontal16,
           child: Text(
-            "Salary (yearly)",
+            "Salary",
             style: context.text.bodyLarge?.copyWith(
               fontWeight: FontWeight.w600,
               color: context.color?.primary,

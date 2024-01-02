@@ -12,19 +12,18 @@ import 'package:jobpilot/src/features/authentication/views/login_system_switcher
 import 'package:jobpilot/src/features/find_jobs/views/filter_job.dart';
 import 'package:jobpilot/src/features/single_job/views/job_details.dart';
 import 'package:jobpilot/src/services/authentication/auth_controller.dart';
+import 'package:jobpilot/src/services/controller_mixin/controller_mixins.dart';
 import 'package:jobpilot/src/utilities/functions.dart';
 import 'package:jobpilot/src/utilities/scaffold_util.dart';
 
-class FindJobController extends GetxController {
-  bool isLoading = false;
-  setLoadingStatus([bool? newState]) {
-    isLoading = newState ?? (!isLoading);
-    update();
-  }
-
+class FindJobController extends GetxController with BaseControllerSystem {
   final String? searchText;
   final String? locationText;
-  FindJobController({this.searchText, this.locationText});
+  FindJobController({
+    this.searchText,
+    this.locationText,
+    SearchQuery? query,
+  }) : currentQuery = query ?? const SearchQuery();
 
   late final TextEditingController searchController;
   late final TextEditingController locationController;
@@ -74,7 +73,7 @@ class FindJobController extends GetxController {
     }
   }
 
-  SearchQuery currentQuery = const SearchQuery();
+  SearchQuery currentQuery;
 
   /* Pagination */
   final singlePageSize = 10;
@@ -147,7 +146,8 @@ class FindJobController extends GetxController {
     }
   }
 
-  onJobClick(String jobSlug) => Get.to(
+  //NOTE: Used all over the application!
+  static onJobClick(String jobSlug) => Get.to(
         () => JobDetailsScreen(
           jobSlug: jobSlug,
         ),

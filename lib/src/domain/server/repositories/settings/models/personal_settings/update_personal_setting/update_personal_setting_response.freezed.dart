@@ -24,7 +24,7 @@ mixin _$UpdatePersonalSettingResponse {
   @JsonKey(name: 'message')
   String? get message => throw _privateConstructorUsedError;
   @JsonKey(name: 'data')
-  Data? get data => throw _privateConstructorUsedError;
+  PersonalSettingData? get data => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -42,9 +42,9 @@ abstract class $UpdatePersonalSettingResponseCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'message') String? message,
-      @JsonKey(name: 'data') Data? data});
+      @JsonKey(name: 'data') PersonalSettingData? data});
 
-  $DataCopyWith<$Res>? get data;
+  $PersonalSettingDataCopyWith<$Res>? get data;
 }
 
 /// @nodoc
@@ -72,18 +72,18 @@ class _$UpdatePersonalSettingResponseCopyWithImpl<$Res,
       data: freezed == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
-              as Data?,
+              as PersonalSettingData?,
     ) as $Val);
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $DataCopyWith<$Res>? get data {
+  $PersonalSettingDataCopyWith<$Res>? get data {
     if (_value.data == null) {
       return null;
     }
 
-    return $DataCopyWith<$Res>(_value.data!, (value) {
+    return $PersonalSettingDataCopyWith<$Res>(_value.data!, (value) {
       return _then(_value.copyWith(data: value) as $Val);
     });
   }
@@ -100,10 +100,10 @@ abstract class _$$UpdatePersonalSettingResponseImplCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: 'message') String? message,
-      @JsonKey(name: 'data') Data? data});
+      @JsonKey(name: 'data') PersonalSettingData? data});
 
   @override
-  $DataCopyWith<$Res>? get data;
+  $PersonalSettingDataCopyWith<$Res>? get data;
 }
 
 /// @nodoc
@@ -130,7 +130,7 @@ class __$$UpdatePersonalSettingResponseImplCopyWithImpl<$Res>
       data: freezed == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
-              as Data?,
+              as PersonalSettingData?,
     ));
   }
 }
@@ -153,7 +153,7 @@ class _$UpdatePersonalSettingResponseImpl
   final String? message;
   @override
   @JsonKey(name: 'data')
-  final Data? data;
+  final PersonalSettingData? data;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -202,7 +202,7 @@ abstract class _UpdatePersonalSettingResponse
     implements UpdatePersonalSettingResponse {
   const factory _UpdatePersonalSettingResponse(
           {@JsonKey(name: 'message') final String? message,
-          @JsonKey(name: 'data') final Data? data}) =
+          @JsonKey(name: 'data') final PersonalSettingData? data}) =
       _$UpdatePersonalSettingResponseImpl;
 
   factory _UpdatePersonalSettingResponse.fromJson(Map<String, dynamic> json) =
@@ -213,280 +213,10 @@ abstract class _UpdatePersonalSettingResponse
   String? get message;
   @override
   @JsonKey(name: 'data')
-  Data? get data;
+  PersonalSettingData? get data;
   @override
   @JsonKey(ignore: true)
   _$$UpdatePersonalSettingResponseImplCopyWith<
           _$UpdatePersonalSettingResponseImpl>
       get copyWith => throw _privateConstructorUsedError;
-}
-
-Data _$DataFromJson(Map<String, dynamic> json) {
-  return _Data.fromJson(json);
-}
-
-/// @nodoc
-mixin _$Data {
-  @JsonKey(name: 'name')
-  String? get name => throw _privateConstructorUsedError;
-  @JsonKey(name: 'title')
-  String? get title => throw _privateConstructorUsedError;
-  @JsonKey(name: 'experience_id')
-  String? get experienceId => throw _privateConstructorUsedError;
-  @JsonKey(name: 'education_id')
-  String? get educationId => throw _privateConstructorUsedError;
-  @JsonKey(name: 'website')
-  String? get website => throw _privateConstructorUsedError;
-  @JsonKey(name: 'birth_date')
-  String? get birthDate => throw _privateConstructorUsedError;
-
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $DataCopyWith<Data> get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $DataCopyWith<$Res> {
-  factory $DataCopyWith(Data value, $Res Function(Data) then) =
-      _$DataCopyWithImpl<$Res, Data>;
-  @useResult
-  $Res call(
-      {@JsonKey(name: 'name') String? name,
-      @JsonKey(name: 'title') String? title,
-      @JsonKey(name: 'experience_id') String? experienceId,
-      @JsonKey(name: 'education_id') String? educationId,
-      @JsonKey(name: 'website') String? website,
-      @JsonKey(name: 'birth_date') String? birthDate});
-}
-
-/// @nodoc
-class _$DataCopyWithImpl<$Res, $Val extends Data>
-    implements $DataCopyWith<$Res> {
-  _$DataCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? name = freezed,
-    Object? title = freezed,
-    Object? experienceId = freezed,
-    Object? educationId = freezed,
-    Object? website = freezed,
-    Object? birthDate = freezed,
-  }) {
-    return _then(_value.copyWith(
-      name: freezed == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String?,
-      title: freezed == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String?,
-      experienceId: freezed == experienceId
-          ? _value.experienceId
-          : experienceId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      educationId: freezed == educationId
-          ? _value.educationId
-          : educationId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      website: freezed == website
-          ? _value.website
-          : website // ignore: cast_nullable_to_non_nullable
-              as String?,
-      birthDate: freezed == birthDate
-          ? _value.birthDate
-          : birthDate // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$DataImplCopyWith<$Res> implements $DataCopyWith<$Res> {
-  factory _$$DataImplCopyWith(
-          _$DataImpl value, $Res Function(_$DataImpl) then) =
-      __$$DataImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {@JsonKey(name: 'name') String? name,
-      @JsonKey(name: 'title') String? title,
-      @JsonKey(name: 'experience_id') String? experienceId,
-      @JsonKey(name: 'education_id') String? educationId,
-      @JsonKey(name: 'website') String? website,
-      @JsonKey(name: 'birth_date') String? birthDate});
-}
-
-/// @nodoc
-class __$$DataImplCopyWithImpl<$Res>
-    extends _$DataCopyWithImpl<$Res, _$DataImpl>
-    implements _$$DataImplCopyWith<$Res> {
-  __$$DataImplCopyWithImpl(_$DataImpl _value, $Res Function(_$DataImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? name = freezed,
-    Object? title = freezed,
-    Object? experienceId = freezed,
-    Object? educationId = freezed,
-    Object? website = freezed,
-    Object? birthDate = freezed,
-  }) {
-    return _then(_$DataImpl(
-      name: freezed == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String?,
-      title: freezed == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String?,
-      experienceId: freezed == experienceId
-          ? _value.experienceId
-          : experienceId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      educationId: freezed == educationId
-          ? _value.educationId
-          : educationId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      website: freezed == website
-          ? _value.website
-          : website // ignore: cast_nullable_to_non_nullable
-              as String?,
-      birthDate: freezed == birthDate
-          ? _value.birthDate
-          : birthDate // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$DataImpl with DiagnosticableTreeMixin implements _Data {
-  const _$DataImpl(
-      {@JsonKey(name: 'name') this.name,
-      @JsonKey(name: 'title') this.title,
-      @JsonKey(name: 'experience_id') this.experienceId,
-      @JsonKey(name: 'education_id') this.educationId,
-      @JsonKey(name: 'website') this.website,
-      @JsonKey(name: 'birth_date') this.birthDate});
-
-  factory _$DataImpl.fromJson(Map<String, dynamic> json) =>
-      _$$DataImplFromJson(json);
-
-  @override
-  @JsonKey(name: 'name')
-  final String? name;
-  @override
-  @JsonKey(name: 'title')
-  final String? title;
-  @override
-  @JsonKey(name: 'experience_id')
-  final String? experienceId;
-  @override
-  @JsonKey(name: 'education_id')
-  final String? educationId;
-  @override
-  @JsonKey(name: 'website')
-  final String? website;
-  @override
-  @JsonKey(name: 'birth_date')
-  final String? birthDate;
-
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Data(name: $name, title: $title, experienceId: $experienceId, educationId: $educationId, website: $website, birthDate: $birthDate)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'Data'))
-      ..add(DiagnosticsProperty('name', name))
-      ..add(DiagnosticsProperty('title', title))
-      ..add(DiagnosticsProperty('experienceId', experienceId))
-      ..add(DiagnosticsProperty('educationId', educationId))
-      ..add(DiagnosticsProperty('website', website))
-      ..add(DiagnosticsProperty('birthDate', birthDate));
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$DataImpl &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.title, title) || other.title == title) &&
-            (identical(other.experienceId, experienceId) ||
-                other.experienceId == experienceId) &&
-            (identical(other.educationId, educationId) ||
-                other.educationId == educationId) &&
-            (identical(other.website, website) || other.website == website) &&
-            (identical(other.birthDate, birthDate) ||
-                other.birthDate == birthDate));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(
-      runtimeType, name, title, experienceId, educationId, website, birthDate);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$DataImplCopyWith<_$DataImpl> get copyWith =>
-      __$$DataImplCopyWithImpl<_$DataImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$DataImplToJson(
-      this,
-    );
-  }
-}
-
-abstract class _Data implements Data {
-  const factory _Data(
-      {@JsonKey(name: 'name') final String? name,
-      @JsonKey(name: 'title') final String? title,
-      @JsonKey(name: 'experience_id') final String? experienceId,
-      @JsonKey(name: 'education_id') final String? educationId,
-      @JsonKey(name: 'website') final String? website,
-      @JsonKey(name: 'birth_date') final String? birthDate}) = _$DataImpl;
-
-  factory _Data.fromJson(Map<String, dynamic> json) = _$DataImpl.fromJson;
-
-  @override
-  @JsonKey(name: 'name')
-  String? get name;
-  @override
-  @JsonKey(name: 'title')
-  String? get title;
-  @override
-  @JsonKey(name: 'experience_id')
-  String? get experienceId;
-  @override
-  @JsonKey(name: 'education_id')
-  String? get educationId;
-  @override
-  @JsonKey(name: 'website')
-  String? get website;
-  @override
-  @JsonKey(name: 'birth_date')
-  String? get birthDate;
-  @override
-  @JsonKey(ignore: true)
-  _$$DataImplCopyWith<_$DataImpl> get copyWith =>
-      throw _privateConstructorUsedError;
 }

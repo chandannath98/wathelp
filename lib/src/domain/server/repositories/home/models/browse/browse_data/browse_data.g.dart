@@ -26,6 +26,9 @@ _$BrowseDataImpl _$$BrowseDataImplFromJson(Map<String, dynamic> json) =>
       testimonial: (json['testimonial'] as List<dynamic>?)
           ?.map((e) => Testimonial.fromJson(e as Map<String, dynamic>))
           .toList(),
+      topCategories: (json['top_categories'] as List<dynamic>?)
+          ?.map((e) => HomeTopCategories.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$$BrowseDataImplToJson(_$BrowseDataImpl instance) =>
@@ -36,4 +39,5 @@ Map<String, dynamic> _$$BrowseDataImplToJson(_$BrowseDataImpl instance) =>
       'most_popular_vacancies': instance.mostPopularVacancies,
       'popular_categories': instance.popularCategories,
       'testimonial': instance.testimonial,
+      'top_categories': instance.topCategories,
     };

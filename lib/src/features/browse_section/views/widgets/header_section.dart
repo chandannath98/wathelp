@@ -1,7 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:get/get.dart';
 import 'package:jobpilot/src/constants/assets/assets.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
 import 'package:jobpilot/src/constants/strings/home_strings.dart';
@@ -11,8 +10,8 @@ import 'package:jobpilot/src/services/theme/app_theme.dart';
 import 'package:jobpilot/src/utilities/extensions/size_utilities.dart';
 import 'package:jobpilot/src/utilities/extensions/string_extensions.dart';
 
-class NoUserHomeHeader extends StatelessWidget {
-  const NoUserHomeHeader({
+class BrowseScreenTopSection extends StatelessWidget {
+  const BrowseScreenTopSection({
     super.key,
     this.liveJobsData,
     this.companiesData,
@@ -59,14 +58,15 @@ class NoUserHomeHeader extends StatelessWidget {
         if (controller.popularTags != null)
           RichText(
             text: TextSpan(
-              text: "Suggestion: ",
-              style: context.text.bodySmall,
+              text: "Suggestion:   ",
+              style: context.text.bodySmall?.copyWith(height: 1.5),
               children: controller.popularTags!
-                  .take(5)
+                  // .take(5)
                   .map(
                     (e) => TextSpan(
-                      text: "${e.name?.upperCaseFirst}, ",
-                      recognizer: TapGestureRecognizer()..onTap = () {},
+                      text: "${e.name},   ",
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () => controller.onSuggestionSelect(e.id),
                       style: TextStyle(
                         color: context.color?.opposite,
                       ),
@@ -162,6 +162,7 @@ class HomeDataCard extends StatelessWidget {
                     children: [
                       Text(
                         data,
+                        maxLines: 1,
                         style: context.text.titleMedium
                             ?.copyWith(fontWeight: FontWeight.bold),
                       ),

@@ -104,6 +104,7 @@ class ApplyJobScreen extends StatelessWidget {
                             icon: const Icon(Icons.arrow_back),
                             label: const Text(
                               "Apply Now",
+                              textAlign: TextAlign.center,
                             ),
                           ),
                         ),

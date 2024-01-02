@@ -16,6 +16,7 @@ import 'package:jobpilot/src/global/widgets/app/squared_icon_button.dart';
 import 'package:jobpilot/src/global/widgets/loading_indicator.dart';
 import 'package:jobpilot/src/services/theme/app_theme.dart';
 import 'package:jobpilot/src/utilities/extensions/size_utilities.dart';
+import 'package:jobpilot/src/utilities/functions.dart';
 import 'package:jobpilot/src/utilities/svg_icon.dart';
 import 'package:readmore/readmore.dart';
 
@@ -81,8 +82,9 @@ class SingleCompanyDetailsScreen extends StatelessWidget {
                                 relatedJobs: controller.openJobs!
                                     .map((job) => (
                                           job: job,
-                                          onTap: () => jobController
-                                              .onJobClick(job.slug!),
+                                          onTap: () =>
+                                              FindJobController.onJobClick(
+                                                  job.slug!),
                                           onBookmark: () => jobController
                                               .onBookmarkJobClick(job.id!),
                                         ))
@@ -330,25 +332,7 @@ class CompanyContactSection extends StatelessWidget {
                     padding: horizontal12 + vertical8,
                     backgroundColor: context.color?.primary.withOpacity(0.1),
                   ),
-                  onPressed: () {
-                    try {
-                      Clipboard.setData(
-                        ClipboardData(
-                          text: "akjsdhfkj",
-                        ),
-                      );
-
-                      ScaffoldMessenger.maybeOf(context)?.showSnackBar(
-                        SnackBar(
-                          content: Text(
-                            "Copied!",
-                          ),
-                        ),
-                      );
-                    } catch (e, s) {
-                      log("#CopyClipboardError", error: e, stackTrace: s);
-                    }
-                  },
+                  onPressed: controller.copyWebLink,
                   icon: Transform.rotate(
                     angle: 15,
                     child: Icon(

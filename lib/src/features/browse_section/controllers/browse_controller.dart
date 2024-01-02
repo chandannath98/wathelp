@@ -2,22 +2,16 @@ import 'dart:developer';
 
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:jobpilot/src/domain/local_storage/repositories/static/static_storage.dart';
 import 'package:jobpilot/src/domain/server/config/request_handler.dart';
 import 'package:jobpilot/src/domain/server/repositories/home/home_repo.dart';
 import 'package:jobpilot/src/domain/server/repositories/home/models/browse/browse_data/browse_data.dart';
-import 'package:jobpilot/src/domain/server/repositories/server_static/popular_tag/popular_tag.dart';
-import 'package:jobpilot/src/domain/server/repositories/server_static/server_static_repo.dart';
+import 'package:jobpilot/src/domain/server/repositories/home/models/browse/home_categories/home_top_categories.dart';
+import 'package:jobpilot/src/domain/server/repositories/jobs/jobs_repo.dart';
+import 'package:jobpilot/src/features/authentication/views/registration.dart';
 import 'package:jobpilot/src/features/find_jobs/views/find_jobs.dart';
-import 'package:jobpilot/src/utilities/scaffold_util.dart';
+import 'package:jobpilot/src/services/controller_mixin/controller_mixins.dart';
 
-class BrowseDataController extends GetxController {
-  bool isLoading = false;
-  setLoadingStatus([bool? newState]) {
-    isLoading = newState ?? (!isLoading);
-    update();
-  }
-
+class BrowseDataController extends GetxController with BaseControllerSystem {
   final searchController = TextEditingController();
   final locationController = TextEditingController();
 
@@ -25,25 +19,16 @@ class BrowseDataController extends GetxController {
   void onInit() {
     super.onInit();
     getBrowseData();
-    setPopularSearchTags();
   }
 
-  final _staticStorage = StaticStorage();
-  final _staticRepo = ServerStaticRepository();
-  List<PopularTag>? get popularTags => _staticStorage.popularTag;
-  setPopularSearchTags() async {
-    try {
-      final res = await _staticRepo.fetchPopularTags();
-      if (res.isSuccess) {
-        await _staticStorage.savePopularTags(res.data!);
-        update();
-      } else {
-        showToastError(res.errorMsg);
-      }
-    } catch (e, s) {
-      log("#FetchPopularTagError", error: e, stackTrace: s);
-      if (e is RequestException) e.handleError();
-    }
+  Future<void> onRegisterClick() async {
+    Get.to(
+      () => const RegistrationScreen(
+        showLoginButton: false,
+      ),
+      transition: Transition.rightToLeft,
+    );
+    update();
   }
 
   onSearchClick() async {
@@ -59,6 +44,7 @@ class BrowseDataController extends GetxController {
   }
 
   BrowseData? data;
+  List<HomeTopCategories>? get popularTags => data?.topCategories;
 
   final HomeRepository _homeRepository = HomeRepository();
   getBrowseData() async {
@@ -77,4 +63,16 @@ class BrowseDataController extends GetxController {
       }
     }
   }
+
+  void onTopCategorySelect(int? id) => Get.to(
+        () => FindJobScreen(query: SearchQuery(category: id)),
+      );
+
+  void onTopVacancySelect(int? id) => Get.to(
+        () => FindJobScreen(query: SearchQuery(jobRole: id)),
+      );
+
+  void onSuggestionSelect(int? id) => Get.to(
+        () => FindJobScreen(query: SearchQuery(category: id)),
+      );
 }

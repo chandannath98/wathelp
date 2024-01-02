@@ -9,10 +9,12 @@ class CustomTitledDropdownField<T> extends StatelessWidget {
     this.onChange,
     this.validator,
     this.fieldList,
+    this.showTitle = true,
     required this.title,
   });
 
   final T? value;
+  final bool showTitle;
   final String title;
   final String? hintText;
   final ValueChanged<T?>? onChange;
@@ -24,8 +26,10 @@ class CustomTitledDropdownField<T> extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Text(title),
-        6.height,
+        if (showTitle) ...[
+          Text(title),
+          6.height,
+        ],
         DropdownButtonFormField<T>(
           value: value,
           items: fieldList

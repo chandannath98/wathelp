@@ -235,8 +235,7 @@ class RequestException implements Exception {
       );
       if (statusCode == 401 && checkAuth) {
         log("#AUTHENTICATION_ERROR#");
-        await AuthController.find.logOut();
-        showToastError(response.errorMsg);
+        await AuthController.find.handleTokenError();
         return;
       } else {
         showToastError(response.errorMsg);
