@@ -1,28 +1,88 @@
+import 'dart:async';
+
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
+import 'package:jobpilot/src/constants/design/border_radius.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
 import 'package:jobpilot/src/constants/strings/home_strings.dart';
 import 'package:jobpilot/src/services/theme/app_theme.dart';
 import 'package:jobpilot/src/utilities/extensions/size_utilities.dart';
 
-class SearchBoxWidget extends StatelessWidget {
+class SearchBoxWidget<T> extends StatelessWidget {
   const SearchBoxWidget({
     super.key,
+    this.hasFilterData,
     this.searchController,
     this.locationController,
     this.onFilterClick,
+    this.suggestionsCallback,
+    this.onLocationSelect,
     required this.onSearchClick,
     required this.showFilterButton,
   });
 
+  final bool? hasFilterData;
   final bool showFilterButton;
   final VoidCallback? onFilterClick;
   final VoidCallback? onSearchClick;
-
   final TextEditingController? searchController;
   final TextEditingController? locationController;
+  //For suggestions
+  final ValueChanged<T>? onLocationSelect;
+  final FutureOr<List<T>> Function(String value)? suggestionsCallback;
 
   @override
   Widget build(BuildContext context) {
+    Widget searchBoxField;
+    if (suggestionsCallback != null) {
+      searchBoxField = TypeAheadField<T>(
+        focusNode: FocusNode(),
+        controller: locationController,
+        builder: (context, controller, focusNode) => SearchTextFieldRow(
+          hintText: "$location...",
+          focusNode: focusNode,
+          controller: controller,
+          icon: Icon(
+            Icons.share_location_sharp,
+            color: context.color?.primary,
+          ),
+        ),
+        decorationBuilder: (context, child) {
+          return Padding(
+            padding: const EdgeInsets.only(
+              top: 3,
+              bottom: 12,
+            ),
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                borderRadius: br6,
+                color: context.color?.theme,
+              ),
+              child: child,
+            ),
+          );
+        },
+        itemBuilder: (context, value) {
+          return ListTile(
+            title: Text(
+              value.toString(),
+            ),
+          );
+        },
+        onSelected: onLocationSelect,
+        suggestionsCallback: suggestionsCallback!,
+      );
+    } else {
+      searchBoxField = SearchTextFieldRow(
+        hintText: "$location...",
+        controller: locationController,
+        icon: Icon(
+          Icons.share_location_sharp,
+          color: context.color?.primary,
+        ),
+      );
+    }
     return Card(
       margin: EdgeInsets.zero,
       shape: RoundedRectangleBorder(
@@ -42,14 +102,7 @@ class SearchBoxWidget extends StatelessWidget {
               ),
             ),
             6.height,
-            SearchTextFieldRow(
-              hintText: "$location...",
-              controller: locationController,
-              icon: Icon(
-                Icons.share_location_sharp,
-                color: context.color?.primary,
-              ),
-            ),
+            searchBoxField,
             6.height,
             if (showFilterButton)
               ElevatedButton.icon(
@@ -57,14 +110,18 @@ class SearchBoxWidget extends StatelessWidget {
                 icon: const Icon(Icons.filter_list_rounded),
                 label: const Text(advanceFilter),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: context.color?.background,
+                  backgroundColor: (hasFilterData ?? false)
+                      ? context.color?.primary.withOpacity(0.15)
+                      : context.color?.background,
                   foregroundColor: context.color?.extraText,
                 ),
               ),
             ElevatedButton.icon(
               onPressed: onSearchClick,
               icon: const Icon(Icons.search),
-              label: const Text(search),
+              label: Text(
+                "search".tr(),
+              ),
             ),
           ],
         ),
@@ -76,6 +133,7 @@ class SearchBoxWidget extends StatelessWidget {
 class SearchTextFieldRow extends StatelessWidget {
   const SearchTextFieldRow({
     super.key,
+    this.focusNode,
     this.controller,
     required this.icon,
     required this.hintText,
@@ -83,6 +141,7 @@ class SearchTextFieldRow extends StatelessWidget {
 
   final Widget icon;
   final String hintText;
+  final FocusNode? focusNode;
   final TextEditingController? controller;
 
   @override
@@ -98,6 +157,7 @@ class SearchTextFieldRow extends StatelessWidget {
         Expanded(
           child: TextFormField(
             maxLines: 1,
+            focusNode: focusNode,
             controller: controller,
             style: const TextStyle(height: 1),
             decoration: searchBoxInputDecoration.copyWith(

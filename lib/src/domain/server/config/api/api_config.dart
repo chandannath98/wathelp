@@ -42,4 +42,6 @@ class API {
 
   //Others
   static const popularTag = "/popular-tags";
+  static const country = "/countries";
+  static const currency = "/currencies";
 }

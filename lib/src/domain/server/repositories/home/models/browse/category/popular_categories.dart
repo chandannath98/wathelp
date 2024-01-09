@@ -9,6 +9,7 @@ class PopularCategories with _$PopularCategories {
     @JsonKey(name: 'id') int? id,
     @JsonKey(name: 'name') String? name,
     @JsonKey(name: 'image') String? image,
+    @JsonKey(name: 'is_svg') bool? isSvg,
     @JsonKey(name: 'open_jobs_count') int? openJobsCount,
   }) = _PopularCategories;
 

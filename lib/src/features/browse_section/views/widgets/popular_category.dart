@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
 import 'package:jobpilot/src/global/widgets/app_shimmer.dart';
 import 'package:jobpilot/src/services/theme/app_theme.dart';
@@ -16,6 +17,7 @@ class HomePopularCategorySection extends StatelessWidget {
       ({
         String title,
         String count,
+        bool isSvg,
         String? imageLink,
         VoidCallback onTap
       })>? dataList;
@@ -49,6 +51,7 @@ class HomePopularCategorySection extends StatelessWidget {
                     PopularCategoryWidget(
                       title: i.title,
                       count: i.count,
+                      isSvg: i.isSvg,
                       imageLink: i.imageLink,
                       onTap: i.onTap,
                     ),
@@ -77,10 +80,12 @@ class PopularCategoryWidget extends StatelessWidget {
     super.key,
     this.onTap,
     this.imageLink,
+    this.isSvg = false,
     required this.title,
     required this.count,
   });
 
+  final bool isSvg;
   final String title;
   final String count;
   final String? imageLink;
@@ -114,10 +119,21 @@ class PopularCategoryWidget extends StatelessWidget {
             color: context.color?.theme,
           ),
           child: (imageLink != null)
-              ? CircleAvatar(
-                  maxRadius: 100,
-                  foregroundImage: NetworkImage(imageLink!),
-                )
+              ? (isSvg
+                  ? Container(
+                      clipBehavior: Clip.hardEdge,
+                      constraints: const BoxConstraints(
+                        maxHeight: 100,
+                      ),
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                      ),
+                      child: SvgPicture.network(imageLink!),
+                    )
+                  : CircleAvatar(
+                      maxRadius: 100,
+                      foregroundImage: NetworkImage(imageLink!),
+                    ))
               : Icon(
                   Icons.code,
                   color: context.color?.primary,

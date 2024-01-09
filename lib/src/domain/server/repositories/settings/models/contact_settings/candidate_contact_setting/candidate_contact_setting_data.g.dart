@@ -16,7 +16,7 @@ _$CandidateContactSettingDataImpl _$$CandidateContactSettingDataImplFromJson(
           ? null
           : Location.fromJson(json['location'] as Map<String, dynamic>),
       jobAlerts: (json['job_alerts'] as List<dynamic>?)
-          ?.map((e) => e as String)
+          ?.map((e) => ProfileJobAlertData.fromJson(e as Map<String, dynamic>))
           .toList(),
       jobAlertRoleList: (json['job_alert_role_list'] as List<dynamic>?)
           ?.map((e) => JobAlertRoleList.fromJson(e as Map<String, dynamic>))
@@ -78,4 +78,24 @@ Map<String, dynamic> _$$JobAlertRoleListImplToJson(
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
+    };
+
+_$ProfileJobAlertDataImpl _$$ProfileJobAlertDataImplFromJson(
+        Map<String, dynamic> json) =>
+    _$ProfileJobAlertDataImpl(
+      id: json['id'] as int?,
+      candidateId: json['candidate_id'] as int?,
+      jobRoleId: json['job_role_id'] as int?,
+      createdAt: json['created_at'] as String?,
+      updatedAt: json['updated_at'] as String?,
+    );
+
+Map<String, dynamic> _$$ProfileJobAlertDataImplToJson(
+        _$ProfileJobAlertDataImpl instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'candidate_id': instance.candidateId,
+      'job_role_id': instance.jobRoleId,
+      'created_at': instance.createdAt,
+      'updated_at': instance.updatedAt,
     };

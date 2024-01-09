@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jobpilot/src/domain/server/repositories/authentication/models/user/user.dart';
 import 'package:jobpilot/src/features/authentication/views/registration.dart';
+import 'package:jobpilot/src/features/notification/views/notification.dart';
 import 'package:jobpilot/src/features/settings/views/settings.dart';
 import 'package:jobpilot/src/services/authentication/auth_controller.dart';
 
@@ -52,7 +53,7 @@ class HomepageController extends GetxController {
     update();
   }
 
-  void onNotificationClick() {}
+  void onNotificationClick() => Get.to(() => const NotificationScreen());
 
   Future<void> onProfileClick() async {
     Get.to(() => const SettingsScreen());

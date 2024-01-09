@@ -12,6 +12,7 @@ _$PopularCategoriesImpl _$$PopularCategoriesImplFromJson(
       id: json['id'] as int?,
       name: json['name'] as String?,
       image: json['image'] as String?,
+      isSvg: json['is_svg'] as bool?,
       openJobsCount: json['open_jobs_count'] as int?,
     );
 
@@ -21,5 +22,6 @@ Map<String, dynamic> _$$PopularCategoriesImplToJson(
       'id': instance.id,
       'name': instance.name,
       'image': instance.image,
+      'is_svg': instance.isSvg,
       'open_jobs_count': instance.openJobsCount,
     };

@@ -253,7 +253,7 @@ class __$$SearchQueryImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$SearchQueryImpl with DiagnosticableTreeMixin implements _SearchQuery {
+class _$SearchQueryImpl extends _SearchQuery with DiagnosticableTreeMixin {
   const _$SearchQueryImpl(
       {@JsonKey(name: 'keyword') this.query,
       @JsonKey(name: 'category') this.category,
@@ -266,7 +266,8 @@ class _$SearchQueryImpl with DiagnosticableTreeMixin implements _SearchQuery {
       @JsonKey(name: 'education') this.education,
       @JsonKey(name: 'is_remote') this.isRemote,
       @JsonKey(name: 'job_type') this.jobType,
-      @JsonKey(name: 'sort_by') this.sortBy});
+      @JsonKey(name: 'sort_by') this.sortBy})
+      : super._();
 
   factory _$SearchQueryImpl.fromJson(Map<String, dynamic> json) =>
       _$$SearchQueryImplFromJson(json);
@@ -389,7 +390,7 @@ class _$SearchQueryImpl with DiagnosticableTreeMixin implements _SearchQuery {
   }
 }
 
-abstract class _SearchQuery implements SearchQuery {
+abstract class _SearchQuery extends SearchQuery {
   const factory _SearchQuery(
       {@JsonKey(name: 'keyword') final String? query,
       @JsonKey(name: 'category') final int? category,
@@ -403,6 +404,7 @@ abstract class _SearchQuery implements SearchQuery {
       @JsonKey(name: 'is_remote') final int? isRemote,
       @JsonKey(name: 'job_type') final int? jobType,
       @JsonKey(name: 'sort_by') final JobSortBy? sortBy}) = _$SearchQueryImpl;
+  const _SearchQuery._() : super._();
 
   factory _SearchQuery.fromJson(Map<String, dynamic> json) =
       _$SearchQueryImpl.fromJson;

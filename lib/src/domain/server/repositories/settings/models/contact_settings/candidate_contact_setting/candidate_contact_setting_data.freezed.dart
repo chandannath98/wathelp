@@ -26,7 +26,8 @@ mixin _$CandidateContactSettingData {
   @JsonKey(name: 'location')
   Location? get location => throw _privateConstructorUsedError;
   @JsonKey(name: 'job_alerts')
-  List<String>? get jobAlerts => throw _privateConstructorUsedError;
+  List<ProfileJobAlertData>? get jobAlerts =>
+      throw _privateConstructorUsedError;
   @JsonKey(name: 'job_alert_role_list')
   List<JobAlertRoleList>? get jobAlertRoleList =>
       throw _privateConstructorUsedError;
@@ -48,7 +49,7 @@ abstract class $CandidateContactSettingDataCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: 'contact_info') ContactInfo? contactInfo,
       @JsonKey(name: 'location') Location? location,
-      @JsonKey(name: 'job_alerts') List<String>? jobAlerts,
+      @JsonKey(name: 'job_alerts') List<ProfileJobAlertData>? jobAlerts,
       @JsonKey(name: 'job_alert_role_list')
       List<JobAlertRoleList>? jobAlertRoleList});
 
@@ -87,7 +88,7 @@ class _$CandidateContactSettingDataCopyWithImpl<$Res,
       jobAlerts: freezed == jobAlerts
           ? _value.jobAlerts
           : jobAlerts // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
+              as List<ProfileJobAlertData>?,
       jobAlertRoleList: freezed == jobAlertRoleList
           ? _value.jobAlertRoleList
           : jobAlertRoleList // ignore: cast_nullable_to_non_nullable
@@ -132,7 +133,7 @@ abstract class _$$CandidateContactSettingDataImplCopyWith<$Res>
   $Res call(
       {@JsonKey(name: 'contact_info') ContactInfo? contactInfo,
       @JsonKey(name: 'location') Location? location,
-      @JsonKey(name: 'job_alerts') List<String>? jobAlerts,
+      @JsonKey(name: 'job_alerts') List<ProfileJobAlertData>? jobAlerts,
       @JsonKey(name: 'job_alert_role_list')
       List<JobAlertRoleList>? jobAlertRoleList});
 
@@ -172,7 +173,7 @@ class __$$CandidateContactSettingDataImplCopyWithImpl<$Res>
       jobAlerts: freezed == jobAlerts
           ? _value._jobAlerts
           : jobAlerts // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
+              as List<ProfileJobAlertData>?,
       jobAlertRoleList: freezed == jobAlertRoleList
           ? _value._jobAlertRoleList
           : jobAlertRoleList // ignore: cast_nullable_to_non_nullable
@@ -189,7 +190,7 @@ class _$CandidateContactSettingDataImpl
   const _$CandidateContactSettingDataImpl(
       {@JsonKey(name: 'contact_info') this.contactInfo,
       @JsonKey(name: 'location') this.location,
-      @JsonKey(name: 'job_alerts') final List<String>? jobAlerts,
+      @JsonKey(name: 'job_alerts') final List<ProfileJobAlertData>? jobAlerts,
       @JsonKey(name: 'job_alert_role_list')
       final List<JobAlertRoleList>? jobAlertRoleList})
       : _jobAlerts = jobAlerts,
@@ -205,10 +206,10 @@ class _$CandidateContactSettingDataImpl
   @override
   @JsonKey(name: 'location')
   final Location? location;
-  final List<String>? _jobAlerts;
+  final List<ProfileJobAlertData>? _jobAlerts;
   @override
   @JsonKey(name: 'job_alerts')
-  List<String>? get jobAlerts {
+  List<ProfileJobAlertData>? get jobAlerts {
     final value = _jobAlerts;
     if (value == null) return null;
     if (_jobAlerts is EqualUnmodifiableListView) return _jobAlerts;
@@ -286,12 +287,12 @@ class _$CandidateContactSettingDataImpl
 abstract class _CandidateContactSettingData
     implements CandidateContactSettingData {
   const factory _CandidateContactSettingData(
-          {@JsonKey(name: 'contact_info') final ContactInfo? contactInfo,
-          @JsonKey(name: 'location') final Location? location,
-          @JsonKey(name: 'job_alerts') final List<String>? jobAlerts,
-          @JsonKey(name: 'job_alert_role_list')
-          final List<JobAlertRoleList>? jobAlertRoleList}) =
-      _$CandidateContactSettingDataImpl;
+      {@JsonKey(name: 'contact_info') final ContactInfo? contactInfo,
+      @JsonKey(name: 'location') final Location? location,
+      @JsonKey(name: 'job_alerts') final List<ProfileJobAlertData>? jobAlerts,
+      @JsonKey(name: 'job_alert_role_list')
+      final List<JobAlertRoleList>?
+          jobAlertRoleList}) = _$CandidateContactSettingDataImpl;
 
   factory _CandidateContactSettingData.fromJson(Map<String, dynamic> json) =
       _$CandidateContactSettingDataImpl.fromJson;
@@ -304,7 +305,7 @@ abstract class _CandidateContactSettingData
   Location? get location;
   @override
   @JsonKey(name: 'job_alerts')
-  List<String>? get jobAlerts;
+  List<ProfileJobAlertData>? get jobAlerts;
   @override
   @JsonKey(name: 'job_alert_role_list')
   List<JobAlertRoleList>? get jobAlertRoleList;
@@ -963,5 +964,261 @@ abstract class _JobAlertRoleList implements JobAlertRoleList {
   @override
   @JsonKey(ignore: true)
   _$$JobAlertRoleListImplCopyWith<_$JobAlertRoleListImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+ProfileJobAlertData _$ProfileJobAlertDataFromJson(Map<String, dynamic> json) {
+  return _ProfileJobAlertData.fromJson(json);
+}
+
+/// @nodoc
+mixin _$ProfileJobAlertData {
+  @JsonKey(name: 'id')
+  int? get id => throw _privateConstructorUsedError;
+  @JsonKey(name: 'candidate_id')
+  int? get candidateId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'job_role_id')
+  int? get jobRoleId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'created_at')
+  String? get createdAt => throw _privateConstructorUsedError;
+  @JsonKey(name: 'updated_at')
+  String? get updatedAt => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ProfileJobAlertDataCopyWith<ProfileJobAlertData> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ProfileJobAlertDataCopyWith<$Res> {
+  factory $ProfileJobAlertDataCopyWith(
+          ProfileJobAlertData value, $Res Function(ProfileJobAlertData) then) =
+      _$ProfileJobAlertDataCopyWithImpl<$Res, ProfileJobAlertData>;
+  @useResult
+  $Res call(
+      {@JsonKey(name: 'id') int? id,
+      @JsonKey(name: 'candidate_id') int? candidateId,
+      @JsonKey(name: 'job_role_id') int? jobRoleId,
+      @JsonKey(name: 'created_at') String? createdAt,
+      @JsonKey(name: 'updated_at') String? updatedAt});
+}
+
+/// @nodoc
+class _$ProfileJobAlertDataCopyWithImpl<$Res, $Val extends ProfileJobAlertData>
+    implements $ProfileJobAlertDataCopyWith<$Res> {
+  _$ProfileJobAlertDataCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? candidateId = freezed,
+    Object? jobRoleId = freezed,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
+  }) {
+    return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      candidateId: freezed == candidateId
+          ? _value.candidateId
+          : candidateId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      jobRoleId: freezed == jobRoleId
+          ? _value.jobRoleId
+          : jobRoleId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as String?,
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$ProfileJobAlertDataImplCopyWith<$Res>
+    implements $ProfileJobAlertDataCopyWith<$Res> {
+  factory _$$ProfileJobAlertDataImplCopyWith(_$ProfileJobAlertDataImpl value,
+          $Res Function(_$ProfileJobAlertDataImpl) then) =
+      __$$ProfileJobAlertDataImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {@JsonKey(name: 'id') int? id,
+      @JsonKey(name: 'candidate_id') int? candidateId,
+      @JsonKey(name: 'job_role_id') int? jobRoleId,
+      @JsonKey(name: 'created_at') String? createdAt,
+      @JsonKey(name: 'updated_at') String? updatedAt});
+}
+
+/// @nodoc
+class __$$ProfileJobAlertDataImplCopyWithImpl<$Res>
+    extends _$ProfileJobAlertDataCopyWithImpl<$Res, _$ProfileJobAlertDataImpl>
+    implements _$$ProfileJobAlertDataImplCopyWith<$Res> {
+  __$$ProfileJobAlertDataImplCopyWithImpl(_$ProfileJobAlertDataImpl _value,
+      $Res Function(_$ProfileJobAlertDataImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? candidateId = freezed,
+    Object? jobRoleId = freezed,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
+  }) {
+    return _then(_$ProfileJobAlertDataImpl(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      candidateId: freezed == candidateId
+          ? _value.candidateId
+          : candidateId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      jobRoleId: freezed == jobRoleId
+          ? _value.jobRoleId
+          : jobRoleId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as String?,
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$ProfileJobAlertDataImpl
+    with DiagnosticableTreeMixin
+    implements _ProfileJobAlertData {
+  const _$ProfileJobAlertDataImpl(
+      {@JsonKey(name: 'id') this.id,
+      @JsonKey(name: 'candidate_id') this.candidateId,
+      @JsonKey(name: 'job_role_id') this.jobRoleId,
+      @JsonKey(name: 'created_at') this.createdAt,
+      @JsonKey(name: 'updated_at') this.updatedAt});
+
+  factory _$ProfileJobAlertDataImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ProfileJobAlertDataImplFromJson(json);
+
+  @override
+  @JsonKey(name: 'id')
+  final int? id;
+  @override
+  @JsonKey(name: 'candidate_id')
+  final int? candidateId;
+  @override
+  @JsonKey(name: 'job_role_id')
+  final int? jobRoleId;
+  @override
+  @JsonKey(name: 'created_at')
+  final String? createdAt;
+  @override
+  @JsonKey(name: 'updated_at')
+  final String? updatedAt;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'ProfileJobAlertData(id: $id, candidateId: $candidateId, jobRoleId: $jobRoleId, createdAt: $createdAt, updatedAt: $updatedAt)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'ProfileJobAlertData'))
+      ..add(DiagnosticsProperty('id', id))
+      ..add(DiagnosticsProperty('candidateId', candidateId))
+      ..add(DiagnosticsProperty('jobRoleId', jobRoleId))
+      ..add(DiagnosticsProperty('createdAt', createdAt))
+      ..add(DiagnosticsProperty('updatedAt', updatedAt));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ProfileJobAlertDataImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.candidateId, candidateId) ||
+                other.candidateId == candidateId) &&
+            (identical(other.jobRoleId, jobRoleId) ||
+                other.jobRoleId == jobRoleId) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.updatedAt, updatedAt) ||
+                other.updatedAt == updatedAt));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, id, candidateId, jobRoleId, createdAt, updatedAt);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ProfileJobAlertDataImplCopyWith<_$ProfileJobAlertDataImpl> get copyWith =>
+      __$$ProfileJobAlertDataImplCopyWithImpl<_$ProfileJobAlertDataImpl>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$ProfileJobAlertDataImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _ProfileJobAlertData implements ProfileJobAlertData {
+  const factory _ProfileJobAlertData(
+          {@JsonKey(name: 'id') final int? id,
+          @JsonKey(name: 'candidate_id') final int? candidateId,
+          @JsonKey(name: 'job_role_id') final int? jobRoleId,
+          @JsonKey(name: 'created_at') final String? createdAt,
+          @JsonKey(name: 'updated_at') final String? updatedAt}) =
+      _$ProfileJobAlertDataImpl;
+
+  factory _ProfileJobAlertData.fromJson(Map<String, dynamic> json) =
+      _$ProfileJobAlertDataImpl.fromJson;
+
+  @override
+  @JsonKey(name: 'id')
+  int? get id;
+  @override
+  @JsonKey(name: 'candidate_id')
+  int? get candidateId;
+  @override
+  @JsonKey(name: 'job_role_id')
+  int? get jobRoleId;
+  @override
+  @JsonKey(name: 'created_at')
+  String? get createdAt;
+  @override
+  @JsonKey(name: 'updated_at')
+  String? get updatedAt;
+  @override
+  @JsonKey(ignore: true)
+  _$$ProfileJobAlertDataImplCopyWith<_$ProfileJobAlertDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -26,6 +26,8 @@ mixin _$PopularCategories {
   String? get name => throw _privateConstructorUsedError;
   @JsonKey(name: 'image')
   String? get image => throw _privateConstructorUsedError;
+  @JsonKey(name: 'is_svg')
+  bool? get isSvg => throw _privateConstructorUsedError;
   @JsonKey(name: 'open_jobs_count')
   int? get openJobsCount => throw _privateConstructorUsedError;
 
@@ -45,6 +47,7 @@ abstract class $PopularCategoriesCopyWith<$Res> {
       {@JsonKey(name: 'id') int? id,
       @JsonKey(name: 'name') String? name,
       @JsonKey(name: 'image') String? image,
+      @JsonKey(name: 'is_svg') bool? isSvg,
       @JsonKey(name: 'open_jobs_count') int? openJobsCount});
 }
 
@@ -64,6 +67,7 @@ class _$PopularCategoriesCopyWithImpl<$Res, $Val extends PopularCategories>
     Object? id = freezed,
     Object? name = freezed,
     Object? image = freezed,
+    Object? isSvg = freezed,
     Object? openJobsCount = freezed,
   }) {
     return _then(_value.copyWith(
@@ -79,6 +83,10 @@ class _$PopularCategoriesCopyWithImpl<$Res, $Val extends PopularCategories>
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as String?,
+      isSvg: freezed == isSvg
+          ? _value.isSvg
+          : isSvg // ignore: cast_nullable_to_non_nullable
+              as bool?,
       openJobsCount: freezed == openJobsCount
           ? _value.openJobsCount
           : openJobsCount // ignore: cast_nullable_to_non_nullable
@@ -99,6 +107,7 @@ abstract class _$$PopularCategoriesImplCopyWith<$Res>
       {@JsonKey(name: 'id') int? id,
       @JsonKey(name: 'name') String? name,
       @JsonKey(name: 'image') String? image,
+      @JsonKey(name: 'is_svg') bool? isSvg,
       @JsonKey(name: 'open_jobs_count') int? openJobsCount});
 }
 
@@ -116,6 +125,7 @@ class __$$PopularCategoriesImplCopyWithImpl<$Res>
     Object? id = freezed,
     Object? name = freezed,
     Object? image = freezed,
+    Object? isSvg = freezed,
     Object? openJobsCount = freezed,
   }) {
     return _then(_$PopularCategoriesImpl(
@@ -131,6 +141,10 @@ class __$$PopularCategoriesImplCopyWithImpl<$Res>
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as String?,
+      isSvg: freezed == isSvg
+          ? _value.isSvg
+          : isSvg // ignore: cast_nullable_to_non_nullable
+              as bool?,
       openJobsCount: freezed == openJobsCount
           ? _value.openJobsCount
           : openJobsCount // ignore: cast_nullable_to_non_nullable
@@ -148,6 +162,7 @@ class _$PopularCategoriesImpl
       {@JsonKey(name: 'id') this.id,
       @JsonKey(name: 'name') this.name,
       @JsonKey(name: 'image') this.image,
+      @JsonKey(name: 'is_svg') this.isSvg,
       @JsonKey(name: 'open_jobs_count') this.openJobsCount});
 
   factory _$PopularCategoriesImpl.fromJson(Map<String, dynamic> json) =>
@@ -163,12 +178,15 @@ class _$PopularCategoriesImpl
   @JsonKey(name: 'image')
   final String? image;
   @override
+  @JsonKey(name: 'is_svg')
+  final bool? isSvg;
+  @override
   @JsonKey(name: 'open_jobs_count')
   final int? openJobsCount;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'PopularCategories(id: $id, name: $name, image: $image, openJobsCount: $openJobsCount)';
+    return 'PopularCategories(id: $id, name: $name, image: $image, isSvg: $isSvg, openJobsCount: $openJobsCount)';
   }
 
   @override
@@ -179,6 +197,7 @@ class _$PopularCategoriesImpl
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('name', name))
       ..add(DiagnosticsProperty('image', image))
+      ..add(DiagnosticsProperty('isSvg', isSvg))
       ..add(DiagnosticsProperty('openJobsCount', openJobsCount));
   }
 
@@ -190,13 +209,15 @@ class _$PopularCategoriesImpl
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.image, image) || other.image == image) &&
+            (identical(other.isSvg, isSvg) || other.isSvg == isSvg) &&
             (identical(other.openJobsCount, openJobsCount) ||
                 other.openJobsCount == openJobsCount));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, image, openJobsCount);
+  int get hashCode =>
+      Object.hash(runtimeType, id, name, image, isSvg, openJobsCount);
 
   @JsonKey(ignore: true)
   @override
@@ -218,6 +239,7 @@ abstract class _PopularCategories implements PopularCategories {
           {@JsonKey(name: 'id') final int? id,
           @JsonKey(name: 'name') final String? name,
           @JsonKey(name: 'image') final String? image,
+          @JsonKey(name: 'is_svg') final bool? isSvg,
           @JsonKey(name: 'open_jobs_count') final int? openJobsCount}) =
       _$PopularCategoriesImpl;
 
@@ -233,6 +255,9 @@ abstract class _PopularCategories implements PopularCategories {
   @override
   @JsonKey(name: 'image')
   String? get image;
+  @override
+  @JsonKey(name: 'is_svg')
+  bool? get isSvg;
   @override
   @JsonKey(name: 'open_jobs_count')
   int? get openJobsCount;

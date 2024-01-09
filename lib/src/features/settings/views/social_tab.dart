@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jobpilot/src/constants/assets/assets.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
-import 'package:jobpilot/src/domain/server/repositories/settings/models/social_settings/response/social_setting_data.dart';
 import 'package:jobpilot/src/features/settings/controllers/social_settings_controller.dart';
 import 'package:jobpilot/src/global/widgets/app/custom_titled_drop_down.dart';
 import 'package:jobpilot/src/global/widgets/loading_indicator.dart';
@@ -61,6 +61,11 @@ class SocialInformationTab extends StatelessWidget {
                                       icon: Image.network(
                                         controller.getImageLink(
                                             userSocial.socialMedia!),
+                                        errorBuilder:
+                                            (context, error, stackTrace) =>
+                                                const Image(
+                                          image: Assets.errorImage,
+                                        ),
                                       ),
                                       onRemoveCall: (value) {},
                                     );
@@ -267,7 +272,12 @@ class _SocialPickerWidgetState extends State<SocialPickerWidget> {
                               child: Padding(
                                 padding: all4,
                                 child: Image.network(
-                                    widget.linkGetter(selectedKey)),
+                                  widget.linkGetter(selectedKey),
+                                  errorBuilder: (context, error, stackTrace) =>
+                                      const Image(
+                                    image: Assets.errorImage,
+                                  ),
+                                ),
                               ),
                             ),
                             16.width,

@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jobpilot/src/constants/assets/assets.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
-import 'package:jobpilot/src/features/dashboard/controllers/dashboard_controller.dart';
-import 'package:jobpilot/src/features/dashboard/views/widgets/complete_profile.dart';
+import 'package:jobpilot/src/features/account/controllers/account_controller.dart';
+import 'package:jobpilot/src/features/account/views/widgets/complete_profile.dart';
+
 import 'package:jobpilot/src/global/widgets/loading_indicator.dart';
 import 'package:jobpilot/src/services/theme/extensions.dart';
 import 'package:jobpilot/src/services/theme/extensions/colors_theme.dart';
@@ -13,8 +14,8 @@ import 'package:jobpilot/src/utilities/svg_icon.dart';
 import 'widgets/applied_job_card.dart';
 import 'widgets/dashboard_data_tile.dart';
 
-class DashboardPage extends StatelessWidget {
-  const DashboardPage({
+class AccountPage extends StatelessWidget {
+  const AccountPage({
     super.key,
   });
 
@@ -23,7 +24,7 @@ class DashboardPage extends StatelessWidget {
     return GetBuilder(
       autoRemove: false,
       dispose: (state) => false,
-      init: DashboardController(),
+      init: AccountController(),
       builder: (controller) {
         return CustomScrollView(
           slivers: [
@@ -32,7 +33,7 @@ class DashboardPage extends StatelessWidget {
                 padding: all16,
                 child: controller.isLoading
                     ? const LoadingIndicator()
-                    : DashboardTopSection(
+                    : AccountTopSection(
                         controller: controller,
                       ),
               ),
@@ -105,13 +106,13 @@ class DashboardPage extends StatelessWidget {
   }
 }
 
-class DashboardTopSection extends StatelessWidget {
-  const DashboardTopSection({
+class AccountTopSection extends StatelessWidget {
+  const AccountTopSection({
     super.key,
     required this.controller,
   });
 
-  final DashboardController controller;
+  final AccountController controller;
 
   @override
   Widget build(BuildContext context) {

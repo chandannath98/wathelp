@@ -4,8 +4,8 @@ import 'package:jobpilot/src/constants/design/paddings.dart';
 import 'package:jobpilot/src/services/theme/app_theme.dart';
 import 'package:jobpilot/src/utilities/extensions/size_utilities.dart';
 
-class SingleFeaturedJobCard extends StatelessWidget {
-  const SingleFeaturedJobCard({
+class SingleJobCard extends StatelessWidget {
+  const SingleJobCard({
     super.key,
     this.bgColor,
     this.bookmarked,

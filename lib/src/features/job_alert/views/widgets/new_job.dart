@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jobpilot/src/constants/assets/assets.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
 import 'package:jobpilot/src/domain/server/repositories/jobs/models/job_alert/alert_job/alert_job.dart';
 import 'package:jobpilot/src/global/widgets/app/vertical_icon_text.dart';
@@ -31,6 +32,10 @@ class SingleJobAlertWidget extends StatelessWidget {
                       child: Image.network(
                         "https://img.icons8.com/?size=80&id=qLVB1tIe9Ts9&format=png",
                         fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) =>
+                            const Image(
+                          image: Assets.errorImage,
+                        ),
                       ),
                     ),
                   ),

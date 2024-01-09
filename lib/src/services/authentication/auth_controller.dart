@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:jobpilot/src/domain/local_storage/repositories/auth_storage/auth_storage.dart';
 import 'package:jobpilot/src/domain/server/repositories/authentication/models/user/user.dart';
 import 'package:jobpilot/src/features/homepage/controllers/homepage_controller.dart';
-import 'package:jobpilot/src/features/homepage/views/homepage.dart';
 import 'package:jobpilot/src/services/authentication/models/auth_credentials/auth_credentials.dart';
 import 'package:jobpilot/src/services/authentication/models/user_type/user_type.dart';
 import 'package:jobpilot/src/utilities/scaffold_util.dart';

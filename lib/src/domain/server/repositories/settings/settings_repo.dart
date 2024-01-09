@@ -1,13 +1,13 @@
-import 'dart:developer';
 import 'dart:io';
+import 'dart:developer';
 
 import 'package:dio/dio.dart';
-import 'package:jobpilot/src/domain/server/config/repository.dart';
 import 'package:jobpilot/src/domain/server/repositories/settings/models/contact_settings/candidate_contact_setting/candidate_contact_setting_data.dart';
-import 'package:jobpilot/src/domain/server/repositories/settings/models/language/language_response/language_response.dart';
 import 'package:jobpilot/src/domain/server/repositories/settings/models/personal_settings/personal_settings_response/personal_setting_data.dart';
 import 'package:jobpilot/src/domain/server/repositories/settings/models/personal_settings/update_personal_setting/update_personal_setting_response.dart';
 import 'package:jobpilot/src/domain/server/repositories/settings/models/profile_settings/candidate_profile_settings/candidate_profile_setting_data.dart';
+import 'package:jobpilot/src/domain/server/config/repository.dart';
+import 'package:jobpilot/src/domain/server/repositories/settings/models/language/language_response/language_response.dart';
 import 'package:jobpilot/src/domain/server/repositories/settings/models/resume/resume_delete/resume_delete_response.dart';
 import 'package:jobpilot/src/domain/server/repositories/settings/models/resume/resume_update/resume_update_response.dart';
 import 'package:jobpilot/src/domain/server/repositories/settings/models/resume/resume_upload/resume_upload_response.dart';
@@ -237,9 +237,9 @@ class SettingsRepository extends ServerRepo {
       final response = await requestHandler.post(
         API.candidateSettings,
         FormData.fromMap({
-          'type': CandidateSettingSections.social.name,
-          'social_media[]': data.key,
           'url[]': data.url,
+          'social_media[]': data.key,
+          'type': CandidateSettingSections.social.name,
         }),
       );
       return ResponseWrapper.fromMap(

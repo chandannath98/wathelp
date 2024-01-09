@@ -2,6 +2,7 @@ import 'dart:developer' show log;
 
 import 'package:dio/dio.dart';
 import 'package:get/get.dart' hide Response;
+import 'package:jobpilot/src/domain/local_storage/repositories/static/static_storage.dart';
 import 'package:jobpilot/src/domain/server/config/repository.dart';
 import 'package:jobpilot/src/services/authentication/auth_controller.dart';
 import 'package:jobpilot/src/utilities/scaffold_util.dart';
@@ -9,16 +10,20 @@ import 'package:jobpilot/src/utilities/scaffold_util.dart';
 class RequestHandler extends GetxController {
   static RequestHandler get find => Get.find();
   String? get authToken => AuthController.find.currentToken;
+  String? get langCode => StaticStorage.selectedLanguage?.code;
+  int? get selectedCountryCode => StaticStorage.selectedCountry?.id;
 
   Dio get dio => Dio(
         BaseOptions(
           baseUrl: API.baseUrl,
           persistentConnection: true,
-          connectTimeout: const Duration(seconds: 10),
+          connectTimeout: const Duration(seconds: 15),
           headers: {
             'connection': 'keep-alive',
             'accept': 'application/json',
+            if (langCode != null) 'current_lang': langCode,
             if (authToken != null) 'Authorization': 'Bearer $authToken',
+            if (langCode != null) 'selected_country': selectedCountryCode,
           },
         ),
       );
@@ -51,6 +56,7 @@ class RequestHandler extends GetxController {
         msg: errorMsg,
         trace: stacktrace,
         res: error.response,
+        exceptionType: error.type,
         statusCode: error.response?.statusCode,
       );
     } catch (error, stacktrace) {
@@ -89,6 +95,7 @@ class RequestHandler extends GetxController {
         msg: errorMsg,
         trace: stacktrace,
         res: error.response,
+        exceptionType: error.type,
         statusCode: error.response?.statusCode,
       );
     } catch (error, stacktrace) {
@@ -129,6 +136,7 @@ class RequestHandler extends GetxController {
         msg: errorMsg,
         trace: stacktrace,
         res: error.response,
+        exceptionType: error.type,
         statusCode: error.response?.statusCode,
       );
     } catch (error, stacktrace) {
@@ -170,6 +178,7 @@ class RequestHandler extends GetxController {
         msg: errorMsg,
         trace: stacktrace,
         res: error.response,
+        exceptionType: error.type,
         statusCode: error.response?.statusCode,
       );
     } catch (error, stacktrace) {
@@ -185,6 +194,29 @@ class RequestHandler extends GetxController {
   }
 }
 
+extension CustomDioExceptionMsg on DioExceptionType {
+  String toPrettyDescription() {
+    switch (this) {
+      case DioExceptionType.connectionTimeout:
+        return '(err: connection timeout) Check your internet connection.';
+      case DioExceptionType.sendTimeout:
+        return '(err: send timeout) Check your internet connection.';
+      case DioExceptionType.receiveTimeout:
+        return '(err: receive timeout) Check your internet connection.';
+      case DioExceptionType.badCertificate:
+        return 'bad certificate';
+      case DioExceptionType.badResponse:
+        return 'bad response';
+      case DioExceptionType.cancel:
+        return 'request cancelled';
+      case DioExceptionType.connectionError:
+        return '(err: connection error) Check your internet connection.';
+      case DioExceptionType.unknown:
+        return 'unknown';
+    }
+  }
+}
+
 class RequestException implements Exception {
   String url;
   String? msg;
@@ -193,6 +225,7 @@ class RequestException implements Exception {
   Response? res;
   int? statusCode;
   StackTrace trace;
+  DioExceptionType exceptionType;
   dynamic data;
 
   RequestException({
@@ -204,6 +237,7 @@ class RequestException implements Exception {
     required this.method,
     required this.error,
     required this.trace,
+    this.exceptionType = DioExceptionType.unknown,
   }) {
     final details = "\x1B[35m/*\n"
         "method: ($method)\n"
@@ -238,7 +272,10 @@ class RequestException implements Exception {
         await AuthController.find.handleTokenError();
         return;
       } else {
-        showToastError(response.errorMsg);
+        print("Else status : ${res?.statusCode}");
+        statusCode == null
+            ? showToastError(exceptionType.toPrettyDescription())
+            : showToastError(response.errorMsg);
       }
     } catch (e, s) {
       log("#HandleError", error: e, stackTrace: s);

@@ -1,9 +1,12 @@
 import 'dart:developer';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:get/get.dart' hide Trans;
+import 'package:jobpilot/generated/locale_keys.g.dart';
 import 'package:jobpilot/src/constants/assets/assets.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
+import 'package:jobpilot/src/domain/local_storage/repositories/static/static_storage.dart';
 import 'package:jobpilot/src/services/authentication/auth_controller.dart';
 import 'package:jobpilot/src/services/theme/extensions.dart';
 import 'package:jobpilot/src/services/theme/extensions/colors_theme.dart';
@@ -61,20 +64,32 @@ class MenuPageWidget extends StatelessWidget {
         10.height,
         MenuJobPilotListTile(
           onTap: controller.gotoChooseLanguage,
-          data: "English",
-          title: "Language",
+          data: StaticStorage.selectedLanguage?.name ?? "English",
+          title: LocaleKeys.languagekey.tr(),
           icon: const Icon(Icons.language_rounded),
         ),
         MenuJobPilotListTile(
-          onTap: () {},
-          data: "USD",
-          title: "Currency",
-          icon: const Icon(Icons.attach_money_rounded),
+          onTap: controller.gotoChooseCurrency,
+          data: StaticStorage.selectedCurrency?.code ?? "USD",
+          title: LocaleKeys.currency.tr(),
+          icon: (StaticStorage.selectedCurrency?.symbol == null)
+              ? const Icon(Icons.attach_money_rounded)
+              : SizedBox.square(
+                  dimension: 24,
+                  child: FittedBox(
+                    child: Text(
+                      StaticStorage.selectedCurrency!.symbol!,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
         ),
         MenuJobPilotListTile(
-          onTap: () {},
-          data: "Bangladesh",
-          title: "Country",
+          onTap: controller.gotoChooseCountry,
+          data: StaticStorage.selectedCountry?.name ?? "Bangladesh",
+          title: LocaleKeys.country.tr(),
           icon: const Icon(Icons.flag_outlined),
         ),
         const CallNowWidget(
@@ -211,7 +226,7 @@ class MenuPageWidget extends StatelessWidget {
         MenuPageListTile(
           onTap: controller.gotoDashboard,
           title: "Dashboard",
-          icon: const SvgIcon(Assets.dashboardIcon),
+          icon: const SvgIcon(Assets.accountIcon),
         ),
         MenuPageListTile(
           onTap: controller.gotoAppliedJobs,

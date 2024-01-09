@@ -4,7 +4,7 @@ import 'package:jobpilot/src/features/settings/views/personal_tab.dart';
 import 'package:jobpilot/src/services/theme/extensions.dart';
 import 'package:jobpilot/src/services/theme/extensions/colors_theme.dart';
 
-import 'account_tab.dart';
+import 'contact_tab.dart';
 import 'profile_tab.dart';
 import 'social_tab.dart';
 
@@ -66,7 +66,7 @@ class _SettingsScreenState extends State<SettingsScreen>
                   "Personal",
                   "Profile",
                   "Social",
-                  "Account Setting",
+                  "Contact Setting",
                 ]
                     .map(
                       (text) => Padding(
@@ -87,7 +87,7 @@ class _SettingsScreenState extends State<SettingsScreen>
                 PersonalInformationTab(),
                 ProfileInformationTab(),
                 SocialInformationTab(),
-                AccountSettingsTab(),
+                ContactSettingsTab(),
               ],
             ),
           ),

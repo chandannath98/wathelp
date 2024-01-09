@@ -44,17 +44,11 @@
 							}
 						],
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/home",
-							"protocol": "http",
+							"raw": "{{JOBPILOT_API}}/home",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{JOBPILOT_API}}"
 							],
-							"port": "8000",
 							"path": [
-								"api",
 								"home"
 							]
 						}
@@ -63,6 +57,9 @@
 				},
 				{
 					"name": "Jobs",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"method": "GET",
 						"header": [
@@ -72,18 +69,16 @@
 								"type": "text"
 							}
 						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/jobs?keyword&category&job_role&price_min&price_max&tag&location&experience&education&is_remote=&job_type&sort_by&paginate=1",
-							"protocol": "http",
+							"raw": "{{JOBPILOT_API}}/jobs?keyword&category&job_role&price_min&price_max&tag&location&experience&education&is_remote=&job_type&sort_by&paginate=10",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{JOBPILOT_API}}"
 							],
-							"port": "8000",
 							"path": [
-								"api",
 								"jobs"
 							],
 							"query": [
@@ -149,37 +144,8 @@
 								},
 								{
 									"key": "paginate",
-									"value": "1"
+									"value": "10"
 								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Countries",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "http://127.0.0.1:8000/api/countries",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"countries"
 							]
 						}
 					},
@@ -371,7 +337,7 @@
 							}
 						],
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/jobs/frontend-developer_1702291731_6867308880",
+							"raw": "http://127.0.0.1:8000/api/jobs/frontend-developer_1702567592_6226582654",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -383,7 +349,7 @@
 							"path": [
 								"api",
 								"jobs",
-								"frontend-developer_1702291731_6867308880"
+								"frontend-developer_1702567592_6226582654"
 							]
 						}
 					},
@@ -741,6 +707,11 @@
 									"value": "",
 									"description": "any country location",
 									"type": "text"
+								},
+								{
+									"key": "paginate",
+									"value": "1",
+									"type": "text"
 								}
 							]
 						},
@@ -787,6 +758,29 @@
 								"api",
 								"companies",
 								"templatecookie"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Page List",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{JOBPILOT_API}}/page-list",
+							"host": [
+								"{{JOBPILOT_API}}"
+							],
+							"path": [
+								"page-list"
 							]
 						}
 					},
@@ -847,19 +841,151 @@
 							"formdata": []
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/change-language/bn",
-							"protocol": "http",
+							"raw": "{{JOBPILOT_API}}/change-language/bn",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{JOBPILOT_API}}"
 							],
-							"port": "8000",
 							"path": [
-								"api",
 								"change-language",
 								"bn"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Countries",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{JOBPILOT_API}}/countries",
+							"host": [
+								"{{JOBPILOT_API}}"
+							],
+							"path": [
+								"countries"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change Country",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{JOBPILOT_API}}/change-country/2",
+							"host": [
+								"{{JOBPILOT_API}}"
+							],
+							"path": [
+								"change-country",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Currencies",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{JOBPILOT_API}}/currencies",
+							"host": [
+								"{{JOBPILOT_API}}"
+							],
+							"path": [
+								"currencies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change Currency",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{JOBPILOT_API}}/change-currency/BDT",
+							"host": [
+								"{{JOBPILOT_API}}"
+							],
+							"path": [
+								"change-currency",
+								"BDT"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Current Session",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{JOBPILOT_API}}/current-session",
+							"host": [
+								"{{JOBPILOT_API}}"
+							],
+							"path": [
+								"current-session"
 							]
 						}
 					},
@@ -925,16 +1051,6 @@
 						"disableBodyPruning": true
 					},
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiNzE0MzFjMDVjNDIwZTQzNTUzZjZlYzk2NThkYWI4ODA1MDk0YWIwNDBkNWVmNGU3OWM1MDVlYTc5ODBkOTFiZDRjODRjNjJkODAyZDljODEiLCJpYXQiOjE2Nzk4ODc4NTYuMzkwNywibmJmIjoxNjc5ODg3ODU2LjM5MDcwMywiZXhwIjoxNjk1Nzg1NDU2LjM4MTk0Mywic3ViIjoiMTUiLCJzY29wZXMiOltdfQ.a55BV-5l7JTmmvd4cdZW24DL48ZO2aeHhg5GSC_RlqxtHowXO7SyQqrGqrE7eVbpfGbnOhyINt0OOp0odteZOYje6iLyetPxPj0lJtQCnqUD16I0qd6OKEvUAT3qbt9MTUdnpGkTAya5TWMJIIiIwGdTqovF6Z9K7hxZk1cwi9B5c2tfVQ5ppSR7vXhPW8dimkVQWC4BxeIWk030cyhgEowlpZNcno01uVpWYwgANDauikMVbEXaQVsaVoE7wuHIRIAxeCsZ5sAK6nltGBZ7b8BEKfEIZmjdKYzHLJUS0emIAb3WgV-sL6WF5aMLvCTca7D86c9-6M8H4dkDaIh_LR3z4Vx2-xvb2Ap44fYsJhfZcqViMtKkK5OFeME7iEZU0uEg5QaTYq1Sf1wkvkKnBhpsUGCx9vl9JocvMWeVz-OKmAxayHIcLQ7MrKWY2wPorwDXHoDt3nUSAQY-5EiqNg8HSEHohev1s_i6THbX4es1u8G12tU0GnUGmDfzCsCIX6LmT1iDby59U5fPrzPsC1KAQnBGm79GXbpCxrooZvPujOq9_GqTVDInHwdETzq8eNzzsXON6mm0-lno5DbHZgXRGexU31p-gSw9fHj2XXFGrme-0aaiQBusjSxKLqrKTs2xxSuAbDyqyIZ-TA8ScoT2b6sE7y_HYuuZYRSEbOc",
-									"type": "string"
-								}
-							]
-						},
 						"method": "GET",
 						"header": [
 							{
@@ -948,17 +1064,11 @@
 							"formdata": []
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/profile",
-							"protocol": "http",
+							"raw": "{{JOBPILOT_API}}/profile",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{JOBPILOT_API}}"
 							],
-							"port": "8000",
 							"path": [
-								"api",
 								"profile"
 							]
 						}
@@ -986,7 +1096,7 @@
 								},
 								{
 									"key": "email",
-									"value": "candidate22@mail.coma",
+									"value": "candidate2@mail.com",
 									"type": "text"
 								},
 								{
@@ -1008,17 +1118,11 @@
 							]
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/register",
-							"protocol": "http",
+							"raw": "{{JOBPILOT_API}}/register",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{JOBPILOT_API}}"
 							],
-							"port": "8000",
 							"path": [
-								"api",
 								"register"
 							]
 						}
@@ -1147,7 +1251,7 @@
 									"formdata": [
 										{
 											"key": "name",
-											"value": "Demo 2",
+											"value": "Demo 4",
 											"description": "Resume Name",
 											"type": "text"
 										},
@@ -1155,7 +1259,7 @@
 											"key": "resume_file",
 											"description": "Resume PDF",
 											"type": "file",
-											"src": "/home/arif/Downloads/Academic Year.pdf"
+											"src": "/run/user/1000/doc/4b6648b/1694002245.pdf"
 										}
 									]
 								},
@@ -1234,6 +1338,417 @@
 					]
 				},
 				{
+					"name": "Settings",
+					"item": [
+						{
+							"name": "Fetch Setting Info",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{JOBPILOT_API}}/candidate/settings?type=personal",
+									"host": [
+										"{{JOBPILOT_API}}"
+									],
+									"path": [
+										"candidate",
+										"settings"
+									],
+									"query": [
+										{
+											"key": "type",
+											"value": "personal",
+											"description": "personal, profile, social, contact"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Personal Setting Update",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "type",
+											"value": "personal",
+											"description": "Do not change the value",
+											"type": "text"
+										},
+										{
+											"key": "image",
+											"type": "file",
+											"src": "/home/arif/Pictures/2023-03-04_12-33.png"
+										},
+										{
+											"key": "name",
+											"value": "Candidate",
+											"type": "text"
+										},
+										{
+											"key": "title",
+											"value": "My title",
+											"type": "text"
+										},
+										{
+											"key": "experience_id",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "education_id",
+											"value": "2",
+											"type": "text"
+										},
+										{
+											"key": "website",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "date_of_birth",
+											"value": "26-12-2023",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{JOBPILOT_API}}/candidate/settings",
+									"host": [
+										"{{JOBPILOT_API}}"
+									],
+									"path": [
+										"candidate",
+										"settings"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Profile Setting Update",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "type",
+											"value": "profile",
+											"description": "Do not change the value",
+											"type": "text"
+										},
+										{
+											"key": "gender",
+											"value": "male",
+											"description": "Value should be: male or female or other",
+											"type": "text"
+										},
+										{
+											"key": "marital_status",
+											"value": "married",
+											"description": "Value should be: married or single",
+											"type": "text"
+										},
+										{
+											"key": "profession",
+											"value": "doctor",
+											"type": "text"
+										},
+										{
+											"key": "bio",
+											"value": "Bolmu na",
+											"type": "text"
+										},
+										{
+											"key": "status",
+											"value": "available",
+											"description": "Value should be: available or not_available or available_in",
+											"type": "text"
+										},
+										{
+											"key": "available_in",
+											"value": "",
+											"description": "If value is available_in then fill this filed with any available date",
+											"type": "text"
+										},
+										{
+											"key": "skills[]",
+											"value": "php",
+											"type": "text"
+										},
+										{
+											"key": "skills[]",
+											"value": "js",
+											"type": "text"
+										},
+										{
+											"key": "languages[]",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "languages[]",
+											"value": "2",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{JOBPILOT_API}}/candidate/settings",
+									"host": [
+										"{{JOBPILOT_API}}"
+									],
+									"path": [
+										"candidate",
+										"settings"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Social Setting Update",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "type",
+											"value": "social",
+											"description": "Do not change the value",
+											"type": "text"
+										},
+										{
+											"key": "social_media[]",
+											"value": "facebook",
+											"description": "Value should be: facebook or twitter or instagram or youtube or linkedin or pinterest or reddit or github or other",
+											"type": "text"
+										},
+										{
+											"key": "url[]",
+											"value": "https://jobpilot.templatecookie.com/candidate/settings",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{JOBPILOT_API}}/candidate/settings",
+									"host": [
+										"{{JOBPILOT_API}}"
+									],
+									"path": [
+										"candidate",
+										"settings"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Contact Setting Update",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "type",
+											"value": "contact",
+											"description": "Do not change the value",
+											"type": "text"
+										},
+										{
+											"key": "phone",
+											"value": "123456",
+											"type": "text"
+										},
+										{
+											"key": "secondary_phone",
+											"value": "123456",
+											"type": "text"
+										},
+										{
+											"key": "whatsapp_number",
+											"value": "123456",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "123456@mail.com",
+											"type": "text"
+										},
+										{
+											"key": "address",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "country",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "long",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "lat",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "exact_location",
+											"value": "",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{JOBPILOT_API}}/candidate/settings",
+									"host": [
+										"{{JOBPILOT_API}}"
+									],
+									"path": [
+										"candidate",
+										"settings"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Password Setting Update",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "type",
+											"value": "password",
+											"description": "Do not change the value",
+											"type": "text"
+										},
+										{
+											"key": "current_password",
+											"value": "password",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "password",
+											"type": "text"
+										},
+										{
+											"key": "password_confirmation",
+											"value": "password",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{JOBPILOT_API}}/candidate/settings",
+									"host": [
+										"{{JOBPILOT_API}}"
+									],
+									"path": [
+										"candidate",
+										"settings"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Account Setting",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "type",
+											"value": "account-delete",
+											"description": "Do not change the value",
+											"type": "text"
+										},
+										{
+											"key": "current_password",
+											"value": "password",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{JOBPILOT_API}}/candidate/settings",
+									"host": [
+										"{{JOBPILOT_API}}"
+									],
+									"path": [
+										"candidate",
+										"settings"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
 					"name": "Dashboard",
 					"request": {
 						"method": "GET",
@@ -1258,40 +1773,6 @@
 					"response": []
 				},
 				{
-					"name": "Setting",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZmEyMDExZDRiZjZmMGY3NTE4YWE1ZWNkZjUyM2Q3N2IzNTVkYWExMThkYTViMWExNzEzM2JmZWIxMGIzODY2OTBiMjczNmQ4ZDU0Mjg4ZjMiLCJpYXQiOjE2ODMxOTI3MTYuODQzNDM5LCJuYmYiOjE2ODMxOTI3MTYuODQzNDQyLCJleHAiOjE2OTkwOTAzMTYuODMzNTU0LCJzdWIiOiIxNSIsInNjb3BlcyI6W119.SUFHDs1Q3KhRTABmg85FF0HpiWnSvtBevzEGSK6zCqORPaDtpoRphL8dC7RGbkpnAFQbtgvsg4xy_w8I3NDhq5n6W0CU7OhUyF_fFFrBnMQjN75_zvP7PqWMjiPnP_7VsZiCzK8rsdq1G8bTZoTZiW7sxyJy5Zh8IdKMizCnomKmWpBt_z5_m2mGMpAVU3hDMBuRh7HO7FpphXyw1WEmzryKtQ5kSn0d4tAWGuAAt_KKyd93V3npCJpWS5zloaimRanWmn2jr4WOSS-L8e0NjfEDx9DzY4qaNw4iaRn_-zcHa0Yy-jfHKSp6a-RcpNcJOkS6H2LmVmjkI-CIY1oAyMGI2ZmI-yW0m9kJIXJ0zXuZjoT2ZRWdNoK6g3QjhFbtKGpoEtNJTMyqK3b6Vc_92dk5Kd1HobmJDTbqfo5zjDWmoRUhTm5QePecSgjpbWDJes4oSPkQfRJCe_03x0d3UvlRRYQAFsPyVkPR-8K6nm9ZU87VkZGoVCQxqPVgb9Yi13DPOQB6aE_BL-y-QhRHHwKKnWhoSDCrh3QZm5CqxeqjcQLzpskSGjGLzKlycbjGaRwl3ubkkBKS79nicOvmGeO3TdYquQxTPpx8yd3ZiIw4yN4O-SmgkF39iqVvu5ZTeeCLKhQho-nTvzTD9K2hmh3F2XzMIljByG3Fly4PtE0",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{JOBPILOT_API}}/candidate/setting",
-							"host": [
-								"{{JOBPILOT_API}}"
-							],
-							"path": [
-								"candidate",
-								"setting"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "Job Apply",
 					"request": {
 						"method": "POST",
@@ -1307,12 +1788,12 @@
 							"formdata": [
 								{
 									"key": "job_id",
-									"value": "6",
+									"value": "7",
 									"type": "text"
 								},
 								{
 									"key": "resume_id",
-									"value": "21",
+									"value": "22",
 									"type": "text"
 								},
 								{
@@ -1348,14 +1829,14 @@
 							}
 						],
 						"url": {
-							"raw": "{{JOBPILOT_API}}/candidate/jobs/4/bookmark",
+							"raw": "{{JOBPILOT_API}}/candidate/jobs/1280/bookmark",
 							"host": [
 								"{{JOBPILOT_API}}"
 							],
 							"path": [
 								"candidate",
 								"jobs",
-								"4",
+								"1280",
 								"bookmark"
 							]
 						}
@@ -1386,6 +1867,36 @@
 								{
 									"key": "paginate",
 									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Job Alert",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{JOBPILOT_API}}/candidate/job-alert?paginate=8",
+							"host": [
+								"{{JOBPILOT_API}}"
+							],
+							"path": [
+								"candidate",
+								"job-alert"
+							],
+							"query": [
+								{
+									"key": "paginate",
+									"value": "8"
 								}
 							]
 						}

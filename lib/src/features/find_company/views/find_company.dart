@@ -159,12 +159,13 @@ class FindCompanySettings extends StatelessWidget {
             showFilterButton: false,
           ),
           12.height,
-          Text(
-            "Popular searches:",
-            style: context.text.bodySmall,
-          ),
-          8.height,
-          if (controller.popularTags?.isNotEmpty ?? true) ...[
+          //No popular tag for companies!
+          /* Text(
+             "Popular searches:",
+             style: context.text.bodySmall,
+           ),
+           8.height,
+           if (controller.popularTags?.isNotEmpty ?? true) ...[
             Wrap(
               spacing: 12,
               runSpacing: 8,
@@ -190,7 +191,7 @@ class FindCompanySettings extends StatelessWidget {
                       .toList(),
             ),
             8.height,
-          ],
+          ], */
         ],
       ),
     );

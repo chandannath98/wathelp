@@ -6,6 +6,7 @@ import 'package:jobpilot/src/domain/local_storage/repositories/static/static_sto
 import 'package:jobpilot/src/domain/server/config/request_handler.dart';
 import 'package:jobpilot/src/domain/server/repositories/jobs/jobs_repo.dart';
 import 'package:jobpilot/src/domain/server/repositories/jobs/models/search_response/paginated_job_list_response.dart';
+import 'package:jobpilot/src/domain/server/repositories/server_static/country/country_data.dart';
 import 'package:jobpilot/src/domain/server/repositories/server_static/popular_tag/popular_tag.dart';
 import 'package:jobpilot/src/domain/server/repositories/server_static/server_static_repo.dart';
 import 'package:jobpilot/src/features/authentication/views/login_system_switcher.dart';
@@ -39,10 +40,13 @@ class FindJobController extends GetxController with BaseControllerSystem {
     locationController = TextEditingController(text: locationText);
     searchController.addListener(() {
       currentQuery = currentQuery.copyWith(query: searchController.text);
+      update();
     });
     locationController.addListener(() {
       currentQuery = currentQuery.copyWith(location: locationController.text);
+      update();
     });
+    setCountryLists();
     setPopularSearchTags();
     fetchJobsWithCurrentQuery();
   }
@@ -57,6 +61,23 @@ class FindJobController extends GetxController with BaseControllerSystem {
 
   final _staticStorage = StaticStorage();
   final _staticRepo = ServerStaticRepository();
+
+  List<CountryData> getCountryOptions(String key) {
+    final options = $countryList();
+    if (options == null || options.isEmpty || key.isEmpty) return [];
+    return options
+        .where(
+          (element) => element.name?.toLowerCase().contains(key) ?? false,
+        )
+        .toList();
+  }
+
+  onCountrySelect(CountryData data) {
+    locationController.text = data.name ?? "";
+    currentQuery = currentQuery.copyWith(location: data.name);
+    update();
+  }
+
   List<PopularTag>? get popularTags => _staticStorage.popularTag;
   setPopularSearchTags() async {
     try {
@@ -87,6 +108,20 @@ class FindJobController extends GetxController with BaseControllerSystem {
       !isLoading &&
       paginationData?.lastPage != null &&
       paginationData!.lastPage! > 1;
+
+  clearSearchSystem() {
+    rmvFocus();
+    searchController.clear();
+    locationController.clear();
+    currentQuery = const SearchQuery();
+    update();
+    fetchJobsWithCurrentQuery(isRefresh: true);
+  }
+
+  searchUsingTag(String tag) async {
+    currentQuery = currentQuery.copyWith(tag: tag);
+    fetchJobsWithCurrentQuery();
+  }
 
   fetchJobsWithCurrentQuery({int? index, bool isRefresh = false}) async {
     try {

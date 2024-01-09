@@ -9,15 +9,15 @@ import 'package:jobpilot/src/domain/server/repositories/dashboard/candidate/mode
 import 'package:jobpilot/src/domain/server/repositories/jobs/jobs_repo.dart';
 import 'package:jobpilot/src/domain/server/repositories/jobs/models/applied_jobs/job/applied_job.dart';
 import 'package:jobpilot/src/domain/server/repositories/jobs/models/applied_jobs/paginated_applied_jobs/response/paginated_applied_jobs_response.dart';
-import 'package:jobpilot/src/features/dashboard/views/applied_jobs.dart';
+import 'package:jobpilot/src/features/account/views/applied_jobs.dart';
 import 'package:jobpilot/src/features/single_job/views/job_details.dart';
 import 'package:jobpilot/src/services/authentication/auth_controller.dart';
 import 'package:jobpilot/src/services/controller_mixin/controller_mixins.dart';
 import 'package:jobpilot/src/utilities/functions.dart';
 import 'package:jobpilot/src/utilities/scaffold_util.dart';
 
-class DashboardController extends GetxController with BaseControllerSystem {
-  static DashboardController get find => Get.find();
+class AccountController extends GetxController with BaseControllerSystem {
+  static AccountController get find => Get.find();
   final _dashboardRepo = CandidateDashboardRepository();
   User get currentProfile => AuthController.find.currentUser!;
 

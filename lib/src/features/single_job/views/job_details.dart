@@ -104,7 +104,7 @@ class RelatedJobsSection extends StatelessWidget {
             18.height,
             for (RelatedJob i in relatedJobs) ...[
               8.height,
-              SingleFeaturedJobCard(
+              SingleJobCard(
                 bookmarked: i.bookmarked,
                 postName: i.title!,
                 postType: i.jobType!,
@@ -523,6 +523,9 @@ class JobDetailCompanyHeader extends StatelessWidget {
                     dimension: 56,
                     child: Image.network(
                       controller.company?.logo ?? "",
+                      errorBuilder: (context, error, stackTrace) => const Image(
+                        image: Assets.errorImage,
+                      ),
                     ),
                   ),
                 ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jobpilot/src/constants/assets/assets.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
 import 'package:jobpilot/src/services/theme/app_theme.dart';
 import 'package:jobpilot/src/utilities/extensions/size_utilities.dart';
@@ -38,6 +39,9 @@ class SocialButton extends StatelessWidget {
                 SizedBox.square(
                   child: Image.network(
                     iconLink,
+                    errorBuilder: (context, error, stackTrace) => const Image(
+                      image: Assets.errorImage,
+                    ),
                   ),
                 ),
                 12.width,

@@ -23,7 +23,6 @@ class JobsRepository extends ServerRepo {
     SearchQuery? query,
   }) async {
     try {
-      log("Job Search : ${query?.toJson()}");
       final response = await requestHandler.get(
         API.job,
         queryParams: {
@@ -32,6 +31,7 @@ class JobsRepository extends ServerRepo {
           ...?query?.toJson(),
         },
       );
+      log("Job search header : ${response.requestOptions.headers}");
       return ResponseWrapper.fromMap(
         response: response.data,
         status: response.statusCode,

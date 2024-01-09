@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:jobpilot/src/app.dart';
+import 'package:jobpilot/src/features/initialization/views/initializer.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const InitialWrapper());
 }

@@ -1,10 +1,13 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:get/get.dart' hide Trans;
+import 'package:jobpilot/generated/locale_keys.g.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
 import 'package:jobpilot/src/domain/server/repositories/settings/models/language/language/language.dart';
 import 'package:jobpilot/src/global/widgets/loading_indicator.dart';
 import 'package:jobpilot/src/services/localization/language_controller.dart';
 import 'package:jobpilot/src/services/theme/extensions.dart';
+import 'package:jobpilot/src/utilities/extensions/overlay_loader.dart';
 import 'package:jobpilot/src/utilities/extensions/size_utilities.dart';
 
 class ChooseLanguageScreen extends StatelessWidget {
@@ -14,29 +17,35 @@ class ChooseLanguageScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          "Language",
+        title: Text(
+          LocaleKeys.languagekey.tr(),
         ),
       ),
       body: GetBuilder(
           init: LanguageController(),
           builder: (controller) {
-            return (controller.isLoading)
-                ? const Center(
-                    child: LoadingIndicator(),
-                  )
-                : Column(
-                    children: [
-                      8.height,
-                      if (controller.serverLanguageList != null)
-                        for (Language lang in controller.serverLanguageList!)
-                          LanguageListTile(
-                            isSelected: lang.id == controller.currentSelectedId,
-                            name: "${lang.name}",
-                            onTap: () {},
-                          ),
-                    ],
-                  );
+            if ((controller.isLoading)) {
+              return const Center(
+                child: LoadingIndicator(),
+              );
+            } else {
+              return SingleChildScrollView(
+                child: Column(
+                  children: [
+                    8.height,
+                    if (controller.serverLanguageList != null)
+                      for (Language lang in controller.serverLanguageList!)
+                        LanguageListTile(
+                          isSelected: lang.code == controller.currentLangCode,
+                          name: "${lang.name}",
+                          onTap: (() async =>
+                                  await controller.onLanguageSelect(lang))
+                              .withOverlay,
+                        ),
+                  ],
+                ),
+              );
+            }
           }),
     );
   }

@@ -54,7 +54,7 @@ class HomepageActions extends StatelessWidget {
             onPressed: onNotificationClick,
             icon: Icon(
               Icons.notifications_active_outlined,
-              color: context.color?.secondaryAccent,
+              color: context.color?.extra,
             ),
           ),
           8.width,

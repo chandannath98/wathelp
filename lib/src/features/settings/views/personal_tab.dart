@@ -8,7 +8,6 @@ import 'package:jobpilot/src/constants/design/border_radius.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
 import 'package:jobpilot/src/domain/server/repositories/settings/models/resume/resume_data/resume_data.dart';
 import 'package:jobpilot/src/features/settings/controllers/personal_settings_controller.dart';
-import 'package:jobpilot/src/features/settings/views/edit_resume.dart';
 import 'package:jobpilot/src/features/settings/views/widgets/date_picker.dart';
 import 'package:jobpilot/src/global/widgets/app/custom_titled_drop_down.dart';
 import 'package:jobpilot/src/global/widgets/app/custom_titled_text_field.dart';
@@ -101,14 +100,14 @@ class ResumeListSection extends StatelessWidget {
           child: ListTile(
             tileColor: context.color?.theme,
             onTap: controller.onAddResumeClick,
-            shape: RoundedRectangleBorder(borderRadius: br4),
+            shape: const RoundedRectangleBorder(borderRadius: br4),
             title: Text(
               "Add Cv/Resume",
               style: context.text.titleMedium?.copyWith(
                 fontWeight: FontWeight.w600,
               ),
             ),
-            subtitle: Text(
+            subtitle: const Text(
               "Browse file or drop here. only pdf",
             ),
             leading: Icon(
@@ -283,7 +282,7 @@ class BasicInformationSection extends StatelessWidget {
           onChange: (value) => controller.updateExperienceId(value!),
           value: controller.currentPersonalData?.experienceId,
           fieldList: controller.experienceOptions
-              ?.map((e) => (
+              .map((e) => (
                     value: e.id,
                     title: e.name ?? "",
                   ))
@@ -295,7 +294,7 @@ class BasicInformationSection extends StatelessWidget {
           onChange: (value) => controller.updateEducationId(value!),
           value: controller.currentPersonalData?.educationId,
           fieldList: controller.educationOptions
-              ?.map((e) => (
+              .map((e) => (
                     value: e.id,
                     title: e.name ?? "",
                   ))

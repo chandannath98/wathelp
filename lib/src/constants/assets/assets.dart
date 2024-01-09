@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 final class Assets {
+  static String translationPath = "assets/translations";
+
   static const appLogo = "assets/images/identity/app_logo.png";
   static const appLogoSvg = "assets/images/identity/app_logo.svg";
   static const onboardSvg = "assets/images/identity/onboard.svg";
@@ -15,7 +17,7 @@ final class Assets {
   //Icons
   static const browseIcon = "assets/icon/browse.svg";
   static const companyIcon = "assets/icon/company.svg";
-  static const dashboardIcon = "assets/icon/dashboard.svg";
+  static const accountIcon = "assets/icon/dashboard.svg";
   static const jobsIcon = "assets/icon/jobs.svg";
   static const loginIcon = "assets/icon/login.svg";
   static const menuIcon = "assets/icon/menu.svg";

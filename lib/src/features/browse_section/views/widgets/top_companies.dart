@@ -4,9 +4,7 @@ import 'package:jobpilot/src/constants/design/paddings.dart';
 import 'package:jobpilot/src/domain/server/repositories/home/models/browse/company/top_companies.dart';
 import 'package:jobpilot/src/features/find_company/controllers/find_company_controllers.dart';
 import 'package:jobpilot/src/features/find_company/views/find_company.dart';
-import 'package:jobpilot/src/features/single_company/views/single_company.dart';
 import 'package:jobpilot/src/global/widgets/app/single_company_card.dart';
-import 'package:jobpilot/src/global/widgets/app_shimmer.dart';
 import 'package:jobpilot/src/services/theme/app_theme.dart';
 import 'package:jobpilot/src/utilities/extensions/size_utilities.dart';
 

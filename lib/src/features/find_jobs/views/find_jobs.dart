@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:jobpilot/src/constants/assets/assets.dart';
+import 'package:jobpilot/src/constants/design/border_radius.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
 import 'package:jobpilot/src/domain/server/repositories/jobs/jobs_repo.dart';
 import 'package:jobpilot/src/features/browse_section/views/widgets/search_box.dart';
@@ -45,7 +46,7 @@ class FindJobScreen extends StatelessWidget {
         builder: (controller) {
           return Padding(
             padding: const EdgeInsets.only(bottom: 12),
-            child: JobSearchWidget(
+            child: JobSearchPage(
               controller: controller,
             ),
           );
@@ -67,7 +68,7 @@ class FindJobsPage extends StatelessWidget {
       dispose: (state) => false,
       init: FindJobController(),
       builder: (controller) {
-        return JobSearchWidget(
+        return JobSearchPage(
           controller: controller,
         );
       },
@@ -75,8 +76,8 @@ class FindJobsPage extends StatelessWidget {
   }
 }
 
-class JobSearchWidget extends StatelessWidget {
-  const JobSearchWidget({
+class JobSearchPage extends StatelessWidget {
+  const JobSearchPage({
     super.key,
     required this.controller,
   });
@@ -108,14 +109,15 @@ class JobSearchWidget extends StatelessWidget {
                         final job = controller.currentJobList![index];
                         return Padding(
                           padding: vertical6,
-                          child: SingleFeaturedJobCard(
+                          child: SingleJobCard(
                             bgColor: Colors.white,
                             bookmarked: job.bookmarked,
                             postType: job.jobType ?? "",
                             companyName: job.companyName ?? "",
                             postName: job.title ?? "",
                             companyLocation: job.country ?? "",
-                            salaryRange: "\$${job.salary}",
+                            salaryRange:
+                                "${job.salary == "Competitive" ? "" : "\$"}${job.salary}",
                             companyIcon: job.companyLogo ?? "",
                             onBookmarkCallback: (() =>
                                     controller.onBookmarkJobClick(job.id!))
@@ -184,14 +186,50 @@ class FindJobsSettings extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           18.height,
-          Text(
-            "Find Jobs",
-            style: context.text.titleLarge?.copyWith(
-              fontWeight: FontWeight.bold,
-            ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 3),
+                  child: Text(
+                    "Find Jobs",
+                    style: context.text.titleLarge?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
+              if (controller.currentQuery.hasData)
+                InkWell(
+                  borderRadius: br6,
+                  onTap: controller.clearSearchSystem,
+                  child: Padding(
+                    padding: vertical3 + horizontal6,
+                    child: Row(
+                      children: [
+                        Text(
+                          "Clear Search",
+                          style: context.text.bodySmall?.copyWith(
+                            color: context.color?.primary,
+                          ),
+                        ),
+                        3.width,
+                        const Icon(
+                          Icons.close,
+                          size: 16,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+            ],
           ),
           18.height,
           SearchBoxWidget(
+            suggestionsCallback: controller.getCountryOptions,
+            onLocationSelect: controller.onCountrySelect,
+            hasFilterData: controller.currentQuery.hasQueryData,
             searchController: controller.searchController,
             locationController: controller.locationController,
             onSearchClick: controller.isLoading
@@ -212,21 +250,24 @@ class FindJobsSettings extends StatelessWidget {
               runSpacing: 8,
               crossAxisAlignment: WrapCrossAlignment.center,
               children: (controller.popularTags == null)
-                  ? const [
+                  ? [
                       PopularSearchOptionWidget(
-                        type: "...",
+                        typeKey: "...",
                         isSelected: false,
+                        onTap: (value) {},
                       ),
                       PopularSearchOptionWidget(
-                        type: "...",
+                        typeKey: "...",
                         isSelected: false,
+                        onTap: (value) {},
                       ),
                     ]
                   : controller.popularTags!
                       .map(
                         (type) => PopularSearchOptionWidget(
-                          isSelected: false,
-                          type: type.name!.upperCaseFirst,
+                          typeKey: type.name!,
+                          onTap: controller.searchUsingTag,
+                          isSelected: controller.currentQuery.tag == type.name,
                         ),
                       )
                       .toList(),
@@ -242,17 +283,19 @@ class FindJobsSettings extends StatelessWidget {
 class PopularSearchOptionWidget extends StatelessWidget {
   const PopularSearchOptionWidget({
     super.key,
-    required this.type,
+    required this.typeKey,
+    required this.onTap,
     required this.isSelected,
   });
 
-  final String type;
+  final String typeKey;
   final bool isSelected;
+  final ValueChanged<String> onTap;
 
   @override
   Widget build(BuildContext context) {
     final actualText = Text(
-      type,
+      typeKey.upperCaseFirst,
       style: context.text.bodySmall?.copyWith(
         color: context.color?.opposite,
         fontWeight: FontWeight.bold,
@@ -269,6 +312,13 @@ class PopularSearchOptionWidget extends StatelessWidget {
               child: actualText,
             ),
           )
-        : actualText;
+        : InkWell(
+            onTap: () => onTap(typeKey),
+            borderRadius: BorderRadius.circular(8),
+            child: Padding(
+              padding: horizontal6 + vertical3,
+              child: actualText,
+            ),
+          );
   }
 }

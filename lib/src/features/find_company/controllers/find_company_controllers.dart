@@ -10,7 +10,6 @@ import 'package:jobpilot/src/domain/server/repositories/company/models/company_q
 import 'package:jobpilot/src/domain/server/repositories/company/models/search_response/response/paginated_company_list.dart';
 import 'package:jobpilot/src/domain/server/repositories/server_static/popular_tag/popular_tag.dart';
 import 'package:jobpilot/src/domain/server/repositories/server_static/server_static_repo.dart';
-import 'package:jobpilot/src/features/single_company/controllers/single_company_controller.dart';
 import 'package:jobpilot/src/features/single_company/views/open_jobs.dart';
 import 'package:jobpilot/src/features/single_company/views/single_company.dart';
 import 'package:jobpilot/src/utilities/functions.dart';
@@ -29,7 +28,7 @@ class FindCompanyController extends GetxController {
   @override
   void onReady() {
     super.onReady();
-    setPopularSearchTags();
+    // setPopularSearchTags();
     fetchCompanyListWithCurrentQuery();
   }
 
@@ -54,7 +53,7 @@ class FindCompanyController extends GetxController {
         ),
       );
 
-  final _staticStorage = StaticStorage();
+/*   final _staticStorage = StaticStorage();
   final _staticRepo = ServerStaticRepository();
   List<PopularTag>? get popularTags => _staticStorage.popularTag;
   setPopularSearchTags() async {
@@ -70,7 +69,7 @@ class FindCompanyController extends GetxController {
       log("#FetchPopularTagError", error: e, stackTrace: s);
       if (e is RequestException) e.handleError();
     }
-  }
+  } */
 
   /* Pagination */
   final singlePageSize = 10;

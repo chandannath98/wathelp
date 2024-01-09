@@ -16,7 +16,7 @@ const _primaryAccent = Color(0xff042852);
 const _extraTextColor = Color(0xff18191C);
 const _secondaryAccent = Color(0xffE4E5E8);
 const _backgroundColor = Color(0xffEDEFF5);
-// #767F8C
+
 final lightTheme = ThemeData(
   useMaterial3: false,
   brightness: Brightness.light,

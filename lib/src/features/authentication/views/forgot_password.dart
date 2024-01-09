@@ -6,7 +6,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:jobpilot/src/constants/assets/assets.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
 import 'package:jobpilot/src/constants/strings/home_strings.dart';
-import 'package:jobpilot/src/global/widgets/social_login_button.dart';
 import 'package:jobpilot/src/services/theme/app_theme.dart';
 import 'package:jobpilot/src/utilities/extensions/overlay_loader.dart';
 import 'package:jobpilot/src/utilities/extensions/size_utilities.dart';

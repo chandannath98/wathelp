@@ -1,17 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get.dart';
-import 'package:jobpilot/src/constants/assets/assets.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
-import 'package:jobpilot/src/constants/strings/home_strings.dart';
-import 'package:jobpilot/src/features/authentication/controllers/login_controller.dart';
-import 'package:jobpilot/src/features/authentication/views/registration.dart';
 import 'package:jobpilot/src/global/widgets/social_login_button.dart';
 import 'package:jobpilot/src/services/theme/app_theme.dart';
 import 'package:jobpilot/src/utilities/extensions/size_utilities.dart';
 import 'package:jobpilot/src/utilities/functions.dart';
 import 'package:jobpilot/src/utilities/scaffold_util.dart';
-import 'package:jobpilot/src/utilities/svg_icon.dart';
 
 import 'package:jobpilot/src/utilities/extensions/overlay_loader.dart';
 /* 

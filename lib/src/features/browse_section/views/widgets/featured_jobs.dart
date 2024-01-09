@@ -43,7 +43,7 @@ class HomeFeaturedJobsSection extends StatelessWidget {
                     for (var i in List.generate(6, (index) => index)) ...[
                       8.height,
                       const AppShimmer(
-                        child: SingleFeaturedJobCard(
+                        child: SingleJobCard(
                           bookmarked: false,
                           postName: "Position Name",
                           postType: "FULL-TIME",
@@ -59,7 +59,7 @@ class HomeFeaturedJobsSection extends StatelessWidget {
                   else
                     for (var i in dataList!) ...[
                       8.height,
-                      SingleFeaturedJobCard(
+                      SingleJobCard(
                         bookmarked: i.job.bookmarked,
                         postName: i.job.title!,
                         postType: i.job.jobType!,

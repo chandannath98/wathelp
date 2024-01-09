@@ -1,12 +1,13 @@
 import 'dart:developer';
 
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jobpilot/src/domain/server/config/repository.dart';
 import 'package:jobpilot/src/features/authentication/views/login_system_switcher.dart';
 import 'package:jobpilot/src/features/authentication/views/registration.dart';
 import 'package:jobpilot/src/features/browse_section/views/browse_screen.dart';
 import 'package:jobpilot/src/features/homepage/controllers/homepage_controller.dart';
+import 'package:jobpilot/src/features/menu/views/choose_country.dart';
+import 'package:jobpilot/src/features/menu/views/choose_currency.dart';
 import 'package:jobpilot/src/features/menu/views/choose_language.dart';
 import 'package:jobpilot/src/features/settings/views/settings.dart';
 import 'package:jobpilot/src/services/authentication/auth_controller.dart';
@@ -66,6 +67,15 @@ class MenuPageController extends GetxController {
 
 // Jobpilot Section
   gotoChooseLanguage() => Get.to(() => const ChooseLanguageScreen());
+  gotoChooseCountry() async {
+    await Get.to(() => const ChooseCountryScreen());
+    update();
+  }
+
+  gotoChooseCurrency() async {
+    await Get.to(() => const ChooseCurrencyScreen());
+    update();
+  }
 
 // Candidate Section
   gotoDashboard() => _moveToHomePageIndex(2);

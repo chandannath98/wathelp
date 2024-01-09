@@ -8,7 +8,6 @@ import 'package:jobpilot/src/features/browse_section/controllers/browse_controll
 import 'package:jobpilot/src/features/browse_section/views/widgets/search_box.dart';
 import 'package:jobpilot/src/services/theme/app_theme.dart';
 import 'package:jobpilot/src/utilities/extensions/size_utilities.dart';
-import 'package:jobpilot/src/utilities/extensions/string_extensions.dart';
 
 class BrowseScreenTopSection extends StatelessWidget {
   const BrowseScreenTopSection({

@@ -52,7 +52,7 @@ class SingleCompanyOpenJobsScreen extends StatelessWidget {
                               final job = controller.openJobs![index];
                               return Padding(
                                 padding: vertical6,
-                                child: SingleFeaturedJobCard(
+                                child: SingleJobCard(
                                   bgColor: Colors.white,
                                   bookmarked: null,
                                   postType: job.jobType?.name ?? "",

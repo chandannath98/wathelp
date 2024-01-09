@@ -3,7 +3,7 @@ import 'package:get/get.dart' hide ContextExtensionss;
 import 'package:jobpilot/src/constants/assets/assets.dart';
 import 'package:jobpilot/src/features/authentication/views/login_system_switcher.dart';
 import 'package:jobpilot/src/features/browse_section/views/browse_screen.dart';
-import 'package:jobpilot/src/features/dashboard/views/dashboard.dart';
+import 'package:jobpilot/src/features/account/views/account.dart';
 import 'package:jobpilot/src/features/find_company/views/find_company.dart';
 import 'package:jobpilot/src/features/find_jobs/views/find_jobs.dart';
 import 'package:jobpilot/src/features/job_alert/views/job_alert.dart';
@@ -36,7 +36,7 @@ class Homepage extends StatelessWidget {
                 onLoginClick: controller.onLoginClick,
                 onRegisterClick: controller.onRegisterClick,
                 onProfileClick: controller.onProfileClick.withOverlay,
-                onNotificationClick: () => controller.onNotificationClick(),
+                onNotificationClick: controller.onNotificationClick,
               ),
             ],
           ),
@@ -44,13 +44,13 @@ class Homepage extends StatelessWidget {
             currentIndex: controller.currentIndex,
             navbarItems: [
               controller.isAuthenticated
-                  ? const (SvgIcon(Assets.browseIcon), "Browse")
+                  ? const (SvgIcon(Assets.browseIcon), "Jobs")
                   : const (SvgIcon(Assets.homeIcon), "Home"),
               controller.isAuthenticated
                   ? const (SvgIcon(Assets.companyIcon), "Company")
-                  : const (SvgIcon(Assets.browseIcon), "Browse"),
+                  : const (SvgIcon(Assets.browseIcon), "Jobs"),
               controller.isAuthenticated
-                  ? const (SvgIcon(Assets.dashboardIcon), "Dashboard")
+                  ? const (SvgIcon(Assets.accountIcon), "Account")
                   : const (SvgIcon(Assets.loginIcon), "Login"),
               controller.isAuthenticated
                   ? const (SvgIcon(Assets.jobsIcon), "Job Alert")
@@ -71,7 +71,7 @@ class Homepage extends StatelessWidget {
                   ? const FindCompanyPage()
                   : const FindJobsPage(),
               controller.isAuthenticated
-                  ? const DashboardPage()
+                  ? const AccountPage()
                   : const LoginSystemSwitcher(),
               controller.isAuthenticated
                   ? const JobAlertPageWidget()

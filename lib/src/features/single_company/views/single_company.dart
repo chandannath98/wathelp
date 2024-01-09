@@ -1,7 +1,4 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:jobpilot/src/constants/assets/assets.dart';
 import 'package:jobpilot/src/constants/design/border_radius.dart';
@@ -16,7 +13,6 @@ import 'package:jobpilot/src/global/widgets/app/squared_icon_button.dart';
 import 'package:jobpilot/src/global/widgets/loading_indicator.dart';
 import 'package:jobpilot/src/services/theme/app_theme.dart';
 import 'package:jobpilot/src/utilities/extensions/size_utilities.dart';
-import 'package:jobpilot/src/utilities/functions.dart';
 import 'package:jobpilot/src/utilities/svg_icon.dart';
 import 'package:readmore/readmore.dart';
 
@@ -118,6 +114,9 @@ class CompanyDetailsHeader extends StatelessWidget {
             controller.detailResponse?.companyDetails?.bannerUrl ??
                 "https://images.unsplash.com/photo-1676970133020-c3e8a2a0cae4?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjd8fGhvcml6b250YWwlMjBiYW5uZXJ8ZW58MHx8MHx8fDA%3D",
             fit: BoxFit.cover,
+            errorBuilder: (context, error, stackTrace) => const Image(
+              image: Assets.errorImage,
+            ),
           ),
         ),
         24.height,
@@ -218,7 +217,7 @@ class OpenJobsSection extends StatelessWidget {
             18.height,
             for (var i in relatedJobs!) ...[
               8.height,
-              SingleFeaturedJobCard(
+              SingleJobCard(
                 bookmarked: null,
                 postName: i.job.title!,
                 postType: i.job.jobType!.name!,

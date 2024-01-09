@@ -9,7 +9,7 @@ class CandidateContactSettingData with _$CandidateContactSettingData {
   const factory CandidateContactSettingData({
     @JsonKey(name: 'contact_info') ContactInfo? contactInfo,
     @JsonKey(name: 'location') Location? location,
-    @JsonKey(name: 'job_alerts') List<String>? jobAlerts,
+    @JsonKey(name: 'job_alerts') List<ProfileJobAlertData>? jobAlerts,
     @JsonKey(name: 'job_alert_role_list')
     List<JobAlertRoleList>? jobAlertRoleList,
   }) = _CandidateContactSettingData;
@@ -54,4 +54,18 @@ class JobAlertRoleList with _$JobAlertRoleList {
 
   factory JobAlertRoleList.fromJson(Map<String, Object?> json) =>
       _$JobAlertRoleListFromJson(json);
+}
+
+@freezed
+class ProfileJobAlertData with _$ProfileJobAlertData {
+  const factory ProfileJobAlertData({
+    @JsonKey(name: 'id') int? id,
+    @JsonKey(name: 'candidate_id') int? candidateId,
+    @JsonKey(name: 'job_role_id') int? jobRoleId,
+    @JsonKey(name: 'created_at') String? createdAt,
+    @JsonKey(name: 'updated_at') String? updatedAt,
+  }) = _ProfileJobAlertData;
+
+  factory ProfileJobAlertData.fromJson(Map<String, Object?> json) =>
+      _$ProfileJobAlertDataFromJson(json);
 }

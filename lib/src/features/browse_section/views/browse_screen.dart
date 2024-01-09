@@ -79,6 +79,7 @@ class BrowsePage extends StatelessWidget {
                 isLoading: false,
                 dataList: controller.data?.popularCategories
                     ?.map((e) => (
+                          isSvg: e.isSvg ?? false,
                           title: e.name!,
                           count: e.openJobsCount!.toString(),
                           imageLink: e.image!,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
-import 'package:jobpilot/src/features/dashboard/controllers/dashboard_controller.dart';
+import 'package:jobpilot/src/features/account/controllers/account_controller.dart';
 import 'package:jobpilot/src/global/widgets/circular_paginator.dart';
 import 'package:jobpilot/src/global/widgets/loading_indicator.dart';
 import 'package:jobpilot/src/services/theme/extensions/colors_theme.dart';
@@ -21,7 +21,7 @@ class AppliedJobsScreen extends StatelessWidget {
           "Applied Jobs",
         ),
       ),
-      body: GetBuilder<DashboardController>(
+      body: GetBuilder<AccountController>(
         builder: (controller) {
           return CustomScrollView(
             slivers: [
