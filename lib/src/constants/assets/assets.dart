@@ -12,6 +12,7 @@ final class Assets {
   //Homepage
   static const homeHero = "assets/images/home_hero.png";
   static const homeHeroSvg = "assets/images/hero_image.svg";
+  static String accountDelete = "assets/images/account_delete.png";
   static const profilePlaceholder = "assets/images/profile_placeholder.jpg";
 
   //Icons

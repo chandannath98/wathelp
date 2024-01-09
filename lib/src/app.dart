@@ -31,6 +31,7 @@ class ReadyApp extends StatelessWidget {
     return EasyLocalization(
       useOnlyLangCode: true,
       path: Assets.translationPath,
+      startLocale: const Locale('en'),
       fallbackLocale: const Locale('en'),
       assetLoader: const CodegenLoader(),
       supportedLocales: const [

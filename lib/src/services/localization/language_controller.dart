@@ -23,9 +23,8 @@ class LanguageController extends GetxController with BaseControllerSystem {
   String? get currentLangCode => Get.context?.locale.languageCode;
 
   onLanguageSelect(Language language) async {
-    final locale = Locale(language.code!);
-    await Get.context!.setLocale(locale);
-    Get.updateLocale(locale);
+    await Get.context!.setLocale(language.toLocale);
+    Get.updateLocale(language.toLocale);
     _staticStorage.setSelectedLanguage(language);
     update();
   }

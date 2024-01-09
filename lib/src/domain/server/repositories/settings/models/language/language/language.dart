@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'language.freezed.dart';
@@ -15,6 +16,10 @@ class Language with _$Language {
     @JsonKey(name: 'created_at') String? createdAt,
     @JsonKey(name: 'updated_at') String? updatedAt,
   }) = _Language;
+
+  const Language._();
+
+  Locale get toLocale => Locale(code!);
 
   factory Language.fromJson(Map<String, Object?> json) =>
       _$LanguageFromJson(json);

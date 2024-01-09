@@ -15,7 +15,7 @@ import 'package:jobpilot/src/domain/server/repositories/settings/models/social_s
 
 import 'models/resume/resume_data/resume_data.dart';
 
-enum CandidateSettingSections { personal, profile, social, contact }
+enum CandidateSettingSections { personal, profile, social, contact, password }
 
 class SettingsRepository extends ServerRepo {
   Future<ResponseWrapper<List<ResumeData>>> fetchResumeList() async {
@@ -231,21 +231,78 @@ class SettingsRepository extends ServerRepo {
     }
   }
 
-  Future<ResponseWrapper> submitNewSocialData(
-      ({String key, String url}) data) async {
+  Future<ResponseWrapper> updateSocialData(
+    List<({String key, String url})> data,
+  ) async {
     try {
+      final socialUpdateData = {
+        'url[]': data.map((e) => e.url).toList(),
+        'social_media[]': data.map((e) => e.key).toList(),
+        'type': CandidateSettingSections.social.name,
+      };
+
+      log("SocialMediaUpdateData: $socialUpdateData");
+
       final response = await requestHandler.post(
         API.candidateSettings,
-        FormData.fromMap({
-          'url[]': data.url,
-          'social_media[]': data.key,
-          'type': CandidateSettingSections.social.name,
-        }),
+        FormData.fromMap(socialUpdateData),
       );
+
+      log("SocialMediaUpdateResponse: ${response.data}");
       return ResponseWrapper.fromMap(
         response: response.data,
         status: response.statusCode,
         purse: (json) => (json),
+      );
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<ResponseWrapper<String>> updatePassword({
+    required String currentPassword,
+    required String newPassword,
+    required String confirmPassword,
+  }) async {
+    try {
+      final passwordUpdateData = {
+        "password": newPassword,
+        "current_password": currentPassword,
+        "password_confirmation": confirmPassword,
+        'type': CandidateSettingSections.password.name,
+      };
+      final response = await requestHandler.post(
+        API.candidateSettings,
+        FormData.fromMap(passwordUpdateData),
+      );
+
+      return ResponseWrapper.fromMap(
+        response: response.data,
+        status: response.statusCode,
+        purse: (json) => (json['message'] as String),
+      );
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<ResponseWrapper<String>> deleteAccount(
+    String password,
+  ) async {
+    try {
+      final socialUpdateData = {
+        'type': 'account-delete',
+        'current_password': password,
+      };
+      final response = await requestHandler.post(
+        API.candidateSettings,
+        FormData.fromMap(socialUpdateData),
+      );
+
+      return ResponseWrapper.fromMap(
+        response: response.data,
+        status: response.statusCode,
+        purse: (json) => (json['message'] as String),
       );
     } catch (e) {
       rethrow;

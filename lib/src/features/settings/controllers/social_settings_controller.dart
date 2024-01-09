@@ -40,7 +40,34 @@ class SocialSettingsController extends GetxController
 
   Future addNewSocialLink(({String key, String url}) data) async {
     try {
-      final res = await _settingsRepo.submitNewSocialData(data);
+      final currentDataList = userSocials
+              ?.map((e) => (key: e.socialMedia ?? "", url: e.url ?? ""))
+              .toList() ??
+          [];
+      final res = await _settingsRepo.updateSocialData([
+        ...currentDataList,
+        data,
+      ]);
+      if (res.isSuccess) {
+        fetchCurrentSocialData(isRefresh: true);
+      } else {
+        showToastError(res.errorMsg);
+      }
+    } catch (e, s) {
+      log("#AddNewSocialError", error: e, stackTrace: s);
+      if (e is RequestException) e.handleError();
+    }
+  }
+
+  Future removeSocialLink(int id) async {
+    try {
+      final newSocials = [
+        ...?userSocials?.where((element) => element.id != id)
+      ];
+      final currentDataList = newSocials
+          .map((e) => (key: e.socialMedia ?? "", url: e.url ?? ""))
+          .toList();
+      final res = await _settingsRepo.updateSocialData(currentDataList);
       if (res.isSuccess) {
         fetchCurrentSocialData(isRefresh: true);
       } else {

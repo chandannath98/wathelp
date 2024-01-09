@@ -54,6 +54,7 @@ class SocialInformationTab extends StatelessWidget {
                                         controller.userSocials![index];
                                     return SingleSocialSettingTile(
                                       linkIndex: index + 1,
+                                      linkId: userSocial.id!,
                                       title: userSocial
                                               .socialMedia?.upperCaseFirst ??
                                           "",
@@ -67,7 +68,11 @@ class SocialInformationTab extends StatelessWidget {
                                           image: Assets.errorImage,
                                         ),
                                       ),
-                                      onRemoveCall: (value) {},
+                                      onRemoveCall: (value) {
+                                        (() async => await controller
+                                                .removeSocialLink(value))
+                                            .withOverlay();
+                                      },
                                     );
                                   },
                                   shrinkWrap: true,
@@ -110,6 +115,7 @@ class SingleSocialSettingTile extends StatelessWidget {
     required this.icon,
     required this.title,
     required this.linkIndex,
+    required this.linkId,
     required this.onRemoveCall,
     required this.link,
   });
@@ -117,6 +123,7 @@ class SingleSocialSettingTile extends StatelessWidget {
   final Widget icon;
   final String title;
   final int linkIndex;
+  final int linkId;
   final ValueChanged<int> onRemoveCall;
   final String link;
 
@@ -129,7 +136,7 @@ class SingleSocialSettingTile extends StatelessWidget {
             Text("Link $linkIndex"),
             const Spacer(),
             InkWell(
-              onTap: () => onRemoveCall(linkIndex),
+              onTap: () => onRemoveCall(linkId),
               child: Padding(
                 padding: horizontal4,
                 child: Text(

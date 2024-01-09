@@ -6,8 +6,10 @@ class CustomTitledTextFormField extends StatelessWidget {
   const CustomTitledTextFormField({
     super.key,
     required this.title,
+    this.isObscured = false,
     this.hintText,
     this.focus,
+    this.nextFocus,
     this.submit,
     this.validators,
     this.controller,
@@ -20,12 +22,14 @@ class CustomTitledTextFormField extends StatelessWidget {
   });
 
   final String title;
+  final bool isObscured;
   final String? hintText;
   final String? initialValue;
   final Widget? prefixIcon;
   final Widget? suffixIcon;
   final TextInputType? inputType;
   final FocusNode? focus;
+  final FocusNode? nextFocus;
   final List<Validation>? validators;
   final ValueChanged<String>? submit;
   final ValueChanged<String>? onChange;
@@ -36,9 +40,13 @@ class CustomTitledTextFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     Widget formField = TextFormField(
       focusNode: focus,
+      obscureText: isObscured,
       onChanged: onChange,
       controller: controller,
-      onFieldSubmitted: submit,
+      onFieldSubmitted: (value) {
+        nextFocus?.requestFocus();
+        submit?.call(value);
+      },
       keyboardType: inputType,
       initialValue: initialValue,
       decoration: InputDecoration(

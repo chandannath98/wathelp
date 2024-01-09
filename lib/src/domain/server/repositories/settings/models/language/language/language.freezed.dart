@@ -182,7 +182,7 @@ class __$$LanguageImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$LanguageImpl with DiagnosticableTreeMixin implements _Language {
+class _$LanguageImpl extends _Language with DiagnosticableTreeMixin {
   const _$LanguageImpl(
       {@JsonKey(name: 'id') this.id,
       @JsonKey(name: 'name') this.name,
@@ -190,7 +190,8 @@ class _$LanguageImpl with DiagnosticableTreeMixin implements _Language {
       @JsonKey(name: 'icon') this.icon,
       @JsonKey(name: 'direction') this.direction,
       @JsonKey(name: 'created_at') this.createdAt,
-      @JsonKey(name: 'updated_at') this.updatedAt});
+      @JsonKey(name: 'updated_at') this.updatedAt})
+      : super._();
 
   factory _$LanguageImpl.fromJson(Map<String, dynamic> json) =>
       _$$LanguageImplFromJson(json);
@@ -272,7 +273,7 @@ class _$LanguageImpl with DiagnosticableTreeMixin implements _Language {
   }
 }
 
-abstract class _Language implements Language {
+abstract class _Language extends Language {
   const factory _Language(
       {@JsonKey(name: 'id') final int? id,
       @JsonKey(name: 'name') final String? name,
@@ -281,6 +282,7 @@ abstract class _Language implements Language {
       @JsonKey(name: 'direction') final String? direction,
       @JsonKey(name: 'created_at') final String? createdAt,
       @JsonKey(name: 'updated_at') final String? updatedAt}) = _$LanguageImpl;
+  const _Language._() : super._();
 
   factory _Language.fromJson(Map<String, dynamic> json) =
       _$LanguageImpl.fromJson;

@@ -73,10 +73,12 @@ class AuthController extends GetxController {
     update();
   }
 
-  handleTokenError({String? message}) async {
+  handleTokenError({String? message, bool showToast = true}) async {
     await logOut();
     Get.until((route) => route.isFirst);
     HomepageController.find.onLoginClick();
-    showToastError(message ?? "Login expired! Please login again.");
+    if (showToast) {
+      showToastError(message ?? "Login expired! Please login again.");
+    }
   }
 }
