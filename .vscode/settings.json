@@ -1,14 +1,15 @@
 {
-    "cSpell.words": [
-        "androidx",
-        "Childrens",
-        "Codegen",
-        "contactinfo",
-        "Extensionss",
-        "Getx",
-        "jobpilot",
-        "Jobpilots",
-        "readmore",
-        "Snackbars"
-    ]
+  "cSpell.words": [
+    "androidx",
+    "Childrens",
+    "Codegen",
+    "contactinfo",
+    "Extensionss",
+    "Getx",
+    "jobpilot",
+    "Jobpilots",
+    "readmore",
+    "Snackbars",
+    "typeahead"
+  ]
 }

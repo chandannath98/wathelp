@@ -4,6 +4,7 @@ import 'package:jobpilot/src/constants/assets/assets.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
 import 'package:jobpilot/src/features/job_alert/controllers/job_alert_controller.dart';
 import 'package:jobpilot/src/features/job_alert/views/widgets/new_job.dart';
+import 'package:jobpilot/src/features/single_job/views/job_details.dart';
 import 'package:jobpilot/src/global/widgets/circular_paginator.dart';
 import 'package:jobpilot/src/global/widgets/loading_indicator.dart';
 import 'package:jobpilot/src/services/theme/app_theme.dart';
@@ -66,20 +67,45 @@ class JobAlertPageWidget extends StatelessWidget {
                             child: LoadingIndicator(),
                           ),
                         )
-                      : SliverList(
-                          delegate: SliverChildBuilderDelegate(
-                            (context, index) {
-                              final job = controller.currentJobList![index];
-                              return Padding(
-                                padding: vertical6,
-                                child: SingleJobAlertWidget(
-                                  jobData: job,
+                      : controller.currentJobList!.isEmpty
+                          ? const SliverFillRemaining(
+                              child: FittedBox(
+                                fit: BoxFit.scaleDown,
+                                alignment: Alignment.center,
+                                child: Text(
+                                  "No jobs found!",
                                 ),
-                              );
-                            },
-                            childCount: controller.currentJobList!.length,
-                          ),
-                        ),
+                              ),
+                            )
+                          : SliverList(
+                              delegate: SliverChildBuilderDelegate(
+                                (context, index) {
+                                  final job = controller.currentJobList![index];
+                                  return Padding(
+                                    padding: vertical6,
+                                    child: SingleJobAlertWidget(
+                                      jobData: job,
+                                      onApplyNow: () => Get.to(
+                                        () => JobDetailsScreen(
+                                          jobSlug: job.slug!,
+                                        ),
+                                      ),
+                                      onBookmark: () => Get.to(
+                                        () => JobDetailsScreen(
+                                          jobSlug: job.slug!,
+                                        ),
+                                      ),
+                                      onCardTap: () => Get.to(
+                                        () => JobDetailsScreen(
+                                          jobSlug: job.slug!,
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                },
+                                childCount: controller.currentJobList!.length,
+                              ),
+                            ),
                 ),
               if (controller.needPaginationControl)
                 SliverToBoxAdapter(

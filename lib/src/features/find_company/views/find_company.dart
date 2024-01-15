@@ -51,33 +51,45 @@ class FindCompanyPage extends StatelessWidget {
                             child: LoadingIndicator(),
                           ),
                         )
-                      : SliverList(
-                          delegate: SliverChildBuilderDelegate(
-                            (context, index) {
-                              final company =
-                                  controller.currentCompanyList![index];
-                              return Padding(
-                                padding: vertical6,
-                                child: SingleCompanyCardWidget(
-                                  icon: company.companyLogo ?? "",
-                                  isFeatured: true,
-                                  positionCount: company.openJobsCount ?? 0,
-                                  name: company.name ?? "",
-                                  location: company.country ?? "",
-                                  onCardTap: () =>
-                                      FindCompanyController.openCompanyPage(
-                                    company.username!,
-                                  ),
-                                  onOpenPositionTap: () => FindCompanyController
-                                      .openOpenPositionsClick(
-                                    company.username!,
-                                  ),
+                      : controller.currentCompanyList!.isEmpty
+                          ? const SliverFillRemaining(
+                              child: FittedBox(
+                                fit: BoxFit.scaleDown,
+                                alignment: Alignment.center,
+                                child: Text(
+                                  "No company found!",
                                 ),
-                              );
-                            },
-                            childCount: controller.currentCompanyList!.length,
-                          ),
-                        ),
+                              ),
+                            )
+                          : SliverList(
+                              delegate: SliverChildBuilderDelegate(
+                                (context, index) {
+                                  final company =
+                                      controller.currentCompanyList![index];
+                                  return Padding(
+                                    padding: vertical6,
+                                    child: SingleCompanyCardWidget(
+                                      icon: company.companyLogo ?? "",
+                                      isFeatured: true,
+                                      positionCount: company.openJobsCount ?? 0,
+                                      name: company.name ?? "",
+                                      location: company.country ?? "",
+                                      onCardTap: () =>
+                                          FindCompanyController.openCompanyPage(
+                                        company.username!,
+                                      ),
+                                      onOpenPositionTap: () =>
+                                          FindCompanyController
+                                              .openOpenPositionsClick(
+                                        company.username!,
+                                      ),
+                                    ),
+                                  );
+                                },
+                                childCount:
+                                    controller.currentCompanyList!.length,
+                              ),
+                            ),
                 ),
               if (controller.needPaginationControl)
                 SliverToBoxAdapter(

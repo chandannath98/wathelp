@@ -44,8 +44,8 @@ class InitializationController extends GetxController {
       rmvFocus();
       await HiveConfig.initialize();
       await EasyLocalization.ensureInitialized();
-      Get.put(AuthController(), permanent: true);
       Get.put(RequestHandler(), permanent: true);
+      Get.put(AuthController(), permanent: true);
       Get.put(HomepageController(), permanent: true);
       updateAppState(InitialAppState.initialized);
     } catch (e, s) {

@@ -47,7 +47,7 @@ mixin _$JobDetails {
   @JsonKey(name: 'status')
   String? get status => throw _privateConstructorUsedError;
   @JsonKey(name: 'apply_on')
-  String? get applyOn => throw _privateConstructorUsedError;
+  ApplyStyle? get applyOn => throw _privateConstructorUsedError;
   @JsonKey(name: 'apply_email')
   String? get applyEmail => throw _privateConstructorUsedError;
   @JsonKey(name: 'apply_url')
@@ -115,7 +115,7 @@ abstract class $JobDetailsCopyWith<$Res> {
       @JsonKey(name: 'deadline') String? deadline,
       @JsonKey(name: 'description') String? description,
       @JsonKey(name: 'status') String? status,
-      @JsonKey(name: 'apply_on') String? applyOn,
+      @JsonKey(name: 'apply_on') ApplyStyle? applyOn,
       @JsonKey(name: 'apply_email') String? applyEmail,
       @JsonKey(name: 'apply_url') String? applyUrl,
       @JsonKey(name: 'featured') bool? featured,
@@ -244,7 +244,7 @@ class _$JobDetailsCopyWithImpl<$Res, $Val extends JobDetails>
       applyOn: freezed == applyOn
           ? _value.applyOn
           : applyOn // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as ApplyStyle?,
       applyEmail: freezed == applyEmail
           ? _value.applyEmail
           : applyEmail // ignore: cast_nullable_to_non_nullable
@@ -363,7 +363,7 @@ abstract class _$$JobDetailsImplCopyWith<$Res>
       @JsonKey(name: 'deadline') String? deadline,
       @JsonKey(name: 'description') String? description,
       @JsonKey(name: 'status') String? status,
-      @JsonKey(name: 'apply_on') String? applyOn,
+      @JsonKey(name: 'apply_on') ApplyStyle? applyOn,
       @JsonKey(name: 'apply_email') String? applyEmail,
       @JsonKey(name: 'apply_url') String? applyUrl,
       @JsonKey(name: 'featured') bool? featured,
@@ -491,7 +491,7 @@ class __$$JobDetailsImplCopyWithImpl<$Res>
       applyOn: freezed == applyOn
           ? _value.applyOn
           : applyOn // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as ApplyStyle?,
       applyEmail: freezed == applyEmail
           ? _value.applyEmail
           : applyEmail // ignore: cast_nullable_to_non_nullable
@@ -662,7 +662,7 @@ class _$JobDetailsImpl extends _JobDetails with DiagnosticableTreeMixin {
   final String? status;
   @override
   @JsonKey(name: 'apply_on')
-  final String? applyOn;
+  final ApplyStyle? applyOn;
   @override
   @JsonKey(name: 'apply_email')
   final String? applyEmail;
@@ -918,7 +918,7 @@ abstract class _JobDetails extends JobDetails {
       @JsonKey(name: 'deadline') final String? deadline,
       @JsonKey(name: 'description') final String? description,
       @JsonKey(name: 'status') final String? status,
-      @JsonKey(name: 'apply_on') final String? applyOn,
+      @JsonKey(name: 'apply_on') final ApplyStyle? applyOn,
       @JsonKey(name: 'apply_email') final String? applyEmail,
       @JsonKey(name: 'apply_url') final String? applyUrl,
       @JsonKey(name: 'featured') final bool? featured,
@@ -985,7 +985,7 @@ abstract class _JobDetails extends JobDetails {
   String? get status;
   @override
   @JsonKey(name: 'apply_on')
-  String? get applyOn;
+  ApplyStyle? get applyOn;
   @override
   @JsonKey(name: 'apply_email')
   String? get applyEmail;

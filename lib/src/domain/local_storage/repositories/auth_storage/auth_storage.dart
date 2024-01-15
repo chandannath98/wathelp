@@ -5,7 +5,7 @@ import 'package:jobpilot/src/domain/server/repositories/authentication/models/us
 import 'package:jobpilot/src/services/authentication/models/auth_credentials/auth_credentials.dart';
 
 class AuthStorage {
-  final config = HiveConfig();
+  static final config = HiveConfig();
   static const tokenKey = '#TOKEN_KEY';
   static const loginCredKey = '#CRED_KEY';
   static const profileKey = '#PROFILE_KEY';
@@ -27,7 +27,7 @@ class AuthStorage {
         : null;
   }
 
-  String? get currentToken => config.tokenBox.get(tokenKey);
+  static String? get currentToken => config.tokenBox.get(tokenKey);
 
   User? get currentProfile {
     String? data = config.profileBox.get(profileKey);

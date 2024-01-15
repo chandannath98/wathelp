@@ -78,11 +78,11 @@ showToastSuccess(String desc, [String? status, IconData? icon]) {
 
 class GreenSnackBarWidget extends StatelessWidget {
   const GreenSnackBarWidget({
-    Key? key,
+    super.key,
     required this.descriptionText,
     this.status,
     this.icon,
-  }) : super(key: key);
+  });
 
   final String descriptionText;
   final String? status;
@@ -181,11 +181,11 @@ class GreenSnackBarWidget extends StatelessWidget {
 
 class BlueSnackBarWidget extends StatelessWidget {
   const BlueSnackBarWidget({
-    Key? key,
+    super.key,
     required this.descriptionText,
     this.status,
     this.icon,
-  }) : super(key: key);
+  });
 
   final String descriptionText;
   final String? status;
@@ -283,11 +283,11 @@ class BlueSnackBarWidget extends StatelessWidget {
 
 class RedSnackBarWidget extends StatelessWidget {
   const RedSnackBarWidget({
-    Key? key,
+    super.key,
     required this.descriptionText,
     this.status,
     this.icon,
-  }) : super(key: key);
+  });
 
   final String descriptionText;
   final String? status;
@@ -385,11 +385,11 @@ class RedSnackBarWidget extends StatelessWidget {
 
 class YellowSnackBarWidget extends StatelessWidget {
   const YellowSnackBarWidget({
-    Key? key,
+    super.key,
     required this.descriptionText,
     this.status,
     this.icon,
-  }) : super(key: key);
+  });
 
   final String descriptionText;
   final String? status;

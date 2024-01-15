@@ -49,7 +49,7 @@ class SocialSettingsController extends GetxController
         data,
       ]);
       if (res.isSuccess) {
-        fetchCurrentSocialData(isRefresh: true);
+        await fetchCurrentSocialData(isRefresh: true);
       } else {
         showToastError(res.errorMsg);
       }
@@ -69,12 +69,12 @@ class SocialSettingsController extends GetxController
           .toList();
       final res = await _settingsRepo.updateSocialData(currentDataList);
       if (res.isSuccess) {
-        fetchCurrentSocialData(isRefresh: true);
+        await fetchCurrentSocialData(isRefresh: true);
       } else {
         showToastError(res.errorMsg);
       }
     } catch (e, s) {
-      log("#AddNewSocialError", error: e, stackTrace: s);
+      log("#RemoveSocialError", error: e, stackTrace: s);
       if (e is RequestException) e.handleError();
     }
   }

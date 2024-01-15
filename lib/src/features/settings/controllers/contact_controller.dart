@@ -79,6 +79,25 @@ class ContactController extends GetxController with BaseControllerSystem {
     }
   }
 
+  Future saveCurrentContactData() async {
+    try {
+      final res = await _settingsRepo.updateCandidateContactData(data: {
+        "whatsapp_number": whatsappTextController.text,
+        "phone": phoneTextController.text,
+        "secondary_phone": secondaryPhoneTextController.text,
+        "email": secondaryEmailTextController.text,
+      });
+      if (res.isSuccess) {
+        showToastSuccess(res.data!);
+      } else {
+        showToastError(res.errorMsg);
+      }
+    } catch (e, s) {
+      log("#SaveProfileDataError", error: e, stackTrace: s);
+      if (e is RequestException) e.handleError();
+    }
+  }
+
   Future updateUserPassword() async {
     try {
       final res = await _settingsRepo.updatePassword(

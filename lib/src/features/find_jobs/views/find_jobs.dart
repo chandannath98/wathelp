@@ -103,33 +103,43 @@ class JobSearchPage extends StatelessWidget {
                       child: LoadingIndicator(),
                     ),
                   )
-                : SliverList(
-                    delegate: SliverChildBuilderDelegate(
-                      (context, index) {
-                        final job = controller.currentJobList![index];
-                        return Padding(
-                          padding: vertical6,
-                          child: SingleJobCard(
-                            bgColor: Colors.white,
-                            bookmarked: job.bookmarked,
-                            postType: job.jobType ?? "",
-                            companyName: job.companyName ?? "",
-                            postName: job.title ?? "",
-                            companyLocation: job.country ?? "",
-                            salaryRange:
-                                "${job.salary == "Competitive" ? "" : "\$"}${job.salary}",
-                            companyIcon: job.companyLogo ?? "",
-                            onBookmarkCallback: (() =>
-                                    controller.onBookmarkJobClick(job.id!))
-                                .withOverlay,
-                            onItemClick: () =>
-                                FindJobController.onJobClick(job.slug ?? ""),
+                : controller.currentJobList!.isEmpty
+                    ? const SliverFillRemaining(
+                        child: FittedBox(
+                          fit: BoxFit.scaleDown,
+                          alignment: Alignment.center,
+                          child: Text(
+                            "No jobs found!",
                           ),
-                        );
-                      },
-                      childCount: controller.currentJobList!.length,
-                    ),
-                  ),
+                        ),
+                      )
+                    : SliverList(
+                        delegate: SliverChildBuilderDelegate(
+                          (context, index) {
+                            final job = controller.currentJobList![index];
+                            return Padding(
+                              padding: vertical6,
+                              child: SingleJobCard(
+                                bgColor: Colors.white,
+                                bookmarked: job.bookmarked,
+                                postType: job.jobType ?? "",
+                                companyName: job.companyName ?? "",
+                                postName: job.title ?? "",
+                                companyLocation: job.country ?? "",
+                                salaryRange:
+                                    "${job.salary == "Competitive" ? "" : "\$"}${job.salary}",
+                                companyIcon: job.companyLogo ?? "",
+                                onBookmarkCallback: (() =>
+                                        controller.onBookmarkJobClick(job.id!))
+                                    .withOverlay,
+                                onItemClick: () => FindJobController.onJobClick(
+                                    job.slug ?? ""),
+                              ),
+                            );
+                          },
+                          childCount: controller.currentJobList!.length,
+                        ),
+                      ),
           ),
         if (controller.needPaginationControl)
           SliverToBoxAdapter(

@@ -66,7 +66,7 @@ class _SettingsScreenState extends State<SettingsScreen>
                   "Personal",
                   "Profile",
                   "Social",
-                  "Contact Setting",
+                  "Contact",
                 ]
                     .map(
                       (text) => Padding(

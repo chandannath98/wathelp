@@ -1,10 +1,20 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
+import 'package:jobpilot/src/domain/server/config/repository.dart';
 
 import '../company/company.dart';
 
 part 'job_details.freezed.dart';
 part 'job_details.g.dart';
+
+enum ApplyStyle {
+  @JsonValue("app")
+  app,
+  @JsonValue("email")
+  email,
+  @JsonValue("custom_url")
+  customUrl,
+}
 
 @freezed
 class JobDetails with _$JobDetails {
@@ -22,7 +32,7 @@ class JobDetails with _$JobDetails {
     @JsonKey(name: 'deadline') String? deadline,
     @JsonKey(name: 'description') String? description,
     @JsonKey(name: 'status') String? status,
-    @JsonKey(name: 'apply_on') String? applyOn,
+    @JsonKey(name: 'apply_on') ApplyStyle? applyOn,
     @JsonKey(name: 'apply_email') String? applyEmail,
     @JsonKey(name: 'apply_url') String? applyUrl,
     @JsonKey(name: 'featured') bool? featured,
@@ -46,6 +56,7 @@ class JobDetails with _$JobDetails {
   }) = _JobDetails;
 
   const JobDetails._();
+  String get webLink => "${API.webUrl}/job/$slug";
   DateTime? get postDate => DateTime.tryParse(postedAt ?? "");
   DateTime? get expireDate => DateTime.tryParse(deadline ?? "");
 

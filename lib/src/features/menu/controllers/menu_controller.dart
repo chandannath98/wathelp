@@ -2,9 +2,11 @@ import 'dart:developer';
 
 import 'package:get/get.dart';
 import 'package:jobpilot/src/domain/server/config/repository.dart';
+import 'package:jobpilot/src/features/account/views/applied_jobs.dart';
 import 'package:jobpilot/src/features/authentication/views/login_system_switcher.dart';
 import 'package:jobpilot/src/features/authentication/views/registration.dart';
 import 'package:jobpilot/src/features/browse_section/views/browse_screen.dart';
+import 'package:jobpilot/src/features/favorite_jobs/views/favorite_jobs.dart';
 import 'package:jobpilot/src/features/homepage/controllers/homepage_controller.dart';
 import 'package:jobpilot/src/features/menu/views/choose_country.dart';
 import 'package:jobpilot/src/features/menu/views/choose_currency.dart';
@@ -79,8 +81,9 @@ class MenuPageController extends GetxController {
 
 // Candidate Section
   gotoDashboard() => _moveToHomePageIndex(2);
-  gotoAppliedJobs() => _moveToHomePageIndex(3);
-  gotoFavoriteJobs() {}
+  gotoJobAlert() => _moveToHomePageIndex(3);
+  gotoAppliedJobs() => Get.to(() => const AppliedJobsScreen());
+  gotoFavoriteJobs() => Get.to(() => const FavoriteJobsScreen());
   gotoSettings() => Get.to(() => const SettingsScreen());
   signOut() => AuthController.find.logOut();
 

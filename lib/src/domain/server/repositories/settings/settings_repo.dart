@@ -134,6 +134,9 @@ class SettingsRepository extends ServerRepo {
         API.candidateSettings,
         queryParams: {"type": CandidateSettingSections.personal.name},
       );
+
+      print("Personal Data Fetch Response : ${response.data.toString()}");
+
       return ResponseWrapper.fromMap(
         response: response.data,
         print: true,
@@ -186,6 +189,7 @@ class SettingsRepository extends ServerRepo {
   }) async {
     final filteredData = settingsData.toJson()
       ..remove("image")
+      ..remove("image_url")
       ..remove("education_list")
       ..remove("experience_list");
 
@@ -204,11 +208,62 @@ class SettingsRepository extends ServerRepo {
           "type": CandidateSettingSections.personal.name,
         }),
       );
+
+      print("Personal Data Update Response : ${response.data.toString()}");
+
       return ResponseWrapper.fromMap(
         response: response.data,
         print: true,
         status: response.statusCode,
         purse: (json) => UpdatePersonalSettingResponse.fromJson(json),
+      );
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<ResponseWrapper<String>> updateCandidateProfileData({
+    required Map<String, dynamic> data,
+  }) async {
+    try {
+      final response = await requestHandler.post(
+        API.candidateSettings,
+        FormData.fromMap({
+          ...data,
+          "type": CandidateSettingSections.profile.name,
+        }),
+      );
+
+      return ResponseWrapper.fromMap(
+        response: response.data,
+        print: true,
+        status: response.statusCode,
+        purse: (json) => (json['message'] as String),
+      );
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<ResponseWrapper<String>> updateCandidateContactData({
+    required Map<String, dynamic> data,
+  }) async {
+    log("(ContactSettingUpdate): $data");
+    try {
+      final response = await requestHandler.post(
+        API.candidateSettings,
+        FormData.fromMap({
+          ...data,
+          "type": CandidateSettingSections.contact.name,
+        }),
+      );
+
+      print("Contact Data Update Response : ${response.data.toString()}");
+      return ResponseWrapper.fromMap(
+        response: response.data,
+        print: true,
+        status: response.statusCode,
+        purse: (json) => (json['message'] as String),
       );
     } catch (e) {
       rethrow;

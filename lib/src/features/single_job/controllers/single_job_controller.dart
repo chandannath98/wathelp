@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:get/get.dart';
-import 'package:jobpilot/src/domain/server/config/repository.dart';
 import 'package:jobpilot/src/domain/server/config/request_handler.dart';
 import 'package:jobpilot/src/domain/server/repositories/jobs/jobs_repo.dart';
 import 'package:jobpilot/src/domain/server/repositories/jobs/models/job_details/company/company.dart';
@@ -16,6 +15,14 @@ import 'package:jobpilot/src/features/single_job/views/job_description.dart';
 import 'package:jobpilot/src/services/authentication/auth_controller.dart';
 import 'package:jobpilot/src/utilities/functions.dart';
 import 'package:jobpilot/src/utilities/scaffold_util.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+String? _encodeQueryParameters(Map<String, String> params) {
+  return params.entries
+      .map((MapEntry<String, String> e) =>
+          '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
+      .join('&');
+}
 
 class SingleJobController extends GetxController {
   bool isLoading = false;
@@ -48,37 +55,65 @@ class SingleJobController extends GetxController {
 
   showFullDescription() async {
     Get.to(
-      () => JobDescriptionHtmlWidget(
-        name: jobDetails?.title ?? "",
-        isBookmarked: jobDetails?.bookmarked ?? false,
-        htmlText: jobDetails?.description ?? "",
-        onApplyClick: () {
-          onApplyClick();
-        },
-        onBookmarkCallback: () {},
-      ),
+      () => JobDescriptionHtmlWidget(slug: slug, controller: this),
     );
   }
 
-  _gotoApplyPageSystem() async {
-    final res = await Get.to(
-      () => ApplyJobScreen(
-        jobId: jobDetails!.id!,
-        jobName: jobDetails?.title ?? "",
-      ),
-    );
-    if (res is bool && res == true) {
-      fetchJobDetails();
+  _getIntoJobApplySystem() async {
+    switch (jobDetails!.applyOn!) {
+      case ApplyStyle.app:
+        {
+          final res = await Get.to(
+            () => ApplyJobScreen(
+              jobId: jobDetails!.id!,
+              jobName: jobDetails?.title ?? "",
+            ),
+          );
+          if (res is bool && res == true) {
+            fetchJobDetails();
+          }
+        }
+      case ApplyStyle.email:
+        {
+          final Uri emailLaunchUri = Uri(
+            scheme: 'mailto',
+            path: jobDetails?.applyEmail,
+            query: _encodeQueryParameters(
+              <String, String>{
+                'subject':
+                    'Application for the position of ${jobDetails?.title ?? ""}',
+              },
+            ),
+          );
+          if (await launchUrl(emailLaunchUri)) {
+            fetchJobDetails();
+          }
+        }
+
+      case ApplyStyle.customUrl:
+        {
+          final pursedUrl = Uri.parse(jobDetails?.applyUrl ?? "");
+          if (await canLaunchUrl(pursedUrl)) {
+            if (await launchUrl(
+              pursedUrl,
+              mode: LaunchMode.inAppBrowserView,
+            )) {
+              fetchJobDetails();
+            }
+          } else {
+            log("Can't launch job apply URL!");
+          }
+        }
     }
   }
 
   Future onApplyClick() async {
     if (AuthController.find.isAuthenticated) {
-      await _gotoApplyPageSystem();
+      await _getIntoJobApplySystem();
     } else {
       await Get.to(() => const LoginSystemScreen());
       if (AuthController.find.isAuthenticated) {
-        await _gotoApplyPageSystem();
+        await _getIntoJobApplySystem();
       }
     }
   }
@@ -91,11 +126,11 @@ class SingleJobController extends GetxController {
     try {
       final res = await _jobRepo.toggleJobBookmark(jobDetails!.id!);
       if (res.isSuccess) {
+        await fetchJobDetails(isRefresh: true);
         showToastSuccess(res.data!.message!);
       } else {
         showToastError(res.errorMsg);
       }
-      await fetchJobDetails(isRefresh: true);
       log("Is bookmarked : ${detailResponse!.job!.bookmarked}");
     } catch (e, s) {
       log("#ToggleJobBookmarkError", error: e, stackTrace: s);
@@ -122,6 +157,5 @@ class SingleJobController extends GetxController {
     }
   }
 
-  copyWebLink() async =>
-      await copyClipboard("${API.baseUrl.replaceAll("/api", "")}/job/$slug");
+  copyWebLink() async => await copyClipboard(jobDetails?.webLink ?? "");
 }

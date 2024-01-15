@@ -30,7 +30,7 @@ mixin _$CandidateProfileSettingData {
   @JsonKey(name: 'bio')
   String? get bio => throw _privateConstructorUsedError;
   @JsonKey(name: 'availability')
-  String? get availability => throw _privateConstructorUsedError;
+  AvailableStatus? get availability => throw _privateConstructorUsedError;
   @JsonKey(name: 'available_in')
   String? get availableIn => throw _privateConstructorUsedError;
   @JsonKey(name: 'skills')
@@ -64,7 +64,7 @@ abstract class $CandidateProfileSettingDataCopyWith<$Res> {
       @JsonKey(name: 'marital_status') MaritalStatus? maritalStatus,
       @JsonKey(name: 'profession_id') int? professionId,
       @JsonKey(name: 'bio') String? bio,
-      @JsonKey(name: 'availability') String? availability,
+      @JsonKey(name: 'availability') AvailableStatus? availability,
       @JsonKey(name: 'available_in') String? availableIn,
       @JsonKey(name: 'skills') List<Skills>? skills,
       @JsonKey(name: 'languages') List<Languages>? languages,
@@ -119,7 +119,7 @@ class _$CandidateProfileSettingDataCopyWithImpl<$Res,
       availability: freezed == availability
           ? _value.availability
           : availability // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as AvailableStatus?,
       availableIn: freezed == availableIn
           ? _value.availableIn
           : availableIn // ignore: cast_nullable_to_non_nullable
@@ -162,7 +162,7 @@ abstract class _$$CandidateProfileSettingDataImplCopyWith<$Res>
       @JsonKey(name: 'marital_status') MaritalStatus? maritalStatus,
       @JsonKey(name: 'profession_id') int? professionId,
       @JsonKey(name: 'bio') String? bio,
-      @JsonKey(name: 'availability') String? availability,
+      @JsonKey(name: 'availability') AvailableStatus? availability,
       @JsonKey(name: 'available_in') String? availableIn,
       @JsonKey(name: 'skills') List<Skills>? skills,
       @JsonKey(name: 'languages') List<Languages>? languages,
@@ -216,7 +216,7 @@ class __$$CandidateProfileSettingDataImplCopyWithImpl<$Res>
       availability: freezed == availability
           ? _value.availability
           : availability // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as AvailableStatus?,
       availableIn: freezed == availableIn
           ? _value.availableIn
           : availableIn // ignore: cast_nullable_to_non_nullable
@@ -287,7 +287,7 @@ class _$CandidateProfileSettingDataImpl
   final String? bio;
   @override
   @JsonKey(name: 'availability')
-  final String? availability;
+  final AvailableStatus? availability;
   @override
   @JsonKey(name: 'available_in')
   final String? availableIn;
@@ -433,7 +433,7 @@ abstract class _CandidateProfileSettingData
           @JsonKey(name: 'marital_status') final MaritalStatus? maritalStatus,
           @JsonKey(name: 'profession_id') final int? professionId,
           @JsonKey(name: 'bio') final String? bio,
-          @JsonKey(name: 'availability') final String? availability,
+          @JsonKey(name: 'availability') final AvailableStatus? availability,
           @JsonKey(name: 'available_in') final String? availableIn,
           @JsonKey(name: 'skills') final List<Skills>? skills,
           @JsonKey(name: 'languages') final List<Languages>? languages,
@@ -461,7 +461,7 @@ abstract class _CandidateProfileSettingData
   String? get bio;
   @override
   @JsonKey(name: 'availability')
-  String? get availability;
+  AvailableStatus? get availability;
   @override
   @JsonKey(name: 'available_in')
   String? get availableIn;

@@ -35,6 +35,7 @@ class VerticalIconText extends StatelessWidget {
             style: context.text.bodyMedium,
           );
     return Row(
+      mainAxisSize: MainAxisSize.min,
       children: [
         icon,
         (space ?? 3).width,

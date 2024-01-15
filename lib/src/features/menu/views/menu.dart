@@ -239,7 +239,7 @@ class MenuPageWidget extends StatelessWidget {
           icon: const Icon(Icons.bookmark_outline_rounded),
         ),
         MenuPageListTile(
-          onTap: controller.gotoAppliedJobs,
+          onTap: controller.gotoJobAlert,
           title: "Job Alert",
           icon: const SvgIcon(Assets.jobsIcon),
         ),

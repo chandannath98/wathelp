@@ -3,8 +3,8 @@ import 'package:jobpilot/src/utilities/extensions/size_utilities.dart';
 
 class OverlayLoadingIndicator extends StatelessWidget {
   const OverlayLoadingIndicator({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

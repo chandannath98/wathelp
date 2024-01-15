@@ -5,7 +5,6 @@ import 'package:jobpilot/src/constants/assets/assets.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
 import 'package:jobpilot/src/constants/strings/home_strings.dart';
 import 'package:jobpilot/src/features/authentication/controllers/registration_controller.dart';
-import 'package:jobpilot/src/global/widgets/horizontal_item_selector.dart';
 import 'package:jobpilot/src/global/widgets/social_login_button.dart';
 import 'package:jobpilot/src/services/authentication/models/user_type/user_type.dart';
 import 'package:jobpilot/src/services/theme/app_theme.dart';
@@ -181,8 +180,9 @@ class _RegistrationSectionWidgetState extends State<RegistrationSectionWidget> {
                       color: context.color?.opposite,
                     ),
                   ),
-                  16.height,
-                  DecoratedBox(
+                  24.height,
+                  //TODO: Uncomment it when the [Company] system is implemented!
+/*                   DecoratedBox(
                     decoration: BoxDecoration(
                       color: context.color?.theme,
                       borderRadius: BorderRadius.circular(8),
@@ -235,7 +235,7 @@ class _RegistrationSectionWidgetState extends State<RegistrationSectionWidget> {
                       ),
                     ),
                   ),
-                  16.height,
+                  16.height, */
                   Row(
                     children: [
                       Expanded(

@@ -1,9 +1,6 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:get/get.dart';
-import 'package:jobpilot/src/services/theme/extensions.dart';
 
 Future<({String? text, DateTime date})?> pickDate(
   BuildContext context, {
@@ -26,6 +23,7 @@ Future<({String? text, DateTime date})?> pickDate(
   }
 }
 
+/* 
 showScrollingDatePicker(BuildContext context) async {
   return showDialog<DateTime?>(
     context: context,
@@ -106,11 +104,11 @@ showBoxyScrollingPicker(BuildContext context,
 ///The return type for this widget is [DateTime?]. That means when selected or done, it should return [DateTime] or [null].
 class BoxyPickerWidget extends StatelessWidget {
   const BoxyPickerWidget({
-    Key? key,
+    super.key,
     this.initialDT,
     this.startingDate,
     this.endDate,
-  }) : super(key: key);
+  });
 
   final DateTime? initialDT;
   final DateTime? startingDate;
@@ -217,4 +215,4 @@ class BoxyPickerWidget extends StatelessWidget {
       ),
     );
   }
-}
+} */

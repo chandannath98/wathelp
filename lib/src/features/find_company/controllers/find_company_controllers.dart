@@ -2,26 +2,17 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:jobpilot/src/domain/local_storage/repositories/static/static_storage.dart';
-import 'package:jobpilot/src/domain/server/config/request_handler.dart';
 import 'package:jobpilot/src/domain/server/repositories/company/company_repo.dart';
 import 'package:jobpilot/src/domain/server/repositories/company/models/company/company.dart';
 import 'package:jobpilot/src/domain/server/repositories/company/models/company_query/company_query.dart';
 import 'package:jobpilot/src/domain/server/repositories/company/models/search_response/response/paginated_company_list.dart';
-import 'package:jobpilot/src/domain/server/repositories/server_static/popular_tag/popular_tag.dart';
-import 'package:jobpilot/src/domain/server/repositories/server_static/server_static_repo.dart';
 import 'package:jobpilot/src/features/single_company/views/open_jobs.dart';
 import 'package:jobpilot/src/features/single_company/views/single_company.dart';
+import 'package:jobpilot/src/services/controller_mixin/controller_mixins.dart';
 import 'package:jobpilot/src/utilities/functions.dart';
 import 'package:jobpilot/src/utilities/scaffold_util.dart';
 
-class FindCompanyController extends GetxController {
-  bool isLoading = false;
-  setLoadingStatus([bool? newState]) {
-    isLoading = newState ?? (!isLoading);
-    update();
-  }
-
+class FindCompanyController extends GetxController with BaseControllerSystem {
   final searchController = TextEditingController();
   final locationController = TextEditingController();
 

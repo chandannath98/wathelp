@@ -5,7 +5,6 @@ import 'package:jobpilot/generated/locale_keys.g.dart';
 import 'package:jobpilot/src/constants/assets/assets.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
 import 'package:jobpilot/src/features/settings/controllers/contact_controller.dart';
-import 'package:jobpilot/src/global/widgets/app/custom_titled_drop_down.dart';
 import 'package:jobpilot/src/global/widgets/app/custom_titled_text_field.dart';
 import 'package:jobpilot/src/services/theme/app_theme.dart';
 import 'package:jobpilot/src/utilities/extensions/overlay_loader.dart';
@@ -44,7 +43,7 @@ class ContactSettingsTab extends StatelessWidget {
                         16.height,
                         SinglePhoneNumberTile(
                           controller: controller.phoneTextController,
-                          icon: Row(
+                          icon: const Row(
                             children: [
                               SizedBox.square(),
                             ],
@@ -54,7 +53,7 @@ class ContactSettingsTab extends StatelessWidget {
                         16.height,
                         SinglePhoneNumberTile(
                           controller: controller.secondaryPhoneTextController,
-                          icon: Row(
+                          icon: const Row(
                             children: [
                               SizedBox.square(),
                             ],
@@ -88,7 +87,7 @@ class ContactSettingsTab extends StatelessWidget {
                         ),
                         16.height,
                         SaveChangesButton(
-                          onTap: () {},
+                          onTap: controller.saveCurrentContactData.withOverlay,
                         ),
                         24.height,
                         Text(

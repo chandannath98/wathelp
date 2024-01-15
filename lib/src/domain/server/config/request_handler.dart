@@ -2,6 +2,7 @@ import 'dart:developer' show log;
 
 import 'package:dio/dio.dart';
 import 'package:get/get.dart' hide Response;
+import 'package:jobpilot/src/domain/local_storage/repositories/auth_storage/auth_storage.dart';
 import 'package:jobpilot/src/domain/local_storage/repositories/static/static_storage.dart';
 import 'package:jobpilot/src/domain/server/config/repository.dart';
 import 'package:jobpilot/src/services/authentication/auth_controller.dart';
@@ -9,7 +10,7 @@ import 'package:jobpilot/src/utilities/scaffold_util.dart';
 
 class RequestHandler extends GetxController {
   static RequestHandler get find => Get.find();
-  String? get authToken => AuthController.find.currentToken;
+  String? get authToken => AuthStorage.currentToken;
   String? get langCode => StaticStorage.selectedLanguage?.code;
   int? get selectedCountryCode => StaticStorage.selectedCountry?.id;
 

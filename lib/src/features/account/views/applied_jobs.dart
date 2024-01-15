@@ -10,7 +10,12 @@ import 'package:jobpilot/src/utilities/extensions/size_utilities.dart';
 import 'widgets/applied_job_card.dart';
 
 class AppliedJobsScreen extends StatelessWidget {
-  const AppliedJobsScreen({super.key});
+  const AppliedJobsScreen({
+    super.key,
+    this.controller,
+  });
+
+  final AccountController? controller;
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +27,7 @@ class AppliedJobsScreen extends StatelessWidget {
         ),
       ),
       body: GetBuilder<AccountController>(
+        init: controller ?? AccountController(),
         builder: (controller) {
           return CustomScrollView(
             slivers: [

@@ -13,6 +13,28 @@ enum Gender {
   other,
 }
 
+extension ToString on AvailableStatus {
+  String get readableString => switch (this) {
+        AvailableStatus.available => "Available",
+        AvailableStatus.notAvailable => "Not Available",
+        AvailableStatus.availableIn => "Available In",
+      };
+  String get keyString => switch (this) {
+        AvailableStatus.available => "available",
+        AvailableStatus.notAvailable => "not_available",
+        AvailableStatus.availableIn => "available_in",
+      };
+}
+
+enum AvailableStatus {
+  @JsonValue("available")
+  available,
+  @JsonValue("not_available")
+  notAvailable,
+  @JsonValue("available_in")
+  availableIn
+}
+
 enum MaritalStatus {
   @JsonValue("married")
   married,
@@ -27,7 +49,7 @@ class CandidateProfileSettingData with _$CandidateProfileSettingData {
     @JsonKey(name: 'marital_status') MaritalStatus? maritalStatus,
     @JsonKey(name: 'profession_id') int? professionId,
     @JsonKey(name: 'bio') String? bio,
-    @JsonKey(name: 'availability') String? availability,
+    @JsonKey(name: 'availability') AvailableStatus? availability,
     @JsonKey(name: 'available_in') String? availableIn,
     @JsonKey(name: 'skills') List<Skills>? skills,
     @JsonKey(name: 'languages') List<Languages>? languages,

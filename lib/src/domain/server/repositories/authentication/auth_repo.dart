@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:jobpilot/src/domain/server/config/repository.dart';
 import 'package:jobpilot/src/domain/server/repositories/authentication/models/register_data/register_data.dart';
@@ -16,6 +18,20 @@ class AuthRepository extends ServerRepo {
           "password": password,
         }),
       );
+      return ResponseWrapper.fromMap(
+        response: response.data,
+        status: response.statusCode,
+        purse: (json) => LoginResponse.fromJson(json),
+      );
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<ResponseWrapper<LoginResponse>> getCurrentUserProfile() async {
+    try {
+      final response = await requestHandler.get(API.profile);
+      log("ProfileResponse : ${response.data}");
       return ResponseWrapper.fromMap(
         response: response.data,
         status: response.statusCode,

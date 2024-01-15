@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
 import 'package:jobpilot/src/domain/server/repositories/settings/models/profile_settings/candidate_profile_settings/candidate_profile_setting_data.dart';
+import 'package:jobpilot/src/global/widgets/app/custom_titled_text_field.dart';
+import 'package:jobpilot/src/services/theme/app_theme.dart';
+import 'package:jobpilot/src/utilities/extensions/overlay_loader.dart';
 import 'package:jobpilot/src/utilities/extensions/size_utilities.dart';
 import 'package:jobpilot/src/utilities/extensions/string_extensions.dart';
 
 import '../controllers/profile_settings_controller.dart';
 import '../../../global/widgets/app/custom_titled_drop_down.dart';
+import 'widgets/date_picker.dart';
 import 'widgets/save_changes_button.dart';
 
 class ProfileInformationTab extends StatelessWidget {
@@ -115,7 +120,45 @@ class ProfileInformationTab extends StatelessWidget {
                               .toList(),
                         ),
                         16.height,
-                        Text("Biography"),
+                        CustomTitledDropdownField(
+                          title: "Availability Status",
+                          onChange: (value) =>
+                              controller.onStatusChange(value!),
+                          value: controller.data?.availability,
+                          fieldList: AvailableStatus.values
+                              .map(
+                                (e) => (value: e, title: e.readableString),
+                              )
+                              .toList(),
+                        ),
+                        16.height,
+                        if (controller.data?.availability ==
+                            AvailableStatus.availableIn) ...[
+                          CustomTitledTextFormField(
+                            hintText: "DD-MM-YYYY",
+                            title: "Available Date",
+                            inputType: TextInputType.datetime,
+                            controller: controller.availableInController,
+                            replacementFunction: () async {
+                              final date = await pickDate(
+                                context,
+                                firstDate: DateTime.now().add(1.days),
+                                lastDate: DateTime.now().add(365.days),
+                                converter: (date) =>
+                                    DateFormat("d-M-y").format(date),
+                              );
+                              if (date != null) {
+                                controller.onAvailableDateSet(date.text!);
+                              }
+                            },
+                            prefixIcon: Icon(
+                              Icons.calendar_today_outlined,
+                              color: context.color?.primary,
+                            ),
+                          ),
+                          16.height,
+                        ],
+                        const Text("Biography"),
                         6.height,
                         ConstrainedBox(
                           constraints: BoxConstraints(
@@ -135,7 +178,7 @@ class ProfileInformationTab extends StatelessWidget {
                         ),
                         16.height,
                         SaveChangesButton(
-                          onTap: () {},
+                          onTap: controller.saveCurrentProfileData.withOverlay,
                         ),
                         24.height,
                       ],

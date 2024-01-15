@@ -433,7 +433,7 @@ class ActiveFiltersSection extends StatelessWidget {
                 ActiveFilterChip(
                   isSelected: false,
                   title:
-                      "Salary \$${controller.currentQuery.minPrice?.toString() ?? "0"} = ${controller.currentQuery.maxPrice == null ? "Up" : "\$${controller.currentQuery.maxPrice}"}",
+                      "Salary \$${controller.currentQuery.minPrice?.toString() ?? "0"} - ${controller.currentQuery.maxPrice == null ? "Up" : "\$${controller.currentQuery.maxPrice}"}",
                   onDelete: () {
                     controller.setMaximumSalary(null);
                     controller.setMinimumSalary(null);

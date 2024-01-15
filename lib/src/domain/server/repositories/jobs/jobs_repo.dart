@@ -6,6 +6,7 @@ import 'package:jobpilot/src/domain/server/repositories/jobs/models/applied_jobs
 import 'package:jobpilot/src/domain/server/repositories/jobs/models/apply_job/apply_job_response.dart';
 import 'package:jobpilot/src/domain/server/repositories/jobs/models/bookmark/bookmark.dart';
 import 'package:jobpilot/src/domain/server/repositories/jobs/models/category/job_category.dart';
+import 'package:jobpilot/src/domain/server/repositories/jobs/models/favorite_jobs/response/paginated_favorite_jobs_response.dart';
 import 'package:jobpilot/src/domain/server/repositories/jobs/models/job_alert/paginated_response/paginated_job_alert_response.dart';
 import 'package:jobpilot/src/domain/server/repositories/jobs/models/job_details/job_detail_response/job_detail_response.dart';
 import 'package:jobpilot/src/domain/server/repositories/jobs/models/job_type/job_type.dart';
@@ -36,6 +37,29 @@ class JobsRepository extends ServerRepo {
         response: response.data,
         status: response.statusCode,
         purse: (json) => PaginatedJobListResponse.fromJson(json),
+      );
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<ResponseWrapper<PaginatedFavoriteJobsResponse>> getFavoriteJobs({
+    required int pageIndex,
+    required int pageSize,
+  }) async {
+    try {
+      final response = await requestHandler.get(
+        API.candidateFavoriteJob,
+        queryParams: {
+          "page": pageIndex,
+          "paginate": pageSize,
+        },
+      );
+      log("Job search header : ${response.requestOptions.headers}");
+      return ResponseWrapper.fromMap(
+        response: response.data,
+        status: response.statusCode,
+        purse: (json) => PaginatedFavoriteJobsResponse.fromJson(json),
       );
     } catch (e) {
       rethrow;

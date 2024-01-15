@@ -21,7 +21,7 @@ _$JobDetailsImpl _$$JobDetailsImplFromJson(Map<String, dynamic> json) =>
       deadline: json['deadline'] as String?,
       description: json['description'] as String?,
       status: json['status'] as String?,
-      applyOn: json['apply_on'] as String?,
+      applyOn: $enumDecodeNullable(_$ApplyStyleEnumMap, json['apply_on']),
       applyEmail: json['apply_email'] as String?,
       applyUrl: json['apply_url'] as String?,
       featured: json['featured'] as bool?,
@@ -63,7 +63,7 @@ Map<String, dynamic> _$$JobDetailsImplToJson(_$JobDetailsImpl instance) =>
       'deadline': instance.deadline,
       'description': instance.description,
       'status': instance.status,
-      'apply_on': instance.applyOn,
+      'apply_on': _$ApplyStyleEnumMap[instance.applyOn],
       'apply_email': instance.applyEmail,
       'apply_url': instance.applyUrl,
       'featured': instance.featured,
@@ -85,3 +85,9 @@ Map<String, dynamic> _$$JobDetailsImplToJson(_$JobDetailsImpl instance) =>
       'education': instance.education,
       'company': instance.company,
     };
+
+const _$ApplyStyleEnumMap = {
+  ApplyStyle.app: 'app',
+  ApplyStyle.email: 'email',
+  ApplyStyle.customUrl: 'custom_url',
+};

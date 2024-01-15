@@ -14,7 +14,8 @@ _$CandidateProfileSettingDataImpl _$$CandidateProfileSettingDataImplFromJson(
           $enumDecodeNullable(_$MaritalStatusEnumMap, json['marital_status']),
       professionId: json['profession_id'] as int?,
       bio: json['bio'] as String?,
-      availability: json['availability'] as String?,
+      availability:
+          $enumDecodeNullable(_$AvailableStatusEnumMap, json['availability']),
       availableIn: json['available_in'] as String?,
       skills: (json['skills'] as List<dynamic>?)
           ?.map((e) => Skills.fromJson(e as Map<String, dynamic>))
@@ -40,7 +41,7 @@ Map<String, dynamic> _$$CandidateProfileSettingDataImplToJson(
       'marital_status': _$MaritalStatusEnumMap[instance.maritalStatus],
       'profession_id': instance.professionId,
       'bio': instance.bio,
-      'availability': instance.availability,
+      'availability': _$AvailableStatusEnumMap[instance.availability],
       'available_in': instance.availableIn,
       'skills': instance.skills,
       'languages': instance.languages,
@@ -58,6 +59,12 @@ const _$GenderEnumMap = {
 const _$MaritalStatusEnumMap = {
   MaritalStatus.married: 'married',
   MaritalStatus.single: 'single',
+};
+
+const _$AvailableStatusEnumMap = {
+  AvailableStatus.available: 'available',
+  AvailableStatus.notAvailable: 'not_available',
+  AvailableStatus.availableIn: 'available_in',
 };
 
 _$SkillsImpl _$$SkillsImplFromJson(Map<String, dynamic> json) => _$SkillsImpl(

@@ -69,7 +69,7 @@ class AccountController extends GetxController with BaseControllerSystem {
       );
 
   onViewAllJobsTap() async => Get.to(
-        () => const AppliedJobsScreen(),
+        () => AppliedJobsScreen(controller: this),
       );
 
   getCandidateAppliedJobList({int? index, bool isRefresh = false}) async {

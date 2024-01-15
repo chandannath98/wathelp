@@ -1,5 +1,7 @@
 class API {
   static const baseUrl = "https://apijobpilot.templatecookie.com/api";
+  static String get webUrl => API.baseUrl.replaceAll("/api", "");
+
   static const posts = "/posts";
   static const about = "/about";
   static const contacts = "/contact";
@@ -10,6 +12,7 @@ class API {
 
   //Authentication
   static const login = "/login";
+  static const profile = "/user-info";
   static const register = "/register";
   static const forgetPassword = "/password/email";
   static const resetPassword = "/password/reset";
@@ -22,6 +25,7 @@ class API {
   static const job = "/jobs";
   static const candidateJob = "/candidate/jobs";
   static const candidateAppliedJob = "/candidate/applied-jobs";
+  static const candidateFavoriteJob = "/candidate/favorite-jobs";
   static const candidateJobAlerts = "/candidate/job-alert";
   static const candidateJobApply = "/candidate/jobs/apply";
   static const jobTypes = "/job-types";
