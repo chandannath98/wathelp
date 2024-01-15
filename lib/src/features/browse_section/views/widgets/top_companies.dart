@@ -16,75 +16,77 @@ class TopCompaniesSection extends StatelessWidget {
   });
 
   final bool isLoading;
-  final List<({TopCompanies company, VoidCallback onTap})>? data;
+  final List<TopCompanies>? data;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: all16 + vertical12,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Text(
-            "Top Companies",
-            style: context.text.titleLarge?.copyWith(
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          18.height,
-          // if (isLoading)
-          //   for (var i in List.generate(6, (index) => index)) ...[
-          //     8.height,
-          //     AppShimmer(
-          //       child: SingleCompanyCardWidget(
-          //         icon:
-          //             "https://img.icons8.com/?size=50&id=vR39khPUVuj4&format=png",
-          //         isFeatured: true,
-          //         positionCount: i,
-          //         name: "Dribble",
-          //         location: "Dhaka, Bangladesh.",
-          //         onOpenPositionTap: () {},
-          //       ),
-          //     ),
-          //     8.height,
-          //   ],
-          for (var i
-              in data ?? <({TopCompanies company, VoidCallback onTap})>[]) ...[
-            8.height,
-            SingleCompanyCardWidget(
-              icon: i.company.companyLogo ??
-                  "https://img.icons8.com/?size=50&id=vR39khPUVuj4&format=png",
-              isFeatured: false,
-              positionCount: i.company.openJobsCount ?? 0,
-              name: i.company.name!,
-              location: i.company.country ?? "",
-              onOpenPositionTap: () =>
-                  FindCompanyController.openOpenPositionsClick(
-                i.company.username!,
-              ),
-              onCardTap: () => FindCompanyController.openCompanyPage(
-                i.company.username!,
-              ),
-            ),
-            8.height,
-          ],
-          18.height,
-          InkWell(
-            onTap: () => Get.to(() => const FindCompanyScreen()),
-            child: Padding(
-              padding: vertical3 + horizontal10,
-              child: Text(
-                "Load More Companies",
-                style: context.text.titleMedium?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: context.color?.primary,
+    return (data == null || data!.isEmpty)
+        ? const SizedBox.shrink()
+        : Padding(
+            padding: all16 + vertical12,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Text(
+                  "Top Companies",
+                  style: context.text.titleLarge?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
+                18.height,
+                //TODO: Need to setup the shimmer!
+                /* if (isLoading)
+                  for (var i in List.generate(6, (index) => index)) ...[
+                    8.height,
+                    AppShimmer(
+                      child: SingleCompanyCardWidget(
+                        icon:
+                            "https://img.icons8.com/?size=50&id=vR39khPUVuj4&format=png",
+                        isFeatured: true,
+                        positionCount: i,
+                        name: "Dribble",
+                        location: "Dhaka, Bangladesh.",
+                        onOpenPositionTap: () {},
+                      ),
+                    ),
+                    8.height,
+                  ], */
+                for (var i in data!) ...[
+                  8.height,
+                  SingleCompanyCardWidget(
+                    icon: i.companyLogo ??
+                        "https://img.icons8.com/?size=50&id=vR39khPUVuj4&format=png",
+                    isFeatured: false,
+                    positionCount: i.openJobsCount ?? 0,
+                    name: i.name!,
+                    location: i.country ?? "",
+                    onOpenPositionTap: () =>
+                        FindCompanyController.openOpenPositionsClick(
+                      i.username!,
+                    ),
+                    onCardTap: () => FindCompanyController.openCompanyPage(
+                      i.username!,
+                    ),
+                  ),
+                  8.height,
+                ],
+                18.height,
+                InkWell(
+                  onTap: () => Get.to(() => const FindCompanyScreen()),
+                  child: Padding(
+                    padding: vertical3 + horizontal10,
+                    child: Text(
+                      "Load More Companies",
+                      style: context.text.titleMedium?.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: context.color?.primary,
+                      ),
+                    ),
+                  ),
+                ),
+                18.height,
+              ],
             ),
-          ),
-          18.height,
-        ],
-      ),
-    );
+          );
   }
 }

@@ -1,6 +1,7 @@
+import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import 'package:flutter/material.dart';
+import 'package:jobpilot/generated/locale_keys.g.dart';
 import 'package:jobpilot/src/constants/assets/assets.dart';
-import 'package:jobpilot/src/constants/strings/home_strings.dart';
 import 'package:jobpilot/src/services/theme/app_theme.dart';
 import 'package:jobpilot/src/utilities/extensions/size_utilities.dart';
 import 'package:jobpilot/src/utilities/svg_icon.dart';
@@ -41,7 +42,9 @@ class HomepageActions extends StatelessWidget {
                 color: context.color?.primary,
               ),
               label: Text(
-                (!showRegisterButton) ? login : createAccount,
+                (!showRegisterButton)
+                    ? LocaleKeys.login.tr()
+                    : LocaleKeys.create_account.tr(),
                 style: context.text.bodyLarge?.copyWith(
                   fontWeight: FontWeight.bold,
                   color: context.color?.primary,

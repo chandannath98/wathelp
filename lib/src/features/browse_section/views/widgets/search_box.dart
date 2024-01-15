@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
+import 'package:jobpilot/generated/locale_keys.g.dart';
 import 'package:jobpilot/src/constants/design/border_radius.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
 import 'package:jobpilot/src/constants/strings/home_strings.dart';
@@ -40,7 +41,7 @@ class SearchBoxWidget<T> extends StatelessWidget {
         focusNode: FocusNode(),
         controller: locationController,
         builder: (context, controller, focusNode) => SearchTextFieldRow(
-          hintText: "$location...",
+          hintText: "${LocaleKeys.location.tr()}...",
           focusNode: focusNode,
           controller: controller,
           icon: Icon(
@@ -75,7 +76,7 @@ class SearchBoxWidget<T> extends StatelessWidget {
       );
     } else {
       searchBoxField = SearchTextFieldRow(
-        hintText: "$location...",
+        hintText: "${LocaleKeys.location.tr()}...",
         controller: locationController,
         icon: Icon(
           Icons.share_location_sharp,
@@ -94,7 +95,7 @@ class SearchBoxWidget<T> extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             SearchTextFieldRow(
-              hintText: "$search...",
+              hintText: "${LocaleKeys.search.tr()}...",
               controller: searchController,
               icon: Icon(
                 Icons.search,
@@ -120,7 +121,7 @@ class SearchBoxWidget<T> extends StatelessWidget {
               onPressed: onSearchClick,
               icon: const Icon(Icons.search),
               label: Text(
-                "search".tr(),
+                LocaleKeys.search.tr().tr(),
               ),
             ),
           ],

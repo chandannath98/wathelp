@@ -1,5 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart' hide ContextExtensionss;
+import 'package:get/get.dart' hide ContextExtensionss, Trans;
+import 'package:jobpilot/generated/locale_keys.g.dart';
 import 'package:jobpilot/src/constants/assets/assets.dart';
 import 'package:jobpilot/src/features/authentication/views/login_system_switcher.dart';
 import 'package:jobpilot/src/features/browse_section/views/browse_screen.dart';
@@ -44,19 +46,22 @@ class Homepage extends StatelessWidget {
             currentIndex: controller.currentIndex,
             navbarItems: [
               controller.isAuthenticated
-                  ? const (SvgIcon(Assets.browseIcon), "Jobs")
-                  : const (SvgIcon(Assets.homeIcon), "Home"),
+                  ? (const SvgIcon(Assets.browseIcon), LocaleKeys.job.tr())
+                  : (const SvgIcon(Assets.homeIcon), LocaleKeys.home.tr()),
               controller.isAuthenticated
-                  ? const (SvgIcon(Assets.companyIcon), "Company")
-                  : const (SvgIcon(Assets.browseIcon), "Jobs"),
+                  ? (const SvgIcon(Assets.companyIcon), LocaleKeys.company.tr())
+                  : (const SvgIcon(Assets.browseIcon), LocaleKeys.job.tr()),
               controller.isAuthenticated
-                  ? const (SvgIcon(Assets.accountIcon), "Account")
-                  : const (SvgIcon(Assets.loginIcon), "Login"),
+                  ? (const SvgIcon(Assets.accountIcon), LocaleKeys.account.tr())
+                  : (const SvgIcon(Assets.loginIcon), LocaleKeys.login.tr()),
               controller.isAuthenticated
-                  ? const (SvgIcon(Assets.jobsIcon), "Job Alert")
-                  : const (SvgIcon(Assets.companyIcon), "Company"),
-              // : const (SvgIcon(Assets.pricingIcon), "Pricing"),
-              const (SvgIcon(Assets.menuIcon), "Menu"),
+                  ? (const SvgIcon(Assets.jobsIcon), LocaleKeys.job_alert.tr())
+                  : (
+                      const SvgIcon(Assets.companyIcon),
+                      LocaleKeys.company.tr()
+                    ),
+              // :  (SvgIcon(Assets.pricingIcon), "Pricing"),
+              (const SvgIcon(Assets.menuIcon), LocaleKeys.menu_settings.tr()),
             ],
             onItemClick: controller.changePage,
           ),

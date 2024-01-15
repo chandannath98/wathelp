@@ -89,36 +89,23 @@ class BrowsePage extends StatelessWidget {
               ),
             ),
             SliverToBoxAdapter(
-              child: GetBuilder(
-                  tag: "#BROWSE_SCREEN_JOBS",
-                  init: FindJobController(),
-                  builder: (jobController) {
-                    return HomeFeaturedJobsSection(
-                      isLoading: false,
-                      dataList: controller.data?.featuredJobs
-                          ?.map(
-                            (e) => (
-                              job: e,
-                              onTap: () => Get.to(
-                                    () => JobDetailsScreen(
-                                      jobSlug: e.slug!,
-                                    ),
-                                  ),
-                              onBookmark: null,
-                            ),
-                          )
-                          .toList(),
-                    );
-                  }),
+              child: HomeFeaturedJobsSection(
+                isLoading: false,
+                dataList: controller.data?.featuredJobs
+                    ?.map(
+                      (e) => (
+                        job: e,
+                        onBookmark: null,
+                        onTap: () => FindJobController.onJobClick(e.slug!),
+                      ),
+                    )
+                    .toList(),
+              ),
             ),
             SliverToBoxAdapter(
               child: TopCompaniesSection(
                 isLoading: controller.isLoading,
-                data: controller.data?.topCompanies
-                    ?.map(
-                      (e) => (company: e, onTap: () {}),
-                    )
-                    .toList(),
+                data: controller.data?.topCompanies?.toList(),
               ),
             ),
             SliverToBoxAdapter(

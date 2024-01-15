@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import 'package:flutter/material.dart';
+import 'package:jobpilot/generated/locale_keys.g.dart';
 import 'package:jobpilot/src/constants/assets/assets.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
 import 'package:jobpilot/src/services/theme/app_theme.dart';
@@ -33,14 +35,14 @@ class RegisterNowSection extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Text(
-                  "Become a Candidate",
+                  LocaleKeys.candidate_title.tr(),
                   style: context.text.titleLarge?.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 16.height,
                 Text(
-                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras cursus a dolor convallis efficitur.",
+                  LocaleKeys.candidate_description.tr(),
                   style: context.text.titleLarge,
                 ),
                 16.height,
@@ -49,14 +51,14 @@ class RegisterNowSection extends StatelessWidget {
                   child: Directionality(
                     textDirection: TextDirection.rtl,
                     child: SizedBox(
-                      width: 180,
+                      width: 200,
                       child: ElevatedButton.icon(
                         onPressed: onActionClick,
                         icon: const Icon(
                           Icons.arrow_back,
                         ),
-                        label: const Text(
-                          "Register Now",
+                        label: Text(
+                          LocaleKeys.register_now.tr(),
                         ),
                       ),
                     ),

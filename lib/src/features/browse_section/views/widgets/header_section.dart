@@ -1,6 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:jobpilot/generated/locale_keys.g.dart';
 import 'package:jobpilot/src/constants/assets/assets.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
 import 'package:jobpilot/src/constants/strings/home_strings.dart';
@@ -33,7 +35,9 @@ class BrowseScreenTopSection extends StatelessWidget {
         Padding(
           padding: vertical12,
           child: Text(
-            heading,
+            LocaleKeys
+                .discover_your_perfect_job_matching_your_interests_and_skills
+                .tr(),
             style: context.text.headlineMedium?.copyWith(
               color: context.color?.extraText,
               fontWeight: FontWeight.bold,
@@ -41,7 +45,7 @@ class BrowseScreenTopSection extends StatelessWidget {
           ),
         ),
         Text(
-          subtitle,
+          LocaleKeys.unlock_your_potential_embrace_your_future.tr(),
           style: context.text.titleMedium?.copyWith(
             color: context.color?.extraText,
           ),
@@ -57,7 +61,7 @@ class BrowseScreenTopSection extends StatelessWidget {
         if (controller.popularTags != null)
           RichText(
             text: TextSpan(
-              text: "Suggestion:   ",
+              text: "${LocaleKeys.suggestion.tr()}:   ",
               style: context.text.bodySmall?.copyWith(height: 1.5),
               children: controller.popularTags!
                   // .take(5)
@@ -94,22 +98,22 @@ class BrowseScreenTopSection extends StatelessWidget {
             HomeDataCard(
               icon: const Icon(Icons.next_week_outlined),
               data: liveJobsData ?? "...",
-              title: "Live Job",
+              title: LocaleKeys.live_job.tr(),
             ),
             HomeDataCard(
               icon: const Icon(Icons.location_city),
               data: companiesData ?? "...",
-              title: "Companies",
+              title: LocaleKeys.companies.tr(),
             ),
             HomeDataCard(
               icon: const Icon(Icons.people_alt_outlined),
               data: candidatesData ?? "...",
-              title: "Candidates",
+              title: LocaleKeys.candidates.tr(),
             ),
             HomeDataCard(
               icon: const Icon(Icons.tour_outlined),
               data: newJobsData ?? "...",
-              title: "New Jobs",
+              title: LocaleKeys.new_jobs.tr(),
             ),
           ],
         ),

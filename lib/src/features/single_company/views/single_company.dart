@@ -344,12 +344,6 @@ class CompanyContactSection extends StatelessWidget {
                 ),
                 SquaredIconButton(
                   icon: SvgIcon(
-                    Assets.youtubeIcon,
-                  ),
-                  onTap: () {},
-                ),
-                SquaredIconButton(
-                  icon: SvgIcon(
                     Assets.twitterIcon,
                   ),
                   onTap: () {},

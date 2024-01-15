@@ -1,8 +1,10 @@
 import 'dart:async';
 
+import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:jobpilot/generated/locale_keys.g.dart';
 import 'package:jobpilot/src/constants/assets/assets.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
 import 'package:jobpilot/src/constants/strings/home_strings.dart';
@@ -110,7 +112,7 @@ class _ForgotPasswordSectionWidgetState
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Text(
-                    "Forgot password",
+                    LocaleKeys.forget_password.tr(),
                     style: context.text.headlineSmall?.copyWith(
                       fontWeight: FontWeight.bold,
                       color: context.color?.opposite,
@@ -119,11 +121,11 @@ class _ForgotPasswordSectionWidgetState
                   24.height,
                   RichText(
                     text: TextSpan(
-                      text: "Go back to ",
+                      text: LocaleKeys.go_back_to.tr(),
                       style: context.text.titleMedium,
                       children: [
                         TextSpan(
-                          text: "Sign In.",
+                          text: " ${LocaleKeys.sign_in.tr()}.",
                           recognizer: TapGestureRecognizer()
                             ..onTap = widget.goSignIn,
                           style: TextStyle(
@@ -137,11 +139,11 @@ class _ForgotPasswordSectionWidgetState
                   8.height,
                   RichText(
                     text: TextSpan(
-                      text: "Don't have account? ",
+                      text: "${LocaleKeys.dont_have_account.tr()} ",
                       style: context.text.titleMedium,
                       children: [
                         TextSpan(
-                          text: "Create Account.",
+                          text: "${LocaleKeys.create_account.tr()}.",
                           recognizer: TapGestureRecognizer()
                             ..onTap = widget.goRegister,
                           style: TextStyle(
@@ -158,8 +160,8 @@ class _ForgotPasswordSectionWidgetState
                     controller: widget.emailController,
                     keyboardType: TextInputType.emailAddress,
                     onFieldSubmitted: (value) => submitEmail.withOverlay(),
-                    decoration: const InputDecoration(
-                      hintText: "Email address...",
+                    decoration: InputDecoration(
+                      hintText: "${LocaleKeys.email_address.tr()}...",
                     ),
                   ),
                   10.height,
@@ -168,8 +170,8 @@ class _ForgotPasswordSectionWidgetState
                     child: ElevatedButton.icon(
                       onPressed: submitEmail.withOverlay,
                       icon: const Icon(Icons.arrow_back),
-                      label: const Text(
-                        "Reset Password",
+                      label: Text(
+                        LocaleKeys.reset_password.tr(),
                       ),
                     ),
                   ),

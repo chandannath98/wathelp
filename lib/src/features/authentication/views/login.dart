@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import 'package:flutter/material.dart';
+import 'package:jobpilot/generated/locale_keys.g.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
 import 'package:jobpilot/src/global/widgets/social_login_button.dart';
 import 'package:jobpilot/src/services/theme/app_theme.dart';
@@ -155,7 +157,7 @@ class _LoginSectionWidgetState extends State<LoginSectionWidget> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Text(
-                    "Sign in",
+                    LocaleKeys.sign_in.tr(),
                     style: context.text.headlineSmall?.copyWith(
                       fontWeight: FontWeight.bold,
                       color: context.color?.opposite,
@@ -169,8 +171,8 @@ class _LoginSectionWidgetState extends State<LoginSectionWidget> {
                     keyboardType: TextInputType.emailAddress,
                     onFieldSubmitted: (value) =>
                         _passwordFocusNode.requestFocus(),
-                    decoration: const InputDecoration(
-                      hintText: "Email address...",
+                    decoration: InputDecoration(
+                      hintText: "${LocaleKeys.email_address.tr()}...",
                     ),
                   ),
                   10.height,
@@ -181,7 +183,7 @@ class _LoginSectionWidgetState extends State<LoginSectionWidget> {
                     validator: widget.passwordValidator,
                     onFieldSubmitted: (value) => onLoginClick.withOverlay(),
                     decoration: InputDecoration(
-                      hintText: "Password",
+                      hintText: "${LocaleKeys.password.tr()}...",
                       suffixIcon: IconButton(
                         onPressed: () {
                           setState(() {
@@ -214,10 +216,10 @@ class _LoginSectionWidgetState extends State<LoginSectionWidget> {
                                 alignment: Alignment.centerLeft,
                                 child: InkWell(
                                   onTap: toggleRememberMe,
-                                  child: const Padding(
+                                  child: Padding(
                                     padding: all6,
                                     child: Text(
-                                      "Remember me",
+                                      LocaleKeys.remember_me.tr(),
                                     ),
                                   ),
                                 ),
@@ -228,8 +230,8 @@ class _LoginSectionWidgetState extends State<LoginSectionWidget> {
                       ),
                       TextButton(
                         onPressed: () => widget.goForgotPassword(),
-                        child: const Text(
-                          "Forgot Password",
+                        child: Text(
+                          LocaleKeys.forget_password.tr(),
                         ),
                       ),
                     ],
@@ -239,15 +241,15 @@ class _LoginSectionWidgetState extends State<LoginSectionWidget> {
                     child: ElevatedButton.icon(
                       onPressed: onLoginClick.withOverlay,
                       icon: const Icon(Icons.arrow_back),
-                      label: const Text(
-                        "Sign In",
+                      label: Text(
+                        LocaleKeys.sign_in.tr(),
                       ),
                     ),
                   ),
                   10.height,
-                  const Center(
+                  Center(
                     child: Text(
-                      "OR",
+                      LocaleKeys.or.tr(),
                     ),
                   ),
                   10.height,

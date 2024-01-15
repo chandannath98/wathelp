@@ -1,6 +1,8 @@
+import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get.dart';
+import 'package:get/get.dart' hide Trans;
+import 'package:jobpilot/generated/locale_keys.g.dart';
 import 'package:jobpilot/src/constants/assets/assets.dart';
 import 'package:jobpilot/src/constants/strings/home_strings.dart';
 import 'package:jobpilot/src/features/authentication/controllers/login_controller.dart';
@@ -70,11 +72,11 @@ class LoginSystemSwitcher extends StatelessWidget {
               passwordController: controller.passwordController,
               attemptLogin: controller.login,
               emailValidator: FieldValidator.validate(
-                name: "Email",
+                name: LocaleKeys.email.tr(),
                 [isRequired, isEmail],
               ),
               passwordValidator: FieldValidator.validate(
-                name: "Password",
+                name: LocaleKeys.password.tr(),
                 [isRequired, tooShort8],
               ),
               goForgotPassword: ({String? email}) async =>

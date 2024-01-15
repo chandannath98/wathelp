@@ -1,6 +1,8 @@
+import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get.dart';
+import 'package:get/get.dart' hide Trans;
+import 'package:jobpilot/generated/locale_keys.g.dart';
 import 'package:jobpilot/src/constants/assets/assets.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
 import 'package:jobpilot/src/constants/strings/home_strings.dart';
@@ -47,7 +49,7 @@ class RegistrationScreen extends StatelessWidget {
                       color: context.color?.primary,
                     ),
                     label: Text(
-                      login,
+                      LocaleKeys.login.tr(),
                       style: context.text.bodyLarge?.copyWith(
                         fontWeight: FontWeight.bold,
                         color: context.color?.primary,
@@ -174,7 +176,7 @@ class _RegistrationSectionWidgetState extends State<RegistrationSectionWidget> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Text(
-                    "Create new account",
+                    LocaleKeys.create_account.tr(),
                     style: context.text.headlineSmall?.copyWith(
                       fontWeight: FontWeight.bold,
                       color: context.color?.opposite,
@@ -279,14 +281,14 @@ class _RegistrationSectionWidgetState extends State<RegistrationSectionWidget> {
                     controller: emailController,
                     keyboardType: TextInputType.emailAddress,
                     validator: FieldValidator.validate(
-                      name: "Email",
+                      name: LocaleKeys.email.tr(),
                       widget.emailValidator,
                     ),
                     onFieldSubmitted: (value) => passwordFocus.requestFocus(),
-                    decoration: const InputDecoration(
-                      hintText: "Email address...",
-                      prefix: Padding(padding: horizontal6),
-                      contentPadding: EdgeInsets.only(left: 0),
+                    decoration: InputDecoration(
+                      hintText: "${LocaleKeys.email_address.tr()}...",
+                      prefix: const Padding(padding: horizontal6),
+                      contentPadding: const EdgeInsets.only(left: 0),
                     ),
                   ),
                   12.height,
@@ -295,13 +297,13 @@ class _RegistrationSectionWidgetState extends State<RegistrationSectionWidget> {
                     focusNode: passwordFocus,
                     controller: passwordController,
                     validator: FieldValidator.validate(
-                      name: "Password",
+                      name: LocaleKeys.password.tr(),
                       widget.passwordValidator,
                     ),
                     onFieldSubmitted: (value) =>
                         confirmPasswordFocus.requestFocus(),
                     decoration: InputDecoration(
-                      hintText: "Password",
+                      hintText: "${LocaleKeys.password.tr()}...",
                       prefix: const Padding(padding: horizontal6),
                       contentPadding: const EdgeInsets.only(left: 0),
                       suffixIcon: IconButton(
@@ -322,13 +324,13 @@ class _RegistrationSectionWidgetState extends State<RegistrationSectionWidget> {
                     focusNode: confirmPasswordFocus,
                     controller: confirmPasswordController,
                     validator: FieldValidator.validate(
-                      name: "Confirm Password",
+                      name: LocaleKeys.confirm_password.tr(),
                       widget.confirmPasswordValidator,
                     ),
                     onFieldSubmitted: (value) =>
                         onCreateAccountClicked.withOverlay(),
                     decoration: InputDecoration(
-                      hintText: "Confirm password...",
+                      hintText: "${LocaleKeys.confirm_password.tr()}...",
                       prefix: const Padding(padding: horizontal6),
                       contentPadding: const EdgeInsets.only(left: 0),
                       suffixIcon: IconButton(
@@ -398,15 +400,15 @@ class _RegistrationSectionWidgetState extends State<RegistrationSectionWidget> {
                     child: ElevatedButton.icon(
                       onPressed: onCreateAccountClicked.withOverlay,
                       icon: const Icon(Icons.arrow_back),
-                      label: const Text(
-                        "Create Account",
+                      label: Text(
+                        LocaleKeys.create_account.tr(),
                       ),
                     ),
                   ),
                   10.height,
-                  const Center(
+                  Center(
                     child: Text(
-                      "OR",
+                      LocaleKeys.or.tr(),
                     ),
                   ),
                   10.height,

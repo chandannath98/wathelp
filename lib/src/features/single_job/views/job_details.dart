@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jobpilot/src/constants/assets/app_strings.dart';
 import 'package:jobpilot/src/constants/assets/assets.dart';
 import 'package:jobpilot/src/constants/design/border_radius.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
@@ -16,6 +17,7 @@ import 'package:jobpilot/src/utilities/extensions/overlay_loader.dart';
 import 'package:jobpilot/src/utilities/extensions/size_utilities.dart';
 import 'package:jobpilot/src/utilities/extensions/string_extensions.dart';
 import 'package:jobpilot/src/utilities/svg_icon.dart';
+import 'package:social_share/social_share.dart';
 
 class JobDetailsScreen extends StatelessWidget {
   const JobDetailsScreen({super.key, required this.jobSlug});
@@ -33,7 +35,7 @@ class JobDetailsScreen extends StatelessWidget {
               "Job Details",
             ),
           ),
-          body: controller.isLoading
+          body: controller.isLoading || controller.jobDetails == null
               ? const LoadingIndicator()
               : CustomScrollView(
                   slivers: [
@@ -178,7 +180,7 @@ class JobOverviewSection extends StatelessWidget {
                     data: (controller.jobDetails?.postDate == null)
                         ? "Unknown"
                         : dMMMy.format(controller.jobDetails!.postDate!),
-                    icon: Icon(Icons.calendar_today_outlined),
+                    icon: const Icon(Icons.calendar_today_outlined),
                   ),
                 ),
                 Expanded(
@@ -187,7 +189,7 @@ class JobOverviewSection extends StatelessWidget {
                     data: dMMMy.format(
                       controller.jobDetails?.expireDate ?? DateTime.now(),
                     ),
-                    icon: Icon(Icons.timer_outlined),
+                    icon: const Icon(Icons.timer_outlined),
                   ),
                 ),
               ],
@@ -199,7 +201,7 @@ class JobOverviewSection extends StatelessWidget {
                   child: OverviewDataTile(
                     title: "EXPERIENCE",
                     data: controller.jobDetails?.experience ?? "",
-                    icon: Icon(Icons.wallet_outlined),
+                    icon: const Icon(Icons.wallet_outlined),
                   ),
                 ),
                 Expanded(
@@ -207,7 +209,7 @@ class JobOverviewSection extends StatelessWidget {
                     title: "EDUCATION",
                     data: controller.jobDetails?.education ??
                         (controller.jobDetails?.education ?? ""),
-                    icon: Icon(Icons.work_outline_rounded),
+                    icon: const Icon(Icons.work_outline_rounded),
                   ),
                 ),
               ],
@@ -226,7 +228,7 @@ class JobOverviewSection extends StatelessWidget {
                   ),
                 ),
                 12.height,
-                Row(
+                Wrap(
                   children: [
                     TextButton.icon(
                       style: TextButton.styleFrom(
@@ -245,19 +247,28 @@ class JobOverviewSection extends StatelessWidget {
                       icon: const SvgIcon(
                         Assets.twitterIcon,
                       ),
-                      onTap: () {},
+                      onTap: () => SocialShare.shareTwitter(
+                        controller.jobDetails?.webLink ?? "",
+                      ),
                     ),
                     SquaredIconButton(
                       icon: const SvgIcon(
                         Assets.facebookIcon,
                       ),
-                      onTap: () {},
+                      onTap: () => SocialShare.shareFacebookStory(
+                        appId: AppStrings.facebookAppId,
+                        attributionURL: controller.jobDetails?.webLink,
+                      ),
                     ),
                     SquaredIconButton(
                       icon: const SvgIcon(
                         Assets.instagramIcon,
                       ),
-                      onTap: () {},
+                      onTap: () => SocialShare.shareInstagramStory(
+                        appId: AppStrings.facebookAppId,
+                        imagePath: "",
+                        attributionURL: controller.jobDetails?.webLink,
+                      ),
                     ),
                   ],
                 ),
@@ -392,7 +403,7 @@ class JobDetails extends StatelessWidget {
               padding: const EdgeInsets.all(20),
               child: Column(
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.map_outlined,
                     size: 32,
                   ),
