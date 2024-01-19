@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:get/get.dart' hide Trans;
+import 'package:easy_localization/easy_localization.dart' hide TextDirection;
+import 'package:jobpilot/generated/locale_keys.g.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
 import 'package:jobpilot/src/features/browse_section/views/widgets/search_box.dart';
 import 'package:jobpilot/src/features/find_company/controllers/find_company_controllers.dart';
@@ -9,7 +11,6 @@ import 'package:jobpilot/src/global/widgets/circular_paginator.dart';
 import 'package:jobpilot/src/global/widgets/loading_indicator.dart';
 import 'package:jobpilot/src/services/theme/app_theme.dart';
 import 'package:jobpilot/src/utilities/extensions/size_utilities.dart';
-import 'package:jobpilot/src/utilities/extensions/string_extensions.dart';
 
 class FindCompanyScreen extends StatelessWidget {
   const FindCompanyScreen({super.key});
@@ -154,7 +155,7 @@ class FindCompanySettings extends StatelessWidget {
         children: [
           18.height,
           Text(
-            "Company List",
+            LocaleKeys.company_list.tr(),
             style: context.text.titleLarge?.copyWith(
               fontWeight: FontWeight.bold,
             ),

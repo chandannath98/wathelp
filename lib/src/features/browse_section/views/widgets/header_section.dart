@@ -144,38 +144,41 @@ class HomeDataCard extends StatelessWidget {
       ),
       child: Padding(
         padding: all16,
-        child: SizedBox(
-          height: 60,
-          child: Row(
-            children: [
-              Expanded(
-                flex: 2,
-                child: FittedBox(
-                  child: icon,
-                ),
+        child: Row(
+          children: [
+            Expanded(
+              flex: 2,
+              child: FittedBox(
+                child: icon,
               ),
-              16.width,
-              Expanded(
-                flex: 8,
-                child: Padding(
-                  padding: vertical6,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        data,
-                        maxLines: 1,
-                        style: context.text.titleMedium
-                            ?.copyWith(fontWeight: FontWeight.bold),
+            ),
+            16.width,
+            Expanded(
+              flex: 8,
+              child: Padding(
+                padding: vertical6,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      data,
+                      maxLines: 1,
+                      style: context.text.titleMedium
+                          ?.copyWith(fontWeight: FontWeight.bold),
+                    ),
+                    Expanded(
+                      child: FittedBox(
+                        fit: BoxFit.scaleDown,
+                        alignment: Alignment.centerLeft,
+                        child: Text(title),
                       ),
-                      Text(title),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

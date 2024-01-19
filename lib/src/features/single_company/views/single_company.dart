@@ -177,7 +177,7 @@ class CompanyDetailsHeader extends StatelessWidget {
             child: ElevatedButton.icon(
               onPressed: () => controller.onMoreOpenClick(),
               icon: const Icon(Icons.arrow_back),
-              label: Text(
+              label: const Text(
                 "Open Positions",
               ),
             ),
@@ -290,7 +290,7 @@ class CompanyContactSection extends StatelessWidget {
             16.height,
             if (controller.detailResponse?.companyDetails?.website != null)
               ContactInformationTile(
-                leading: Icon(
+                leading: const Icon(
                   Icons.language,
                   size: 32,
                 ),
@@ -298,9 +298,9 @@ class CompanyContactSection extends StatelessWidget {
                 data: controller.detailResponse?.companyDetails?.website ?? "",
               ),
             divider,
-            if (controller.detailResponse?.user?.contactInfo?.phone != null)
+            if (controller.companyUser?.contactInfo?.phone != null)
               ContactInformationTile(
-                leading: Icon(
+                leading: const Icon(
                   Icons.ring_volume_outlined,
                   size: 32,
                 ),
@@ -310,7 +310,7 @@ class CompanyContactSection extends StatelessWidget {
             divider,
             if (controller.detailResponse?.user?.contactInfo?.email != null)
               ContactInformationTile(
-                leading: Icon(
+                leading: const Icon(
                   Icons.mail_outline,
                   size: 32,
                 ),
@@ -334,31 +334,31 @@ class CompanyContactSection extends StatelessWidget {
                   onPressed: controller.copyWebLink,
                   icon: Transform.rotate(
                     angle: 15,
-                    child: Icon(
+                    child: const Icon(
                       Icons.insert_link_rounded,
                     ),
                   ),
-                  label: Text(
+                  label: const Text(
                     "Copy Link",
                   ),
                 ),
                 SquaredIconButton(
-                  icon: SvgIcon(
+                  icon: const SvgIcon(
                     Assets.twitterIcon,
                   ),
-                  onTap: () {},
+                  onTap: controller.shareTwitter,
                 ),
                 SquaredIconButton(
-                  icon: SvgIcon(
+                  icon: const SvgIcon(
                     Assets.facebookIcon,
                   ),
-                  onTap: () {},
+                  onTap: controller.shareFacebook,
                 ),
                 SquaredIconButton(
-                  icon: SvgIcon(
-                    Assets.instagramIcon,
+                  icon: const SvgIcon(
+                    Assets.telegramIcon,
                   ),
-                  onTap: () {},
+                  onTap: controller.shareTelegram,
                 ),
               ],
             ),
@@ -446,13 +446,13 @@ class CompanyOverviewSection extends StatelessWidget {
                                 ?.establishmentDate ==
                             null)
                         ? "Unknown"
-                        : dMMMy.format(DateTime.tryParse(controller
+                        : dMonthY.format(DateTime.tryParse(controller
                                     .detailResponse
                                     ?.companyDetails
                                     ?.establishmentDate ??
                                 "") ??
                             DateTime.now()),
-                    icon: Icon(Icons.calendar_today_outlined),
+                    icon: const Icon(Icons.calendar_today_outlined),
                   ),
                 ),
                 Expanded(
@@ -461,7 +461,7 @@ class CompanyOverviewSection extends StatelessWidget {
                     data: controller.detailResponse?.companyDetails
                             ?.organization?.name ??
                         "",
-                    icon: Icon(Icons.timer_outlined),
+                    icon: const Icon(Icons.timer_outlined),
                   ),
                 ),
               ],
@@ -475,7 +475,7 @@ class CompanyOverviewSection extends StatelessWidget {
                     data: controller
                             .detailResponse?.companyDetails?.teamSize?.name ??
                         "",
-                    icon: Icon(Icons.wallet_outlined),
+                    icon: const Icon(Icons.wallet_outlined),
                   ),
                 ),
                 Expanded(
@@ -484,7 +484,7 @@ class CompanyOverviewSection extends StatelessWidget {
                     data: controller
                             .detailResponse?.companyDetails?.industry?.name ??
                         "",
-                    icon: Icon(Icons.work_outline_rounded),
+                    icon: const Icon(Icons.work_outline_rounded),
                   ),
                 ),
               ],

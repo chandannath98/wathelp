@@ -1,11 +1,16 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:get/get.dart' hide Trans;
+import 'package:jobpilot/generated/locale_keys.g.dart';
 import 'package:jobpilot/src/constants/design/border_radius.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
+import 'package:jobpilot/src/constants/utilities/date_formats.dart';
+import 'package:jobpilot/src/domain/server/repositories/account/notification/notification_data/notification_data.dart';
 import 'package:jobpilot/src/features/notification/controller/notification_controller.dart';
+import 'package:jobpilot/src/global/widgets/circular_paginator.dart';
+import 'package:jobpilot/src/global/widgets/loading_indicator.dart';
 import 'package:jobpilot/src/services/theme/extensions.dart';
 import 'package:jobpilot/src/services/theme/extensions/colors_theme.dart';
-import 'package:jobpilot/src/utilities/extensions/size_utilities.dart';
 
 class NotificationScreen extends StatelessWidget {
   const NotificationScreen({super.key});
@@ -15,20 +20,95 @@ class NotificationScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         titleSpacing: 0,
-        title: const Text(
-          "Notifications",
+        title: Text(
+          LocaleKeys.notifications.tr(),
         ),
       ),
       body: GetBuilder(
-          init: NotificationsController(),
-          builder: (controller) {
-            return ListView.separated(
-              itemCount: 25,
-              padding: vertical10 + horizontal12,
-              separatorBuilder: (context, index) => 8.height,
-              itemBuilder: (context, index) => const NotificationTile(),
-            );
-          }),
+        init: NotificationsController(),
+        builder: (controller) {
+          return CustomScrollView(
+            slivers: [
+              if (controller.isLoading || controller.currentCompanyList != null)
+                SliverPadding(
+                  padding: horizontal16 + vertical8,
+                  sliver: controller.isLoading
+                      ? const SliverFillRemaining(
+                          child: FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: LoadingIndicator(),
+                          ),
+                        )
+                      : controller.currentCompanyList!.isEmpty
+                          ? const SliverFillRemaining(
+                              child: FittedBox(
+                                fit: BoxFit.scaleDown,
+                                alignment: Alignment.center,
+                                child: Text(
+                                  "No company found!",
+                                ),
+                              ),
+                            )
+                          : SliverList(
+                              delegate: SliverChildBuilderDelegate(
+                                (context, index) {
+                                  final notification =
+                                      controller.currentCompanyList![index];
+                                  return Padding(
+                                    padding: vertical6,
+                                    child: NotificationTile(
+                                      data: notification,
+                                    ),
+                                  );
+                                },
+                                childCount:
+                                    controller.currentCompanyList!.length,
+                              ),
+                            ),
+                ),
+              if (controller.needPaginationControl)
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: (vertical12 + horizontal16) + horizontal16,
+                    child: CircularPaginatorWidget(
+                      selectedIndex: controller.currentPageIndex,
+                      scrollController: controller.pageScrollController,
+                      selectedColor: context.color?.primary ?? Colors.blue,
+                      controlColor: context.color?.theme ?? Colors.white,
+                      actionsList: List.generate(
+                        controller.paginationData!.lastPage!,
+                        (index) => (index + 1),
+                      )
+                          .map(
+                            (index) => (
+                              index == controller.currentPageIndex,
+                              Text((index <= 9) ? "0$index" : "$index"),
+                              (index == controller.currentPageIndex)
+                                  ? () {}
+                                  : () => controller.fetchNotificationList(
+                                        pageIndex: index,
+                                      ),
+                            ),
+                          )
+                          .toList(),
+                      onForwardClick:
+                          controller.paginationData?.nextPageUrl == null
+                              ? null
+                              : () => controller.fetchNotificationList(
+                                  pageIndex: controller.currentPageIndex + 1),
+                      onBackwardClick:
+                          controller.paginationData?.prevPageUrl == null
+                              ? null
+                              : () => controller.fetchNotificationList(
+                                    pageIndex: controller.currentPageIndex - 1,
+                                  ),
+                    ),
+                  ),
+                ),
+            ],
+          );
+        },
+      ),
     );
   }
 }
@@ -36,7 +116,10 @@ class NotificationScreen extends StatelessWidget {
 class NotificationTile extends StatelessWidget {
   const NotificationTile({
     super.key,
+    required this.data,
   });
+
+  final NotificationData data;
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +127,7 @@ class NotificationTile extends StatelessWidget {
       tileColor: context.color?.theme,
       horizontalTitleGap: 0,
       title: Text(
-        "Notification",
+        data.data?.title ?? "",
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
         style: context.text.titleSmall?.copyWith(
@@ -53,7 +136,7 @@ class NotificationTile extends StatelessWidget {
         ),
       ),
       subtitle: Text(
-        "This is the data from notification that just got here.",
+        "${LocaleKeys.created_time.tr()}: ${dMonthYT.format(data.createDate!)}",
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
         style: context.text.bodyMedium?.copyWith(

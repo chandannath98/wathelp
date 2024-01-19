@@ -91,7 +91,7 @@ _$OpenJobImpl _$$OpenJobImplFromJson(Map<String, dynamic> json) =>
       fullAddress: json['full_address'] as String?,
       company: json['company'] == null
           ? null
-          : Company.fromJson(json['company'] as Map<String, dynamic>),
+          : OpenJobCompany.fromJson(json['company'] as Map<String, dynamic>),
       jobType: json['job_type'] == null
           ? null
           : JobType.fromJson(json['job_type'] as Map<String, dynamic>),
@@ -187,7 +187,7 @@ _$CompanyImpl _$$CompanyImplFromJson(Map<String, dynamic> json) =>
       fullAddress: json['full_address'] as String?,
       user: json['user'] == null
           ? null
-          : CompanyUser.fromJson(json['user'] as Map<String, dynamic>),
+          : OpenJobCompanyUser.fromJson(json['user'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$CompanyImplToJson(_$CompanyImpl instance) =>

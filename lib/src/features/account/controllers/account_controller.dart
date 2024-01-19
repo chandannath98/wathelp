@@ -3,9 +3,10 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jobpilot/src/domain/server/config/request_handler.dart';
+import 'package:jobpilot/src/domain/server/repositories/account/account_repo.dart';
+import 'package:jobpilot/src/domain/server/repositories/account/candidate/dashboard/candidate_dashboard_data.dart';
 import 'package:jobpilot/src/domain/server/repositories/authentication/models/user/user.dart';
-import 'package:jobpilot/src/domain/server/repositories/dashboard/candidate/candidate_dashboard_repo.dart';
-import 'package:jobpilot/src/domain/server/repositories/dashboard/candidate/model/candidate_dashboard_data.dart';
+
 import 'package:jobpilot/src/domain/server/repositories/jobs/jobs_repo.dart';
 import 'package:jobpilot/src/domain/server/repositories/jobs/models/applied_jobs/job/applied_job.dart';
 import 'package:jobpilot/src/domain/server/repositories/jobs/models/applied_jobs/paginated_applied_jobs/response/paginated_applied_jobs_response.dart';
@@ -18,7 +19,7 @@ import 'package:jobpilot/src/utilities/scaffold_util.dart';
 
 class AccountController extends GetxController with BaseControllerSystem {
   static AccountController get find => Get.find();
-  final _dashboardRepo = CandidateDashboardRepository();
+  final _dashboardRepo = AccountRepository();
   User get currentProfile => AuthController.find.currentUser!;
 
   @override

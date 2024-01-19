@@ -37,10 +37,11 @@ class JobAlertPageWidget extends StatelessWidget {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          Expanded(
+                          const Expanded(
                             child: Align(
                               alignment: Alignment.centerRight,
-                              child: TextButton.icon(
+                              //TODO: Uncomment this when [EditAlertJob] UI and system arrives!
+                              /* child: TextButton.icon(
                                 onPressed: () {},
                                 icon: const SvgIcon(
                                   Assets.editIcon,
@@ -48,7 +49,7 @@ class JobAlertPageWidget extends StatelessWidget {
                                 label: const Text(
                                   "Edit Job Alerts",
                                 ),
-                              ),
+                              ), */
                             ),
                           ),
                         ],

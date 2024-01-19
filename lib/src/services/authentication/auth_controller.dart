@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:get/get.dart';
 import 'package:jobpilot/src/domain/local_storage/repositories/auth_storage/auth_storage.dart';
-import 'package:jobpilot/src/domain/server/config/repository.dart';
 import 'package:jobpilot/src/domain/server/config/request_handler.dart';
 import 'package:jobpilot/src/domain/server/repositories/authentication/auth_repo.dart';
 import 'package:jobpilot/src/domain/server/repositories/authentication/models/user/user.dart';

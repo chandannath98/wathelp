@@ -12,7 +12,20 @@
           "package_name": "com.templatecookie.jobpilot"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "309931703224-s2076g2tgutdc9d2il339f50is6ukdam.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.templatecookie.jobpilot",
+            "certificate_hash": "cfab1ad95f586711617afb3448a6d0082c1cabb6"
+          }
+        },
+        {
+          "client_id": "309931703224-3ot8q7727u8rpm9g2eno2qgrltq53rc0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCBqjJtjVsemoCnMBFwVzdOBW-eqgaZ51w"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "309931703224-3ot8q7727u8rpm9g2eno2qgrltq53rc0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

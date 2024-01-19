@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:jobpilot/generated/locale_keys.g.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
 import 'package:jobpilot/src/services/theme/app_theme.dart';
 import 'package:jobpilot/src/utilities/extensions/size_utilities.dart';
@@ -16,7 +18,7 @@ class HomeTutorialSection extends StatelessWidget {
         children: [
           32.height,
           Text(
-            "How jobpilot work",
+            "Jobpilot ${LocaleKeys.working_process_setup.tr()}",
             style: context.text.titleMedium?.copyWith(
               fontWeight: FontWeight.w600,
               color: context.color?.extraText,
@@ -26,23 +28,31 @@ class HomeTutorialSection extends StatelessWidget {
           for (var i in [
             (
               Icons.person_add_alt,
-              "Create account",
-              "Aliquam facilisis egestas sapien, nec tempor leo tristique at."
+              LocaleKeys.explore_opportunities.tr(),
+              LocaleKeys
+                  .browse_through_a_diverse_range_of_job_listings_tailored_to_your_interests_and_expertise
+                  .tr()
             ),
             (
               Icons.cloud_upload_outlined,
-              "Upload CV/Resume",
-              "Curabitur sit amet maximus ligula. Nam a nulla ante. Nam sodales"
+              LocaleKeys.create_your_profile.tr(),
+              LocaleKeys
+                  .build_a_standout_profile_highlighting_your_skills_experience_and_qualifications
+                  .tr(),
             ),
             (
               Icons.cases_outlined,
-              "Find suitable job",
-              "Phasellus quis eleifend ex. Morbi nec fringilla nibh."
+              LocaleKeys.apply_with_ease.tr(),
+              LocaleKeys
+                  .effortlessly_apply_to_jobs_that_match_your_preferences_with_just_a_few_clicks
+                  .tr(),
             ),
             (
               Icons.verified_outlined,
-              "Apply job",
-              "Curabitur sit amet maximus ligula. Nam a nulla ante, Nam sodales purus."
+              LocaleKeys.track_your_progress.tr(),
+              LocaleKeys
+                  .stay_informed_on_your_applications_and_manage_your_job_seeking_journey_effectively
+                  .tr()
             ),
           ])
             SingleTutorialStepWidget(

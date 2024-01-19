@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:jobpilot/generated/locale_keys.g.dart';
 import 'package:jobpilot/src/constants/assets/assets.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
 import 'package:jobpilot/src/services/theme/app_theme.dart';
@@ -176,7 +178,7 @@ class SingleCompanyCardWidget extends StatelessWidget {
                       backgroundColor: context.color?.primary.withOpacity(0.1),
                     ),
                     child: Text(
-                      "Open Position ($positionCount)",
+                      "${LocaleKeys.open_positions.tr()} ($positionCount)",
                     ),
                   ),
                 ],

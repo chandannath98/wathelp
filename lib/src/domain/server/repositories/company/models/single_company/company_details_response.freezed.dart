@@ -24,7 +24,7 @@ mixin _$CompanyDetailsResponse {
   @JsonKey(name: 'companyDetails')
   CompanyDetails? get companyDetails => throw _privateConstructorUsedError;
   @JsonKey(name: 'user')
-  User? get user => throw _privateConstructorUsedError;
+  CompanyUser? get user => throw _privateConstructorUsedError;
   @JsonKey(name: 'open_jobs')
   PaginatedOpenPositionsData? get openJobs =>
       throw _privateConstructorUsedError;
@@ -43,11 +43,11 @@ abstract class $CompanyDetailsResponseCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'companyDetails') CompanyDetails? companyDetails,
-      @JsonKey(name: 'user') User? user,
+      @JsonKey(name: 'user') CompanyUser? user,
       @JsonKey(name: 'open_jobs') PaginatedOpenPositionsData? openJobs});
 
   $CompanyDetailsCopyWith<$Res>? get companyDetails;
-  $UserCopyWith<$Res>? get user;
+  $CompanyUserCopyWith<$Res>? get user;
   $PaginatedOpenPositionsDataCopyWith<$Res>? get openJobs;
 }
 
@@ -77,7 +77,7 @@ class _$CompanyDetailsResponseCopyWithImpl<$Res,
       user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as User?,
+              as CompanyUser?,
       openJobs: freezed == openJobs
           ? _value.openJobs
           : openJobs // ignore: cast_nullable_to_non_nullable
@@ -99,12 +99,12 @@ class _$CompanyDetailsResponseCopyWithImpl<$Res,
 
   @override
   @pragma('vm:prefer-inline')
-  $UserCopyWith<$Res>? get user {
+  $CompanyUserCopyWith<$Res>? get user {
     if (_value.user == null) {
       return null;
     }
 
-    return $UserCopyWith<$Res>(_value.user!, (value) {
+    return $CompanyUserCopyWith<$Res>(_value.user!, (value) {
       return _then(_value.copyWith(user: value) as $Val);
     });
   }
@@ -133,13 +133,13 @@ abstract class _$$CompanyDetailsResponseImplCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: 'companyDetails') CompanyDetails? companyDetails,
-      @JsonKey(name: 'user') User? user,
+      @JsonKey(name: 'user') CompanyUser? user,
       @JsonKey(name: 'open_jobs') PaginatedOpenPositionsData? openJobs});
 
   @override
   $CompanyDetailsCopyWith<$Res>? get companyDetails;
   @override
-  $UserCopyWith<$Res>? get user;
+  $CompanyUserCopyWith<$Res>? get user;
   @override
   $PaginatedOpenPositionsDataCopyWith<$Res>? get openJobs;
 }
@@ -169,7 +169,7 @@ class __$$CompanyDetailsResponseImplCopyWithImpl<$Res>
       user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as User?,
+              as CompanyUser?,
       openJobs: freezed == openJobs
           ? _value.openJobs
           : openJobs // ignore: cast_nullable_to_non_nullable
@@ -196,7 +196,7 @@ class _$CompanyDetailsResponseImpl
   final CompanyDetails? companyDetails;
   @override
   @JsonKey(name: 'user')
-  final User? user;
+  final CompanyUser? user;
   @override
   @JsonKey(name: 'open_jobs')
   final PaginatedOpenPositionsData? openJobs;
@@ -250,7 +250,7 @@ class _$CompanyDetailsResponseImpl
 abstract class _CompanyDetailsResponse implements CompanyDetailsResponse {
   const factory _CompanyDetailsResponse(
       {@JsonKey(name: 'companyDetails') final CompanyDetails? companyDetails,
-      @JsonKey(name: 'user') final User? user,
+      @JsonKey(name: 'user') final CompanyUser? user,
       @JsonKey(name: 'open_jobs')
       final PaginatedOpenPositionsData?
           openJobs}) = _$CompanyDetailsResponseImpl;
@@ -263,7 +263,7 @@ abstract class _CompanyDetailsResponse implements CompanyDetailsResponse {
   CompanyDetails? get companyDetails;
   @override
   @JsonKey(name: 'user')
-  User? get user;
+  CompanyUser? get user;
   @override
   @JsonKey(name: 'open_jobs')
   PaginatedOpenPositionsData? get openJobs;

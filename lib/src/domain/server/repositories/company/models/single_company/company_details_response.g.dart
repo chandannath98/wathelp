@@ -15,7 +15,7 @@ _$CompanyDetailsResponseImpl _$$CompanyDetailsResponseImplFromJson(
               json['companyDetails'] as Map<String, dynamic>),
       user: json['user'] == null
           ? null
-          : User.fromJson(json['user'] as Map<String, dynamic>),
+          : CompanyUser.fromJson(json['user'] as Map<String, dynamic>),
       openJobs: json['open_jobs'] == null
           ? null
           : PaginatedOpenPositionsData.fromJson(

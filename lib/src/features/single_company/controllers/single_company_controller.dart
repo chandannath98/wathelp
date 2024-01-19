@@ -8,11 +8,12 @@ import 'package:jobpilot/src/domain/server/repositories/company/company_repo.dar
 import 'package:jobpilot/src/domain/server/repositories/company/models/single_company/company_details/company_details.dart';
 import 'package:jobpilot/src/domain/server/repositories/company/models/single_company/company_details_response.dart';
 import 'package:jobpilot/src/domain/server/repositories/company/models/single_company/open_positions/paginated_open_positions_data.dart';
-import 'package:jobpilot/src/domain/server/repositories/company/models/single_company/user_info/user/user.dart';
+import 'package:jobpilot/src/domain/server/repositories/company/models/single_company/user_info/company_user/company_user.dart';
 import 'package:jobpilot/src/features/single_company/views/open_jobs.dart';
 import 'package:jobpilot/src/features/single_job/views/job_details.dart';
 import 'package:jobpilot/src/utilities/functions.dart';
 import 'package:jobpilot/src/utilities/scaffold_util.dart';
+import 'package:jobpilot/src/utilities/social_share_link.dart';
 
 class SingleCompanyController extends GetxController {
   bool isLoading = false;
@@ -35,7 +36,7 @@ class SingleCompanyController extends GetxController {
   }
 
   CompanyDetailsResponse? detailResponse;
-  User? get companyUser => detailResponse?.user;
+  CompanyUser? get companyUser => detailResponse?.user;
   CompanyDetails? get companyDetails => detailResponse?.companyDetails;
   List<OpenJob>? get openJobs => detailResponse?.openJobs?.data;
 
@@ -87,6 +88,29 @@ class SingleCompanyController extends GetxController {
     }
   }
 
-  void copyWebLink() =>
-      copyClipboard("${API.baseUrl.replaceAll("/api", "")}/employer/$userName");
+  void copyWebLink() => copyClipboard(companyUser!.webLink);
+
+  void shareFacebook() async {
+    await enterSocialShareLink(
+      url: companyUser?.webLink,
+      option: SocialShareOption.facebook,
+      text: "Check out this amazing company: \n",
+    );
+  }
+
+  void shareTelegram() async {
+    await enterSocialShareLink(
+      url: companyUser?.webLink,
+      option: SocialShareOption.telegram,
+      text: "Check out this amazing company: \n",
+    );
+  }
+
+  void shareTwitter() async {
+    await enterSocialShareLink(
+      url: companyUser?.webLink,
+      option: SocialShareOption.twitter,
+      text: "Check out this amazing company: \n",
+    );
+  }
 }

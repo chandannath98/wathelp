@@ -1,3 +1,4 @@
 import 'package:intl/intl.dart';
 
-final DateFormat dMMMy = DateFormat("d MMM, y");
+final DateFormat dMonthY = DateFormat("d MMM, y");
+final DateFormat dMonthYT = DateFormat("d MMM, y. h:mm a");

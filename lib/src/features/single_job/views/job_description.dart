@@ -1,6 +1,8 @@
+import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
-import 'package:get/get.dart';
+import 'package:get/get.dart' hide Trans;
+import 'package:jobpilot/generated/locale_keys.g.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
 import 'package:jobpilot/src/features/single_job/controllers/single_job_controller.dart';
 import 'package:jobpilot/src/global/widgets/loading_indicator.dart';
@@ -25,7 +27,7 @@ class JobDescriptionHtmlWidget extends StatelessWidget {
         appBar: AppBar(
           titleSpacing: 0,
           title: Text(
-            "Job Description: ${controller.jobDetails?.title ?? ""}",
+            "${LocaleKeys.job_description.tr()}: ${controller.jobDetails?.title ?? ""}",
           ),
         ),
         body: Padding(
@@ -63,8 +65,8 @@ class JobDescriptionHtmlWidget extends StatelessWidget {
                                     ? null
                                     : controller.onApplyClick,
                                 icon: const Icon(Icons.arrow_back),
-                                label: const Text(
-                                  "Apply Now",
+                                label: Text(
+                                  LocaleKeys.total_employers.tr(),
                                   textAlign: TextAlign.center,
                                 ),
                               ),

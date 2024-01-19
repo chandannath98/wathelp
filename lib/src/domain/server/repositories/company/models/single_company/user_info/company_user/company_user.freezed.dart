@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'user.dart';
+part of 'company_user.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,12 +14,12 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-User _$UserFromJson(Map<String, dynamic> json) {
+CompanyUser _$CompanyUserFromJson(Map<String, dynamic> json) {
   return _User.fromJson(json);
 }
 
 /// @nodoc
-mixin _$User {
+mixin _$CompanyUser {
   @JsonKey(name: 'id')
   int? get id => throw _privateConstructorUsedError;
   @JsonKey(name: 'name')
@@ -35,13 +35,15 @@ mixin _$User {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $UserCopyWith<User> get copyWith => throw _privateConstructorUsedError;
+  $CompanyUserCopyWith<CompanyUser> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $UserCopyWith<$Res> {
-  factory $UserCopyWith(User value, $Res Function(User) then) =
-      _$UserCopyWithImpl<$Res, User>;
+abstract class $CompanyUserCopyWith<$Res> {
+  factory $CompanyUserCopyWith(
+          CompanyUser value, $Res Function(CompanyUser) then) =
+      _$CompanyUserCopyWithImpl<$Res, CompanyUser>;
   @useResult
   $Res call(
       {@JsonKey(name: 'id') int? id,
@@ -55,9 +57,9 @@ abstract class $UserCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$UserCopyWithImpl<$Res, $Val extends User>
-    implements $UserCopyWith<$Res> {
-  _$UserCopyWithImpl(this._value, this._then);
+class _$CompanyUserCopyWithImpl<$Res, $Val extends CompanyUser>
+    implements $CompanyUserCopyWith<$Res> {
+  _$CompanyUserCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -116,7 +118,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
 }
 
 /// @nodoc
-abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
+abstract class _$$UserImplCopyWith<$Res> implements $CompanyUserCopyWith<$Res> {
   factory _$$UserImplCopyWith(
           _$UserImpl value, $Res Function(_$UserImpl) then) =
       __$$UserImplCopyWithImpl<$Res>;
@@ -136,7 +138,7 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
 
 /// @nodoc
 class __$$UserImplCopyWithImpl<$Res>
-    extends _$UserCopyWithImpl<$Res, _$UserImpl>
+    extends _$CompanyUserCopyWithImpl<$Res, _$UserImpl>
     implements _$$UserImplCopyWith<$Res> {
   __$$UserImplCopyWithImpl(_$UserImpl _value, $Res Function(_$UserImpl) _then)
       : super(_value, _then);
@@ -182,7 +184,7 @@ class __$$UserImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$UserImpl with DiagnosticableTreeMixin implements _User {
+class _$UserImpl extends _User with DiagnosticableTreeMixin {
   const _$UserImpl(
       {@JsonKey(name: 'id') this.id,
       @JsonKey(name: 'name') this.name,
@@ -190,7 +192,8 @@ class _$UserImpl with DiagnosticableTreeMixin implements _User {
       @JsonKey(name: 'image_url') this.imageUrl,
       @JsonKey(name: 'contact_info') this.contactInfo,
       @JsonKey(name: 'social_info') final List<SocialInfo>? socialInfo})
-      : _socialInfo = socialInfo;
+      : _socialInfo = socialInfo,
+        super._();
 
   factory _$UserImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserImplFromJson(json);
@@ -223,14 +226,14 @@ class _$UserImpl with DiagnosticableTreeMixin implements _User {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'User(id: $id, name: $name, username: $username, imageUrl: $imageUrl, contactInfo: $contactInfo, socialInfo: $socialInfo)';
+    return 'CompanyUser(id: $id, name: $name, username: $username, imageUrl: $imageUrl, contactInfo: $contactInfo, socialInfo: $socialInfo)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'User'))
+      ..add(DiagnosticsProperty('type', 'CompanyUser'))
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('name', name))
       ..add(DiagnosticsProperty('username', username))
@@ -275,7 +278,7 @@ class _$UserImpl with DiagnosticableTreeMixin implements _User {
   }
 }
 
-abstract class _User implements User {
+abstract class _User extends CompanyUser {
   const factory _User(
           {@JsonKey(name: 'id') final int? id,
           @JsonKey(name: 'name') final String? name,
@@ -284,6 +287,7 @@ abstract class _User implements User {
           @JsonKey(name: 'contact_info') final ContactInfo? contactInfo,
           @JsonKey(name: 'social_info') final List<SocialInfo>? socialInfo}) =
       _$UserImpl;
+  const _User._() : super._();
 
   factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
 

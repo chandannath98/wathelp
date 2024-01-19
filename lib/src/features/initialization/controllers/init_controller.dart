@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/instance_manager.dart';
 import 'package:jobpilot/src/domain/local_storage/config/hive_config.dart';
@@ -42,6 +43,7 @@ class InitializationController extends GetxController {
       updateAppState(InitialAppState.loading);
       /* Initializing */
       rmvFocus();
+      await Firebase.initializeApp();
       await HiveConfig.initialize();
       await EasyLocalization.ensureInitialized();
       Get.put(RequestHandler(), permanent: true);

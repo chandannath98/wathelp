@@ -1,7 +1,12 @@
+import 'dart:developer';
+
 import 'package:easy_localization/easy_localization.dart' hide TextDirection;
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart' hide Trans;
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:jobpilot/generated/locale_keys.g.dart';
 import 'package:jobpilot/src/constants/assets/assets.dart';
 import 'package:jobpilot/src/constants/strings/home_strings.dart';
@@ -81,8 +86,43 @@ class LoginSystemSwitcher extends StatelessWidget {
               ),
               goForgotPassword: ({String? email}) async =>
                   controller.shiftLoginView(),
-              onFacebookClick: () {},
-              onGoogleClick: () {},
+              onFacebookClick: () async {
+                try {
+                  final LoginResult loginResult =
+                      await FacebookAuth.instance.login();
+                  if (loginResult.accessToken != null) {
+                    final OAuthCredential facebookAuthCredential =
+                        FacebookAuthProvider.credential(
+                      loginResult.accessToken!.token,
+                    );
+                    final user =
+                        await FirebaseAuth.instance.signInWithCredential(
+                      facebookAuthCredential,
+                    );
+                    print("Facebook user : $user");
+                  }
+                } catch (e, s) {
+                  log("#FacebookAuthError", error: e, stackTrace: s);
+                }
+              },
+              onGoogleClick: () async {
+                try {
+                  final GoogleSignInAccount? googleUser =
+                      await GoogleSignIn().signIn();
+                  final GoogleSignInAuthentication? googleAuth =
+                      await googleUser?.authentication;
+
+                  final credential = GoogleAuthProvider.credential(
+                    accessToken: googleAuth?.accessToken,
+                    idToken: googleAuth?.idToken,
+                  );
+                  final user = await FirebaseAuth.instance
+                      .signInWithCredential(credential);
+                  print("Google user : $user");
+                } catch (e, s) {
+                  log("#GoogleAuthError", error: e, stackTrace: s);
+                }
+              },
             ),
             secondChild: ForgotPasswordSectionWidget(
               emailController: controller.emailController,

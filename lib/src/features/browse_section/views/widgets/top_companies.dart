@@ -1,5 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:get/get.dart' hide Trans;
+import 'package:jobpilot/generated/locale_keys.g.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
 import 'package:jobpilot/src/domain/server/repositories/home/models/browse/company/top_companies.dart';
 import 'package:jobpilot/src/features/find_company/controllers/find_company_controllers.dart';
@@ -11,8 +13,8 @@ import 'package:jobpilot/src/utilities/extensions/size_utilities.dart';
 class TopCompaniesSection extends StatelessWidget {
   const TopCompaniesSection({
     super.key,
-    required this.isLoading,
     this.data,
+    required this.isLoading,
   });
 
   final bool isLoading;
@@ -28,7 +30,7 @@ class TopCompaniesSection extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Text(
-                  "Top Companies",
+                  LocaleKeys.total_employers.tr(),
                   style: context.text.titleLarge?.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
@@ -76,7 +78,7 @@ class TopCompaniesSection extends StatelessWidget {
                   child: Padding(
                     padding: vertical3 + horizontal10,
                     child: Text(
-                      "Load More Companies",
+                      LocaleKeys.load_more.tr(),
                       style: context.text.titleMedium?.copyWith(
                         fontWeight: FontWeight.bold,
                         color: context.color?.primary,

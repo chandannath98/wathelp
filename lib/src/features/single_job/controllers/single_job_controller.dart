@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:get/get.dart';
+import 'package:jobpilot/src/constants/assets/app_strings.dart';
 import 'package:jobpilot/src/domain/server/config/request_handler.dart';
 import 'package:jobpilot/src/domain/server/repositories/jobs/jobs_repo.dart';
 import 'package:jobpilot/src/domain/server/repositories/jobs/models/job_details/company/company.dart';
@@ -15,6 +16,8 @@ import 'package:jobpilot/src/features/single_job/views/job_description.dart';
 import 'package:jobpilot/src/services/authentication/auth_controller.dart';
 import 'package:jobpilot/src/utilities/functions.dart';
 import 'package:jobpilot/src/utilities/scaffold_util.dart';
+import 'package:jobpilot/src/utilities/social_share_link.dart';
+import 'package:social_share/social_share.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 String? _encodeQueryParameters(Map<String, String> params) {
@@ -158,4 +161,28 @@ class SingleJobController extends GetxController {
   }
 
   copyWebLink() async => await copyClipboard(jobDetails?.webLink ?? "");
+
+  void shareFacebook() async {
+    await enterSocialShareLink(
+      url: jobDetails?.webLink,
+      option: SocialShareOption.facebook,
+      text: "Check out this amazing job offer: \n",
+    );
+  }
+
+  void shareTelegram() async {
+    await enterSocialShareLink(
+      url: jobDetails?.webLink,
+      option: SocialShareOption.telegram,
+      text: "Check out this amazing job offer: \n",
+    );
+  }
+
+  void shareTwitter() async {
+    await enterSocialShareLink(
+      url: jobDetails?.webLink,
+      option: SocialShareOption.twitter,
+      text: "Check out this amazing job offer: \n",
+    );
+  }
 }

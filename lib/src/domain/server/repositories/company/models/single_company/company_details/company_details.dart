@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:jobpilot/src/domain/server/config/repository.dart';
 
 import 'industry/industry.dart';
 import 'organization/organization.dart';

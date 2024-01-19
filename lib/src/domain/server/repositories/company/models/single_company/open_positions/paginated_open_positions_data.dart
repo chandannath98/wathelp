@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:jobpilot/src/domain/server/config/repository.dart';
 
 part 'paginated_open_positions_data.freezed.dart';
 part 'paginated_open_positions_data.g.dart';
@@ -74,7 +75,7 @@ class OpenJob with _$OpenJob {
     @JsonKey(name: 'deadline_active') bool? deadlineActive,
     @JsonKey(name: 'can_apply') bool? canApply,
     @JsonKey(name: 'full_address') String? fullAddress,
-    @JsonKey(name: 'company') Company? company,
+    @JsonKey(name: 'company') OpenJobCompany? company,
     @JsonKey(name: 'job_type') JobType? jobType,
   }) = _OpenJob;
 
@@ -83,8 +84,8 @@ class OpenJob with _$OpenJob {
 }
 
 @freezed
-class Company with _$Company {
-  const factory Company({
+class OpenJobCompany with _$OpenJobCompany {
+  const factory OpenJobCompany({
     @JsonKey(name: 'id') int? id,
     @JsonKey(name: 'user_id') int? userId,
     @JsonKey(name: 'industry_type_id') int? industryTypeId,
@@ -118,16 +119,16 @@ class Company with _$Company {
     @JsonKey(name: 'logo_url') String? logoUrl,
     @JsonKey(name: 'banner_url') String? bannerUrl,
     @JsonKey(name: 'full_address') String? fullAddress,
-    @JsonKey(name: 'user') CompanyUser? user,
+    @JsonKey(name: 'user') OpenJobCompanyUser? user,
   }) = _Company;
 
-  factory Company.fromJson(Map<String, Object?> json) =>
-      _$CompanyFromJson(json);
+  factory OpenJobCompany.fromJson(Map<String, Object?> json) =>
+      _$OpenJobCompanyFromJson(json);
 }
 
 @freezed
-class CompanyUser with _$CompanyUser {
-  const factory CompanyUser({
+class OpenJobCompanyUser with _$OpenJobCompanyUser {
+  const factory OpenJobCompanyUser({
     @JsonKey(name: 'id') int? id,
     @JsonKey(name: 'name') String? name,
     @JsonKey(name: 'username') String? username,
@@ -151,8 +152,11 @@ class CompanyUser with _$CompanyUser {
     @JsonKey(name: 'image_url') String? imageUrl,
   }) = _CompanyUser;
 
-  factory CompanyUser.fromJson(Map<String, Object?> json) =>
-      _$CompanyUserFromJson(json);
+  const OpenJobCompanyUser._();
+  String get webLink => "${API.webUrl}/employer/$username";
+
+  factory OpenJobCompanyUser.fromJson(Map<String, Object?> json) =>
+      _$OpenJobCompanyUserFromJson(json);
 }
 
 @freezed

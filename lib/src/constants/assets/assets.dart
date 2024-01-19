@@ -28,6 +28,7 @@ final class Assets {
   static const facebookIcon = "assets/icon/facebook.svg";
   static const youtubeIcon = "assets/icon/youtube.svg";
   static const twitterIcon = "assets/icon/twitter.svg";
+  static const telegramIcon = "assets/icon/telegram.svg";
   static const instagramIcon = "assets/icon/instagram.svg";
 
   //Reg

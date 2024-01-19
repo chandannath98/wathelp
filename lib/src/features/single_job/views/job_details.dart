@@ -1,10 +1,13 @@
+import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:get/get.dart' hide Trans;
+import 'package:jobpilot/generated/locale_keys.g.dart';
 import 'package:jobpilot/src/constants/assets/app_strings.dart';
 import 'package:jobpilot/src/constants/assets/assets.dart';
 import 'package:jobpilot/src/constants/design/border_radius.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
 import 'package:jobpilot/src/constants/utilities/date_formats.dart';
+import 'package:jobpilot/src/domain/local_storage/repositories/static/static_storage.dart';
 import 'package:jobpilot/src/domain/server/repositories/jobs/models/job_details/related_jobs/related_job.dart';
 import 'package:jobpilot/src/features/single_job/controllers/single_job_controller.dart';
 import 'package:jobpilot/src/global/widgets/app/overview_data_tile.dart';
@@ -31,8 +34,8 @@ class JobDetailsScreen extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             titleSpacing: 0,
-            title: const Text(
-              "Job Details",
+            title: Text(
+              LocaleKeys.job_details.tr(),
             ),
           ),
           body: controller.isLoading || controller.jobDetails == null
@@ -98,7 +101,7 @@ class RelatedJobsSection extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
-              "Related Jobs",
+              LocaleKeys.total_employers.tr(),
               style: context.text.titleLarge?.copyWith(
                 fontWeight: FontWeight.bold,
               ),
@@ -127,7 +130,7 @@ class RelatedJobsSection extends StatelessWidget {
               child: Padding(
                 padding: horizontal10 + vertical3,
                 child: Text(
-                  "Load More Related Jobs",
+                  LocaleKeys.load_more.tr(),
                   style: context.text.titleMedium?.copyWith(
                     fontWeight: FontWeight.bold,
                     color: context.color?.primary,
@@ -165,7 +168,7 @@ class JobOverviewSection extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
-              "Job Overview",
+              LocaleKeys.job_overview.tr(),
               style: context.text.titleMedium?.copyWith(
                 height: 0.9,
                 fontSize: 18,
@@ -176,17 +179,17 @@ class JobOverviewSection extends StatelessWidget {
               children: [
                 Expanded(
                   child: OverviewDataTile(
-                    title: "JOB POSTED: ",
+                    title: "${LocaleKeys.job_posted.tr()}: ",
                     data: (controller.jobDetails?.postDate == null)
                         ? "Unknown"
-                        : dMMMy.format(controller.jobDetails!.postDate!),
+                        : dMonthY.format(controller.jobDetails!.postDate!),
                     icon: const Icon(Icons.calendar_today_outlined),
                   ),
                 ),
                 Expanded(
                   child: OverviewDataTile(
-                    title: "JOB EXPIRES IN: ",
-                    data: dMMMy.format(
+                    title: "${LocaleKeys.job_expire.tr()}: ",
+                    data: dMonthY.format(
                       controller.jobDetails?.expireDate ?? DateTime.now(),
                     ),
                     icon: const Icon(Icons.timer_outlined),
@@ -199,14 +202,14 @@ class JobOverviewSection extends StatelessWidget {
               children: [
                 Expanded(
                   child: OverviewDataTile(
-                    title: "EXPERIENCE",
+                    title: LocaleKeys.experience.tr(),
                     data: controller.jobDetails?.experience ?? "",
                     icon: const Icon(Icons.wallet_outlined),
                   ),
                 ),
                 Expanded(
                   child: OverviewDataTile(
-                    title: "EDUCATION",
+                    title: LocaleKeys.education.tr(),
                     data: controller.jobDetails?.education ??
                         (controller.jobDetails?.education ?? ""),
                     icon: const Icon(Icons.work_outline_rounded),
@@ -221,7 +224,7 @@ class JobOverviewSection extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Text(
-                  "Share this job:",
+                  "${LocaleKeys.share_this_job.tr()}:",
                   style: context.text.titleMedium?.copyWith(
                     height: 0.9,
                     fontSize: 18,
@@ -247,35 +250,26 @@ class JobOverviewSection extends StatelessWidget {
                       icon: const SvgIcon(
                         Assets.twitterIcon,
                       ),
-                      onTap: () => SocialShare.shareTwitter(
-                        controller.jobDetails?.webLink ?? "",
-                      ),
+                      onTap: controller.shareTwitter,
                     ),
                     SquaredIconButton(
                       icon: const SvgIcon(
                         Assets.facebookIcon,
                       ),
-                      onTap: () => SocialShare.shareFacebookStory(
-                        appId: AppStrings.facebookAppId,
-                        attributionURL: controller.jobDetails?.webLink,
-                      ),
+                      onTap: controller.shareFacebook,
                     ),
                     SquaredIconButton(
                       icon: const SvgIcon(
-                        Assets.instagramIcon,
+                        Assets.telegramIcon,
                       ),
-                      onTap: () => SocialShare.shareInstagramStory(
-                        appId: AppStrings.facebookAppId,
-                        imagePath: "",
-                        attributionURL: controller.jobDetails?.webLink,
-                      ),
+                      onTap: controller.shareTelegram,
                     ),
                   ],
                 ),
               ],
             ),
             16.height,
-            const Text("Job tags:"),
+            Text("${LocaleKeys.job_tags.tr()}:"),
             8.height,
             Wrap(
               spacing: 8,
@@ -324,7 +318,7 @@ class JobBenefitsSection extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
-              "Job Benefits",
+              LocaleKeys.job_benefits.tr(),
               style: context.text.titleMedium,
             ),
             16.height,
@@ -379,7 +373,7 @@ class JobDetails extends StatelessWidget {
               child: Column(
                 children: [
                   Text(
-                    "Salary (USD)",
+                    "${LocaleKeys.salary.tr()} (${StaticStorage.selectedCurrency?.code ?? "USD"})",
                     style: context.text.titleMedium,
                   ),
                   12.height,
@@ -408,7 +402,7 @@ class JobDetails extends StatelessWidget {
                     size: 32,
                   ),
                   Text(
-                    "Job Location",
+                    LocaleKeys.location.tr(),
                     style: context.text.titleMedium,
                   ),
                   8.height,
@@ -444,7 +438,7 @@ class JobDescriptionWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(
-            "Job Description",
+            LocaleKeys.job_description.tr(),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: context.text.titleMedium?.copyWith(
@@ -488,7 +482,7 @@ class JobDescriptionWidget extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               Text(
-                                "Read Full Description",
+                                LocaleKeys.read_more.tr(),
                                 style: context.text.bodyLarge?.copyWith(
                                   fontWeight: FontWeight.bold,
                                   color: context.color?.primary,
@@ -629,8 +623,8 @@ class JobDetailCompanyHeader extends StatelessWidget {
                     ? ElevatedButton.icon(
                         onPressed: null,
                         icon: const Icon(Icons.check_rounded),
-                        label: const Text(
-                          "Applied",
+                        label: Text(
+                          LocaleKeys.job_applied.tr(),
                         ),
                       )
                     : Directionality(
@@ -638,8 +632,8 @@ class JobDetailCompanyHeader extends StatelessWidget {
                         child: ElevatedButton.icon(
                           onPressed: controller.onApplyClick,
                           icon: const Icon(Icons.arrow_back),
-                          label: const Text(
-                            "Apply Now",
+                          label: Text(
+                            LocaleKeys.apply_now.tr(),
                             textAlign: TextAlign.center,
                           ),
                         ),

@@ -1,5 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:get/get.dart' hide Trans;
+import 'package:jobpilot/generated/locale_keys.g.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
 import 'package:jobpilot/src/domain/server/repositories/home/models/browse/feature_job/featured_jobs.dart';
 import 'package:jobpilot/src/domain/server/repositories/jobs/jobs_repo.dart';
@@ -33,7 +35,7 @@ class HomeFeaturedJobsSection extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Text(
-                    "Featured Jobs",
+                    LocaleKeys.featured_jobs.tr(),
                     style: context.text.titleLarge?.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
@@ -65,10 +67,10 @@ class HomeFeaturedJobsSection extends StatelessWidget {
                         postType: i.job.jobType!,
                         salaryRange:
                             "Salary: \$${i.job.minSalary} - \$${i.job.maxSalary}",
+                        onItemClick: i.onTap,
                         companyName: i.job.companyName!,
                         companyLocation: i.job.country!,
                         companyIcon: i.job.companyLogo!,
-                        onItemClick: i.onTap,
                         onBookmarkCallback: i.onBookmark,
                       ),
                       8.height,
@@ -83,7 +85,7 @@ class HomeFeaturedJobsSection extends StatelessWidget {
                     child: Padding(
                       padding: vertical3 + horizontal10,
                       child: Text(
-                        "Load More Feature Jobs",
+                        LocaleKeys.load_more.tr(),
                         style: context.text.titleMedium?.copyWith(
                           fontWeight: FontWeight.bold,
                           color: context.color?.primary,

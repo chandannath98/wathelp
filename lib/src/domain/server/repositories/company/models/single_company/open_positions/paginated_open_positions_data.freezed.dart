@@ -545,7 +545,7 @@ mixin _$OpenJob {
   @JsonKey(name: 'full_address')
   String? get fullAddress => throw _privateConstructorUsedError;
   @JsonKey(name: 'company')
-  Company? get company => throw _privateConstructorUsedError;
+  OpenJobCompany? get company => throw _privateConstructorUsedError;
   @JsonKey(name: 'job_type')
   JobType? get jobType => throw _privateConstructorUsedError;
 
@@ -607,10 +607,10 @@ abstract class $OpenJobCopyWith<$Res> {
       @JsonKey(name: 'deadline_active') bool? deadlineActive,
       @JsonKey(name: 'can_apply') bool? canApply,
       @JsonKey(name: 'full_address') String? fullAddress,
-      @JsonKey(name: 'company') Company? company,
+      @JsonKey(name: 'company') OpenJobCompany? company,
       @JsonKey(name: 'job_type') JobType? jobType});
 
-  $CompanyCopyWith<$Res>? get company;
+  $OpenJobCompanyCopyWith<$Res>? get company;
   $JobTypeCopyWith<$Res>? get jobType;
 }
 
@@ -869,7 +869,7 @@ class _$OpenJobCopyWithImpl<$Res, $Val extends OpenJob>
       company: freezed == company
           ? _value.company
           : company // ignore: cast_nullable_to_non_nullable
-              as Company?,
+              as OpenJobCompany?,
       jobType: freezed == jobType
           ? _value.jobType
           : jobType // ignore: cast_nullable_to_non_nullable
@@ -879,12 +879,12 @@ class _$OpenJobCopyWithImpl<$Res, $Val extends OpenJob>
 
   @override
   @pragma('vm:prefer-inline')
-  $CompanyCopyWith<$Res>? get company {
+  $OpenJobCompanyCopyWith<$Res>? get company {
     if (_value.company == null) {
       return null;
     }
 
-    return $CompanyCopyWith<$Res>(_value.company!, (value) {
+    return $OpenJobCompanyCopyWith<$Res>(_value.company!, (value) {
       return _then(_value.copyWith(company: value) as $Val);
     });
   }
@@ -957,11 +957,11 @@ abstract class _$$OpenJobImplCopyWith<$Res> implements $OpenJobCopyWith<$Res> {
       @JsonKey(name: 'deadline_active') bool? deadlineActive,
       @JsonKey(name: 'can_apply') bool? canApply,
       @JsonKey(name: 'full_address') String? fullAddress,
-      @JsonKey(name: 'company') Company? company,
+      @JsonKey(name: 'company') OpenJobCompany? company,
       @JsonKey(name: 'job_type') JobType? jobType});
 
   @override
-  $CompanyCopyWith<$Res>? get company;
+  $OpenJobCompanyCopyWith<$Res>? get company;
   @override
   $JobTypeCopyWith<$Res>? get jobType;
 }
@@ -1219,7 +1219,7 @@ class __$$OpenJobImplCopyWithImpl<$Res>
       company: freezed == company
           ? _value.company
           : company // ignore: cast_nullable_to_non_nullable
-              as Company?,
+              as OpenJobCompany?,
       jobType: freezed == jobType
           ? _value.jobType
           : jobType // ignore: cast_nullable_to_non_nullable
@@ -1428,7 +1428,7 @@ class _$OpenJobImpl with DiagnosticableTreeMixin implements _OpenJob {
   final String? fullAddress;
   @override
   @JsonKey(name: 'company')
-  final Company? company;
+  final OpenJobCompany? company;
   @override
   @JsonKey(name: 'job_type')
   final JobType? jobType;
@@ -1705,7 +1705,7 @@ abstract class _OpenJob implements OpenJob {
       @JsonKey(name: 'deadline_active') final bool? deadlineActive,
       @JsonKey(name: 'can_apply') final bool? canApply,
       @JsonKey(name: 'full_address') final String? fullAddress,
-      @JsonKey(name: 'company') final Company? company,
+      @JsonKey(name: 'company') final OpenJobCompany? company,
       @JsonKey(name: 'job_type') final JobType? jobType}) = _$OpenJobImpl;
 
   factory _OpenJob.fromJson(Map<String, dynamic> json) = _$OpenJobImpl.fromJson;
@@ -1853,7 +1853,7 @@ abstract class _OpenJob implements OpenJob {
   String? get fullAddress;
   @override
   @JsonKey(name: 'company')
-  Company? get company;
+  OpenJobCompany? get company;
   @override
   @JsonKey(name: 'job_type')
   JobType? get jobType;
@@ -1863,12 +1863,12 @@ abstract class _OpenJob implements OpenJob {
       throw _privateConstructorUsedError;
 }
 
-Company _$CompanyFromJson(Map<String, dynamic> json) {
+OpenJobCompany _$OpenJobCompanyFromJson(Map<String, dynamic> json) {
   return _Company.fromJson(json);
 }
 
 /// @nodoc
-mixin _$Company {
+mixin _$OpenJobCompany {
   @JsonKey(name: 'id')
   int? get id => throw _privateConstructorUsedError;
   @JsonKey(name: 'user_id')
@@ -1936,17 +1936,19 @@ mixin _$Company {
   @JsonKey(name: 'full_address')
   String? get fullAddress => throw _privateConstructorUsedError;
   @JsonKey(name: 'user')
-  CompanyUser? get user => throw _privateConstructorUsedError;
+  OpenJobCompanyUser? get user => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $CompanyCopyWith<Company> get copyWith => throw _privateConstructorUsedError;
+  $OpenJobCompanyCopyWith<OpenJobCompany> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $CompanyCopyWith<$Res> {
-  factory $CompanyCopyWith(Company value, $Res Function(Company) then) =
-      _$CompanyCopyWithImpl<$Res, Company>;
+abstract class $OpenJobCompanyCopyWith<$Res> {
+  factory $OpenJobCompanyCopyWith(
+          OpenJobCompany value, $Res Function(OpenJobCompany) then) =
+      _$OpenJobCompanyCopyWithImpl<$Res, OpenJobCompany>;
   @useResult
   $Res call(
       {@JsonKey(name: 'id') int? id,
@@ -1982,15 +1984,15 @@ abstract class $CompanyCopyWith<$Res> {
       @JsonKey(name: 'logo_url') String? logoUrl,
       @JsonKey(name: 'banner_url') String? bannerUrl,
       @JsonKey(name: 'full_address') String? fullAddress,
-      @JsonKey(name: 'user') CompanyUser? user});
+      @JsonKey(name: 'user') OpenJobCompanyUser? user});
 
-  $CompanyUserCopyWith<$Res>? get user;
+  $OpenJobCompanyUserCopyWith<$Res>? get user;
 }
 
 /// @nodoc
-class _$CompanyCopyWithImpl<$Res, $Val extends Company>
-    implements $CompanyCopyWith<$Res> {
-  _$CompanyCopyWithImpl(this._value, this._then);
+class _$OpenJobCompanyCopyWithImpl<$Res, $Val extends OpenJobCompany>
+    implements $OpenJobCompanyCopyWith<$Res> {
+  _$OpenJobCompanyCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -2171,25 +2173,26 @@ class _$CompanyCopyWithImpl<$Res, $Val extends Company>
       user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as CompanyUser?,
+              as OpenJobCompanyUser?,
     ) as $Val);
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $CompanyUserCopyWith<$Res>? get user {
+  $OpenJobCompanyUserCopyWith<$Res>? get user {
     if (_value.user == null) {
       return null;
     }
 
-    return $CompanyUserCopyWith<$Res>(_value.user!, (value) {
+    return $OpenJobCompanyUserCopyWith<$Res>(_value.user!, (value) {
       return _then(_value.copyWith(user: value) as $Val);
     });
   }
 }
 
 /// @nodoc
-abstract class _$$CompanyImplCopyWith<$Res> implements $CompanyCopyWith<$Res> {
+abstract class _$$CompanyImplCopyWith<$Res>
+    implements $OpenJobCompanyCopyWith<$Res> {
   factory _$$CompanyImplCopyWith(
           _$CompanyImpl value, $Res Function(_$CompanyImpl) then) =
       __$$CompanyImplCopyWithImpl<$Res>;
@@ -2229,15 +2232,15 @@ abstract class _$$CompanyImplCopyWith<$Res> implements $CompanyCopyWith<$Res> {
       @JsonKey(name: 'logo_url') String? logoUrl,
       @JsonKey(name: 'banner_url') String? bannerUrl,
       @JsonKey(name: 'full_address') String? fullAddress,
-      @JsonKey(name: 'user') CompanyUser? user});
+      @JsonKey(name: 'user') OpenJobCompanyUser? user});
 
   @override
-  $CompanyUserCopyWith<$Res>? get user;
+  $OpenJobCompanyUserCopyWith<$Res>? get user;
 }
 
 /// @nodoc
 class __$$CompanyImplCopyWithImpl<$Res>
-    extends _$CompanyCopyWithImpl<$Res, _$CompanyImpl>
+    extends _$OpenJobCompanyCopyWithImpl<$Res, _$CompanyImpl>
     implements _$$CompanyImplCopyWith<$Res> {
   __$$CompanyImplCopyWithImpl(
       _$CompanyImpl _value, $Res Function(_$CompanyImpl) _then)
@@ -2417,7 +2420,7 @@ class __$$CompanyImplCopyWithImpl<$Res>
       user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as CompanyUser?,
+              as OpenJobCompanyUser?,
     ));
   }
 }
@@ -2565,18 +2568,18 @@ class _$CompanyImpl with DiagnosticableTreeMixin implements _Company {
   final String? fullAddress;
   @override
   @JsonKey(name: 'user')
-  final CompanyUser? user;
+  final OpenJobCompanyUser? user;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Company(id: $id, userId: $userId, industryTypeId: $industryTypeId, organizationTypeId: $organizationTypeId, teamSizeId: $teamSizeId, logo: $logo, banner: $banner, establishmentDate: $establishmentDate, website: $website, visibility: $visibility, profileCompletion: $profileCompletion, bio: $bio, vision: $vision, totalViews: $totalViews, createdAt: $createdAt, updatedAt: $updatedAt, address: $address, exactLocation: $exactLocation, neighborhood: $neighborhood, locality: $locality, place: $place, district: $district, postcode: $postcode, region: $region, country: $country, long: $long, lat: $lat, isProfileVerified: $isProfileVerified, documentVerifiedAt: $documentVerifiedAt, questionFeatureEnable: $questionFeatureEnable, logoUrl: $logoUrl, bannerUrl: $bannerUrl, fullAddress: $fullAddress, user: $user)';
+    return 'OpenJobCompany(id: $id, userId: $userId, industryTypeId: $industryTypeId, organizationTypeId: $organizationTypeId, teamSizeId: $teamSizeId, logo: $logo, banner: $banner, establishmentDate: $establishmentDate, website: $website, visibility: $visibility, profileCompletion: $profileCompletion, bio: $bio, vision: $vision, totalViews: $totalViews, createdAt: $createdAt, updatedAt: $updatedAt, address: $address, exactLocation: $exactLocation, neighborhood: $neighborhood, locality: $locality, place: $place, district: $district, postcode: $postcode, region: $region, country: $country, long: $long, lat: $lat, isProfileVerified: $isProfileVerified, documentVerifiedAt: $documentVerifiedAt, questionFeatureEnable: $questionFeatureEnable, logoUrl: $logoUrl, bannerUrl: $bannerUrl, fullAddress: $fullAddress, user: $user)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'Company'))
+      ..add(DiagnosticsProperty('type', 'OpenJobCompany'))
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('userId', userId))
       ..add(DiagnosticsProperty('industryTypeId', industryTypeId))
@@ -2727,7 +2730,7 @@ class _$CompanyImpl with DiagnosticableTreeMixin implements _Company {
   }
 }
 
-abstract class _Company implements Company {
+abstract class _Company implements OpenJobCompany {
   const factory _Company(
       {@JsonKey(name: 'id') final int? id,
       @JsonKey(name: 'user_id') final int? userId,
@@ -2763,7 +2766,7 @@ abstract class _Company implements Company {
       @JsonKey(name: 'logo_url') final String? logoUrl,
       @JsonKey(name: 'banner_url') final String? bannerUrl,
       @JsonKey(name: 'full_address') final String? fullAddress,
-      @JsonKey(name: 'user') final CompanyUser? user}) = _$CompanyImpl;
+      @JsonKey(name: 'user') final OpenJobCompanyUser? user}) = _$CompanyImpl;
 
   factory _Company.fromJson(Map<String, dynamic> json) = _$CompanyImpl.fromJson;
 
@@ -2868,19 +2871,19 @@ abstract class _Company implements Company {
   String? get fullAddress;
   @override
   @JsonKey(name: 'user')
-  CompanyUser? get user;
+  OpenJobCompanyUser? get user;
   @override
   @JsonKey(ignore: true)
   _$$CompanyImplCopyWith<_$CompanyImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
-CompanyUser _$CompanyUserFromJson(Map<String, dynamic> json) {
+OpenJobCompanyUser _$OpenJobCompanyUserFromJson(Map<String, dynamic> json) {
   return _CompanyUser.fromJson(json);
 }
 
 /// @nodoc
-mixin _$CompanyUser {
+mixin _$OpenJobCompanyUser {
   @JsonKey(name: 'id')
   int? get id => throw _privateConstructorUsedError;
   @JsonKey(name: 'name')
@@ -2926,15 +2929,15 @@ mixin _$CompanyUser {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $CompanyUserCopyWith<CompanyUser> get copyWith =>
+  $OpenJobCompanyUserCopyWith<OpenJobCompanyUser> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $CompanyUserCopyWith<$Res> {
-  factory $CompanyUserCopyWith(
-          CompanyUser value, $Res Function(CompanyUser) then) =
-      _$CompanyUserCopyWithImpl<$Res, CompanyUser>;
+abstract class $OpenJobCompanyUserCopyWith<$Res> {
+  factory $OpenJobCompanyUserCopyWith(
+          OpenJobCompanyUser value, $Res Function(OpenJobCompanyUser) then) =
+      _$OpenJobCompanyUserCopyWithImpl<$Res, OpenJobCompanyUser>;
   @useResult
   $Res call(
       {@JsonKey(name: 'id') int? id,
@@ -2961,9 +2964,9 @@ abstract class $CompanyUserCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$CompanyUserCopyWithImpl<$Res, $Val extends CompanyUser>
-    implements $CompanyUserCopyWith<$Res> {
-  _$CompanyUserCopyWithImpl(this._value, this._then);
+class _$OpenJobCompanyUserCopyWithImpl<$Res, $Val extends OpenJobCompanyUser>
+    implements $OpenJobCompanyUserCopyWith<$Res> {
+  _$OpenJobCompanyUserCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -3086,7 +3089,7 @@ class _$CompanyUserCopyWithImpl<$Res, $Val extends CompanyUser>
 
 /// @nodoc
 abstract class _$$CompanyUserImplCopyWith<$Res>
-    implements $CompanyUserCopyWith<$Res> {
+    implements $OpenJobCompanyUserCopyWith<$Res> {
   factory _$$CompanyUserImplCopyWith(
           _$CompanyUserImpl value, $Res Function(_$CompanyUserImpl) then) =
       __$$CompanyUserImplCopyWithImpl<$Res>;
@@ -3118,7 +3121,7 @@ abstract class _$$CompanyUserImplCopyWith<$Res>
 
 /// @nodoc
 class __$$CompanyUserImplCopyWithImpl<$Res>
-    extends _$CompanyUserCopyWithImpl<$Res, _$CompanyUserImpl>
+    extends _$OpenJobCompanyUserCopyWithImpl<$Res, _$CompanyUserImpl>
     implements _$$CompanyUserImplCopyWith<$Res> {
   __$$CompanyUserImplCopyWithImpl(
       _$CompanyUserImpl _value, $Res Function(_$CompanyUserImpl) _then)
@@ -3240,7 +3243,7 @@ class __$$CompanyUserImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$CompanyUserImpl with DiagnosticableTreeMixin implements _CompanyUser {
+class _$CompanyUserImpl extends _CompanyUser with DiagnosticableTreeMixin {
   const _$CompanyUserImpl(
       {@JsonKey(name: 'id') this.id,
       @JsonKey(name: 'name') this.name,
@@ -3262,7 +3265,8 @@ class _$CompanyUserImpl with DiagnosticableTreeMixin implements _CompanyUser {
       @JsonKey(name: 'facebook_id') this.facebookId,
       @JsonKey(name: 'provider') this.provider,
       @JsonKey(name: 'provider_id') this.providerId,
-      @JsonKey(name: 'image_url') this.imageUrl});
+      @JsonKey(name: 'image_url') this.imageUrl})
+      : super._();
 
   factory _$CompanyUserImpl.fromJson(Map<String, dynamic> json) =>
       _$$CompanyUserImplFromJson(json);
@@ -3333,14 +3337,14 @@ class _$CompanyUserImpl with DiagnosticableTreeMixin implements _CompanyUser {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'CompanyUser(id: $id, name: $name, username: $username, email: $email, emailVerifiedAt: $emailVerifiedAt, image: $image, role: $role, recentActivitiesAlert: $recentActivitiesAlert, jobExpiredAlert: $jobExpiredAlert, newJobAlert: $newJobAlert, shortlistedAlert: $shortlistedAlert, status: $status, isDemoField: $isDemoField, createdAt: $createdAt, updatedAt: $updatedAt, authType: $authType, googleId: $googleId, facebookId: $facebookId, provider: $provider, providerId: $providerId, imageUrl: $imageUrl)';
+    return 'OpenJobCompanyUser(id: $id, name: $name, username: $username, email: $email, emailVerifiedAt: $emailVerifiedAt, image: $image, role: $role, recentActivitiesAlert: $recentActivitiesAlert, jobExpiredAlert: $jobExpiredAlert, newJobAlert: $newJobAlert, shortlistedAlert: $shortlistedAlert, status: $status, isDemoField: $isDemoField, createdAt: $createdAt, updatedAt: $updatedAt, authType: $authType, googleId: $googleId, facebookId: $facebookId, provider: $provider, providerId: $providerId, imageUrl: $imageUrl)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'CompanyUser'))
+      ..add(DiagnosticsProperty('type', 'OpenJobCompanyUser'))
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('name', name))
       ..add(DiagnosticsProperty('username', username))
@@ -3448,7 +3452,7 @@ class _$CompanyUserImpl with DiagnosticableTreeMixin implements _CompanyUser {
   }
 }
 
-abstract class _CompanyUser implements CompanyUser {
+abstract class _CompanyUser extends OpenJobCompanyUser {
   const factory _CompanyUser(
       {@JsonKey(name: 'id') final int? id,
       @JsonKey(name: 'name') final String? name,
@@ -3472,6 +3476,7 @@ abstract class _CompanyUser implements CompanyUser {
       @JsonKey(name: 'provider') final String? provider,
       @JsonKey(name: 'provider_id') final String? providerId,
       @JsonKey(name: 'image_url') final String? imageUrl}) = _$CompanyUserImpl;
+  const _CompanyUser._() : super._();
 
   factory _CompanyUser.fromJson(Map<String, dynamic> json) =
       _$CompanyUserImpl.fromJson;

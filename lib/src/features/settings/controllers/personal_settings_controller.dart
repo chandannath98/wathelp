@@ -8,6 +8,7 @@ import 'package:jobpilot/src/domain/server/repositories/settings/models/personal
 import 'package:jobpilot/src/domain/server/repositories/settings/models/resume/resume_data/resume_data.dart';
 import 'package:jobpilot/src/domain/server/repositories/settings/settings_repo.dart';
 import 'package:jobpilot/src/features/settings/views/edit_resume.dart';
+import 'package:jobpilot/src/services/authentication/auth_controller.dart';
 import 'package:jobpilot/src/services/controller_mixin/controller_mixins.dart';
 import 'package:jobpilot/src/utilities/scaffold_util.dart';
 
@@ -115,6 +116,13 @@ class PersonalSettingsController extends GetxController
     headlineTextController.text = currentPersonalData?.title ?? "";
     birthDateTextController.text = currentPersonalData?.dateOfBirth ?? "";
     websiteTextController.text = currentPersonalData?.website ?? "";
+    //Handle new image link!
+    final currentUser = AuthController.find.currentUser;
+    AuthController.find.handleNewUser(
+      currentUser!.copyWith(
+        photoUrl: newSettings.imageUrl ?? currentUser.photoUrl,
+      ),
+    );
 
     if (newSettings.educationList != null) {
       educationOptions = newSettings.educationList!;
@@ -139,7 +147,7 @@ class PersonalSettingsController extends GetxController
       if (!isRefresh) setLoadingStatus(false);
       log("#FetchPersonalDataError", error: e, stackTrace: s);
       if (e is RequestException) e.handleError();
-    }
+    } finally {}
   }
 
   Future saveCurrentPersonalData() async {

@@ -1,5 +1,7 @@
+import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:get/get.dart' hide Trans;
+import 'package:jobpilot/generated/locale_keys.g.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
 import 'package:jobpilot/src/features/single_job/controllers/apply_job_controller.dart';
 import 'package:jobpilot/src/global/widgets/app/custom_titled_drop_down.dart';
@@ -23,7 +25,7 @@ class ApplyJobScreen extends StatelessWidget {
       appBar: AppBar(
         titleSpacing: 0,
         title: Text(
-          "Apply Job: $jobName",
+          "${LocaleKeys.apply_job.tr()}: $jobName",
         ),
       ),
       body: GetBuilder(
@@ -40,8 +42,8 @@ class ApplyJobScreen extends StatelessWidget {
                         children: [
                           24.height,
                           CustomTitledDropdownField(
-                            title: "CV/Resume",
-                            hintText: "Choose resume...",
+                            title: LocaleKeys.cv_resume_name.tr(),
+                            hintText: "${LocaleKeys.choose_resume.tr()}...",
                             onChange: (value) =>
                                 controller.onResumeSelect(value!),
                             fieldList: controller.resumeList
@@ -61,7 +63,7 @@ class ApplyJobScreen extends StatelessWidget {
                           ],
                           24.height,
                           Text(
-                            "Cover Letter",
+                            LocaleKeys.cover_letter.tr(),
                             style: context.text.bodyLarge?.copyWith(
                               fontWeight: FontWeight.w500,
                             ),
@@ -102,8 +104,8 @@ class ApplyJobScreen extends StatelessWidget {
                                 ? null
                                 : controller.apply.withOverlay,
                             icon: const Icon(Icons.arrow_back),
-                            label: const Text(
-                              "Apply Now",
+                            label: Text(
+                              LocaleKeys.apply_now.tr(),
                               textAlign: TextAlign.center,
                             ),
                           ),

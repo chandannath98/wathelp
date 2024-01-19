@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="app_name">Jobpilot</string>
+<string name="facebook_app_id">232542909907202</string>
+<string name="fb_login_protocol_scheme">fb1234</string>
+<string name="facebook_client_token">52312c3d4a90f5d2667caacbc2885d48</string>
+</resources>
+
+

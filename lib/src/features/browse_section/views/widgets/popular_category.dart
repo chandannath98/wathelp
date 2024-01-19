@@ -1,5 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:jobpilot/generated/locale_keys.g.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
 import 'package:jobpilot/src/global/widgets/app_shimmer.dart';
 import 'package:jobpilot/src/services/theme/app_theme.dart';
@@ -32,7 +34,7 @@ class HomePopularCategorySection extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Text(
-                  "Popular Category",
+                  LocaleKeys.popular_category.tr(),
                   style: context.text.titleLarge?.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
@@ -105,7 +107,7 @@ class PopularCategoryWidget extends StatelessWidget {
       subtitle: Padding(
         padding: const EdgeInsets.only(top: 4),
         child: Text(
-          "$count Open Positions",
+          "$count ${LocaleKeys.open_positions.tr()}",
           style: context.text.bodyMedium,
         ),
       ),

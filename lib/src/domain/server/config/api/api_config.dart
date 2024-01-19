@@ -19,6 +19,7 @@ class API {
 
   //Home
   static const homeBrowse = "/home";
+  static const notifications = "/notifications";
   static const candidateDashboard = "/candidate/dashboard";
 
   //Jobs
