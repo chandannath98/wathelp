@@ -45,4 +45,10 @@ class RegistrationController extends GetxController {
     }
     return null;
   }
+
+  initiateGoogleLogin() async {
+    try {} catch (e, s) {
+      log("#GoogleLoginError", error: e, stackTrace: s);
+    }
+  }
 }
