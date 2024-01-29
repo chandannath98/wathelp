@@ -42,7 +42,7 @@ class LoginSystemScreen extends StatelessWidget {
                 color: context.color?.primary,
               ),
               label: Text(
-                createAccount,
+                LocaleKeys.create_account.tr(),
                 style: context.text.bodyLarge?.copyWith(
                   fontWeight: FontWeight.bold,
                   color: context.color?.primary,

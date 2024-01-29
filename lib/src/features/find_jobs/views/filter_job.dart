@@ -1,6 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart' hide ContextExtensionss;
+import 'package:get/get.dart' hide ContextExtensionss, Trans;
+import 'package:jobpilot/generated/locale_keys.g.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
 import 'package:jobpilot/src/domain/server/repositories/jobs/jobs_repo.dart';
 import 'package:jobpilot/src/domain/server/repositories/jobs/models/category/job_category.dart';
@@ -24,8 +26,8 @@ class AdvanceJobFilter extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         titleSpacing: 0,
-        title: const Text(
-          "Advance Filter",
+        title: Text(
+          LocaleKeys.advance_filter.tr(),
         ),
       ),
       body: GetBuilder(
@@ -113,8 +115,8 @@ class AdvanceJobFilter extends StatelessWidget {
                                       ),
                                     ),
                                     4.width,
-                                    const Text(
-                                      "Remote Job",
+                                    Text(
+                                      LocaleKeys.remote_job.tr(),
                                     ),
                                   ],
                                 ),
@@ -126,8 +128,8 @@ class AdvanceJobFilter extends StatelessWidget {
                             child: ElevatedButton(
                               onPressed: () =>
                                   Get.back(result: controller.currentQuery),
-                              child: const Text(
-                                "Apply Filter",
+                              child: Text(
+                                LocaleKeys.active_filter.tr(),
                                 textAlign: TextAlign.center,
                               ),
                             ),
@@ -159,9 +161,9 @@ class AvailableCategorySection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const allCategoryOption = JobCategory(
+    final allCategoryOption = JobCategory(
       id: null,
-      name: "All Category",
+      name: LocaleKeys.all_category.tr(),
     );
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -170,7 +172,7 @@ class AvailableCategorySection extends StatelessWidget {
         Padding(
           padding: horizontal16,
           child: Text(
-            "Industry",
+            LocaleKeys.industry_type.tr(),
             style: context.text.bodyLarge?.copyWith(
               fontWeight: FontWeight.w600,
               color: context.color?.primary,
@@ -266,7 +268,7 @@ class SalaryLimitSection extends StatelessWidget {
         Padding(
           padding: horizontal16,
           child: Text(
-            "Salary",
+            LocaleKeys.salary.tr(),
             style: context.text.bodyLarge?.copyWith(
               fontWeight: FontWeight.w600,
               color: context.color?.primary,
@@ -355,7 +357,7 @@ class JobTypesSection extends StatelessWidget {
         Padding(
           padding: horizontal16,
           child: Text(
-            "Job Type",
+            LocaleKeys.job_type.tr(),
             style: context.text.bodyLarge?.copyWith(
               fontWeight: FontWeight.w600,
               color: context.color?.primary,
@@ -391,8 +393,8 @@ class ActiveFiltersSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const Text(
-            "Active Filters:",
+          Text(
+            "${LocaleKeys.active_filter.tr()}:",
           ),
           12.height,
           Wrap(
@@ -403,7 +405,8 @@ class ActiveFiltersSection extends StatelessWidget {
                   controller.currentQuery.query!.isNotEmpty)
                 ActiveFilterChip(
                   isSelected: false,
-                  title: "Search: ${controller.currentQuery.query}",
+                  title:
+                      "${LocaleKeys.search.tr()}: ${controller.currentQuery.query}",
                   onDelete: () => controller.setCurrentQuery(
                       controller.currentQuery.copyWith(query: null)),
                 ),
@@ -433,7 +436,7 @@ class ActiveFiltersSection extends StatelessWidget {
                 ActiveFilterChip(
                   isSelected: false,
                   title:
-                      "Salary \$${controller.currentQuery.minPrice?.toString() ?? "0"} - ${controller.currentQuery.maxPrice == null ? "Up" : "\$${controller.currentQuery.maxPrice}"}",
+                      "${LocaleKeys.salary.tr()} \$${controller.currentQuery.minPrice?.toString() ?? "0"} - ${controller.currentQuery.maxPrice == null ? "Up" : "\$${controller.currentQuery.maxPrice}"}",
                   onDelete: () {
                     controller.setMaximumSalary(null);
                     controller.setMinimumSalary(null);

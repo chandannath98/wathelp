@@ -10,6 +10,7 @@ enum SocialShareOption {
   whatsapp,
 }
 
+/// Ref : [https://blog.shahednasser.com/how-to-easily-add-share-links-for-each-social-media-platform]
 Future<bool?> enterSocialShareLink({
   required SocialShareOption option,
   String? url,
@@ -25,7 +26,8 @@ Future<bool?> enterSocialShareLink({
         "https://www.facebook.com/sharer/sharer.php?u=$encodedUrl&qoute=$encodedText",
       SocialShareOption.telegram =>
         "https://t.me/share/url?text=$encodedText&url=$encodedUrl",
-      SocialShareOption.whatsapp => "https://wa.me/?text=$heading$url",
+      SocialShareOption.whatsapp =>
+        "https://wa.me/?text=$encodedText$encodedUrl",
     };
     final finalUri = Uri.parse(stringUrl);
     if (await canLaunchUrl(finalUri)) {

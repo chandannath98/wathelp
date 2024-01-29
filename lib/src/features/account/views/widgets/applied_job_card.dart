@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import 'package:flutter/material.dart';
+import 'package:jobpilot/generated/locale_keys.g.dart';
 import 'package:jobpilot/src/constants/assets/assets.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
 import 'package:jobpilot/src/domain/server/repositories/jobs/models/applied_jobs/job/applied_job.dart';
@@ -74,7 +76,7 @@ class AppliedJobCardWidget extends StatelessWidget {
                                   child: Padding(
                                     padding: all6,
                                     child: Text(
-                                      "Remote",
+                                      "${LocaleKeys.remote.tr()}",
                                       style: context.text.bodySmall?.copyWith(
                                         color: context.color?.primary,
                                       ),
@@ -130,7 +132,7 @@ class AppliedJobCardWidget extends StatelessWidget {
                 12.width,
                 Expanded(
                   child: Text(
-                    "Applied Date: ${jobData.appliedHumanTime}",
+                    "${LocaleKeys.already_applied.tr()}: ${jobData.appliedHumanTime}",
                     style: context.text.bodySmall,
                   ),
                 ),
@@ -149,8 +151,8 @@ class AppliedJobCardWidget extends StatelessWidget {
                     icon: const Icon(
                       Icons.arrow_back,
                     ),
-                    label: const Text(
-                      "View Details",
+                    label: Text(
+                      LocaleKeys.view_details.tr(),
                     ),
                   ),
                 ),

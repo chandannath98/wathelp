@@ -5,7 +5,6 @@ import 'package:get/get.dart' hide Trans;
 import 'package:jobpilot/generated/locale_keys.g.dart';
 import 'package:jobpilot/src/constants/assets/assets.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
-import 'package:jobpilot/src/constants/strings/home_strings.dart';
 import 'package:jobpilot/src/features/authentication/controllers/registration_controller.dart';
 import 'package:jobpilot/src/global/widgets/social_login_button.dart';
 import 'package:jobpilot/src/services/authentication/models/user_type/user_type.dart';
@@ -365,21 +364,23 @@ class _RegistrationSectionWidgetState extends State<RegistrationSectionWidget> {
                             Expanded(
                               child: RichText(
                                 text: TextSpan(
-                                  text: "I have read & agreed with Jobpilot ",
+                                  text:
+                                      "${LocaleKeys.i_have_read_and_agree_with.tr()} ",
                                   style: context.text.bodyMedium,
                                   children: [
                                     TextSpan(
-                                      text: "Privacy Policy",
+                                      text: LocaleKeys.privacy_policy.tr(),
                                       style: context.text.bodyMedium?.copyWith(
                                         fontWeight: FontWeight.w600,
                                         color: context.color?.primary,
                                       ),
                                     ),
-                                    const TextSpan(
-                                      text: " and ",
+                                    TextSpan(
+                                      text: " ${LocaleKeys.and.tr()} ",
                                     ),
                                     TextSpan(
-                                      text: "Terms & Conditions.",
+                                      text:
+                                          "${LocaleKeys.terms_conditions.tr()}.",
                                       style: context.text.bodyMedium?.copyWith(
                                         fontWeight: FontWeight.w600,
                                         color: context.color?.primary,
@@ -413,14 +414,14 @@ class _RegistrationSectionWidgetState extends State<RegistrationSectionWidget> {
                   ),
                   10.height,
                   SocialButton(
-                    text: "Sign up with Facebook",
+                    text: LocaleKeys.login_with_facebook.tr(),
                     iconLink:
                         "https://img.icons8.com/?size=48&id=118497&format=png",
                     onTap: () {},
                   ),
                   10.height,
                   SocialButton(
-                    text: "Sign up with Google",
+                    text: LocaleKeys.login_with_google.tr(),
                     iconLink:
                         "https://img.icons8.com/?size=48&id=17949&format=png",
                     onTap: () {},

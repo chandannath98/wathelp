@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:jobpilot/generated/locale_keys.g.dart';
 
 class SaveChangesButton extends StatelessWidget {
   const SaveChangesButton({
@@ -16,8 +18,9 @@ class SaveChangesButton extends StatelessWidget {
         width: 160,
         child: ElevatedButton(
           onPressed: onTap,
-          child: const Text(
-            "Save Changes",
+          child: Text(
+            LocaleKeys.save_changes.tr(),
+            textAlign: TextAlign.center,
           ),
         ),
       ),

@@ -109,7 +109,9 @@ class SearchBoxWidget<T> extends StatelessWidget {
               ElevatedButton.icon(
                 onPressed: onFilterClick,
                 icon: const Icon(Icons.filter_list_rounded),
-                label: const Text(advanceFilter),
+                label: Text(
+                  LocaleKeys.advance_filter.tr(),
+                ),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: (hasFilterData ?? false)
                       ? context.color?.primary.withOpacity(0.15)

@@ -2,9 +2,11 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:dotted_border/dotted_border.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:get/get.dart' hide Trans;
+import 'package:jobpilot/generated/locale_keys.g.dart';
 import 'package:jobpilot/src/constants/design/border_radius.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
 import 'package:jobpilot/src/domain/server/repositories/settings/models/resume/resume_data/resume_data.dart';
@@ -50,7 +52,9 @@ class EditResumeScreen extends StatelessWidget {
       appBar: AppBar(
         titleSpacing: 0,
         title: Text(
-          isEdit ? "Edit Resume" : "Add New CV/Resume",
+          isEdit
+              ? "${LocaleKeys.upload_cv_resume.tr()}"
+              : "${LocaleKeys.add_cv_resume.tr()}",
         ),
       ),
       body: Padding(
@@ -68,7 +72,7 @@ class EditResumeScreen extends StatelessWidget {
                           24.height,
                           CustomTitledTextFormField(
                             hintText: "",
-                            title: "Cv/Resume Name",
+                            title: "${LocaleKeys.cv_resume_name.tr()}",
                             controller: controller.resumeNameController,
                           ),
                           if (controller.nameError != null) ...[
@@ -81,7 +85,7 @@ class EditResumeScreen extends StatelessWidget {
                             ),
                           ],
                           12.height,
-                          const Text("Upload your Cv/Resume"),
+                          Text("${LocaleKeys.upload_cv_resume.tr()}"),
                           8.height,
                           PickResumeWidget(
                             fileName: controller.resumeName,
@@ -115,7 +119,9 @@ class EditResumeScreen extends StatelessWidget {
                             : controller.createResume.withOverlay,
                         icon: const Icon(Icons.add_circle_outline_outlined),
                         label: Text(
-                          isEdit ? "Update Resume" : "Create  Resume",
+                          isEdit
+                              ? "${LocaleKeys.update_cv_resume.tr()}"
+                              : "${LocaleKeys.add_cv_resume.tr()}",
                         ),
                       ),
                     ),
@@ -184,7 +190,7 @@ class PickResumeWidget extends StatelessWidget {
                         ]
                       : [
                           TextSpan(
-                            text: "Browse file",
+                            text: "${LocaleKeys.browse_file.tr()}",
                             style: context.text.titleMedium?.copyWith(
                               fontWeight: FontWeight.w600,
                             ),

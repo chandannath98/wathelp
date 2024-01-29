@@ -1,6 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:intl/intl.dart';
+import 'package:get/get.dart' hide Trans;
+import 'package:jobpilot/generated/locale_keys.g.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
 import 'package:jobpilot/src/domain/server/repositories/settings/models/profile_settings/candidate_profile_settings/candidate_profile_setting_data.dart';
 import 'package:jobpilot/src/global/widgets/app/custom_titled_text_field.dart';
@@ -61,7 +62,7 @@ class ProfileInformationTab extends StatelessWidget {
                         ), 
                         16.height,*/
                         CustomTitledDropdownField(
-                          title: "Gender",
+                          title: "${LocaleKeys.gender.tr()}",
                           value: controller.data?.gender,
                           onChange: (value) =>
                               controller.onGenderSelect(value!),
@@ -73,7 +74,7 @@ class ProfileInformationTab extends StatelessWidget {
                         ),
                         16.height,
                         CustomTitledDropdownField(
-                          title: "Marital State",
+                          title: "${LocaleKeys.marital_status.tr()}",
                           value: controller.data?.maritalStatus,
                           onChange: (value) =>
                               controller.onMaritalStatusSelect(value!),
@@ -109,7 +110,7 @@ class ProfileInformationTab extends StatelessWidget {
                         //Not from UI.
                         16.height,
                         CustomTitledDropdownField(
-                          title: "Profession",
+                          title: "${LocaleKeys.profession.tr()}",
                           onChange: (value) =>
                               controller.onProfessionSelect(value!),
                           value: controller.data?.professionId,
@@ -121,7 +122,7 @@ class ProfileInformationTab extends StatelessWidget {
                         ),
                         16.height,
                         CustomTitledDropdownField(
-                          title: "Availability Status",
+                          title: "${LocaleKeys.availability.tr()}",
                           onChange: (value) =>
                               controller.onStatusChange(value!),
                           value: controller.data?.availability,
@@ -136,7 +137,7 @@ class ProfileInformationTab extends StatelessWidget {
                             AvailableStatus.availableIn) ...[
                           CustomTitledTextFormField(
                             hintText: "DD-MM-YYYY",
-                            title: "Available Date",
+                            title: "${LocaleKeys.available_in.tr()}",
                             inputType: TextInputType.datetime,
                             controller: controller.availableInController,
                             replacementFunction: () async {
@@ -158,7 +159,7 @@ class ProfileInformationTab extends StatelessWidget {
                           ),
                           16.height,
                         ],
-                        const Text("Biography"),
+                        Text("${LocaleKeys.biography.tr()}"),
                         6.height,
                         ConstrainedBox(
                           constraints: BoxConstraints(

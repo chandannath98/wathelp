@@ -1,6 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get.dart';
+import 'package:get/get.dart' hide Trans;
+import 'package:jobpilot/generated/locale_keys.g.dart';
 import 'package:jobpilot/src/constants/assets/assets.dart';
 import 'package:jobpilot/src/constants/design/border_radius.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
@@ -104,12 +106,12 @@ class JobSearchPage extends StatelessWidget {
                     ),
                   )
                 : controller.currentJobList!.isEmpty
-                    ? const SliverFillRemaining(
+                    ? SliverFillRemaining(
                         child: FittedBox(
                           fit: BoxFit.scaleDown,
                           alignment: Alignment.center,
                           child: Text(
-                            "No jobs found!",
+                            LocaleKeys.no_data_found.tr(),
                           ),
                         ),
                       )
@@ -203,7 +205,7 @@ class FindJobsSettings extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.only(bottom: 3),
                   child: Text(
-                    "Find Jobs",
+                    LocaleKeys.find_job.tr(),
                     style: context.text.titleLarge?.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
@@ -250,7 +252,7 @@ class FindJobsSettings extends StatelessWidget {
           ),
           12.height,
           Text(
-            "Popular searches:",
+            LocaleKeys.popular_searches.tr(),
             style: context.text.bodySmall,
           ),
           8.height,

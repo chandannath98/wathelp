@@ -1,5 +1,7 @@
+import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:get/get.dart' hide Trans;
+import 'package:jobpilot/generated/locale_keys.g.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
 import 'package:jobpilot/src/features/settings/views/settings.dart';
 import 'package:jobpilot/src/services/authentication/auth_controller.dart';
@@ -42,7 +44,9 @@ class CompleteProfileSection extends StatelessWidget {
                         ),
                         6.height,
                         Text(
-                          "Complete your profile editing & build your custom resume.",
+                          LocaleKeys
+                              .complete_your_profile_before_applying_to_jobs_add_your_information_resume_and_profile_picture_for_a_better_chance_of_getting_hired
+                              .tr(),
                           style: context.text.bodySmall?.copyWith(
                             color: context.color?.theme,
                           ),
@@ -59,7 +63,7 @@ class CompleteProfileSection extends StatelessWidget {
               child: Directionality(
                 textDirection: TextDirection.rtl,
                 child: SizedBox(
-                  width: 150,
+                  width: 160,
                   child: ElevatedButton.icon(
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.red.shade900,
@@ -69,8 +73,9 @@ class CompleteProfileSection extends StatelessWidget {
                     icon: const Icon(
                       Icons.arrow_back,
                     ),
-                    label: const Text(
-                      "Edit Now",
+                    label: Text(
+                      // ignore: unnecessary_string_interpolations
+                      "${LocaleKeys.edit_profile.tr()}",
                     ),
                   ),
                 ),

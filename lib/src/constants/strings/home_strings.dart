@@ -1,3 +1,4 @@
+/* 
 const login = "Login";
 const createAccount = "Create Account";
 const heading = "Find a job that suits your interest & skills.";
@@ -6,3 +7,4 @@ const subtitle =
 const search = "Search";
 const location = "Location";
 const advanceFilter = "Advance Filter";
+ */

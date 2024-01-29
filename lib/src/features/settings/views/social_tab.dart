@@ -1,5 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:get/get.dart' hide Trans;
+import 'package:jobpilot/generated/locale_keys.g.dart';
 import 'package:jobpilot/src/constants/assets/assets.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
 import 'package:jobpilot/src/features/settings/controllers/social_settings_controller.dart';
@@ -96,7 +98,8 @@ class SocialInformationTab extends StatelessWidget {
                                     .withOverlay();
                               }
                             },
-                            label: const Text("Add New Social Link"),
+                            label:
+                                Text("${LocaleKeys.add_new_social_link.tr()}"),
                             icon: const Icon(Icons.add_circle_outline_rounded),
                           ),
                         ),
@@ -294,7 +297,7 @@ class _SocialPickerWidgetState extends State<SocialPickerWidget> {
                                     (widget.optionList.containsKey(selectedKey))
                                         ? selectedKey
                                         : null,
-                                title: "Social Media",
+                                title: "${LocaleKeys.social_media.tr()}",
                                 showTitle: false,
                                 onChange: (value) => setState(() {
                                   selectedKey = value!;
@@ -340,8 +343,8 @@ class _SocialPickerWidgetState extends State<SocialPickerWidget> {
                         icon: const Icon(
                           Icons.add,
                         ),
-                        label: const Text(
-                          "Add Social",
+                        label: Text(
+                          "${LocaleKeys.add_new_social_link.tr()}",
                         ),
                       ),
                     ],

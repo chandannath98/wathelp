@@ -254,14 +254,14 @@ class _LoginSectionWidgetState extends State<LoginSectionWidget> {
                   ),
                   10.height,
                   SocialButton(
-                    text: "Sign in with Facebook",
+                    text: LocaleKeys.login_with_facebook.tr(),
                     iconLink:
                         "https://img.icons8.com/?size=48&id=118497&format=png",
                     onTap: widget.onFacebookClick,
                   ),
                   10.height,
                   SocialButton(
-                    text: "Sign in with Google",
+                    text: LocaleKeys.login_with_google.tr(),
                     iconLink:
                         "https://img.icons8.com/?size=48&id=17949&format=png",
                     onTap: widget.onGoogleClick,

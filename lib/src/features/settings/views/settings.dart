@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:jobpilot/generated/locale_keys.g.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
 import 'package:jobpilot/src/features/settings/views/personal_tab.dart';
 import 'package:jobpilot/src/services/theme/extensions.dart';
@@ -39,8 +41,8 @@ class _SettingsScreenState extends State<SettingsScreen>
     return Scaffold(
       appBar: AppBar(
         titleSpacing: 0,
-        title: const Text(
-          "Setting",
+        title: Text(
+          LocaleKeys.settings.tr(),
         ),
       ),
       body: Column(
@@ -63,10 +65,10 @@ class _SettingsScreenState extends State<SettingsScreen>
                   fontWeight: FontWeight.w600,
                 ),
                 tabs: [
-                  "Personal",
-                  "Profile",
-                  "Social",
-                  "Contact",
+                  (LocaleKeys.basic.tr()),
+                  (LocaleKeys.profile.tr()),
+                  (LocaleKeys.social_media.tr()),
+                  (LocaleKeys.contact.tr()),
                 ]
                     .map(
                       (text) => Padding(

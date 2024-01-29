@@ -1,9 +1,10 @@
 import 'dart:io';
 
 import 'package:dotted_border/dotted_border.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:intl/intl.dart';
+import 'package:get/get.dart' hide Trans;
+import 'package:jobpilot/generated/locale_keys.g.dart';
 import 'package:jobpilot/src/constants/design/border_radius.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
 import 'package:jobpilot/src/domain/server/repositories/settings/models/resume/resume_data/resume_data.dart';
@@ -73,7 +74,7 @@ class ResumeListSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Text(
-          "Your Resume/CV",
+          "${LocaleKeys.your_cv_resume.tr()}",
           style: context.text.titleLarge?.copyWith(
             fontSize: 18,
             fontWeight: FontWeight.w600,
@@ -102,13 +103,13 @@ class ResumeListSection extends StatelessWidget {
             onTap: controller.onAddResumeClick,
             shape: const RoundedRectangleBorder(borderRadius: br4),
             title: Text(
-              "Add Cv/Resume",
+              "${LocaleKeys.add_cv_resume.tr()}",
               style: context.text.titleMedium?.copyWith(
                 fontWeight: FontWeight.w600,
               ),
             ),
-            subtitle: const Text(
-              "Browse file or drop here. only pdf",
+            subtitle: Text(
+              "${LocaleKeys.browse_photo_or_drop_here.tr()}. only pdf",
             ),
             leading: Icon(
               Icons.add_circle_outline_outlined,
@@ -157,7 +158,7 @@ class ResumeListTile extends StatelessWidget {
             padding: EdgeInsets.zero,
             onTap: () async => onEditResumeClick(resumeData),
             child: ResumeActionMenuOption(
-              title: "Edit Resume",
+              title: "${LocaleKeys.update_cv_resume.tr()}",
               icon: Icons.edit_square,
               baseColor: context.color?.primary ?? Colors.green,
             ),
@@ -239,7 +240,7 @@ class BasicInformationSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Text(
-          "Basic Information",
+          "${LocaleKeys.basic_information.tr()}",
           style: context.text.titleLarge?.copyWith(
             fontSize: 18,
             fontWeight: FontWeight.w600,
@@ -247,7 +248,7 @@ class BasicInformationSection extends StatelessWidget {
         ),
         16.height,
         Text(
-          "Profile Picture",
+          "${LocaleKeys.profile_picture.tr()}",
         ),
         8.height,
         Align(
@@ -266,19 +267,19 @@ class BasicInformationSection extends StatelessWidget {
         16.height,
         6.height,
         CustomTitledTextFormField(
-          title: "Name",
+          title: "${LocaleKeys.app_name.tr()}",
           controller: controller.nameTextController,
           onChange: (value) => controller.updateName(value),
         ),
         16.height,
         CustomTitledTextFormField(
-          title: "Title/Headline",
+          title: "${LocaleKeys.tittle_headline.tr()}",
           controller: controller.headlineTextController,
           onChange: (value) => controller.updateTitle(value),
         ),
         16.height,
         CustomTitledDropdownField(
-          title: "Experience",
+          title: "${LocaleKeys.experience.tr()}",
           onChange: (value) => controller.updateExperienceId(value!),
           value: controller.currentPersonalData?.experienceId,
           fieldList: controller.experienceOptions
@@ -290,7 +291,7 @@ class BasicInformationSection extends StatelessWidget {
         ),
         16.height,
         CustomTitledDropdownField(
-          title: "Education",
+          title: "${LocaleKeys.education.tr()}",
           onChange: (value) => controller.updateEducationId(value!),
           value: controller.currentPersonalData?.educationId,
           fieldList: controller.educationOptions
@@ -303,7 +304,7 @@ class BasicInformationSection extends StatelessWidget {
         16.height,
         CustomTitledTextFormField(
           hintText: "DD-MM-YYYY",
-          title: "Date of Birth",
+          title: "${LocaleKeys.date_of_birth.tr()}",
           inputType: TextInputType.datetime,
           controller: controller.birthDateTextController,
           onChange: (value) => controller.updateBirthDate(value),
@@ -321,8 +322,8 @@ class BasicInformationSection extends StatelessWidget {
         ),
         16.height,
         CustomTitledTextFormField(
-          hintText: "Link/Url...",
-          title: "Personal Website",
+          hintText: "${LocaleKeys.profile_link_url.tr()}...",
+          title: "${LocaleKeys.personal_website.tr()}",
           controller: controller.websiteTextController,
           onChange: (value) => controller.updateWebsite(value),
           prefixIcon: Icon(
@@ -397,13 +398,14 @@ class SetProfilePictureWidget extends StatelessWidget {
                           text: TextSpan(
                             children: [
                               TextSpan(
-                                text: "Attach a photo",
+                                text: "${LocaleKeys.upload_photo.tr()}",
                                 style: context.text.titleMedium?.copyWith(
                                   fontWeight: FontWeight.w600,
                                 ),
                               ),
                               TextSpan(
-                                text: " or take one.",
+                                text:
+                                    " ${LocaleKeys.or.tr()} ${LocaleKeys.sign_in.tr()}.",
                                 style: context.text.titleMedium?.copyWith(
                                   color: context.color?.extra,
                                 ),
@@ -413,7 +415,7 @@ class SetProfilePictureWidget extends StatelessWidget {
                         ),
                         8.height,
                         Text(
-                          "A photo larger than 400 pixels work best.\n Max photo size 5 MB.",
+                          "${LocaleKeys.photo_larger_than_pixels_work_best_max_photo_size_mb.tr()}",
                           textAlign: TextAlign.center,
                           style: context.text.bodySmall?.copyWith(
                             color: context.color?.extra,

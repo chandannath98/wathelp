@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:jobpilot/src/domain/server/config/repository.dart';
 import 'package:jobpilot/src/domain/server/config/request_handler.dart';
 import 'package:jobpilot/src/domain/server/repositories/company/company_repo.dart';
 import 'package:jobpilot/src/domain/server/repositories/company/models/single_company/company_details/company_details.dart';

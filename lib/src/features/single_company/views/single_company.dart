@@ -1,5 +1,7 @@
+import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:get/get.dart' hide Trans;
+import 'package:jobpilot/generated/locale_keys.g.dart';
 import 'package:jobpilot/src/constants/assets/assets.dart';
 import 'package:jobpilot/src/constants/design/border_radius.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
@@ -29,8 +31,8 @@ class SingleCompanyDetailsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         titleSpacing: 0,
-        title: const Text(
-          "Company Description",
+        title: Text(
+          LocaleKeys.company_description.tr(),
         ),
       ),
       body: GetBuilder(
@@ -177,8 +179,8 @@ class CompanyDetailsHeader extends StatelessWidget {
             child: ElevatedButton.icon(
               onPressed: () => controller.onMoreOpenClick(),
               icon: const Icon(Icons.arrow_back),
-              label: const Text(
-                "Open Positions",
+              label: Text(
+                LocaleKeys.open_positions.tr(),
               ),
             ),
           ),
@@ -209,7 +211,7 @@ class OpenJobsSection extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
-              "Open Positions",
+              LocaleKeys.open_positions.tr(),
               style: context.text.titleLarge?.copyWith(
                 fontWeight: FontWeight.bold,
               ),
@@ -222,7 +224,7 @@ class OpenJobsSection extends StatelessWidget {
                 postName: i.job.title!,
                 postType: i.job.jobType!.name!,
                 salaryRange:
-                    "Salary: \$${i.job.minSalary} - \$${i.job.maxSalary}",
+                    "${LocaleKeys.salary.tr()}: \$${i.job.minSalary} - \$${i.job.maxSalary}",
                 companyName: i.job.company?.user?.name ?? "",
                 companyLocation: i.job.country!,
                 companyIcon: i.job.company!.logo!,
@@ -236,7 +238,7 @@ class OpenJobsSection extends StatelessWidget {
               InkWell(
                 onTap: onLoadMoreClick,
                 child: Text(
-                  "Load More Feature Jobs",
+                  LocaleKeys.view_more_jobs.tr(),
                   style: context.text.titleMedium?.copyWith(
                     fontWeight: FontWeight.bold,
                     color: context.color?.primary,
@@ -280,7 +282,7 @@ class CompanyContactSection extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
-              "Contact Information",
+              LocaleKeys.contact_information.tr(),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: context.text.titleMedium?.copyWith(
@@ -294,7 +296,7 @@ class CompanyContactSection extends StatelessWidget {
                   Icons.language,
                   size: 32,
                 ),
-                title: "WEBSITE",
+                title: LocaleKeys.website.tr().toUpperCase(),
                 data: controller.detailResponse?.companyDetails?.website ?? "",
               ),
             divider,
@@ -304,7 +306,7 @@ class CompanyContactSection extends StatelessWidget {
                   Icons.ring_volume_outlined,
                   size: 32,
                 ),
-                title: "PHONE",
+                title: LocaleKeys.phone.tr().toUpperCase(),
                 data: controller.detailResponse?.user?.contactInfo?.phone ?? "",
               ),
             divider,
@@ -314,13 +316,13 @@ class CompanyContactSection extends StatelessWidget {
                   Icons.mail_outline,
                   size: 32,
                 ),
-                title: "EMAIL ADDRESS",
+                title: LocaleKeys.email_address.tr().toUpperCase(),
                 data: controller.detailResponse?.user?.contactInfo?.email ?? "",
               ),
             divider,
             20.height,
             Text(
-              "Share this Profile:",
+              "${LocaleKeys.share_this_profile.tr()}:",
               style: context.text.titleMedium,
             ),
             12.height,
@@ -338,8 +340,8 @@ class CompanyContactSection extends StatelessWidget {
                       Icons.insert_link_rounded,
                     ),
                   ),
-                  label: const Text(
-                    "Copy Link",
+                  label: Text(
+                    LocaleKeys.copy_links.tr(),
                   ),
                 ),
                 SquaredIconButton(
@@ -441,7 +443,7 @@ class CompanyOverviewSection extends StatelessWidget {
               children: [
                 Expanded(
                   child: OverviewDataTile(
-                    title: "FOUNDED IN: ",
+                    title: "${LocaleKeys.founded_in.tr()}: ".toUpperCase(),
                     data: (controller.detailResponse?.companyDetails
                                 ?.establishmentDate ==
                             null)
@@ -457,7 +459,7 @@ class CompanyOverviewSection extends StatelessWidget {
                 ),
                 Expanded(
                   child: OverviewDataTile(
-                    title: "ORGANIZATION TYPE",
+                    title: LocaleKeys.organization_type.tr().toUpperCase(),
                     data: controller.detailResponse?.companyDetails
                             ?.organization?.name ??
                         "",
@@ -471,7 +473,7 @@ class CompanyOverviewSection extends StatelessWidget {
               children: [
                 Expanded(
                   child: OverviewDataTile(
-                    title: "TEAM SIZE",
+                    title: LocaleKeys.team_size.tr().toUpperCase(),
                     data: controller
                             .detailResponse?.companyDetails?.teamSize?.name ??
                         "",
@@ -480,7 +482,7 @@ class CompanyOverviewSection extends StatelessWidget {
                 ),
                 Expanded(
                   child: OverviewDataTile(
-                    title: "INDUSTRY TYPES  ",
+                    title: "${LocaleKeys.industry_type.tr()}  ".toUpperCase(),
                     data: controller
                             .detailResponse?.companyDetails?.industry?.name ??
                         "",
@@ -512,7 +514,7 @@ class CompanyDescriptionWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(
-            "Description",
+            LocaleKeys.description.tr(),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: context.text.titleMedium?.copyWith(

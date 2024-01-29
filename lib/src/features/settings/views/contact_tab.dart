@@ -20,167 +20,168 @@ class ContactSettingsTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ContactController>(
-        init: ContactController(),
-        builder: (controller) {
-          return controller.isLoading
-              ? const Center(
-                  child: CircularProgressIndicator(),
-                )
-              : SingleChildScrollView(
-                  child: Padding(
-                    padding: horizontal16,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        24.height,
-                        Text(
-                          "Contact Information",
-                          style: context.text.titleLarge?.copyWith(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w600,
-                          ),
+      init: ContactController(),
+      builder: (controller) {
+        return controller.isLoading
+            ? const Center(
+                child: CircularProgressIndicator(),
+              )
+            : SingleChildScrollView(
+                child: Padding(
+                  padding: horizontal16,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      24.height,
+                      Text(
+                        LocaleKeys.contact_information.tr(),
+                        style: context.text.titleLarge?.copyWith(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
                         ),
-                        16.height,
-                        SinglePhoneNumberTile(
-                          controller: controller.phoneTextController,
-                          icon: const Row(
-                            children: [
-                              SizedBox.square(),
-                            ],
-                          ),
-                          title: "Phone Number",
+                      ),
+                      16.height,
+                      SinglePhoneNumberTile(
+                        controller: controller.phoneTextController,
+                        icon: const Row(
+                          children: [
+                            SizedBox.square(),
+                          ],
                         ),
-                        16.height,
-                        SinglePhoneNumberTile(
-                          controller: controller.secondaryPhoneTextController,
-                          icon: const Row(
-                            children: [
-                              SizedBox.square(),
-                            ],
-                          ),
-                          title: "Secondary Number",
+                        title: LocaleKeys.phone_number.tr(),
+                      ),
+                      16.height,
+                      SinglePhoneNumberTile(
+                        controller: controller.secondaryPhoneTextController,
+                        icon: const Row(
+                          children: [
+                            SizedBox.square(),
+                          ],
                         ),
-                        16.height,
-                        SinglePhoneNumberTile(
-                          controller: controller.whatsappTextController,
-                          icon: Row(
-                            children: [
-                              SizedBox.square(
-                                dimension: 24,
-                                child: Image.network(
-                                  controller.getImageLink('whatsapp'),
-                                ),
+                        title: LocaleKeys.secondary_phone.tr(),
+                      ),
+                      16.height,
+                      SinglePhoneNumberTile(
+                        controller: controller.whatsappTextController,
+                        icon: Row(
+                          children: [
+                            SizedBox.square(
+                              dimension: 24,
+                              child: Image.network(
+                                controller.getImageLink('whatsapp'),
                               ),
-                            ],
-                          ),
-                          title: "Whatsapp Number",
-                        ),
-                        16.height,
-                        CustomTitledTextFormField(
-                          title: "Email",
-                          hintText: "Email address",
-                          controller: controller.secondaryEmailTextController,
-                          prefixIcon: Icon(
-                            Icons.email_outlined,
-                            color: context.color?.primary,
-                          ),
-                        ),
-                        16.height,
-                        SaveChangesButton(
-                          onTap: controller.saveCurrentContactData.withOverlay,
-                        ),
-                        24.height,
-                        Text(
-                          "Change Password",
-                          style: context.text.titleLarge?.copyWith(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        16.height,
-                        CustomTitledTextFormField(
-                          title: "Current Password",
-                          hintText: "Password...",
-                          isObscured: controller.hidePasswords,
-                          suffixIcon: IconButton(
-                            onPressed: controller.changeHidePasswords,
-                            icon: controller.hidePasswords
-                                ? const Icon(Icons.visibility_off_outlined)
-                                : const Icon(Icons.visibility_outlined),
-                          ),
-                          controller: controller.passwordController,
-                        ),
-                        16.height,
-                        CustomTitledTextFormField(
-                          title: "New Password",
-                          hintText: "Password...",
-                          isObscured: controller.hidePasswords,
-                          suffixIcon: IconButton(
-                            onPressed: controller.changeHidePasswords,
-                            icon: controller.hidePasswords
-                                ? const Icon(Icons.visibility_off_outlined)
-                                : const Icon(Icons.visibility_outlined),
-                          ),
-                          controller: controller.newPasswordController,
-                        ),
-                        16.height,
-                        CustomTitledTextFormField(
-                          title: "Confirm Password",
-                          hintText: "Password...",
-                          isObscured: controller.hidePasswords,
-                          suffixIcon: IconButton(
-                            onPressed: controller.changeHidePasswords,
-                            icon: controller.hidePasswords
-                                ? const Icon(Icons.visibility_off_outlined)
-                                : const Icon(Icons.visibility_outlined),
-                          ),
-                          controller: controller.confirmPasswordController,
-                        ),
-                        16.height,
-                        SaveChangesButton(
-                          onTap: controller.updateUserPassword.withOverlay,
-                        ),
-                        24.height,
-                        Text(
-                          "Delete Account",
-                          style: context.text.titleLarge?.copyWith(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        16.height,
-                        Text(
-                          "If you delete your Jobpilot account, you will no longer be able to get information about the matched jobs, following employers, and job alert, shortlisted jobs and more. You will be abandoned from all the services of Jobpilot.com.",
-                          style: context.text.bodyMedium?.copyWith(
-                            color: context.color?.extra,
-                          ),
-                        ),
-                        8.height,
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: TextButton.icon(
-                            style: TextButton.styleFrom(
-                              foregroundColor: Colors.red,
                             ),
-                            onPressed: () async {
-                              final password =
-                                  await _showAccountDeletePopup(context);
-                              if (password != null && password.isNotEmpty) {
-                                (() async =>
-                                        controller.deleteUserAccount(password))
-                                    .withOverlay();
-                              }
-                            },
-                            label: const Text("Delete Account"),
-                            icon: const Icon(Icons.cancel_outlined),
-                          ),
+                          ],
                         ),
-                        24.height,
-                      ],
-                    ),
+                        title: LocaleKeys.whatsapp_number.tr(),
+                      ),
+                      16.height,
+                      CustomTitledTextFormField(
+                        title: LocaleKeys.email.tr(),
+                        hintText: LocaleKeys.email_address.tr(),
+                        controller: controller.secondaryEmailTextController,
+                        prefixIcon: Icon(
+                          Icons.email_outlined,
+                          color: context.color?.primary,
+                        ),
+                      ),
+                      16.height,
+                      SaveChangesButton(
+                        onTap: controller.saveCurrentContactData.withOverlay,
+                      ),
+                      24.height,
+                      Text(
+                        LocaleKeys.change_password.tr(),
+                        style: context.text.titleLarge?.copyWith(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      16.height,
+                      CustomTitledTextFormField(
+                        title: LocaleKeys.current_password.tr(),
+                        hintText: "${LocaleKeys.password.tr()}...",
+                        isObscured: controller.hidePasswords,
+                        suffixIcon: IconButton(
+                          onPressed: controller.changeHidePasswords,
+                          icon: controller.hidePasswords
+                              ? const Icon(Icons.visibility_off_outlined)
+                              : const Icon(Icons.visibility_outlined),
+                        ),
+                        controller: controller.passwordController,
+                      ),
+                      16.height,
+                      CustomTitledTextFormField(
+                        title: LocaleKeys.new_password.tr(),
+                        hintText: "${LocaleKeys.password.tr()}...",
+                        isObscured: controller.hidePasswords,
+                        suffixIcon: IconButton(
+                          onPressed: controller.changeHidePasswords,
+                          icon: controller.hidePasswords
+                              ? const Icon(Icons.visibility_off_outlined)
+                              : const Icon(Icons.visibility_outlined),
+                        ),
+                        controller: controller.newPasswordController,
+                      ),
+                      16.height,
+                      CustomTitledTextFormField(
+                        title: LocaleKeys.confirm_password.tr(),
+                        hintText: "${LocaleKeys.password.tr()}...",
+                        isObscured: controller.hidePasswords,
+                        suffixIcon: IconButton(
+                          onPressed: controller.changeHidePasswords,
+                          icon: controller.hidePasswords
+                              ? const Icon(Icons.visibility_off_outlined)
+                              : const Icon(Icons.visibility_outlined),
+                        ),
+                        controller: controller.confirmPasswordController,
+                      ),
+                      16.height,
+                      SaveChangesButton(
+                        onTap: controller.updateUserPassword.withOverlay,
+                      ),
+                      24.height,
+                      Text(
+                        LocaleKeys.close_delete_account.tr(),
+                        style: context.text.titleLarge?.copyWith(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      16.height,
+                      Text(
+                        LocaleKeys.account_delete_msg.tr(),
+                        style: context.text.bodyMedium?.copyWith(
+                          color: context.color?.extra,
+                        ),
+                      ),
+                      8.height,
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: TextButton.icon(
+                          style: TextButton.styleFrom(
+                            foregroundColor: Colors.red,
+                          ),
+                          onPressed: () async {
+                            final password =
+                                await _showAccountDeletePopup(context);
+                            if (password != null && password.isNotEmpty) {
+                              (() async =>
+                                      controller.deleteUserAccount(password))
+                                  .withOverlay();
+                            }
+                          },
+                          label: Text(LocaleKeys.close_delete_account.tr()),
+                          icon: const Icon(Icons.cancel_outlined),
+                        ),
+                      ),
+                      24.height,
+                    ],
                   ),
-                );
-        });
+                ),
+              );
+      },
+    );
   }
 }
 
@@ -252,8 +253,9 @@ class _DeleteAccountPopupState extends State<DeleteAccountPopup> {
                     16.height,
                     TextFormField(
                       controller: passwordController,
-                      decoration: const InputDecoration(
-                        hintText: "Enter password to confirm...",
+                      decoration: InputDecoration(
+                        hintText:
+                            "${LocaleKeys.please_confirm_your_password_before_continuing.tr()}...",
                       ),
                     ),
                     8.height,
@@ -334,7 +336,7 @@ class SinglePhoneNumberTile extends StatelessWidget {
                   child: TextFormField(
                     controller: controller,
                     decoration: InputDecoration(
-                      hintText: "Phone number...",
+                      hintText: "${LocaleKeys.phone_number.tr()}...",
                       isDense: true,
                       border: InputBorder.none,
                       focusedBorder: InputBorder.none,

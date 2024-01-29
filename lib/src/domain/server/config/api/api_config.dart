@@ -1,6 +1,9 @@
 class API {
   static const baseUrl = "https://apijobpilot.templatecookie.com/api";
+
   static String get webUrl => API.baseUrl.replaceAll("/api", "");
+
+  static const String appFacebook = "https://www.facebook.com/zakirsoft";
 
   static const posts = "/posts";
   static const about = "/about";

@@ -7,11 +7,13 @@ import 'package:jobpilot/generated/locale_keys.g.dart';
 import 'package:jobpilot/src/constants/assets/assets.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
 import 'package:jobpilot/src/domain/local_storage/repositories/static/static_storage.dart';
+import 'package:jobpilot/src/domain/server/config/repository.dart';
 import 'package:jobpilot/src/services/authentication/auth_controller.dart';
 import 'package:jobpilot/src/services/theme/extensions.dart';
 import 'package:jobpilot/src/services/theme/extensions/colors_theme.dart';
 import 'package:jobpilot/src/utilities/extensions/size_utilities.dart';
 import 'package:jobpilot/src/utilities/extensions/string_extensions.dart';
+import 'package:jobpilot/src/utilities/social_share_link.dart';
 import 'package:jobpilot/src/utilities/svg_icon.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -34,24 +36,24 @@ class MenuPageWidget extends StatelessWidget {
   const MenuPageWidget({super.key});
 
   List<Widget> getAboutUsSection(MenuPageController controller) => [
-        const Padding(
+        Padding(
           padding: horizontal16,
-          child: Text("About Us"),
+          child: Text(LocaleKeys.about_us.tr()),
         ),
         10.height,
         MenuPageListTile(
           onTap: controller.gotoBlogs,
-          title: "Blog",
+          title: LocaleKeys.blog.tr(),
           icon: const Icon(Icons.receipt_outlined),
         ),
         MenuPageListTile(
           onTap: controller.gotoAbout,
-          title: "About",
+          title: LocaleKeys.about.tr(),
           icon: const Icon(Icons.person_outline_rounded),
         ),
         MenuPageListTile(
           onTap: controller.gotoContact,
-          title: "Contact",
+          title: LocaleKeys.contact.tr(),
           icon: const Icon(Icons.mail_outline_rounded),
         ),
       ];
@@ -96,16 +98,27 @@ class MenuPageWidget extends StatelessWidget {
           phoneNumber: "(315) 155-1276",
         ),
         8.height,
-        const Padding(
+        Padding(
           padding: horizontal16,
-          child: Text("Follow us on social media"),
+          child: Text(LocaleKeys.follow_us.tr()),
         ),
         Padding(
           padding: horizontal3,
           child: Row(
             children: [
               IconButton(
-                onPressed: () {},
+                onPressed: () async {
+                  try {
+                    final uri = Uri.parse(API.appFacebook);
+                    if (await canLaunchUrl(uri)) {
+                      launchUrl(uri);
+                    } else {
+                      log("Can't launch URL");
+                    }
+                  } catch (e, s) {
+                    log("#LinkOpenUrlError", error: e, stackTrace: s);
+                  }
+                },
                 icon: const SvgIcon(
                   Assets.facebookIcon,
                   size: 20,
@@ -138,49 +151,49 @@ class MenuPageWidget extends StatelessWidget {
       ];
 
   List<Widget> getSupportSection(MenuPageController controller) => [
-        const Padding(
+        Padding(
           padding: horizontal16,
-          child: Text("Support"),
+          child: Text(LocaleKeys.support.tr()),
         ),
         10.height,
         MenuPageListTile(
           onTap: controller.gotoFaq,
-          title: "FAQ",
+          title: LocaleKeys.faq.tr(),
           icon: const Icon(Icons.question_mark_rounded),
         ),
         MenuPageListTile(
           onTap: controller.gotoPrivacyPolicy,
-          title: "Privacy Policy",
+          title: LocaleKeys.privacy_policy.tr(),
           icon: const Icon(Icons.privacy_tip_outlined),
         ),
         MenuPageListTile(
           onTap: controller.gotoTermsAndConditions,
-          title: "Terms & Conditions",
+          title: LocaleKeys.terms_condition.tr(),
           icon: const Icon(Icons.school_outlined),
         ),
         MenuPageListTile(
           onTap: controller.gotoRefundPolicy,
-          title: "Refund Policy",
+          title: LocaleKeys.refund_policy.tr(),
           icon: const Icon(Icons.policy_outlined),
         ),
       ];
 
   List<Widget> getPageSection(MenuPageController controller) => [
-        const Padding(
+        Padding(
           padding: horizontal16,
           child: Text(
-            "Pages",
+            LocaleKeys.page.tr(),
           ),
         ),
         16.height,
         MenuPageListTile(
           onTap: controller.gotoHomePage,
-          title: "Homepage",
+          title: LocaleKeys.home.tr(),
           icon: const SvgIcon(Assets.homeIcon),
         ),
         MenuPageListTile(
           onTap: controller.gotoBrowsePage,
-          title: "Browse Jobs",
+          title: LocaleKeys.browse_jobs.tr(),
           icon: const Icon(Icons.work_outline_rounded),
         ),
         /* MenuPageListTile(
@@ -190,7 +203,7 @@ class MenuPageWidget extends StatelessWidget {
         ), */
         MenuPageListTile(
           onTap: controller.browseEmployers,
-          title: "Browse Employers",
+          title: LocaleKeys.browse_employers.tr(),
           icon: const SvgIcon(Assets.companyIcon),
         ),
         /* MenuPageListTile(
@@ -205,12 +218,12 @@ class MenuPageWidget extends StatelessWidget {
         ), */
         MenuPageListTile(
           onTap: controller.gotoRegistration,
-          title: "Create Account",
+          title: LocaleKeys.create_account.tr(),
           icon: const Icon(Icons.person_add_alt_outlined),
         ),
         MenuPageListTile(
           onTap: controller.gotoLogin,
-          title: "Sign In",
+          title: LocaleKeys.sign_in.tr(),
           icon: const SvgIcon(Assets.loginIcon),
         ),
       ];
@@ -219,76 +232,76 @@ class MenuPageWidget extends StatelessWidget {
         Padding(
           padding: horizontal16,
           child: Text(
-            AuthController.find.currentUserType!.name.upperCaseFirst,
+            AuthController.find.currentUserType!.name.tr(),
           ),
         ),
         16.height,
         MenuPageListTile(
           onTap: controller.gotoDashboard,
-          title: "Dashboard",
+          title: LocaleKeys.dashboard.tr(),
           icon: const SvgIcon(Assets.accountIcon),
         ),
         MenuPageListTile(
           onTap: controller.gotoAppliedJobs,
-          title: "Applied Jobs",
+          title: LocaleKeys.applied_jobs.tr(),
           icon: const Icon(Icons.work_outline_rounded),
         ),
         MenuPageListTile(
           onTap: controller.gotoFavoriteJobs,
-          title: "Favorite Jobs",
+          title: LocaleKeys.favorite_jobs.tr(),
           icon: const Icon(Icons.bookmark_outline_rounded),
         ),
         MenuPageListTile(
           onTap: controller.gotoJobAlert,
-          title: "Job Alert",
+          title: LocaleKeys.job_alert.tr(),
           icon: const SvgIcon(Assets.jobsIcon),
         ),
         MenuPageListTile(
           onTap: controller.gotoSettings,
-          title: "Setting",
+          title: LocaleKeys.settings.tr(),
           icon: const Icon(Icons.settings_outlined),
         ),
         MenuPageListTile(
           onTap: controller.signOut,
-          title: "Sign Out",
+          title: LocaleKeys.log_out.tr(),
           icon: const Icon(Icons.logout),
         ),
       ];
 
   List<Widget> getOthersSection(MenuPageController controller) => [
-        const Padding(
+        Padding(
           padding: horizontal16,
-          child: Text("Other pages"),
+          child: Text(LocaleKeys.others.tr()),
         ),
         10.height,
         MenuPageListTile(
           onTap: controller.gotoHomePage,
-          title: "Homepage",
+          title: LocaleKeys.home.tr(),
           icon: const SvgIcon(Assets.homeIcon),
         ),
         MenuPageListTile(
           onTap: controller.gotoBrowsePage,
-          title: "Browse Jobs",
+          title: LocaleKeys.browse_jobs.tr(),
           icon: const Icon(Icons.work_outline_rounded),
         ),
         MenuPageListTile(
           onTap: controller.browseEmployers,
-          title: "Browse Employers",
+          title: LocaleKeys.browse_employers.tr(),
           icon: const SvgIcon(Assets.companyIcon),
         ),
         MenuPageListTile(
           onTap: controller.gotoBlogs,
-          title: "Blogs",
+          title: LocaleKeys.blog.tr(),
           icon: const Icon(Icons.receipt_outlined),
         ),
         MenuPageListTile(
           onTap: controller.gotoAbout,
-          title: "About",
+          title: LocaleKeys.about.tr(),
           icon: const Icon(Icons.person_outline_rounded),
         ),
         MenuPageListTile(
           onTap: controller.gotoContact,
-          title: "Contacts",
+          title: LocaleKeys.contact.tr(),
           icon: const Icon(Icons.mail_outline_rounded),
         ),
       ];
@@ -369,7 +382,7 @@ class CallNowWidget extends StatelessWidget {
                 alignment: PlaceholderAlignment.middle,
                 child: 10.width,
               ),
-              const TextSpan(text: "Call Now:  "),
+              TextSpan(text: "${LocaleKeys.call_now.tr()}:  "),
               TextSpan(
                 text: phoneNumber,
                 style: TextStyle(

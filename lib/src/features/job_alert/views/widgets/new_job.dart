@@ -1,5 +1,6 @@
+import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:jobpilot/generated/locale_keys.g.dart';
 import 'package:jobpilot/src/constants/assets/assets.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
 import 'package:jobpilot/src/domain/server/repositories/jobs/models/job_alert/alert_job/alert_job.dart';
@@ -144,8 +145,8 @@ class SingleJobAlertWidget extends StatelessWidget {
                         icon: const Icon(
                           Icons.arrow_back,
                         ),
-                        label: const Text(
-                          "Apply Now",
+                        label: Text(
+                          LocaleKeys.apply_now.tr(),
                           textAlign: TextAlign.center,
                         ),
                       ),

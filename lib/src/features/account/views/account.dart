@@ -1,5 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:get/get.dart' hide Trans;
+import 'package:jobpilot/generated/locale_keys.g.dart';
 import 'package:jobpilot/src/constants/assets/assets.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
 import 'package:jobpilot/src/features/account/controllers/account_controller.dart';
@@ -51,7 +53,7 @@ class AccountPage extends StatelessWidget {
                 delegate: SliverChildListDelegate.fixed(
                   [
                     Text(
-                      "Recently Applied Jobs",
+                      LocaleKeys.recently_applied.tr(),
                       style: context.text.titleLarge?.copyWith(
                         fontWeight: FontWeight.bold,
                       ),
@@ -85,7 +87,7 @@ class AccountPage extends StatelessWidget {
                         child: Padding(
                           padding: horizontal8 + vertical3,
                           child: Text(
-                            "View All Applied Jobs",
+                            "${LocaleKeys.view_all.tr()} ${LocaleKeys.applied_jobs.tr()}",
                             style: context.text.titleMedium?.copyWith(
                               fontWeight: FontWeight.bold,
                               color: context.color?.primary,
@@ -121,19 +123,19 @@ class AccountTopSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Text(
-          "Hello, ${controller.currentProfile.name}",
+          "${LocaleKeys.hello.tr()}, ${controller.currentProfile.name}",
           style: context.text.titleMedium?.copyWith(
             fontWeight: FontWeight.bold,
           ),
         ),
         4.height,
-        const Text(
-          "Here is your daily activities and job alerts.",
+        Text(
+          "${LocaleKeys.here_is_your_daily_activities_career_opportunities.tr()}.",
         ),
         12.height,
         DashboardDataTile(
           data: "${controller.dashboardData?.appliedJobs ?? "??"}",
-          title: "Applied Jobs",
+          title: LocaleKeys.applied_jobs.tr(),
           icon: const Icon(
             Icons.work_outline_rounded,
           ),
@@ -143,7 +145,7 @@ class AccountTopSection extends StatelessWidget {
         12.height,
         DashboardDataTile(
           data: "${controller.dashboardData?.favoriteJobs ?? "??"}",
-          title: "Favorite Jobs",
+          title: LocaleKeys.favorite_jobs.tr(),
           icon: const Icon(
             Icons.bookmark_border_rounded,
           ),
@@ -153,7 +155,7 @@ class AccountTopSection extends StatelessWidget {
         12.height,
         DashboardDataTile(
           data: "${controller.dashboardData?.notifications ?? "??"}",
-          title: "Job Alerts",
+          title: LocaleKeys.job_alert.tr(),
           icon: const Center(
             child: SvgIcon(
               Assets.jobsIcon,

@@ -1,5 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:get/get.dart' hide Trans;
+import 'package:jobpilot/generated/locale_keys.g.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
 import 'package:jobpilot/src/features/account/controllers/account_controller.dart';
 import 'package:jobpilot/src/global/widgets/circular_paginator.dart';
@@ -22,8 +24,8 @@ class AppliedJobsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         titleSpacing: 0,
-        title: const Text(
-          "Applied Jobs",
+        title: Text(
+          LocaleKeys.applied_jobs.tr(),
         ),
       ),
       body: GetBuilder<AccountController>(
