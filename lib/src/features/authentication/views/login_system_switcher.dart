@@ -86,43 +86,8 @@ class LoginSystemSwitcher extends StatelessWidget {
               ),
               goForgotPassword: ({String? email}) async =>
                   controller.shiftLoginView(),
-              onFacebookClick: () async {
-                try {
-                  final LoginResult loginResult =
-                      await FacebookAuth.instance.login();
-                  if (loginResult.accessToken != null) {
-                    final OAuthCredential facebookAuthCredential =
-                        FacebookAuthProvider.credential(
-                      loginResult.accessToken!.token,
-                    );
-                    final user =
-                        await FirebaseAuth.instance.signInWithCredential(
-                      facebookAuthCredential,
-                    );
-                    print("Facebook user : $user");
-                  }
-                } catch (e, s) {
-                  log("#FacebookAuthError", error: e, stackTrace: s);
-                }
-              },
-              onGoogleClick: () async {
-                try {
-                  final GoogleSignInAccount? googleUser =
-                      await GoogleSignIn().signIn();
-                  final GoogleSignInAuthentication? googleAuth =
-                      await googleUser?.authentication;
-
-                  final credential = GoogleAuthProvider.credential(
-                    accessToken: googleAuth?.accessToken,
-                    idToken: googleAuth?.idToken,
-                  );
-                  final user = await FirebaseAuth.instance
-                      .signInWithCredential(credential);
-                  print("Google user : $user");
-                } catch (e, s) {
-                  log("#GoogleAuthError", error: e, stackTrace: s);
-                }
-              },
+              onFacebookClick: controller.initiateFacebookLogin,
+              onGoogleClick: controller.initiateGoogleLogin,
             ),
             secondChild: ForgotPasswordSectionWidget(
               emailController: controller.emailController,

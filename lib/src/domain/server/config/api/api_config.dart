@@ -17,6 +17,7 @@ class API {
   static const login = "/login";
   static const profile = "/user-info";
   static const register = "/register";
+  static const socialLogin = "/social-login";
   static const forgetPassword = "/password/email";
   static const resetPassword = "/password/reset";
 

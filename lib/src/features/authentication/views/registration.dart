@@ -60,8 +60,8 @@ class RegistrationScreen extends StatelessWidget {
           ),
           body: RegistrationSectionWidget(
             onCreateAccount: controller.createAccount,
-            onFacebookSignUpClick: () {},
-            onGoogleSignUpClick: () {},
+            onFacebookSignUpClick: controller.initiateFacebookRegistration,
+            onGoogleSignUpClick: controller.initiateGoogleRegistration,
             firstNameValidator: [isRequired],
             lastNameValidator: [isRequired],
             emailValidator: [isRequired, isEmail],
@@ -93,8 +93,8 @@ class RegistrationSectionWidget extends StatefulWidget {
   final List<Validation>? passwordValidator;
   final List<Validation>? confirmPasswordValidator;
 
-  final VoidCallback onFacebookSignUpClick;
-  final VoidCallback onGoogleSignUpClick;
+  final ValueChanged<UserType> onFacebookSignUpClick;
+  final ValueChanged<UserType> onGoogleSignUpClick;
   final Future<String?> Function({
     required String firstName,
     required String lastName,
@@ -417,14 +417,18 @@ class _RegistrationSectionWidgetState extends State<RegistrationSectionWidget> {
                     text: LocaleKeys.login_with_facebook.tr(),
                     iconLink:
                         "https://img.icons8.com/?size=48&id=118497&format=png",
-                    onTap: () {},
+                    onTap: (() async =>
+                            widget.onFacebookSignUpClick(selectedUserType))
+                        .withOverlay,
                   ),
                   10.height,
                   SocialButton(
                     text: LocaleKeys.login_with_google.tr(),
                     iconLink:
                         "https://img.icons8.com/?size=48&id=17949&format=png",
-                    onTap: () {},
+                    onTap: (() async =>
+                            widget.onGoogleSignUpClick(selectedUserType))
+                        .withOverlay,
                   ),
                 ],
               ),

@@ -73,6 +73,37 @@ class AuthRepository extends ServerRepo {
     }
   }
 
+  Future<ResponseWrapper> authenticateSocialTokens({
+    String? name,
+    String? email,
+    UserType? userType,
+    required String firebaseToken,
+  }) async {
+    try {
+      final authData = {
+        if (name != null) "name": name,
+        if (email != null) "email": email,
+        if (userType != null) "role": userType.name,
+        "Firebasetoken": firebaseToken,
+      };
+
+      log("SocialAuthData: $authData");
+
+      final response = await requestHandler.post(
+        API.socialLogin,
+        FormData.fromMap(authData),
+      );
+
+      return ResponseWrapper.fromMap(
+        response: response.data,
+        status: response.statusCode,
+        purse: (json) => json,
+      );
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   Future<ResponseWrapper<String>> sendResetOTP({required String email}) async {
     try {
       final response = await requestHandler.post(
