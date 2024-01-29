@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:jobpilot/src/domain/server/config/request_handler.dart';
 import 'package:jobpilot/src/domain/server/repositories/authentication/auth_repo.dart';
 import 'package:jobpilot/src/services/authentication/auth_controller.dart';
@@ -49,7 +50,8 @@ class RegistrationController extends GetxController {
 
   initiateGoogleLogin() async {
     try {
-      final loginHandler = GoogleAuthProvider();
+      final loginHandler = GoogleSignIn();
+      final user = await loginHandler.signIn();
     } catch (e, s) {
       log("#GoogleLoginError", error: e, stackTrace: s);
     }
