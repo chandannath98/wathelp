@@ -76,7 +76,7 @@ class AppliedJobCardWidget extends StatelessWidget {
                                   child: Padding(
                                     padding: all6,
                                     child: Text(
-                                      "${LocaleKeys.remote.tr()}",
+                                      LocaleKeys.remote.tr(),
                                       style: context.text.bodySmall?.copyWith(
                                         color: context.color?.primary,
                                       ),

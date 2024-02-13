@@ -2,7 +2,6 @@ import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide Trans;
 import 'package:jobpilot/generated/locale_keys.g.dart';
-import 'package:jobpilot/src/constants/assets/app_strings.dart';
 import 'package:jobpilot/src/constants/assets/assets.dart';
 import 'package:jobpilot/src/constants/design/border_radius.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
@@ -20,7 +19,6 @@ import 'package:jobpilot/src/utilities/extensions/overlay_loader.dart';
 import 'package:jobpilot/src/utilities/extensions/size_utilities.dart';
 import 'package:jobpilot/src/utilities/extensions/string_extensions.dart';
 import 'package:jobpilot/src/utilities/svg_icon.dart';
-import 'package:social_share/social_share.dart';
 
 class JobDetailsScreen extends StatelessWidget {
   const JobDetailsScreen({super.key, required this.jobSlug});

@@ -99,7 +99,7 @@ class SocialInformationTab extends StatelessWidget {
                               }
                             },
                             label:
-                                Text("${LocaleKeys.add_new_social_link.tr()}"),
+                                Text(LocaleKeys.add_new_social_link.tr()),
                             icon: const Icon(Icons.add_circle_outline_rounded),
                           ),
                         ),
@@ -297,7 +297,7 @@ class _SocialPickerWidgetState extends State<SocialPickerWidget> {
                                     (widget.optionList.containsKey(selectedKey))
                                         ? selectedKey
                                         : null,
-                                title: "${LocaleKeys.social_media.tr()}",
+                                title: LocaleKeys.social_media.tr(),
                                 showTitle: false,
                                 onChange: (value) => setState(() {
                                   selectedKey = value!;
@@ -344,7 +344,7 @@ class _SocialPickerWidgetState extends State<SocialPickerWidget> {
                           Icons.add,
                         ),
                         label: Text(
-                          "${LocaleKeys.add_new_social_link.tr()}",
+                          LocaleKeys.add_new_social_link.tr(),
                         ),
                       ),
                     ],

@@ -12,8 +12,6 @@ import 'package:jobpilot/src/services/authentication/auth_controller.dart';
 import 'package:jobpilot/src/services/theme/extensions.dart';
 import 'package:jobpilot/src/services/theme/extensions/colors_theme.dart';
 import 'package:jobpilot/src/utilities/extensions/size_utilities.dart';
-import 'package:jobpilot/src/utilities/extensions/string_extensions.dart';
-import 'package:jobpilot/src/utilities/social_share_link.dart';
 import 'package:jobpilot/src/utilities/svg_icon.dart';
 import 'package:url_launcher/url_launcher.dart';
 

@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:get/get.dart';
-import 'package:jobpilot/src/constants/assets/app_strings.dart';
 import 'package:jobpilot/src/domain/server/config/request_handler.dart';
 import 'package:jobpilot/src/domain/server/repositories/jobs/jobs_repo.dart';
 import 'package:jobpilot/src/domain/server/repositories/jobs/models/job_details/company/company.dart';
@@ -17,7 +16,6 @@ import 'package:jobpilot/src/services/authentication/auth_controller.dart';
 import 'package:jobpilot/src/utilities/functions.dart';
 import 'package:jobpilot/src/utilities/scaffold_util.dart';
 import 'package:jobpilot/src/utilities/social_share_link.dart';
-import 'package:social_share/social_share.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 String? _encodeQueryParameters(Map<String, String> params) {

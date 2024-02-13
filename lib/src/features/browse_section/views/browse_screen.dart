@@ -4,7 +4,6 @@ import 'package:jobpilot/src/constants/design/paddings.dart';
 import 'package:jobpilot/src/features/browse_section/controllers/browse_controller.dart';
 import 'package:jobpilot/src/features/browse_section/views/widgets/testimonial_list.dart';
 import 'package:jobpilot/src/features/find_jobs/controllers/find_jobs_controller.dart';
-import 'package:jobpilot/src/features/single_job/views/job_details.dart';
 import 'package:jobpilot/src/global/widgets/app/app_logo_app_bar.dart';
 import 'package:jobpilot/src/utilities/extensions/size_utilities.dart';
 

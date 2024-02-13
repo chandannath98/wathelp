@@ -1,5 +1,4 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools"> <!-- Tools for social share plugin -->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <queries>
         <intent>
         <action android:name="android.support.customtabs.action.CustomTabsService" />
@@ -37,17 +36,7 @@
             android:name="flutterEmbedding"
             android:value="2" />
         
-        <!-- This whole provider section is for social share plugin -->
-        <provider
-            android:name="androidx.core.content.FileProvider"
-            android:authorities="${applicationId}.com.shekarmudaliyar.social_share"
-            android:exported="false"
-            android:grantUriPermissions="true"
-            tools:replace="android:authorities">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/filepaths" />
-        </provider>
+       
         <!-- Facebook meta setup -->
    	    <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
    	    <meta-data android:name="com.facebook.sdk.ClientToken" android:value="@string/facebook_client_token"/>

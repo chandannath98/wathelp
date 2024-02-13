@@ -74,7 +74,7 @@ class ResumeListSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Text(
-          "${LocaleKeys.your_cv_resume.tr()}",
+          LocaleKeys.your_cv_resume.tr(),
           style: context.text.titleLarge?.copyWith(
             fontSize: 18,
             fontWeight: FontWeight.w600,
@@ -103,7 +103,7 @@ class ResumeListSection extends StatelessWidget {
             onTap: controller.onAddResumeClick,
             shape: const RoundedRectangleBorder(borderRadius: br4),
             title: Text(
-              "${LocaleKeys.add_cv_resume.tr()}",
+              LocaleKeys.add_cv_resume.tr(),
               style: context.text.titleMedium?.copyWith(
                 fontWeight: FontWeight.w600,
               ),
@@ -158,7 +158,7 @@ class ResumeListTile extends StatelessWidget {
             padding: EdgeInsets.zero,
             onTap: () async => onEditResumeClick(resumeData),
             child: ResumeActionMenuOption(
-              title: "${LocaleKeys.update_cv_resume.tr()}",
+              title: LocaleKeys.update_cv_resume.tr(),
               icon: Icons.edit_square,
               baseColor: context.color?.primary ?? Colors.green,
             ),
@@ -240,7 +240,7 @@ class BasicInformationSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Text(
-          "${LocaleKeys.basic_information.tr()}",
+          LocaleKeys.basic_information.tr(),
           style: context.text.titleLarge?.copyWith(
             fontSize: 18,
             fontWeight: FontWeight.w600,
@@ -248,7 +248,7 @@ class BasicInformationSection extends StatelessWidget {
         ),
         16.height,
         Text(
-          "${LocaleKeys.profile_picture.tr()}",
+          LocaleKeys.profile_picture.tr(),
         ),
         8.height,
         Align(
@@ -267,19 +267,19 @@ class BasicInformationSection extends StatelessWidget {
         16.height,
         6.height,
         CustomTitledTextFormField(
-          title: "${LocaleKeys.app_name.tr()}",
+          title: LocaleKeys.app_name.tr(),
           controller: controller.nameTextController,
           onChange: (value) => controller.updateName(value),
         ),
         16.height,
         CustomTitledTextFormField(
-          title: "${LocaleKeys.tittle_headline.tr()}",
+          title: LocaleKeys.tittle_headline.tr(),
           controller: controller.headlineTextController,
           onChange: (value) => controller.updateTitle(value),
         ),
         16.height,
         CustomTitledDropdownField(
-          title: "${LocaleKeys.experience.tr()}",
+          title: LocaleKeys.experience.tr(),
           onChange: (value) => controller.updateExperienceId(value!),
           value: controller.currentPersonalData?.experienceId,
           fieldList: controller.experienceOptions
@@ -291,7 +291,7 @@ class BasicInformationSection extends StatelessWidget {
         ),
         16.height,
         CustomTitledDropdownField(
-          title: "${LocaleKeys.education.tr()}",
+          title: LocaleKeys.education.tr(),
           onChange: (value) => controller.updateEducationId(value!),
           value: controller.currentPersonalData?.educationId,
           fieldList: controller.educationOptions
@@ -304,7 +304,7 @@ class BasicInformationSection extends StatelessWidget {
         16.height,
         CustomTitledTextFormField(
           hintText: "DD-MM-YYYY",
-          title: "${LocaleKeys.date_of_birth.tr()}",
+          title: LocaleKeys.date_of_birth.tr(),
           inputType: TextInputType.datetime,
           controller: controller.birthDateTextController,
           onChange: (value) => controller.updateBirthDate(value),
@@ -323,7 +323,7 @@ class BasicInformationSection extends StatelessWidget {
         16.height,
         CustomTitledTextFormField(
           hintText: "${LocaleKeys.profile_link_url.tr()}...",
-          title: "${LocaleKeys.personal_website.tr()}",
+          title: LocaleKeys.personal_website.tr(),
           controller: controller.websiteTextController,
           onChange: (value) => controller.updateWebsite(value),
           prefixIcon: Icon(
@@ -398,7 +398,7 @@ class SetProfilePictureWidget extends StatelessWidget {
                           text: TextSpan(
                             children: [
                               TextSpan(
-                                text: "${LocaleKeys.upload_photo.tr()}",
+                                text: LocaleKeys.upload_photo.tr(),
                                 style: context.text.titleMedium?.copyWith(
                                   fontWeight: FontWeight.w600,
                                 ),
@@ -415,7 +415,7 @@ class SetProfilePictureWidget extends StatelessWidget {
                         ),
                         8.height,
                         Text(
-                          "${LocaleKeys.photo_larger_than_pixels_work_best_max_photo_size_mb.tr()}",
+                          LocaleKeys.photo_larger_than_pixels_work_best_max_photo_size_mb.tr(),
                           textAlign: TextAlign.center,
                           style: context.text.bodySmall?.copyWith(
                             color: context.color?.extra,

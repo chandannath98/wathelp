@@ -294,7 +294,7 @@ class SalaryLimitSection extends StatelessWidget {
               children: [
                 Expanded(
                   child: Text(
-                    "Min: \$${currentMin}",
+                    "Min: \$$currentMin",
                     style: context.text.bodyMedium?.copyWith(
                       color: context.color?.extraText,
                     ),
@@ -304,7 +304,7 @@ class SalaryLimitSection extends StatelessWidget {
                   child: Align(
                     alignment: Alignment.centerRight,
                     child: Text(
-                      "Min: \$${currentMax}",
+                      "Min: \$$currentMax",
                       style: context.text.bodyMedium?.copyWith(
                         color: context.color?.extraText,
                       ),

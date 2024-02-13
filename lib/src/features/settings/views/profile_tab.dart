@@ -62,7 +62,7 @@ class ProfileInformationTab extends StatelessWidget {
                         ), 
                         16.height,*/
                         CustomTitledDropdownField(
-                          title: "${LocaleKeys.gender.tr()}",
+                          title: LocaleKeys.gender.tr(),
                           value: controller.data?.gender,
                           onChange: (value) =>
                               controller.onGenderSelect(value!),
@@ -74,7 +74,7 @@ class ProfileInformationTab extends StatelessWidget {
                         ),
                         16.height,
                         CustomTitledDropdownField(
-                          title: "${LocaleKeys.marital_status.tr()}",
+                          title: LocaleKeys.marital_status.tr(),
                           value: controller.data?.maritalStatus,
                           onChange: (value) =>
                               controller.onMaritalStatusSelect(value!),
@@ -110,7 +110,7 @@ class ProfileInformationTab extends StatelessWidget {
                         //Not from UI.
                         16.height,
                         CustomTitledDropdownField(
-                          title: "${LocaleKeys.profession.tr()}",
+                          title: LocaleKeys.profession.tr(),
                           onChange: (value) =>
                               controller.onProfessionSelect(value!),
                           value: controller.data?.professionId,
@@ -122,7 +122,7 @@ class ProfileInformationTab extends StatelessWidget {
                         ),
                         16.height,
                         CustomTitledDropdownField(
-                          title: "${LocaleKeys.availability.tr()}",
+                          title: LocaleKeys.availability.tr(),
                           onChange: (value) =>
                               controller.onStatusChange(value!),
                           value: controller.data?.availability,
@@ -137,7 +137,7 @@ class ProfileInformationTab extends StatelessWidget {
                             AvailableStatus.availableIn) ...[
                           CustomTitledTextFormField(
                             hintText: "DD-MM-YYYY",
-                            title: "${LocaleKeys.available_in.tr()}",
+                            title: LocaleKeys.available_in.tr(),
                             inputType: TextInputType.datetime,
                             controller: controller.availableInController,
                             replacementFunction: () async {
@@ -159,7 +159,7 @@ class ProfileInformationTab extends StatelessWidget {
                           ),
                           16.height,
                         ],
-                        Text("${LocaleKeys.biography.tr()}"),
+                        Text(LocaleKeys.biography.tr()),
                         6.height,
                         ConstrainedBox(
                           constraints: BoxConstraints(

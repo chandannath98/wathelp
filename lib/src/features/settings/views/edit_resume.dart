@@ -53,8 +53,8 @@ class EditResumeScreen extends StatelessWidget {
         titleSpacing: 0,
         title: Text(
           isEdit
-              ? "${LocaleKeys.upload_cv_resume.tr()}"
-              : "${LocaleKeys.add_cv_resume.tr()}",
+              ? LocaleKeys.upload_cv_resume.tr()
+              : LocaleKeys.add_cv_resume.tr(),
         ),
       ),
       body: Padding(
@@ -72,7 +72,7 @@ class EditResumeScreen extends StatelessWidget {
                           24.height,
                           CustomTitledTextFormField(
                             hintText: "",
-                            title: "${LocaleKeys.cv_resume_name.tr()}",
+                            title: LocaleKeys.cv_resume_name.tr(),
                             controller: controller.resumeNameController,
                           ),
                           if (controller.nameError != null) ...[
@@ -85,7 +85,7 @@ class EditResumeScreen extends StatelessWidget {
                             ),
                           ],
                           12.height,
-                          Text("${LocaleKeys.upload_cv_resume.tr()}"),
+                          Text(LocaleKeys.upload_cv_resume.tr()),
                           8.height,
                           PickResumeWidget(
                             fileName: controller.resumeName,
@@ -120,8 +120,8 @@ class EditResumeScreen extends StatelessWidget {
                         icon: const Icon(Icons.add_circle_outline_outlined),
                         label: Text(
                           isEdit
-                              ? "${LocaleKeys.update_cv_resume.tr()}"
-                              : "${LocaleKeys.add_cv_resume.tr()}",
+                              ? LocaleKeys.update_cv_resume.tr()
+                              : LocaleKeys.add_cv_resume.tr(),
                         ),
                       ),
                     ),
@@ -190,7 +190,7 @@ class PickResumeWidget extends StatelessWidget {
                         ]
                       : [
                           TextSpan(
-                            text: "${LocaleKeys.browse_file.tr()}",
+                            text: LocaleKeys.browse_file.tr(),
                             style: context.text.titleMedium?.copyWith(
                               fontWeight: FontWeight.w600,
                             ),

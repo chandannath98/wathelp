@@ -11,7 +11,6 @@ import 'package:jobpilot/src/features/authentication/views/reset_password.dart';
 import 'package:jobpilot/src/features/authentication/views/verify_email.dart';
 import 'package:jobpilot/src/services/authentication/auth_controller.dart';
 import 'package:jobpilot/src/services/authentication/models/auth_credentials/auth_credentials.dart';
-import 'package:jobpilot/src/services/authentication/models/user_type/user_type.dart';
 import 'package:jobpilot/src/utilities/scaffold_util.dart';
 
 class LoginController extends GetxController {
@@ -127,6 +126,7 @@ class LoginController extends GetxController {
         if (e.statusCode == 400) Get.back();
       }
     }
+    return null;
   }
 
   Future<String?> forgotPassword({required email}) async {
@@ -147,6 +147,7 @@ class LoginController extends GetxController {
         ),
       );
     }
+    return null;
   }
 
   void initiateGoogleLogin() async {
@@ -157,7 +158,7 @@ class LoginController extends GetxController {
       final authData = await user?.authentication;
       if (authData?.accessToken != null) {
         final res = await _authRepo.authenticateSocialTokens(
-          firebaseToken: authData!.accessToken!,
+          firebaseToken: authData!.idToken!,
         );
         log("GoogleLoginHandler : ${res.data}");
       } else {
@@ -178,7 +179,7 @@ class LoginController extends GetxController {
         final authCred =
             FacebookAuthProvider.credential(authData.accessToken!.token);
         final res = await _authRepo.authenticateSocialTokens(
-          firebaseToken: authCred.accessToken!,
+          firebaseToken: authCred.idToken!,
         );
         log("FacebookLoginHandler : ${res.data}");
         // TODO: Handle login data. And remember to logout from facebook and firebaseAuth!

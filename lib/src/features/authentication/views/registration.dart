@@ -6,7 +6,6 @@ import 'package:jobpilot/generated/locale_keys.g.dart';
 import 'package:jobpilot/src/constants/assets/assets.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
 import 'package:jobpilot/src/features/authentication/controllers/registration_controller.dart';
-import 'package:jobpilot/src/global/widgets/social_login_button.dart';
 import 'package:jobpilot/src/services/authentication/models/user_type/user_type.dart';
 import 'package:jobpilot/src/services/theme/app_theme.dart';
 import 'package:jobpilot/src/utilities/extensions/overlay_loader.dart';
@@ -407,7 +406,8 @@ class _RegistrationSectionWidgetState extends State<RegistrationSectionWidget> {
                     ),
                   ),
                   10.height,
-                  Center(
+                  //TODO: Uncomment for SocialLogin Buttons!
+                  /* Center(
                     child: Text(
                       LocaleKeys.or.tr(),
                     ),
@@ -429,7 +429,7 @@ class _RegistrationSectionWidgetState extends State<RegistrationSectionWidget> {
                     onTap: (() async =>
                             widget.onGoogleSignUpClick(selectedUserType))
                         .withOverlay,
-                  ),
+                  ), */
                 ],
               ),
             ),

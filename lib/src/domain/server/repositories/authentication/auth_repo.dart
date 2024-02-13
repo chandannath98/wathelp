@@ -84,7 +84,7 @@ class AuthRepository extends ServerRepo {
         if (name != null) "name": name,
         if (email != null) "email": email,
         if (userType != null) "role": userType.name,
-        "Firebasetoken": firebaseToken,
+        "firebasetoken": firebaseToken,
       };
 
       log("SocialAuthData: $authData");

@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jobpilot/src/domain/local_storage/repositories/static/static_storage.dart';
 import 'package:jobpilot/src/domain/server/config/request_handler.dart';

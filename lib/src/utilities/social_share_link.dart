@@ -1,6 +1,5 @@
 import 'dart:developer';
 
-import 'package:jobpilot/src/constants/strings/home_strings.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 enum SocialShareOption {

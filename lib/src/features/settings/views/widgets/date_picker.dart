@@ -21,6 +21,7 @@ Future<({String? text, DateTime date})?> pickDate(
   } catch (e, s) {
     log("#CustomDatePickerError", error: e, stackTrace: s);
   }
+  return null;
 }
 
 /* 

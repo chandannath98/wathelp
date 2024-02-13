@@ -78,7 +78,7 @@ class ApplyJobScreen extends StatelessWidget {
                               minLines: 15,
                               maxLines: null,
                               controller: controller.coverLetterController,
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                 hintText: "Write down your biography here. "
                                     "Let the employers know who you are...",
                                 hintMaxLines: 15,

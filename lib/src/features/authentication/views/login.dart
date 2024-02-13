@@ -2,7 +2,6 @@ import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import 'package:flutter/material.dart';
 import 'package:jobpilot/generated/locale_keys.g.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
-import 'package:jobpilot/src/global/widgets/social_login_button.dart';
 import 'package:jobpilot/src/services/theme/app_theme.dart';
 import 'package:jobpilot/src/utilities/extensions/size_utilities.dart';
 import 'package:jobpilot/src/utilities/functions.dart';
@@ -247,7 +246,8 @@ class _LoginSectionWidgetState extends State<LoginSectionWidget> {
                     ),
                   ),
                   10.height,
-                  Center(
+                  //TODO: Uncomment for SocialLogin Buttons!
+                  /* Center(
                     child: Text(
                       LocaleKeys.or.tr(),
                     ),
@@ -265,7 +265,7 @@ class _LoginSectionWidgetState extends State<LoginSectionWidget> {
                     iconLink:
                         "https://img.icons8.com/?size=48&id=17949&format=png",
                     onTap: widget.onGoogleClick,
-                  ),
+                  ), */
                 ],
               ),
             ),

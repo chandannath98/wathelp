@@ -5,7 +5,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:jobpilot/generated/locale_keys.g.dart';
 import 'package:jobpilot/src/constants/assets/assets.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
-import 'package:jobpilot/src/constants/strings/home_strings.dart';
 import 'package:jobpilot/src/features/browse_section/controllers/browse_controller.dart';
 import 'package:jobpilot/src/features/browse_section/views/widgets/search_box.dart';
 import 'package:jobpilot/src/services/theme/app_theme.dart';
