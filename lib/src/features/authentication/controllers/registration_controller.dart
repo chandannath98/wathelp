@@ -6,6 +6,8 @@ import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:jobpilot/src/domain/server/config/request_handler.dart';
 import 'package:jobpilot/src/domain/server/repositories/authentication/auth_repo.dart';
+import 'package:jobpilot/src/features/account/views/widgets/complete_profile.dart';
+import 'package:jobpilot/src/features/settings/views/settings.dart';
 import 'package:jobpilot/src/services/authentication/auth_controller.dart';
 import 'package:jobpilot/src/services/authentication/models/auth_credentials/auth_credentials.dart';
 import 'package:jobpilot/src/services/authentication/models/user_type/user_type.dart';
@@ -37,6 +39,7 @@ class RegistrationController extends GetxController {
           password: password,
         ));
         showToastSuccess(data.message ?? "Registration successful!");
+        // Get.to(SettingsScreen());
         Get.back();
       } else {
         showToastError(data.errorMsg);

@@ -1,4 +1,4 @@
-package com.templatecookie.jobpilot
+package com.wathelp
 
 import io.flutter.embedding.android.FlutterActivity
 

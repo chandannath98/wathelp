@@ -35,54 +35,54 @@ class SearchBoxWidget<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Widget searchBoxField;
-    if (suggestionsCallback != null) {
-      searchBoxField = TypeAheadField<T>(
-        focusNode: FocusNode(),
-        controller: locationController,
-        builder: (context, controller, focusNode) => SearchTextFieldRow(
-          hintText: "${LocaleKeys.location.tr()}...",
-          focusNode: focusNode,
-          controller: controller,
-          icon: Icon(
-            Icons.share_location_sharp,
-            color: context.color?.primary,
-          ),
-        ),
-        decorationBuilder: (context, child) {
-          return Padding(
-            padding: const EdgeInsets.only(
-              top: 3,
-              bottom: 12,
-            ),
-            child: DecoratedBox(
-              decoration: BoxDecoration(
-                borderRadius: br6,
-                color: context.color?.theme,
-              ),
-              child: child,
-            ),
-          );
-        },
-        itemBuilder: (context, value) {
-          return ListTile(
-            title: Text(
-              value.toString(),
-            ),
-          );
-        },
-        onSelected: onLocationSelect,
-        suggestionsCallback: suggestionsCallback!,
-      );
-    } else {
-      searchBoxField = SearchTextFieldRow(
-        hintText: "${LocaleKeys.location.tr()}...",
-        controller: locationController,
-        icon: Icon(
-          Icons.share_location_sharp,
-          color: context.color?.primary,
-        ),
-      );
-    }
+    // if (suggestionsCallback != null) {
+    //   searchBoxField = TypeAheadField<T>(
+    //     focusNode: FocusNode(),
+    //     controller: locationController,
+    //     builder: (context, controller, focusNode) => SearchTextFieldRow(
+    //       hintText: "${LocaleKeys.location.tr()}...",
+    //       focusNode: focusNode,
+    //       controller: controller,
+    //       icon: Icon(
+    //         Icons.share_location_sharp,
+    //         color: context.color?.primary,
+    //       ),
+    //     ),
+    //     decorationBuilder: (context, child) {
+    //       return Padding(
+    //         padding: const EdgeInsets.only(
+    //           top: 3,
+    //           bottom: 12,
+    //         ),
+    //         child: DecoratedBox(
+    //           decoration: BoxDecoration(
+    //             borderRadius: br6,
+    //             color: context.color?.theme,
+    //           ),
+    //           child: child,
+    //         ),
+    //       );
+    //     },
+    //     itemBuilder: (context, value) {
+    //       return ListTile(
+    //         title: Text(
+    //           value.toString(),
+    //         ),
+    //       );
+    //     },
+    //     onSelected: onLocationSelect,
+    //     suggestionsCallback: suggestionsCallback!,
+    //   );
+    // } else {
+    //   searchBoxField = SearchTextFieldRow(
+    //     hintText: "${LocaleKeys.location.tr()}...",
+    //     controller: locationController,
+    //     icon: Icon(
+    //       Icons.share_location_sharp,
+    //       color: context.color?.primary,
+    //     ),
+    //   );
+    // }
     return Card(
       margin: EdgeInsets.zero,
       shape: RoundedRectangleBorder(
@@ -94,6 +94,7 @@ class SearchBoxWidget<T> extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             SearchTextFieldRow(
+              onSearchClick:()=>onSearchClick!(),
               hintText: "${LocaleKeys.search.tr()}...",
               controller: searchController,
               icon: Icon(
@@ -101,30 +102,30 @@ class SearchBoxWidget<T> extends StatelessWidget {
                 color: context.color?.primary,
               ),
             ),
-            6.height,
-            searchBoxField,
-            6.height,
-            if (showFilterButton)
-              ElevatedButton.icon(
-                onPressed: onFilterClick,
-                icon: const Icon(Icons.filter_list_rounded),
-                label: Text(
-                  LocaleKeys.advance_filter.tr(),
-                ),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: (hasFilterData ?? false)
-                      ? context.color?.primary.withOpacity(0.15)
-                      : context.color?.background,
-                  foregroundColor: context.color?.extraText,
-                ),
-              ),
-            ElevatedButton.icon(
-              onPressed: onSearchClick,
-              icon: const Icon(Icons.search),
-              label: Text(
-                LocaleKeys.search.tr().tr(),
-              ),
-            ),
+            // 6.height,
+            // searchBoxField,
+            // 6.height,
+            // if (showFilterButton)
+            //   ElevatedButton.icon(
+            //     onPressed: onFilterClick,
+            //     icon: const Icon(Icons.filter_list_rounded),
+            //     label: Text(
+            //       LocaleKeys.advance_filter.tr(),
+            //     ),
+            //     style: ElevatedButton.styleFrom(
+            //       backgroundColor: (hasFilterData ?? false)
+            //           ? context.color?.primary.withOpacity(0.15)
+            //           : context.color?.background,
+            //       foregroundColor: context.color?.extraText,
+            //     ),
+            //   ),
+            // ElevatedButton.icon(
+            //   onPressed: onSearchClick,
+            //   icon: const Icon(Icons.search),
+            //   label: Text(
+            //     LocaleKeys.search.tr().tr(),
+            //   ),
+            // ),
           ],
         ),
       ),
@@ -139,13 +140,14 @@ class SearchTextFieldRow extends StatelessWidget {
     this.controller,
     required this.icon,
     required this.hintText,
+    required this.onSearchClick,
   });
 
   final Widget icon;
   final String hintText;
   final FocusNode? focusNode;
   final TextEditingController? controller;
-
+  final VoidCallback onSearchClick;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -158,6 +160,7 @@ class SearchTextFieldRow extends StatelessWidget {
         6.width,
         Expanded(
           child: TextFormField(
+            onEditingComplete: onSearchClick,
             maxLines: 1,
             focusNode: focusNode,
             controller: controller,

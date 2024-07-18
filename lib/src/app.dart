@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: lightTheme,
-      title: 'Jobpilot App',
+      title: 'Wathelp',
       home: const SplashScreen(),
       debugShowCheckedModeBanner: false,
       scaffoldMessengerKey: ScaffoldUtilities.instance.key,
@@ -27,7 +27,7 @@ class ReadyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       theme: lightTheme,
-      title: 'Jobpilot App',
+      title: 'Wathelp',
       home: const Homepage(),
       locale: context.locale,
       debugShowCheckedModeBanner: false,
@@ -54,7 +54,7 @@ class ErrorApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       theme: lightTheme,
-      title: 'Jobpilot App',
+      title: 'Wathelp',
       home: GlobalErrorPage(
         error: error,
         stackTrace: stackTrace,

@@ -31,7 +31,7 @@ class HomeMoreVacanciesSection extends StatelessWidget {
                 children: [
                   Text(
                     LocaleKeys.most_popular_vacancies.tr(),
-                    style: context.text.titleLarge?.copyWith(
+                    style: context.text.titleMedium?.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
                   ),

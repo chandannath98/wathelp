@@ -3,4 +3,5 @@ import 'package:jobpilot/src/features/initialization/views/initializer.dart';
 
 void main() {
   runApp(const InitialWrapper());
+
 }

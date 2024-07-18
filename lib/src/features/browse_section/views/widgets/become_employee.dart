@@ -35,7 +35,7 @@ class BecomeEmployeeSection extends StatelessWidget {
               children: [
                 Text(
                   LocaleKeys.employers_title.tr(),
-                  style: context.text.titleLarge?.copyWith(
+                  style: context.text.titleMedium?.copyWith(
                     color: context.color?.theme,
                     fontWeight: FontWeight.bold,
                   ),

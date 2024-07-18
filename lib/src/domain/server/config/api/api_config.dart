@@ -1,5 +1,5 @@
 class API {
-  static const baseUrl = "https://apijobpilot.templatecookie.com/api";
+  static const baseUrl = "https://wathelp.com/api";
 
   static String get webUrl => API.baseUrl.replaceAll("/api", "");
 

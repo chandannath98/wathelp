@@ -35,7 +35,7 @@ class HomePopularCategorySection extends StatelessWidget {
               children: [
                 Text(
                   LocaleKeys.popular_category.tr(),
-                  style: context.text.titleLarge?.copyWith(
+                  style: context.text.titleMedium?.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
                 ),

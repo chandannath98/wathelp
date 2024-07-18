@@ -26,7 +26,7 @@ class TestimonialListSection extends StatelessWidget {
         children: [
           Text(
             LocaleKeys.clients_testimonial.tr(),
-            style: context.text.titleLarge?.copyWith(
+            style: context.text.titleMedium?.copyWith(
               fontWeight: FontWeight.bold,
             ),
           ),

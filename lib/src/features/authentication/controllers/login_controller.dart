@@ -9,6 +9,7 @@ import 'package:jobpilot/src/domain/server/config/request_handler.dart';
 import 'package:jobpilot/src/domain/server/repositories/authentication/auth_repo.dart';
 import 'package:jobpilot/src/features/authentication/views/reset_password.dart';
 import 'package:jobpilot/src/features/authentication/views/verify_email.dart';
+import 'package:jobpilot/src/features/settings/views/settings.dart';
 import 'package:jobpilot/src/services/authentication/auth_controller.dart';
 import 'package:jobpilot/src/services/authentication/models/auth_credentials/auth_credentials.dart';
 import 'package:jobpilot/src/utilities/scaffold_util.dart';
@@ -68,11 +69,19 @@ class LoginController extends GetxController {
           await _authHandler.removeAuthCredentials();
         }
         await _authHandler.handleNewUser(data.data!.user!);
-        await _authHandler.handleNewAuthToken(data.data!.token!);
-        Get.deleteAll();
-        if (Navigator.of(Get.context!).canPop()) {
-          Get.back();
-        }
+        await _authHandler.handleNewAuthToken(data.data!.token!,data.data!.user!.contactInfo!.phone);
+        // Get.deleteAll();
+        // if (Navigator.of(Get.context!).canPop()) {
+        //   print("data.data!.user!.firstName");
+        //   print(data.data!.user!.firstName);
+        //   print("data.data!.user!.firstName");
+        //   if(data.data!.user!.firstName == null){
+        //     Get.to(SettingsScreen());
+        //   }else{
+        //   Get.back();
+
+        //   }
+        // }
       } else {
         showToastError(data.errorMsg);
       }

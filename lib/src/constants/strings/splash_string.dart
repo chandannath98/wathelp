@@ -1,1 +1,1 @@
-const appName = "Jobpilot";
+const appName = "Wathelp";

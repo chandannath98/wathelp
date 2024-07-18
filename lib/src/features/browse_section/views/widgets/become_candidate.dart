@@ -36,7 +36,7 @@ class RegisterNowSection extends StatelessWidget {
               children: [
                 Text(
                   LocaleKeys.candidate_title.tr(),
-                  style: context.text.titleLarge?.copyWith(
+                  style: context.text.titleMedium?.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
                 ),

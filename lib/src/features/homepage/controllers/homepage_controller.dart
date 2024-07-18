@@ -9,11 +9,12 @@ import 'package:jobpilot/src/services/authentication/auth_controller.dart';
 class HomepageController extends GetxController {
   static HomepageController get find => Get.find();
   int currentIndex = 0;
-  final int loginPageIndex = 2;
+  final int loginPageIndex = 3;
   bool get isAuthenticated => AuthController.find.isAuthenticated;
   User? get currentUser => AuthController.find.currentUser;
   bool get isLoginScreen =>
-      (!isAuthenticated && currentIndex == loginPageIndex);
+      (!isAuthenticated);
+      // (!isAuthenticated && currentIndex == loginPageIndex);
   late final PageController pageController;
 
   @override

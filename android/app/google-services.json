@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:309931703224:android:2c3a856bc85060ee6f6d4d",
         "android_client_info": {
-          "package_name": "com.templatecookie.jobpilot"
+          "package_name": "com.wathelp"
         }
       },
       "oauth_client": [
@@ -17,7 +17,7 @@
           "client_id": "309931703224-s2076g2tgutdc9d2il339f50is6ukdam.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.templatecookie.jobpilot",
+            "package_name": "com.wathelp",
             "certificate_hash": "cfab1ad95f586711617afb3448a6d0082c1cabb6"
           }
         },

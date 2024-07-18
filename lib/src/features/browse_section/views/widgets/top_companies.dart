@@ -31,7 +31,7 @@ class TopCompaniesSection extends StatelessWidget {
               children: [
                 Text(
                   LocaleKeys.total_employers.tr(),
-                  style: context.text.titleLarge?.copyWith(
+                  style: context.text.titleMedium?.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
                 ),

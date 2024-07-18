@@ -57,173 +57,173 @@ class MenuPageWidget extends StatelessWidget {
       ];
 
   List<Widget> getJobPilotSection(MenuPageController controller) => [
-        const Padding(
-          padding: horizontal16,
-          child: Text("Jobpilots"),
-        ),
-        10.height,
-        MenuJobPilotListTile(
-          onTap: controller.gotoChooseLanguage,
-          data: StaticStorage.selectedLanguage?.name ?? "English",
-          title: LocaleKeys.languagekey.tr(),
-          icon: const Icon(Icons.language_rounded),
-        ),
-        MenuJobPilotListTile(
-          onTap: controller.gotoChooseCurrency,
-          data: StaticStorage.selectedCurrency?.code ?? "USD",
-          title: LocaleKeys.currency.tr(),
-          icon: (StaticStorage.selectedCurrency?.symbol == null)
-              ? const Icon(Icons.attach_money_rounded)
-              : SizedBox.square(
-                  dimension: 24,
-                  child: FittedBox(
-                    child: Text(
-                      StaticStorage.selectedCurrency!.symbol!,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ),
-        ),
-        MenuJobPilotListTile(
-          onTap: controller.gotoChooseCountry,
-          data: StaticStorage.selectedCountry?.name ?? "Bangladesh",
-          title: LocaleKeys.country.tr(),
-          icon: const Icon(Icons.flag_outlined),
-        ),
-        const CallNowWidget(
-          phoneNumber: "(315) 155-1276",
-        ),
-        8.height,
-        Padding(
-          padding: horizontal16,
-          child: Text(LocaleKeys.follow_us.tr()),
-        ),
-        Padding(
-          padding: horizontal3,
-          child: Row(
-            children: [
-              IconButton(
-                onPressed: () async {
-                  try {
-                    final uri = Uri.parse(API.appFacebook);
-                    if (await canLaunchUrl(uri)) {
-                      launchUrl(uri);
-                    } else {
-                      log("Can't launch URL");
-                    }
-                  } catch (e, s) {
-                    log("#LinkOpenUrlError", error: e, stackTrace: s);
-                  }
-                },
-                icon: const SvgIcon(
-                  Assets.facebookIcon,
-                  size: 20,
-                ),
-              ),
-              IconButton(
-                onPressed: () {},
-                icon: const SvgIcon(
-                  Assets.youtubeIcon,
-                  size: 20,
-                ),
-              ),
-              IconButton(
-                onPressed: () {},
-                icon: const SvgIcon(
-                  Assets.instagramIcon,
-                  size: 20,
-                ),
-              ),
-              IconButton(
-                onPressed: () {},
-                icon: const SvgIcon(
-                  Assets.twitterIcon,
-                  size: 20,
-                ),
-              ),
-            ],
-          ),
-        ),
+        // const Padding(
+        //   padding: horizontal16,
+        //   child: Text("Jobpilots"),
+        // ),
+        // 10.height,
+        // MenuJobPilotListTile(
+        //   onTap: controller.gotoChooseLanguage,
+        //   data: StaticStorage.selectedLanguage?.name ?? "English",
+        //   title: LocaleKeys.languagekey.tr(),
+        //   icon: const Icon(Icons.language_rounded),
+        // ),
+        // MenuJobPilotListTile(
+        //   onTap: controller.gotoChooseCurrency,
+        //   data: StaticStorage.selectedCurrency?.code ?? "USD",
+        //   title: LocaleKeys.currency.tr(),
+        //   icon: (StaticStorage.selectedCurrency?.symbol == null)
+        //       ? const Icon(Icons.attach_money_rounded)
+        //       : SizedBox.square(
+        //           dimension: 24,
+        //           child: FittedBox(
+        //             child: Text(
+        //               StaticStorage.selectedCurrency!.symbol!,
+        //               style: const TextStyle(
+        //                 fontWeight: FontWeight.bold,
+        //               ),
+        //             ),
+        //           ),
+        //         ),
+        // ),
+        // MenuJobPilotListTile(
+        //   onTap: controller.gotoChooseCountry,
+        //   data: StaticStorage.selectedCountry?.name ?? "Bangladesh",
+        //   title: LocaleKeys.country.tr(),
+        //   icon: const Icon(Icons.flag_outlined),
+        // ),
+        // const CallNowWidget(
+        //   phoneNumber: "(315) 155-1276",
+        // ),
+        // 8.height,
+        // Padding(
+        //   padding: horizontal16,
+        //   child: Text(LocaleKeys.follow_us.tr()),
+        // ),
+        // Padding(
+          // padding: horizontal3,
+          // child: Row(
+          //   children: [
+          //     IconButton(
+          //       onPressed: () async {
+          //         try {
+          //           final uri = Uri.parse(API.appFacebook);
+          //           if (await canLaunchUrl(uri)) {
+          //             launchUrl(uri);
+          //           } else {
+          //             log("Can't launch URL");
+          //           }
+          //         } catch (e, s) {
+          //           log("#LinkOpenUrlError", error: e, stackTrace: s);
+          //         }
+          //       },
+          //       icon: const SvgIcon(
+          //         Assets.facebookIcon,
+          //         size: 20,
+          //       ),
+          //     ),
+          //     IconButton(
+          //       onPressed: () {},
+          //       icon: const SvgIcon(
+          //         Assets.youtubeIcon,
+          //         size: 20,
+          //       ),
+          //     ),
+          //     IconButton(
+          //       onPressed: () {},
+          //       icon: const SvgIcon(
+          //         Assets.instagramIcon,
+          //         size: 20,
+          //       ),
+          //     ),
+          //     IconButton(
+          //       onPressed: () {},
+          //       icon: const SvgIcon(
+          //         Assets.twitterIcon,
+          //         size: 20,
+          //       ),
+          //     ),
+        //     ],
+        //   ),
+        // ),
       ];
 
   List<Widget> getSupportSection(MenuPageController controller) => [
-        Padding(
-          padding: horizontal16,
-          child: Text(LocaleKeys.support.tr()),
-        ),
-        10.height,
-        MenuPageListTile(
-          onTap: controller.gotoFaq,
-          title: LocaleKeys.faq.tr(),
-          icon: const Icon(Icons.question_mark_rounded),
-        ),
-        MenuPageListTile(
-          onTap: controller.gotoPrivacyPolicy,
-          title: LocaleKeys.privacy_policy.tr(),
-          icon: const Icon(Icons.privacy_tip_outlined),
-        ),
-        MenuPageListTile(
-          onTap: controller.gotoTermsAndConditions,
-          title: LocaleKeys.terms_condition.tr(),
-          icon: const Icon(Icons.school_outlined),
-        ),
-        MenuPageListTile(
-          onTap: controller.gotoRefundPolicy,
-          title: LocaleKeys.refund_policy.tr(),
-          icon: const Icon(Icons.policy_outlined),
-        ),
+        // Padding(
+        //   padding: horizontal16,
+        //   child: Text(LocaleKeys.support.tr()),
+        // ),
+        // 10.height,
+        // MenuPageListTile(
+        //   onTap: controller.gotoFaq,
+        //   title: LocaleKeys.faq.tr(),
+        //   icon: const Icon(Icons.question_mark_rounded),
+        // ),
+        // MenuPageListTile(
+        //   onTap: controller.gotoPrivacyPolicy,
+        //   title: LocaleKeys.privacy_policy.tr(),
+        //   icon: const Icon(Icons.privacy_tip_outlined),
+        // ),
+        // MenuPageListTile(
+        //   onTap: controller.gotoTermsAndConditions,
+        //   title: LocaleKeys.terms_condition.tr(),
+        //   icon: const Icon(Icons.school_outlined),
+        // ),
+        // MenuPageListTile(
+        //   onTap: controller.gotoRefundPolicy,
+        //   title: LocaleKeys.refund_policy.tr(),
+        //   icon: const Icon(Icons.policy_outlined),
+        // ),
       ];
 
   List<Widget> getPageSection(MenuPageController controller) => [
-        Padding(
-          padding: horizontal16,
-          child: Text(
-            LocaleKeys.page.tr(),
-          ),
-        ),
-        16.height,
-        MenuPageListTile(
-          onTap: controller.gotoHomePage,
-          title: LocaleKeys.home.tr(),
-          icon: const SvgIcon(Assets.homeIcon),
-        ),
-        MenuPageListTile(
-          onTap: controller.gotoBrowsePage,
-          title: LocaleKeys.browse_jobs.tr(),
-          icon: const Icon(Icons.work_outline_rounded),
-        ),
-        /* MenuPageListTile(
-          onTap: controller.gotoLogin,
-          title: "Post Jobs",
-          icon: const Icon(Icons.add_circle_outline),
-        ), */
-        MenuPageListTile(
-          onTap: controller.browseEmployers,
-          title: LocaleKeys.browse_employers.tr(),
-          icon: const SvgIcon(Assets.companyIcon),
-        ),
-        /* MenuPageListTile(
-          onTap: controller.gotoLogin,
-          title: "Browse Candidates",
-          icon: const Icon(Icons.people_outline_outlined),
-        ),
-        MenuPageListTile(
-          onTap: controller.gotoPricing,
-          title: "Pricing",
-          icon: const Icon(Icons.account_balance_outlined),
-        ), */
-        MenuPageListTile(
-          onTap: controller.gotoRegistration,
-          title: LocaleKeys.create_account.tr(),
-          icon: const Icon(Icons.person_add_alt_outlined),
-        ),
-        MenuPageListTile(
-          onTap: controller.gotoLogin,
-          title: LocaleKeys.sign_in.tr(),
-          icon: const SvgIcon(Assets.loginIcon),
-        ),
+        // Padding(
+        //   padding: horizontal16,
+        //   child: Text(
+        //     LocaleKeys.page.tr(),
+        //   ),
+        // ),
+        // 16.height,
+        // MenuPageListTile(
+        //   onTap: controller.gotoHomePage,
+        //   title: LocaleKeys.home.tr(),
+        //   icon: const SvgIcon(Assets.homeIcon),
+        // ),
+        // MenuPageListTile(
+        //   onTap: controller.gotoBrowsePage,
+        //   title: LocaleKeys.browse_jobs.tr(),
+        //   icon: const Icon(Icons.work_outline_rounded),
+        // ),
+        // /* MenuPageListTile(
+        //   onTap: controller.gotoLogin,
+        //   title: "Post Jobs",
+        //   icon: const Icon(Icons.add_circle_outline),
+        // ), */
+        // MenuPageListTile(
+        //   onTap: controller.browseEmployers,
+        //   title: LocaleKeys.browse_employers.tr(),
+        //   icon: const SvgIcon(Assets.companyIcon),
+        // ),
+        // /* MenuPageListTile(
+        //   onTap: controller.gotoLogin,
+        //   title: "Browse Candidates",
+        //   icon: const Icon(Icons.people_outline_outlined),
+        // ),
+        // MenuPageListTile(
+        //   onTap: controller.gotoPricing,
+        //   title: "Pricing",
+        //   icon: const Icon(Icons.account_balance_outlined),
+        // ), */
+        // MenuPageListTile(
+        //   onTap: controller.gotoRegistration,
+        //   title: LocaleKeys.create_account.tr(),
+        //   icon: const Icon(Icons.person_add_alt_outlined),
+        // ),
+        // MenuPageListTile(
+        //   onTap: controller.gotoLogin,
+        //   title: LocaleKeys.sign_in.tr(),
+        //   icon: const SvgIcon(Assets.loginIcon),
+        // ),
       ];
 
   List<Widget> getCandidateSection(MenuPageController controller) => [

@@ -23,9 +23,7 @@ class BrowseDataController extends GetxController with BaseControllerSystem {
 
   Future<void> onRegisterClick() async {
     Get.to(
-      () => const RegistrationScreen(
-        showLoginButton: false,
-      ),
+      () => const FindJobsPage(),
       transition: Transition.rightToLeft,
     );
     update();

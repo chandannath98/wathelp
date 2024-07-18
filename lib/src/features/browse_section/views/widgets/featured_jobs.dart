@@ -34,9 +34,9 @@ class HomeFeaturedJobsSection extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Text(
+                  Text( 
                     LocaleKeys.featured_jobs.tr(),
-                    style: context.text.titleLarge?.copyWith(
+                    style: context.text.titleMedium?.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
                   ),

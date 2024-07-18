@@ -6,7 +6,9 @@ import 'package:jobpilot/generated/locale_keys.g.dart';
 import 'package:jobpilot/src/constants/assets/assets.dart';
 import 'package:jobpilot/src/constants/design/paddings.dart';
 import 'package:jobpilot/src/features/browse_section/controllers/browse_controller.dart';
+import 'package:jobpilot/src/features/browse_section/views/widgets/featured_jobs.dart';
 import 'package:jobpilot/src/features/browse_section/views/widgets/search_box.dart';
+import 'package:jobpilot/src/features/find_jobs/controllers/find_jobs_controller.dart';
 import 'package:jobpilot/src/services/theme/app_theme.dart';
 import 'package:jobpilot/src/utilities/extensions/size_utilities.dart';
 
@@ -30,62 +32,26 @@ class BrowseScreenTopSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        // 16.height,
+        // Padding(
+        //   padding: vertical20,
+        //   child: Text(
+        //    "Find your dream job now",
+        //     style: context.text.bodyLarge?.copyWith(
+        //       color: context.color?.extraText,
+        //       fontWeight: FontWeight.bold,
+        //     ),
+        //   ),
+        // ),
+        // Text(
+        //   LocaleKeys.unlock_your_potential_embrace_your_future.tr(),
+        //   style: context.text.titleMedium?.copyWith(
+        //     color: context.color?.extraText,
+        //   ),
+        // ),
+       
         16.height,
-        Padding(
-          padding: vertical12,
-          child: Text(
-            LocaleKeys
-                .discover_your_perfect_job_matching_your_interests_and_skills
-                .tr(),
-            style: context.text.headlineMedium?.copyWith(
-              color: context.color?.extraText,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        Text(
-          LocaleKeys.unlock_your_potential_embrace_your_future.tr(),
-          style: context.text.titleMedium?.copyWith(
-            color: context.color?.extraText,
-          ),
-        ),
-        16.height,
-        SearchBoxWidget(
-          showFilterButton: false,
-          searchController: controller.searchController,
-          locationController: controller.locationController,
-          onSearchClick: controller.onSearchClick,
-        ),
-        8.height,
-        if (controller.popularTags != null)
-          RichText(
-            text: TextSpan(
-              text: "${LocaleKeys.suggestion.tr()}:   ",
-              style: context.text.bodySmall?.copyWith(height: 1.5),
-              children: controller.popularTags!
-                  // .take(5)
-                  .map(
-                    (e) => TextSpan(
-                      text: "${e.name},   ",
-                      recognizer: TapGestureRecognizer()
-                        ..onTap = () => controller.onSuggestionSelect(e.id),
-                      style: TextStyle(
-                        color: context.color?.opposite,
-                      ),
-                    ),
-                  )
-                  .toList()
-                ..add(
-                  const TextSpan(
-                    text: "etc.",
-                  ),
-                ),
-            ),
-            textAlign: TextAlign.center,
-          ),
-        32.height,
-        SvgPicture.asset(Assets.homeHeroSvg),
-        32.height,
+       
         GridView.count(
           shrinkWrap: true,
           crossAxisCount: 2,
@@ -116,6 +82,49 @@ class BrowseScreenTopSection extends StatelessWidget {
             ),
           ],
         ),
+        // 8.height,
+        if (controller.popularTags != null)
+          // RichText(
+          //   text: TextSpan(
+          //     text: "${LocaleKeys.suggestion.tr()}:   ",
+          //     style: context.text.bodySmall?.copyWith(height: 1.5),
+          //     children: controller.popularTags!
+          //         // .take(5)
+          //         .map(
+          //           (e) => TextSpan(
+          //             text: "${e.name},   ",
+          //             recognizer: TapGestureRecognizer()
+          //               ..onTap = () => controller.onSuggestionSelect(e.id),
+          //             style: TextStyle(
+          //               color: context.color?.opposite,
+          //             ),
+          //           ),
+          //         )
+          //         .toList()
+          //       ..add(
+          //         const TextSpan(
+          //           text: "etc.",
+          //         ),
+          //       ),
+          //   ),
+          //   textAlign: TextAlign.center,
+          // ),
+          
+        32.height,
+        HomeFeaturedJobsSection(
+                isLoading: false,
+                dataList: controller.data?.featuredJobs
+                    ?.map(
+                      (e) => (
+                        job: e,
+                        onBookmark: null,
+                        onTap: () => FindJobController.onJobClick(e.slug!),
+                      ),
+                    )
+                    .toList(),
+              ),
+        // SvgPicture.asset(Assets.homeHeroSvg),
+        
       ],
     );
   }
